@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-    title: "DataRace.ai",
+    title: "Datarace.ai | About Us",
     description: "DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.",
 };
 
@@ -22,27 +22,23 @@ const Home: React.FC = () => {
             <header className="bg-white shadow-md">
                 <nav className="container mx-auto flex justify-between items-center py-4">
                     <div className="flex items-center">
-                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={150} height={50} />
+                        <Image src="/logo.png" alt="Logo" width={120} height={40} />
                     </div>
                     <ul className="flex space-x-6">
-                        <li><a href="#" className="text-gray-600 hover:text-gray-900">About Us</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Courses</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Community</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-900">FAQ</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Contact Us</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Home</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-900">About</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Services</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-900">Contact</a></li>
                     </ul>
                 </nav>
             </header>
 
             <main className="flex-grow bg-gray-50 py-16">
                 <section className="container mx-auto text-center">
-                    <h1 className="text-4xl font-bold mb-4">Join the race to AI excellence</h1>
-                    <p className="text-md text-gray-700 mb-8">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
-                    <button type="button" className="text-white bg-gray-900 hover:bg-gray-1000 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        See races
-                        <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
+                    <h1 className="text-4xl font-bold mb-4">Welcome to Our Website</h1>
+                    <p className="text-lg text-gray-700 mb-8">Your amazing product description goes here.</p>
+                    <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition">
+                        Get Started
                     </button>
                 </section>
 
