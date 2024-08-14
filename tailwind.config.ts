@@ -9,8 +9,15 @@ const config: Config = {
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/api/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        dark: '#000',
+        foreground: 'var(--foreground-rgb)',
+        backgroundStart: 'var(--background-start-rgb)',
+        backgroundEnd: 'var(--background-end-rgb)',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
