@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Metadata } from 'next'
+import { useParams } from 'next/navigation';
 
 
 export const metadata: Metadata = {
@@ -11,9 +12,6 @@ export const metadata: Metadata = {
 
 
 const Home: React.FC = () => {
-    var a = 5
-    // var a = 3
-    console.log(a)
 
     return (
         <div className="min-h-screen flex flex-col">
