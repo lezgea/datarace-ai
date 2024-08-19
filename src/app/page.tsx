@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Metadata } from 'next'
 import { useParams } from 'next/navigation';
-import { RaceItem } from 'components/shared';
+import { RaceItem, ResourceItem } from 'components/shared';
 
 
 export const metadata: Metadata = {
@@ -21,6 +21,12 @@ interface RaceItemType extends RaceType {
     price: string,
     expiry_date: string | number,
 }
+
+interface ResourceItemType extends RaceType {
+    duration: string,
+    guided: string,
+}
+
 
 const RACE_SELECTS: RaceType[] = [
     {
@@ -132,6 +138,52 @@ const COMPLETED_ITEMS: RaceItemType[] = [
 ];
 
 
+const RESOURCE_ITEMS: ResourceItemType[] = [
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+    {
+        title: 'Foundation of the programming',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/svg/foundation.svg',
+        duration: '5 hours',
+        guided: '1 guided project',
+    },
+];
+
+
 const Home: React.FC = () => {
 
     return (
@@ -181,7 +233,7 @@ const Home: React.FC = () => {
                                 <div className="text-[40px]">Discover races</div>
                                 <img src={'/svg/arrow_styled.svg'} alt="Feature 1" className="ml-7" />
                             </div>
-                            <div className='text-sm'>Get ready to exciting race</div>
+                            <div className='text-sm text-gray-700'>Get ready to exciting race</div>
                         </div>
                         <form className="group relative w-[400px] mt-10">
                             <div className="relative">
@@ -207,14 +259,44 @@ const Home: React.FC = () => {
                     </button>
                 </section>
 
+                <section className="bg-gray-200 mt-20">
+                    <div className="py-20">
+                        <div className="container mx-auto flex justify-between content-center">
+                            <div className="space-y-3">
+                                <div className="flex">
+                                    <div className="text-[40px]">Learn with <strong>DataRace</strong></div>
+                                    <img src={'/svg/draw.svg'} alt="Feature 1" className="ml-5 rotate-90 -mt-10" />
+                                </div>
+                                <div className='text-sm text-gray-700'>Expand your knowledge and master data science with our expert resources</div>
+                            </div>
+                            <button type="button" className="inline-flex h-[50px] w-auto mt-5 text-center items-center px-6 py-3 text-gray-900 transition-all bg-white dark:bg-white dark:text-gray-800 rounded-xl shadow-sm shadow-neutral-300 sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                                See all courses
+                                <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </button>
+                        </div>
+                        <section className="w-full overflow-x-auto hide-scrollbar py-10">
+                            <div className="container mx-auto flex space-x-5">
+                                {
+                                    RESOURCE_ITEMS.map((item, i) =>
+                                        <ResourceItem key={i} {...item} />
+                                    )
+                                }
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+
                 <section className="container mx-auto pt-20 space-y-10">
                     <div className="flex justify-between content-center">
                         <div className="space-y-3">
                             <div className="flex">
                                 <div className="text-[40px]">Completed <strong>projects</strong></div>
-                                <img src={'/svg/arrow_styled.svg'} alt="Feature 1" className="ml-7" />
+                                <img src={'/svg/draw.svg'} alt="Feature 1" className="ml-5 rotate-90 -mt-10" />
                             </div>
-                            <div className='text-sm'>Get ready to exciting race</div>
+                            <div className='text-sm text-gray-700'>Get ready to exciting race</div>
                         </div>
                         <button type="button" className="inline-flex h-[50px] w-auto mt-5 text-center items-center px-6 py-3 text-gray-900 transition-all bg-gray-200 dark:bg-white dark:text-gray-800 rounded-xl shadow-sm shadow-neutral-300 sm:w-auto hover:bg-gray-900 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                             See all
