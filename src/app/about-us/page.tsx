@@ -12,11 +12,6 @@ export const metadata: Metadata = {
 const AboutUs: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
-            <Head>
-                <title>About Us Page</title>
-                <meta name="description" content="Your description here" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
             <main className="flex-grow bg-gray-50 py-40">
                 <section className="container mx-auto text-center">
                     <h1 className="text-4xl font-bold mb-4">About Us</h1>
