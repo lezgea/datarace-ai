@@ -17,4 +17,4 @@ jobs:
           docker build -t datarace-web .
           docker stop datarace-web  || true
           docker rm datarace-web || true
-          docker run -p 3007:3000 -d --name=datarace-web datarace-web
+          docker run -p 3008:3000 -d --name=datarace-web datarace-web
