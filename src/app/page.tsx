@@ -193,7 +193,7 @@ const Home: React.FC = () => {
                 {/*---- BANNER SECTION */}
                 <section className="flex w-full justify-between items-center text-center">
                     <a className="flex items-center">
-                        <Image src="/svg/team-brainstorming.svg" alt="Team Brainstorming" width={400} height={300} />
+                        <Image src="/svg/team-brainstorming.svg" alt="Team Brainstorming" width={400} height={300} priority />
                     </a>
                     <div className='px-20 space-y-7'>
                         <div className="flex justify-center content-center">
@@ -211,7 +211,7 @@ const Home: React.FC = () => {
                         </button>
                     </div>
                     <div className="flex items-center">
-                        <Image src="/svg/human-right.svg" alt="Human Right" width={400} height={100} className="max-h-[400px]" />
+                        <Image src="/svg/human-right.svg" alt="Human Right" width={400} height={100} className="max-h-[400px]" priority />
                     </div>
                 </section>
 

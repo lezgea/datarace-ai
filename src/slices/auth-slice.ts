@@ -43,7 +43,6 @@ const authSlice = createSlice({
                 (state, action: PayloadAction<LoginResponse>) => {
                     state.loading = false;
                     state.isAuthenticated = true;
-                    // state.user = action.payload.user;
                     Cookies.set('dtr-token', action.payload, {
                         secure: process.env.NODE_ENV === 'production',
                         expires: 7,
