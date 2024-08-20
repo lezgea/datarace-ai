@@ -2,11 +2,22 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@store/store';
+import { login } from '@store/slices';
 
 
 const SignIn: React.FC = () => {
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const dispatch: AppDispatch = useDispatch();
+    const { loading, error } = useSelector((state: RootState) => state.auth);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        dispatch(login({ email, password }));
+    };
 
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);

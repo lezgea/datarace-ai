@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import '../styles/global.css';
 import { Footer, Header } from "components";
+import ReduxProvider from "providers/redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] }); // Specify weights if needed
@@ -25,7 +26,9 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} ${poppins.className}`}>
         <Header />
-        {children}
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
         <Footer />
       </body>
     </html>

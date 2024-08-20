@@ -7,7 +7,8 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx,scss}",
     "./src/utils/**/*.{js,ts,jsx,tsx,mdx,scss}",
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx,scss}",
-    "./src/api/**/*.{js,ts,jsx,tsx,mdx,scss}",
+    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/store/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: 'class',
   theme: {
