@@ -162,7 +162,7 @@ const SignUp: React.FC = () => {
                             <span>Register with Google</span>
                         </button>
                     </form>
-                    <p className="mt-6 text-center">
+                    <p className="mt-6 text-center font-light">
                         Have an account? <a href="/sign-in" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign in</a>
                     </p>
                 </div>

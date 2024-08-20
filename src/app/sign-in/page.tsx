@@ -126,7 +126,7 @@ const SignIn: React.FC = () => {
                             <span>Login with Google</span>
                         </button>
                     </form>
-                    <p className="mt-6 text-center">
+                    <p className="mt-6 text-center font-light">
                         Don't have an account? <a href="/sign-up" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>

@@ -4,7 +4,7 @@ import '../styles/global.css';
 import { Footer, Header } from "components";
 
 const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] }); // Specify weights if needed
+const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] }); // Specify weights if needed
 
 
 export const metadata: Metadata = {
