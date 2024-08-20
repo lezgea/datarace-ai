@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { apiSlice } from '../api-slice';
 
 interface AuthState {
     isAuthenticated: boolean;
@@ -15,19 +15,6 @@ const initialState: AuthState = {
     error: null,
 };
 
-// Async thunk for logging in
-export const login = createAsyncThunk(
-    'auth/login',
-    async (credentials: { email: string; password: string }, { rejectWithValue }) => {
-        try {
-            const response = await axios.post('/api/login', credentials);
-            return response.data;
-        } catch (error: any) {
-            return rejectWithValue(error.response.data.message);
-        }
-    }
-);
-
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -38,20 +25,30 @@ const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        // Handle loginUser mutation
         builder
-            .addCase(login.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(login.fulfilled, (state, action) => {
-                state.loading = false;
-                state.isAuthenticated = true;
-                state.user = action.payload.user;
-            })
-            .addCase(login.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload as string;
-            });
+            .addMatcher(
+                apiSlice.endpoints.loginUser.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                apiSlice.endpoints.loginUser.matchFulfilled,
+                (state, action: PayloadAction<{ user: string }>) => {
+                    state.loading = false;
+                    state.isAuthenticated = true;
+                    state.user = action.payload.user;
+                }
+            )
+            .addMatcher(
+                apiSlice.endpoints.loginUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error.message || 'Login failed';
+                }
+            );
     },
 });
 
