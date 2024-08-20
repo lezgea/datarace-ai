@@ -19,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Link to the favicon */}
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${inter.className} ${poppins.className}`}>
         <Header />
         {children}

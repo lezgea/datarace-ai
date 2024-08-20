@@ -22,7 +22,7 @@ const SignIn: React.FC = () => {
             </div>
 
             {/* Right side with form */}
-            <div className="w-full lg:w-1/2 bg-white content-center p-10">
+            <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20">
                 <div className="w-full mx-auto lg:max-w-md space-y-10">
                     <a className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
                                 type="email"
                                 id="email"
                                 placeholder="example@company.com"
-                                className="w-full h-[50px] bg-gray-50 px-5 py-2 border rounded-xl hover:outline-none hover:ring-2 hover:ring-primary focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
+                                className="w-full h-[50px] bg-gray-50 px-5 py-2 border rounded-xl hover:outline-none hover:ring-1 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
                             />
                         </div>
 
@@ -50,16 +50,16 @@ const SignIn: React.FC = () => {
                                 type="password"
                                 id="password"
                                 placeholder="Enter password"
-                                className="w-full h-[50px] bg-gray-50 px-5 py-2 border rounded-xl hover:outline-none hover:ring-2 hover:ring-primary focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
+                                className="w-full h-[50px] bg-gray-50 px-5 py-2 border rounded-xl hover:outline-none hover:ring-1 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
                             />
                         </div>
 
-                        <div className="flex justify-between items-center pb-4">
+                        <div className="flex justify-between items-center pb-2">
                             <label className="inline-flex items-center">
                                 <input type="checkbox" className="form-checkbox text-blue-600" />
                                 <span className="ml-2 text-gray-700">Remember me</span>
                             </label>
-                            <a href="#" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500">Forget password</a>
+                            <a href="#" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Forget password</a>
                         </div>
 
                         <button
@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
                     </form>
 
                     <p className="mt-6 text-center">
-                        Don't have an account? <a href="#" className="text-blue-600 hover:underline">Sign up</a>
+                        Don't have an account? <a href="#" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>
             </div>
