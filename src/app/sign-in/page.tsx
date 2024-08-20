@@ -4,24 +4,32 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@store/store';
-import { login } from '@store/slices';
+import { useLoginUserMutation } from '@store/slices';
 
 
 const SignIn: React.FC = () => {
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
-    const dispatch: AppDispatch = useDispatch();
-    const { loading, error } = useSelector((state: RootState) => state.auth);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const dispatch = useDispatch<AppDispatch>();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // RTK Query mutation hook
+    const [loginUser, { isLoading, error }] = useLoginUserMutation();
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(login({ email, password }));
+        try {
+            await loginUser({ email, password }).unwrap();
+            // Handle successful login here (e.g., navigate to another page)
+        } catch (err) {
+            console.error('Failed to login', err);
+        }
     };
 
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
     };
+
 
     return (
         <div className="min-h-screen flex">
