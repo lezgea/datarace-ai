@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
 
@@ -39,10 +39,19 @@ const SignIn: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </a>
                     <div>
-                        <h2 className="text-2xl font-bold mb-4 lg:text-start text-center">Log in</h2>
-                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
+                        <h2 className="text-2xl font-bold mb-4 lg:text-start text-center">Register with email</h2>
+                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to sign up</p>
                     </div>
                     <form className="space-y-5">
+                        <div className="relative mb-4">
+                            <label htmlFor="fullname" className="block text-gray-700 mb-2">Full Name*</label>
+                            <input
+                                type="fullname"
+                                id="fullname"
+                                placeholder="Enter your full name"
+                                className="w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border rounded-xl hover:outline-none hover:ring-1 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
+                            />
+                        </div>
                         <div className="relative mb-4">
                             <label htmlFor="email" className="block text-gray-700 mb-2">E-mail*</label>
                             <input
@@ -88,6 +97,34 @@ const SignIn: React.FC = () => {
                                 )}
                             </div>
                         </div>
+                        <div className="relative mb-4">
+                            <label htmlFor="password" className="block text-gray-700 mb-2">Confirm Password*</label>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                placeholder="Enter password"
+                                className="w-full h-[50px] bg-gray-50 px-5 py-2 border rounded-xl hover:outline-none hover:ring-1 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
+                            />
+                            <div
+                                className="absolute h-[50px] right-5 bottom-0 flex items-center cursor-pointer"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? (
+                                    // Open Eye Icon
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5c-7.5 0-10 7.5-10 7.5s2.5 7.5 10 7.5 10-7.5 10-7.5-2.5-7.5-10-7.5z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                    </svg>
+                                ) : (
+                                    // Closed Eye Icon
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="Bold / Security / Eye Closed">
+                                            <path id="Vector" fillRule="evenodd" clipRule="evenodd" d="M1.60603 6.08085C2.11366 5.8633 2.70154 6.09845 2.9191 6.60608L1.99995 7C2.9191 6.60608 2.91924 6.6064 2.9191 6.60608L2.91858 6.60488C2.9183 6.60423 2.91851 6.6047 2.91858 6.60488L2.9225 6.61374C2.92651 6.62276 2.93339 6.63807 2.94319 6.65928C2.96278 6.7017 2.99397 6.76758 3.03696 6.85356C3.12302 7.02569 3.25594 7.27745 3.43737 7.58226C3.80137 8.19378 4.35439 9.00824 5.10775 9.81955C5.28532 10.0108 5.47324 10.2011 5.67173 10.388C5.68003 10.3956 5.68823 10.4033 5.69633 10.4112C7.18102 11.8014 9.25227 13 12 13C13.2089 13 14.2783 12.7692 15.2209 12.3982C16.4469 11.9156 17.4745 11.1891 18.3156 10.3997C19.2652 9.50838 19.9627 8.55004 20.4232 7.81099C20.6526 7.44291 20.8207 7.13317 20.9299 6.91908C20.9844 6.81215 21.0241 6.72942 21.0491 6.6756C21.0617 6.64871 21.0706 6.62906 21.0758 6.61727L21.0808 6.60608C21.2985 6.09872 21.8864 5.86335 22.3939 6.08085C22.9015 6.29841 23.1367 6.88629 22.9191 7.39392L22 7C22.9191 7.39392 22.9192 7.39369 22.9191 7.39392L22.9169 7.39894L22.9134 7.40716L22.9019 7.433C22.8924 7.45433 22.879 7.48377 22.8618 7.52071C22.8274 7.59457 22.7774 7.69854 22.7115 7.82773C22.5799 8.08589 22.384 8.44607 22.1206 8.86867C21.718 9.51483 21.152 10.3162 20.4096 11.1243L21.2071 11.9217C21.5976 12.3123 21.5976 12.9454 21.2071 13.3359C20.8165 13.7265 20.1834 13.7265 19.7928 13.3359L18.9527 12.4958C18.3884 12.9515 17.757 13.3814 17.0558 13.7522L17.8381 14.9546C18.1393 15.4175 18.0083 16.037 17.5453 16.3382C17.0824 16.6394 16.463 16.5083 16.1618 16.0454L15.1763 14.5309C14.4973 14.739 13.772 14.8865 13 14.9557V16.5C13 17.0523 12.5522 17.5 12 17.5C11.4477 17.5 11 17.0523 11 16.5V14.9558C10.2253 14.8866 9.50014 14.7388 8.82334 14.5313L7.83814 16.0454C7.53693 16.5083 6.91748 16.6394 6.45457 16.3382C5.99165 16.037 5.86056 15.4175 6.16177 14.9546L6.94417 13.7522C6.24405 13.3816 5.61245 12.9518 5.04746 12.4955L4.20706 13.3359C3.81654 13.7265 3.18337 13.7265 2.79285 13.3359C2.40232 12.9454 2.40232 12.3123 2.79285 11.9217L3.59029 11.1243C2.74529 10.2045 2.12772 9.29223 1.71879 8.60523C1.5096 8.25379 1.35345 7.95868 1.2481 7.74799C1.19539 7.64257 1.15529 7.55806 1.12752 7.49794C1.11363 7.46788 1.10282 7.44389 1.09505 7.42641L1.08566 7.40513L1.08267 7.39824L1.0816 7.39576L1.08117 7.39476C1.08098 7.39432 1.08081 7.39392 1.99995 7L1.08117 7.39476C0.863613 6.88713 1.0984 6.29841 1.60603 6.08085Z" fill="#282732" />
+                                        </g>
+                                    </svg>
+                                )}
+                            </div>
+                        </div>
                         <div className="flex justify-between items-center pb-4 pt-1 select-none">
                             <label className="inline-flex items-center cursor-pointer">
                                 {/* Hidden native checkbox */}
@@ -107,15 +144,14 @@ const SignIn: React.FC = () => {
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                 </span>
-                                <span className="ml-2 text-gray-700">Remember me</span>
+                                <span className="ml-2 text-gray-700">I accept terms and conditions</span>
                             </label>
-                            <a href="#" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Forget password</a>
                         </div>
                         <button
                             type="submit"
                             className="w-full h-[50px] bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark focus:outline-none focus:ring-2 focus:ring-primaryDark transition duration-200 ease-in-out transform"
                         >
-                            Login
+                            Sign up
                         </button>
                         <div className="text-center my-4">Or</div>
                         <button
@@ -123,11 +159,11 @@ const SignIn: React.FC = () => {
                             className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" /><path d="M1 1h22v22H1z" fill="none" /></svg>
-                            <span>Login with Google</span>
+                            <span>Register with Google</span>
                         </button>
                     </form>
                     <p className="mt-6 text-center">
-                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
+                        Have an account? <a href="/sign-in" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign in</a>
                     </p>
                 </div>
             </div>
@@ -135,4 +171,4 @@ const SignIn: React.FC = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;
