@@ -13,6 +13,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        primary: '#3EC491',
+        primaryDark: '#2da175',
         customBlue: {
           50: '#ebf5ff',
           100: '#e1effe',
