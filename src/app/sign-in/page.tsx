@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { useLoginUserMutation } from '@store/slices';
+import { useLoginUserMutation } from 'slices';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -42,8 +42,13 @@ const SignIn: React.FC = () => {
         try {
             await loginUser(data).unwrap();
             router.push('/')
-        } catch (err) {
-            toast.error(`${err}`)
+        } catch (err: any) {
+            if (err?.data?.code === "UNEXPECTED_EXCEPTION = USER_NOT_FOUND") {
+                toast.error("User is not found");
+            } else {
+                console.error('Unknown error:', err);
+                toast.error('An unexpected error occurred');
+            }
         }
     };
 

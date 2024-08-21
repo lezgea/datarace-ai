@@ -1,5 +1,3 @@
-
-
 import DataraceLogo from './datarace-logo.svg';
 import HumanRight from './human-right.svg';
 import TeamBrainStorming from './team-brainstorming.svg';
@@ -14,6 +12,7 @@ import EyeClosedIcon from './eye_closed.svg';
 import EyeIcon from './eye.svg';
 import FoundationIcon from './foundation.svg';
 import GoogleIcon from './google.svg';
+import CheckSquareIcon from './check-square.svg';
 
 
 export {
@@ -36,4 +35,5 @@ export {
     EyeIcon,
     FoundationIcon,
     GoogleIcon,
+    CheckSquareIcon,
 }

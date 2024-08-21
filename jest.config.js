@@ -2,9 +2,13 @@ module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
     transform: {
-        '^.+\\.(ts|tsx)$': 'ts-jest',
-        '^.+\\.(js|jsx)$': 'babel-jest',
+        '^.+\\.tsx?$': 'ts-jest', // Transform TypeScript and JSX files using ts-jest
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-    transformIgnorePatterns: ['/node_modules/'],
+    transformIgnorePatterns: ['<rootDir>/node_modules/'],
+    globals: {
+        'ts-jest': {
+            tsconfig: 'tsconfig.json',
+        },
+    },
 };

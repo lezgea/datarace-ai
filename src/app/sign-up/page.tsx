@@ -2,9 +2,38 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { FormInput } from '@components/shared';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+
+
+interface IFormInput {
+    email: string;
+    password: string;
+    confirmation: string;
+}
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string()
+        .required('Password is required')
+        .min(3, 'Password must be at least 3 characters'),
+    confirmation: Yup.string()
+        .required('Password is required')
+        .min(3, 'Password must be at least 3 characters'),
+});
+
 
 
 const SignUp: React.FC = () => {
+    let router = useRouter()
+
+    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
+        resolver: yupResolver(validationSchema),
+        mode: 'onBlur',
+    });
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
 
@@ -43,15 +72,15 @@ const SignUp: React.FC = () => {
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to sign up</p>
                     </div>
                     <form className="space-y-5 select-none">
-                        <div className="relative mb-4">
-                            <label htmlFor="fullname" className="block text-gray-700 mb-2">Full Name*</label>
-                            <input
-                                type="fullname"
-                                id="fullname"
-                                placeholder="Enter your full name"
-                                className="w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border rounded-xl hover:outline-none hover:ring-1 hover:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition duration-200 ease-in-out transform"
-                            />
-                        </div>
+                        {/* <FormInput
+                            label='E-mail*'
+                            type='email'
+                            name='email'
+                            placeholder="example@company.com"
+                            register={register}
+                            errors={errors}
+                            icon={<EmailIcon />}
+                        /> */}
                         <div className="relative mb-4">
                             <label htmlFor="email" className="block text-gray-700 mb-2">E-mail*</label>
                             <input
