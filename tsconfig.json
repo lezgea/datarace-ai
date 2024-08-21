@@ -43,6 +43,12 @@
       ],
       "@store/*": [
         "store/*"
+      ],
+      "@slices/*": [
+        "slices/*"
+      ],
+      "@api/*": [
+        "api/*"
       ]
     },
     "forceConsistentCasingInFileNames": true

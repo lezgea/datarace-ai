@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { apiSlice } from '../api-slice';
+import { apiSlice } from '@api/api-slice';
 
 interface AuthState {
     isAuthenticated: boolean;
@@ -25,7 +25,6 @@ const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        // Handle loginUser mutation
         builder
             .addMatcher(
                 apiSlice.endpoints.loginUser.matchPending,

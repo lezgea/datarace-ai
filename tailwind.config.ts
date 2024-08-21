@@ -9,6 +9,8 @@ const config: Config = {
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx,scss}",
     "./src/providers/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/store/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/api/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/slices/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: 'class',
   theme: {
