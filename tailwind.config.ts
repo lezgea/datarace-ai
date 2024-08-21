@@ -46,7 +46,14 @@ const config: Config = {
         custom_md: '24px',
       },
       fontWeight: {
+        thin: '200',
+        light: '300',
+        regular: '400',
+        regmed: '500',
         medium: '600',
+        semi: '700',
+        bold: '800',
+        black: '900',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
