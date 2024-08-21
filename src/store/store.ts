@@ -13,9 +13,5 @@ export const store = configureStore({
         getDefaultMiddleware().concat(userApi.middleware, productApi.middleware),
 });
 
-// Injects endpoints after the store is configured
-injectUserEndpoints();
-injectCompetitionEndpoints();
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
