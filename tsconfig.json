@@ -14,11 +14,12 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve", // Or "react" for older React versions
     "incremental": true,
+    "noImplicitAny": true,
     "plugins": [
       {
         "name": "next"
@@ -43,8 +44,15 @@
       ],
       "@store/*": [
         "store/*"
+      ],
+      "@slices/*": [
+        "slices/*"
+      ],
+      "@api/*": [
+        "api/*"
       ]
-    }
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",

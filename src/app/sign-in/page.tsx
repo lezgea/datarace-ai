@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { useLoginUserMutation } from '@store/slices';
+import { useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -13,13 +13,14 @@ import { useRouter } from 'next/navigation';
 
 
 interface IFormInput {
-    email: string;
+    username: string;
     password: string;
+    rememberMe?: boolean;
 }
 
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    username: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string()
         .required('Password is required')
         .min(3, 'Password must be at least 3 characters'),
@@ -28,7 +29,7 @@ const validationSchema = Yup.object().shape({
 
 const SignIn: React.FC = () => {
     let router = useRouter()
-    // React Hook Form
+
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur',
@@ -40,10 +41,16 @@ const SignIn: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
+            console.log('@@@@@', data)
             await loginUser(data).unwrap();
             router.push('/')
-        } catch (err) {
-            toast.error(`${err}`)
+        } catch (err: any) {
+            if (err?.data?.code === "UNEXPECTED_EXCEPTION = USER_NOT_FOUND") {
+                toast.error("User is not found");
+            } else {
+                console.error('Unknown error:', err);
+                toast.error('An unexpected error occurred');
+            }
         }
     };
 
@@ -89,7 +96,7 @@ const SignIn: React.FC = () => {
                         <FormInput
                             label='E-mail*'
                             type='email'
-                            name='email'
+                            name='username'
                             placeholder="example@company.com"
                             register={register}
                             errors={errors}
@@ -111,6 +118,7 @@ const SignIn: React.FC = () => {
                                 <input
                                     type="checkbox"
                                     className="hidden peer"
+                                    {...register("rememberMe")}
                                 />
                                 {/* Custom checkbox */}
                                 <span className="w-6 h-6 rounded-lg border-2 border-gray-300 flex items-center justify-center bg-white peer-checked:bg-blue-400 peer-checked:border-transparent transition-colors duration-200">
@@ -130,7 +138,7 @@ const SignIn: React.FC = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark focus:outline-none focus:ring-2 focus:ring-primaryDark transition duration-200 ease-in-out transform"
+                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none focus:bg-primaryDark transition duration-200 ease-in-out transform"
                         >
                             Login
                         </button>
