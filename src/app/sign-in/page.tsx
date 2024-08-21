@@ -84,7 +84,7 @@ const SignIn: React.FC = () => {
                         <h2 className="text-2xl font-bold mb-4 lg:text-start text-center">Log in</h2>
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
                     </div>
-                    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
                             label='E-mail*'
                             type='email'
