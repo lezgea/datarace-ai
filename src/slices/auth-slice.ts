@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { apiSlice } from '@api/api-slice';
+import { userApi } from '../api/user-api';  // Import the user API slice
+import { LoginResponse, User } from '@api/types/auth-types';
+
 
 interface AuthState {
     isAuthenticated: boolean;
-    user: string | null;
+    user: User | null;
     loading: boolean;
     error: string | null;
 }
@@ -22,34 +24,41 @@ const authSlice = createSlice({
         logout: (state) => {
             state.isAuthenticated = false;
             state.user = null;
+            state.error = null;
         },
     },
     extraReducers: (builder) => {
         builder
+            // Handle pending state when the loginUser mutation is initiated
             .addMatcher(
-                apiSlice.endpoints.loginUser.matchPending,
+                userApi.endpoints.loginUser.matchPending,
                 (state) => {
                     state.loading = true;
                     state.error = null;
                 }
             )
+            // Handle fulfilled state when the loginUser mutation succeeds
             .addMatcher(
-                apiSlice.endpoints.loginUser.matchFulfilled,
-                (state, action: PayloadAction<{ user: string }>) => {
+                userApi.endpoints.loginUser.matchFulfilled,
+                (state, action: PayloadAction<LoginResponse>) => {
                     state.loading = false;
                     state.isAuthenticated = true;
                     state.user = action.payload.user;
                 }
             )
+            // Handle rejected state when the loginUser mutation fails
             .addMatcher(
-                apiSlice.endpoints.loginUser.matchRejected,
+                userApi.endpoints.loginUser.matchRejected,
                 (state, action) => {
                     state.loading = false;
-                    state.error = action.error.message || 'Login failed';
+                    state.error = action.error?.message || 'Login failed';
                 }
             );
     },
 });
 
+// Export the logout action so you can use it in components
 export const { logout } = authSlice.actions;
+
+// Export the reducer to be used in the store
 export default authSlice.reducer;

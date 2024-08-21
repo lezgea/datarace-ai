@@ -5,6 +5,13 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-    user: string;
+    user: User; // Ensure this is a User object, not a string
     token: string;
 }
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+}
+

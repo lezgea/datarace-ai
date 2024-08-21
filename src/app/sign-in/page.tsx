@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { useLoginUserMutation } from '@api/user-endpoints';
+import { useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
