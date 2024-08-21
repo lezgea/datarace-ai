@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
                         <h2 className="text-2xl font-bold mb-4 lg:text-start text-center">Register with email</h2>
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to sign up</p>
                     </div>
-                    <form className="space-y-5">
+                    <form className="space-y-5 select-none">
                         <div className="relative mb-4">
                             <label htmlFor="fullname" className="block text-gray-700 mb-2">Full Name*</label>
                             <input
