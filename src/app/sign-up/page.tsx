@@ -149,7 +149,7 @@ const SignUp: React.FC = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark focus:outline-none focus:ring-2 focus:ring-primaryDark transition duration-200 ease-in-out transform"
+                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none focus:bg-primaryDark transition duration-200 ease-in-out transform"
                         >
                             Sign up
                         </button>
