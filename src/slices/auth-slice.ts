@@ -31,7 +31,6 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // Handle pending state when the loginUser mutation is initiated
             .addMatcher(
                 userApi.endpoints.loginUser.matchPending,
                 (state) => {
@@ -39,7 +38,6 @@ const authSlice = createSlice({
                     state.error = null;
                 }
             )
-            // Handle fulfilled state when the loginUser mutation succeeds
             .addMatcher(
                 userApi.endpoints.loginUser.matchFulfilled,
                 (state, action: PayloadAction<LoginResponse>) => {
@@ -51,7 +49,6 @@ const authSlice = createSlice({
                     });
                 }
             )
-            // Handle rejected state when the loginUser mutation fails
             .addMatcher(
                 userApi.endpoints.loginUser.matchRejected,
                 (state, action) => {
@@ -62,7 +59,6 @@ const authSlice = createSlice({
     },
 });
 
-// Export the logout action so you can use it in components
 export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
