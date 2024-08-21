@@ -5,6 +5,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -35,8 +38,8 @@
       "@assets/*": [
         "assets/*"
       ],
-      "@features/*": [
-        "features/*"
+      "@providers/*": [
+        "providers/*"
       ],
       "@store/*": [
         "store/*"
