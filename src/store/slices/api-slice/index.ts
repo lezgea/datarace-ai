@@ -14,13 +14,13 @@ interface LoginRequest {
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: axiosBaseQuery({
-        baseUrl: 'https://beta.datarace.ai',
+        baseUrl: 'https://petstore.swagger.io/v2',
     }),
     endpoints: (builder) => ({
         loginUser: builder.mutation<LoginResponse, LoginRequest>({
             query: (credentials) => ({
                 url: '/user/login',
-                method: 'POST',
+                method: 'GET',
                 data: credentials,
             }),
         }),

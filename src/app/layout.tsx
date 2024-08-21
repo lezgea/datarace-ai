@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import '../styles/global.css';
 import { Footer, Header } from "components";
 import ReduxProvider from "providers/redux-provider";
+import ToastProvider from "@providers/toast-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] }); // Specify weights if needed
@@ -25,11 +26,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${inter.className} ${poppins.className}`}>
-        <Header />
-        <ReduxProvider>
-          {children}
-        </ReduxProvider>
-        <Footer />
+        <ToastProvider>
+          <Header />
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );
