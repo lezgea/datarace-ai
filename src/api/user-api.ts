@@ -3,15 +3,18 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { LoginRequest, LoginResponse } from './types/auth-types';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+
+
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: axiosBaseQuery({
-        baseUrl: 'https://api.example.com/users',
+        baseUrl: BASE_URL + '/v1',
     }),
     endpoints: (builder) => ({
         loginUser: builder.mutation<LoginResponse, LoginRequest>({
             query: (credentials) => ({
-                url: '/login',
+                url: '/users/login',
                 method: 'POST',
                 data: credentials,
             }),
