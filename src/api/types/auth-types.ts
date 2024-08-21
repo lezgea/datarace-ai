@@ -4,10 +4,7 @@ export interface LoginRequest {
     rememberMe?: boolean;
 }
 
-export interface LoginResponse {
-    user: User; // Ensure this is a User object, not a string
-    token: string;
-}
+export type LoginResponse = string
 
 export interface User {
     id: string;
