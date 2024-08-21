@@ -6,7 +6,7 @@ import ReduxProvider from "providers/redux-provider";
 import ToastProvider from "@providers/toast-provider";
 
 const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] }); // Specify weights if needed
+const poppins = Poppins({ subsets: ["latin"], weight: ["200", "300", "400", "500", "600", "700", "800", "900"] }); // Specify weights if needed
 
 
 export const metadata: Metadata = {

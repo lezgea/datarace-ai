@@ -2,15 +2,14 @@
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@store/store';
 import { useLoginUserMutation } from '@store/slices';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { FormInput } from '@components/shared';
 import { toast } from 'react-toastify';
-import { DataraceLogo, EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
+import { EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
+import { useRouter } from 'next/navigation';
 
 
 interface IFormInput {
@@ -22,12 +21,13 @@ interface IFormInput {
 const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string()
-        .min(3, 'Password must be at least 3 characters')
-        .required('Password is required'),
+        .required('Password is required')
+        .min(3, 'Password must be at least 3 characters'),
 });
 
 
 const SignIn: React.FC = () => {
+    let router = useRouter()
     // React Hook Form
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -41,7 +41,7 @@ const SignIn: React.FC = () => {
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
             await loginUser(data).unwrap();
-            // Handle successful login here (e.g., navigate to another page)
+            router.push('/')
         } catch (err) {
             toast.error(`${err}`)
         }
@@ -82,7 +82,7 @@ const SignIn: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </a>
                     <div>
-                        <h2 className="text-2xl font-bold mb-4 lg:text-start text-center">Log in</h2>
+                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Log in</h2>
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
                     </div>
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
@@ -130,7 +130,7 @@ const SignIn: React.FC = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full h-[50px] bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark focus:outline-none focus:ring-2 focus:ring-primaryDark transition duration-200 ease-in-out transform"
+                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark focus:outline-none focus:ring-2 focus:ring-primaryDark transition duration-200 ease-in-out transform"
                         >
                             Login
                         </button>
@@ -140,11 +140,11 @@ const SignIn: React.FC = () => {
                             className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform"
                         >
                             <GoogleIcon />
-                            <span>Login with Google</span>
+                            <span className="font-regmed">Login with Google</span>
                         </button>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
+                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>
             </div>
