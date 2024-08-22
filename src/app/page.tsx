@@ -329,7 +329,7 @@ const RaceSelect: React.FC<RacesSelectProps> = (props) => {
     return (
         <div className="min-w-[300px] w-[300px] h-md px-6 py-4 flex rounded-custom_md bg-custom_gray border border-transparent cursor-pointer shadow-sm hover:shadow-lg hover:border-blue transition-bg transition-shadow duration-200 ease-in group">
             <div className="flex-shrink-0 transition-transform duration-300 ease-in-out transform group-hover:scale-105">
-                <img src={img} alt="Feature 1" />
+                <Image src={img} alt="Feature 1" width="100" height="100" className="h-11 w-11" />
             </div>
             <div className='column px-4'>
                 <h4 className="text-md font-medium">{title}</h4>

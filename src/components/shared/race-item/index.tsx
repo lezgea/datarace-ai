@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 interface RacesItemProps {
     title: string;
@@ -13,9 +14,11 @@ export const RaceItem: React.FC<RacesItemProps> = (props) => {
     return (
         <div className="h-md rounded-custom_md cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group">
             <div className="overflow-hidden">
-                <img
+                <Image
                     src={img}
                     alt="Feature 1"
+                    height="300"
+                    width="300"
                     className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
                 />
             </div>
