@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { Metadata } from 'next'
+import { Loader } from '@components/shared';
 
 
 export const metadata: Metadata = {
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 
 
 const AboutUs: React.FC = () => {
+    return <Loader />
+
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow bg-gray-50 py-40">

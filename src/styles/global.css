@@ -34,6 +34,77 @@ body {
 }
 
 
+.loader-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out;
+    position: absolute;
+
+
+    .loader-wrapper {
+        position: relative;
+        height: 11em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .overflow-box {
+            position: absolute;
+            width: 250px;
+            height: 8em;
+            opacity: 0.9;
+            background-color: #ffffff;
+            transition: ease-in;
+            animation: overflowBoxAnimation 1.6s ease-in-out infinite;
+        }
+
+        .loader {
+            font-size: 5em;
+            /* animation: loaderAnimation 2s ease-in-out infinite; */
+        }
+    }
+}
+
+
+@keyframes overflowBoxAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-100px);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes logoAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes loaderAnimation {
+    0% {
+        scale: 0.5;
+    }
+
+    100% {
+        scale: 1;
+    }
+}
+
+
 @layer utilities {
     .text-balance {
         text-wrap: balance;
