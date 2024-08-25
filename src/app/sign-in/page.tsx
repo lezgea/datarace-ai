@@ -41,7 +41,6 @@ const SignIn: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            console.log('@@@@@', data)
             await loginUser(data).unwrap();
             router.push('/')
         } catch (err: any) {
@@ -57,8 +56,6 @@ const SignIn: React.FC = () => {
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
     };
-
-    // if (isLoading) return <div>mdmdmdmdm</div>
 
 
     return (
