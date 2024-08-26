@@ -9,7 +9,7 @@ interface DropdownProps {
     children?: ReactNode;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ width = 200, button, items, children }) => {
+export const Dropdown: React.FC<DropdownProps> = ({ width, button, items, children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = React.useRef<HTMLDivElement>(null);
 
@@ -30,6 +30,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ width = 200, button, items, 
         };
     }, []);
 
+
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
             <div onClick={toggleDropdown}>
@@ -38,8 +39,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ width = 200, button, items, 
 
             {isOpen && (
                 <div
-                    className={`origin-top-right absolute right-0 mt-2 w-[${width}px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-2 transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-10 opacity-0'
-                        }`}
+                    className={`w-${width} origin-top-right absolute right-0 mt-2 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-2 transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-10 opacity-0'}`}
                 >
                     <div role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {items.map((item, index) => (

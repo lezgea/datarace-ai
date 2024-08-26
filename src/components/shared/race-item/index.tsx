@@ -23,10 +23,10 @@ export const RaceItem: React.FC<RacesItemProps> = (props) => {
                 />
             </div>
             <div className='column p-6 space-y-3'>
-                <h4 className="text-md font-medium text-customBlue-900">{title}</h4>
-                <p className="text-sm text-customBlue-900">{description}</p>
+                <h4 className="text-xl font-medium text-customBlue-900">{title}</h4>
+                <p className="text-md text-gray-500 truncate-text">{description}</p>
                 <div className='flex justify-between pt-5'>
-                    <p className="text-[22px] font-medium text-customBlue-900">{price}</p>
+                    <p className="text-[22px] text-customBlue-900">{price}</p>
                     <p className="bg-customBlue-500 text-sm content-center px-4 rounded-xl text-white">{expiry_date}</p>
                 </div>
             </div>

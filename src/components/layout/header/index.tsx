@@ -15,11 +15,6 @@ const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/contact-us', label: 'Contact Us' },
 ];
 
-const DROPDOWN_MENU: { route: string; label: string }[] = [
-    { route: '/profile', label: 'Profile' },
-    { route: '/races', label: 'Races' },
-];
-
 
 export const Header: React.FC = () => {
     const pathname = usePathname();
@@ -47,19 +42,10 @@ export const Header: React.FC = () => {
                         }
                     </ul>
                     <div className="flex items-center justify-end w-[20%] h-full">
-                        <Dropdown
-                            items={DROPDOWN_MENU}
-                            button={
-                                <button className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
-                                    Sign Out
-                                </button>
-                            }
-                        >
-                            <UserProfile
-                                name="Surname F."
-                                image="/png/pic1.png"
-                            />
-                        </Dropdown>
+                        <UserProfile
+                            name="Surname F."
+                            image="/png/pic1.png"
+                        />
                     </div>
                 </nav>
             </header>

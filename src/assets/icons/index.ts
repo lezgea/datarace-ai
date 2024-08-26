@@ -13,6 +13,8 @@ import EyeIcon from './eye.svg';
 import FoundationIcon from './foundation.svg';
 import GoogleIcon from './google.svg';
 import CheckSquareIcon from './check-square.svg';
+import LocationIcon from './location.svg';
+import BagIcon from './bag.svg';
 
 
 export {
@@ -24,6 +26,8 @@ export {
     TeamBrainStorming,
 
     // icons
+    BagIcon,
+    LocationIcon,
     RaceIcon,
     ArrowStyledIcon,
     DrawIcon,
