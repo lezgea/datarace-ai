@@ -6,7 +6,7 @@ import { useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { FormInput } from '@components/shared';
+import { FormInput, Loader } from '@components/shared';
 import { toast } from 'react-toastify';
 import { EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
 import { useRouter } from 'next/navigation';
@@ -57,6 +57,7 @@ const SignIn: React.FC = () => {
         setShowPassword(!showPassword);
     };
 
+    if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen max-h-screen flex">
