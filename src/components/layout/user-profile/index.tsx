@@ -76,8 +76,8 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
     return (
         <Dropdown content={DropdownContent}>
             <div className="flex items-center cursor-pointer group select-none">
-                <div className="font-regmed mr-3 group-hover:text-blue-400 transition-all duration-200 ease-in-out">{name}</div>
-                <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
+                <div className="hidden md:flex font-regmed mr-3 group-hover:text-blue-400 transition-all duration-200 ease-in-out">{name}</div>
+                <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
                     <Image
                         src={image}
                         alt="Avatar"

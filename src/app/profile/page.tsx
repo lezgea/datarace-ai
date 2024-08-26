@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { BagIcon, LocationIcon } from '@assets/icons';
 
 
-interface RaceItemType {
+interface IRaceItemType {
     title: string,
     description: string,
     img: string,
@@ -15,7 +15,7 @@ interface RaceItemType {
 }
 
 
-const RACE_ITEMS: RaceItemType[] = [
+const RACE_ITEMS: IRaceItemType[] = [
     {
         title: 'Elektrik kəsintiləri',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor adipiscing elit, sed do eiusmod tempor ',
@@ -50,9 +50,9 @@ const Profile: React.FC = () => {
     if (testLoading) return <Loader />;
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col p-5">
             <main className="flex-grow py-20">
-                <section className="container flex items-center justify-between mx-auto p-10 border border-gray-300 rounded-3xl space-x-10">
+                <section className="container flex flex-col items-center justify-between space-y-7 mx-auto p-10 border border-gray-300 rounded-3xl lg:flex-row lg:space-x-10 lg:space-y-0">
                     <div className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200">
                         <Image
                             src="/png/pic1.png"
@@ -63,20 +63,22 @@ const Profile: React.FC = () => {
                             priority
                         />
                     </div>
-                    <div className="w-full flex">
-                        <div className="w-full flex flex-col justify-end space-y-2">
+                    <div className="w-full flex flex-col space-y-7 md:flex-row justify-start md:space-y-0">
+                        <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-2">
                             <p className="text-[2rem] font-medium">Mike Wiseman</p>
                             <p className="text-md text-gray-500">@username45</p>
                             <p className="text-md text-gray-500">mike.wiseman@gmail.com</p>
                         </div>
-                        <div className="w-[40%] flex flex-col justify-end space-y-2">
-                            <div className="flex space-x-3">
-                                <LocationIcon />
-                                <p className="text-md text-gray-500">Santa Clara, CA, USA</p>
-                            </div>
-                            <div className="flex space-x-3">
-                                <BagIcon />
-                                <p className="text-md text-gray-500">Project Manager at AILAB</p>
+                        <div className="w-full flex justify-center items-end md:justify-end">
+                            <div className="flex flex-col items-center justify-end space-y-2 md:items-start">
+                                <div className="flex space-x-3">
+                                    <LocationIcon />
+                                    <p className="text-md text-gray-500">Santa Clara, CA, USA</p>
+                                </div>
+                                <div className="flex space-x-3">
+                                    <BagIcon />
+                                    <p className="text-md text-gray-500">Project Manager at AILAB</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,7 +87,7 @@ const Profile: React.FC = () => {
                     <div className="flex justify-between content-center">
 
                     </div>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {
                             RACE_ITEMS.map((item, i) =>
                                 <RaceItem key={i} {...item} />
@@ -94,7 +96,7 @@ const Profile: React.FC = () => {
                     </div>
                 </section>
             </main>
-        </div>
+        </div >
     );
 };
 

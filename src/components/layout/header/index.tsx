@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserProfile } from '../user-profile';
 import { Dropdown } from '@components/shared/dropdown';
+import { CloseIcon, HamburgerIcon } from '@assets/icons';
 
 
 const NAV_ROUTES: { route: string; label: string }[] = [
@@ -26,11 +27,13 @@ export const Header: React.FC = () => {
     if (!hideHeaderRoutes.includes(pathname)) {
         return (
             <header className="backdrop-blur-xl bg-white/60 w-full fixed z-10 h-[65px]">
-                <nav className="container mx-auto flex justify-between items-center py-0 h-full">
-                    <Link href="/" passHref className="flex items-center cursor-pointer w-[20%]">
+                <nav className="container w-full mx-auto flex justify-between items-center py-0 h-full space-x-5">
+                    <HamburgerIcon className="flex lg:hidden" />
+                    {/* <CloseIcon className="flex lg:hidden" /> */}
+                    <Link href="/" passHref className="flex items-center cursor-pointer w-full md:w-[20%]">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority />
                     </Link>
-                    <ul className="flex space-x-10">
+                    <ul className="hidden lg:flex space-x-10">
                         {
                             NAV_ROUTES.map((item, i) =>
                                 <li key={i}>

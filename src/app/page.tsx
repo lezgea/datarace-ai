@@ -11,24 +11,24 @@ export const metadata: Metadata = {
     description: "DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.",
 };
 
-interface RaceType {
+interface IRaceType {
     title: string;
     description: string;
     img: string;
 }
 
-interface RaceItemType extends RaceType {
+interface IRaceItemType extends IRaceType {
     price: string,
     expiry_date: string | number,
 }
 
-interface ResourceItemType extends RaceType {
+interface IResourceItemType extends IRaceType {
     duration: string,
     guided: string,
 }
 
 
-const RACE_SELECTS: RaceType[] = [
+const RACE_SELECTS: IRaceType[] = [
     {
         title: 'All races',
         description: '180 races',
@@ -67,7 +67,7 @@ const RACE_SELECTS: RaceType[] = [
 ];
 
 
-const RACE_ITEMS: RaceItemType[] = [
+const RACE_ITEMS: IRaceItemType[] = [
     {
         title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
@@ -113,7 +113,7 @@ const RACE_ITEMS: RaceItemType[] = [
 ];
 
 
-const COMPLETED_ITEMS: RaceItemType[] = [
+const COMPLETED_ITEMS: IRaceItemType[] = [
     {
         title: 'Auctor ut luctus euismod euismod quam ut sapien.',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
@@ -138,7 +138,7 @@ const COMPLETED_ITEMS: RaceItemType[] = [
 ];
 
 
-const RESOURCE_ITEMS: ResourceItemType[] = [
+const RESOURCE_ITEMS: IResourceItemType[] = [
     {
         title: 'Foundation of the programming',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
@@ -321,9 +321,9 @@ const Home: React.FC = () => {
 export default Home;
 
 
-interface RacesSelectProps extends RaceType { };
+interface IRacesSelectProps extends IRaceType { };
 
-const RaceSelect: React.FC<RacesSelectProps> = (props) => {
+const RaceSelect: React.FC<IRacesSelectProps> = (props) => {
     let { title, description, img } = props
 
     return (

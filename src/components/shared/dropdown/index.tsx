@@ -1,12 +1,12 @@
 import React, { useState, ReactNode } from 'react';
 
 
-interface DropdownProps {
+interface IDropdownProps {
     content?: ReactNode;
     children: ReactNode;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ content, children }) => {
+export const Dropdown: React.FC<IDropdownProps> = ({ content, children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = React.useRef<HTMLDivElement>(null);
 

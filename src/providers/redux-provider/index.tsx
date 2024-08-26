@@ -4,11 +4,12 @@ import { Provider } from 'react-redux';
 import { ReactNode } from 'react';
 import { store } from '../../store/store';
 
-interface ReduxProviderProps {
+
+interface IReduxProviderProps {
     children: ReactNode;
 }
 
-const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
+const ReduxProvider: React.FC<IReduxProviderProps> = ({ children }) => {
     return <Provider store={store}>{children}</Provider>;
 };
 
