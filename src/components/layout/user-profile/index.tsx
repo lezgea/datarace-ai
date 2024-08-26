@@ -29,7 +29,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
 
     return (
         <div className="flex items-center cursor-pointer group select-none">
-            <div className="font-regmed mr-3 group-hover:text-blue-400">{name}</div>
+            <div className="font-regmed mr-3 group-hover:text-blue-400 transition-all duration-200 ease-in-out">{name}</div>
             <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
                 <Image
                     src={image}

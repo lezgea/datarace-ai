@@ -15,6 +15,12 @@ const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/contact-us', label: 'Contact Us' },
 ];
 
+const DROPDOWN_MENU: { route: string; label: string }[] = [
+    { route: '/profile', label: 'Profile' },
+    { route: '/races', label: 'Races' },
+];
+
+
 export const Header: React.FC = () => {
     const pathname = usePathname();
 
@@ -42,32 +48,18 @@ export const Header: React.FC = () => {
                     </ul>
                     <div className="flex items-center justify-end w-[20%] h-full">
                         <Dropdown
-                            items={[{ label: 'test', href: '/' }]}
+                            items={DROPDOWN_MENU}
+                            button={
+                                <button className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
+                                    Sign Out
+                                </button>
+                            }
                         >
                             <UserProfile
                                 name="Surname F."
                                 image="/png/pic1.png"
                             />
                         </Dropdown>
-
-                        {/* <div className="relative inline-block text-left">
-                            <div>
-                                <button onClick={() => { }} className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                    Options
-                                    <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 3a1 1 0 01.707 1.707l-3.293 3.293H16a1 1 0 110 2H7.414l3.293 3.293A1 1 0 0110 17a1 1 0 01-.707-.293l-5-5a1 1 0 010-1.414l5-5A1 1 0 0110 3z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div id="dropdownMenu" className="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                                <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Item 1</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Item 2</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Item 3</a>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </nav>
             </header>

@@ -5,19 +5,19 @@ import { Loader } from '@components/shared';
 
 
 export const metadata: Metadata = {
-    title: "About Us | Datarace.ai",
+    title: "My Profile | Datarace.ai",
     description: "DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.",
 };
 
 
-const AboutUs: React.FC = () => {
+const Profile: React.FC = () => {
     // return <Loader />
 
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow bg-gray-50 py-40">
                 <section className="container mx-auto text-center">
-                    <h1 className="text-4xl font-bold mb-4">About Us</h1>
+                    <h1 className="text-4xl font-bold mb-4">Profile</h1>
                     <p className="text-lg text-gray-700 mb-8">Some amazing description goes here</p>
                 </section>
             </main>
@@ -25,4 +25,5 @@ const AboutUs: React.FC = () => {
     );
 };
 
-export default AboutUs;
+export default Profile;
+

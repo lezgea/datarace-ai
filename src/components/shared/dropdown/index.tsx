@@ -1,16 +1,17 @@
+import Link from 'next/link';
 import React, { useState, ReactNode } from 'react';
-
+import Divider from '../divider';
 
 interface DropdownProps {
+    width?: number;
     button?: ReactNode;
-    items: { label: string; href?: string }[];
+    items: { label: string; route: string }[];
     children?: ReactNode;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ button, items, children }) => {
-    const [isOpen, setIsOpen] = React.useState<boolean>(false);
+export const Dropdown: React.FC<DropdownProps> = ({ width = 200, button, items, children }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = React.useRef<HTMLDivElement>(null);
-
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -29,29 +30,33 @@ export const Dropdown: React.FC<DropdownProps> = ({ button, items, children }) =
         };
     }, []);
 
-
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
             <div onClick={toggleDropdown}>
-                {children}
+                {children} {/* Renders children element */}
             </div>
 
             {isOpen && (
-                <div className="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1">
-                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <div
+                    className={`origin-top-right absolute right-0 mt-2 w-[${width}px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-2 transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-10 opacity-0'
+                        }`}
+                >
+                    <div role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {items.map((item, index) => (
-                            <a
+                            <Link
                                 key={index}
-                                href={item.href}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                href={item.route}
+                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 rounded-md transition-all duration-200 ease-in-out"
                                 role="menuitem"
+                                onClick={() => setIsOpen(false)} // Close dropdown on item click
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
+                        <Divider />
                         {button && (
                             <div className="mt-2">
-                                {button} {/* Render children elements */}
+                                {button} {/* Additional btn */}
                             </div>
                         )}
                     </div>
