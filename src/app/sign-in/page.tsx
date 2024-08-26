@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
         setShowPassword(!showPassword);
     };
 
-    if (isLoading) return <Loader />
+    // if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen max-h-screen flex">
