@@ -1,5 +1,7 @@
+import React from 'react';
 
-interface ResourceItemProps {
+
+interface IResourceItemProps {
     title: string;
     description: string;
     img: string;
@@ -7,7 +9,7 @@ interface ResourceItemProps {
     guided: string | number,
 };
 
-export const ResourceItem: React.FC<ResourceItemProps> = (props) => {
+export const ResourceItem: React.FC<IResourceItemProps> = (props) => {
     let { title, description, img, duration, guided } = props
 
     return (

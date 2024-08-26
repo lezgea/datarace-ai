@@ -1,4 +1,4 @@
-export interface LoginRequest {
+export interface ILoginRequest {
     username: string;
     password: string;
     rememberMe?: boolean;
@@ -6,7 +6,7 @@ export interface LoginRequest {
 
 export type LoginResponse = string
 
-export interface User {
+export interface IUser {
     id: string;
     name: string;
     email: string;

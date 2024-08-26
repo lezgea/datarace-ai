@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-interface RacesItemProps {
+
+interface IRacesItemProps {
     title: string;
     description: string;
     img: string;
@@ -8,7 +9,7 @@ interface RacesItemProps {
     expiry_date: string | number,
 };
 
-export const RaceItem: React.FC<RacesItemProps> = (props) => {
+export const RaceItem: React.FC<IRacesItemProps> = (props) => {
     let { title, description, img, expiry_date, price } = props
 
     return (

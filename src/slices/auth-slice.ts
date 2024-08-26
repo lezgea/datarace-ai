@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '../api/user-api';
-import { LoginResponse, User } from '@api/types/auth-types';
+import { IUser, LoginResponse } from '@api/types/auth-types';
 import Cookies from 'js-cookie';
 
 
-interface AuthState {
+interface IAuthState {
     isAuthenticated: boolean;
-    user: User | null;
+    user: IUser | null;
     loading: boolean;
     error: string | null;
 }
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
     isAuthenticated: false,
     user: null,
     loading: false,

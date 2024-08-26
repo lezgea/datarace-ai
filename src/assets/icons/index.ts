@@ -15,6 +15,8 @@ import GoogleIcon from './google.svg';
 import CheckSquareIcon from './check-square.svg';
 import LocationIcon from './location.svg';
 import BagIcon from './bag.svg';
+import HamburgerIcon from './hamburger.svg';
+import CloseIcon from './close.svg';
 
 
 export {
@@ -26,6 +28,8 @@ export {
     TeamBrainStorming,
 
     // icons
+    CloseIcon,
+    HamburgerIcon,
     BagIcon,
     LocationIcon,
     RaceIcon,
