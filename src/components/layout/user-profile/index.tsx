@@ -1,9 +1,13 @@
+import { useLogoutUserMutation } from '@api/user-api';
 import { UserProfileSkeleton } from '@components/shared';
 import { Dropdown } from '@components/shared/dropdown';
+import { logout } from '@slices/auth-slice';
 import { useAuth } from 'hooks/use-auth';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 
 interface IUserProfileProps {
@@ -19,13 +23,27 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 
 export const UserProfile: React.FC<IUserProfileProps> = (props) => {
     let { name, image } = props;
-    const { isLogged, isLoading } = useAuth();
+
+    const { isLogged, isLoading: isUserLoading } = useAuth();
+    const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        try {
+            // await logoutUser().unwrap();
+            dispatch(logout());
+            window.location.reload();
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
 
 
-    if (isLoading) return <UserProfileSkeleton />
+    if (isUserLoading) return <UserProfileSkeleton />
 
     // shows Sign In button if user is not logged in
-    if (!isLogged && !isLoading)
+    if (!isLogged && !isUserLoading)
         return (
             <Link href="/sign-in">
                 <button type="button" className="inline-flex w-auto text-center items-center px-5 py-2 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-lg shadow-md shadow-neutral-300 sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
@@ -40,7 +58,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             width={80}
             items={DROPDOWN_MENU}
             button={
-                <button className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
+                <button onClick={handleLogout} disabled={isLoading} className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
                     Sign Out
                 </button>
             }
