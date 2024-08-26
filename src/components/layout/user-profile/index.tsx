@@ -1,5 +1,6 @@
 import { useLogoutUserMutation } from '@api/user-api';
 import { UserProfileSkeleton } from '@components/shared';
+import Divider from '@components/shared/divider';
 import { Dropdown } from '@components/shared/dropdown';
 import { logout } from '@slices/auth-slice';
 import { useAuth } from 'hooks/use-auth';
@@ -40,6 +41,25 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
     };
 
 
+    const DropdownContent = (
+        <div role="menu" aria-orientation="vertical" aria-labelledby="options-menu" className="w-40">
+            {DROPDOWN_MENU.map((item, index) => (
+                <Link
+                    key={index}
+                    href={item.route}
+                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 rounded-md transition-all duration-200 ease-in-out"
+                    role="menuitem"
+                >
+                    {item.label}
+                </Link>
+            ))}
+            <Divider />
+            <button onClick={handleLogout} disabled={isLoading} className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
+                Sign Out
+            </button>
+        </div>
+    )
+
     if (isUserLoading) return <UserProfileSkeleton />
 
     // shows Sign In button if user is not logged in
@@ -54,15 +74,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
 
 
     return (
-        <Dropdown
-            width={80}
-            items={DROPDOWN_MENU}
-            button={
-                <button onClick={handleLogout} disabled={isLoading} className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 dark:bg-white dark:text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
-                    Sign Out
-                </button>
-            }
-        >
+        <Dropdown content={DropdownContent}>
             <div className="flex items-center cursor-pointer group select-none">
                 <div className="font-regmed mr-3 group-hover:text-blue-400 transition-all duration-200 ease-in-out">{name}</div>
                 <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
