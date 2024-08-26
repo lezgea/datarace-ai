@@ -2,6 +2,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { LoginRequest, LoginResponse } from './types/auth-types';
+import Cookies from 'js-cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
@@ -19,16 +20,23 @@ export const userApi = createApi({
                 data: credentials,
             }),
         }),
-        // getUser: builder.query<User, string>({
-        //     query: (userId) => ({
-        //         url: `/${userId}`,
-        //         method: 'GET',
-        //     }),
-        // }),
+        logoutUser: builder.mutation<string, void>({
+            query: () => {
+                const token = Cookies.get('dtr-token'); // Retrieve the token from cookies
+                return {
+                    url: `/users/logout`,
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+                    },
+                };
+            },
+        }),
     }),
 });
 
 export const {
     useLoginUserMutation,
+    useLogoutUserMutation,
     // useGetUserQuery
 } = userApi;

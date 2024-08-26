@@ -26,13 +26,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${inter.className} ${poppins.className}`}>
-        <ToastProvider>
-          <Header />
-          <ReduxProvider>
+        <ReduxProvider>
+          <ToastProvider>
+            <Header />
             {children}
-          </ReduxProvider>
-          <Footer />
-        </ToastProvider>
+            <Footer />
+          </ToastProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
