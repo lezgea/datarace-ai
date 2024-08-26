@@ -4,7 +4,7 @@ import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { ILoginRequest, LoginResponse } from './types/auth-types';
 import Cookies from 'js-cookie';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 
 export const userApi = createApi({
