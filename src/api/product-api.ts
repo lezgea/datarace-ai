@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IProduct } from './types/product-types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 export const productApi = createApi({
     reducerPath: 'productApi',
