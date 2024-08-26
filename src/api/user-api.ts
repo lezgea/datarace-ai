@@ -1,7 +1,7 @@
 
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { LoginRequest, LoginResponse } from './types/auth-types';
+import { ILoginRequest, LoginResponse } from './types/auth-types';
 import Cookies from 'js-cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
@@ -13,7 +13,7 @@ export const userApi = createApi({
         baseUrl: BASE_URL + '/v1',
     }),
     endpoints: (builder) => ({
-        loginUser: builder.mutation<LoginResponse, LoginRequest>({
+        loginUser: builder.mutation<LoginResponse, ILoginRequest>({
             query: (credentials) => ({
                 url: '/users/login',
                 method: 'POST',
