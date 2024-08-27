@@ -1,5 +1,6 @@
-import React, { useState, ReactNode } from 'react';
+"use client";
 
+import React, { useState, ReactNode, useRef, useEffect } from 'react';
 
 interface IDropdownProps {
     content?: ReactNode;
@@ -8,10 +9,10 @@ interface IDropdownProps {
 
 export const Dropdown: React.FC<IDropdownProps> = ({ content, children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const dropdownRef = React.useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((prevState) => !prevState);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -20,25 +21,25 @@ export const Dropdown: React.FC<IDropdownProps> = ({ content, children }) => {
         }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
-
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
-            <div onClick={toggleDropdown}>
+            <div onClick={toggleDropdown} aria-expanded={isOpen} role="button" tabIndex={0} onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') toggleDropdown();
+            }}>
                 {children} {/* Renders children element */}
             </div>
-            {
-                isOpen &&
+            {isOpen && (
                 <div className={`origin-top-right absolute right-0 mt-2 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-2 transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-10 opacity-0'}`}>
                     {content}
                 </div>
-            }
+            )}
         </div>
     );
 };

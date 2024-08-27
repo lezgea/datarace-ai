@@ -109,7 +109,6 @@ const RACE_ITEMS: IRaceItemType[] = [
 
 
 const Home: React.FC = () => {
-
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow bg-gray-50 py-40">

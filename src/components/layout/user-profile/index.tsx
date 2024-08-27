@@ -1,18 +1,22 @@
-import { useLogoutUserMutation } from '@api/user-api';
+"use client";
+
+import { useGetUserQuery, useLogoutUserMutation } from '@api/user-api';
 import { UserProfileSkeleton } from '@components/shared';
 import Divider from '@components/shared/divider';
 import { Dropdown } from '@components/shared/dropdown';
-import { logout } from '@slices/auth-slice';
-import { useAuth } from 'hooks/use-auth';
+import { createSelector } from '@reduxjs/toolkit';
+import { logout } from '@slices/user-slice';
+import { RootState } from '@store/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 
 interface IUserProfileProps {
-    name: string,
+    name: string | undefined,
     image: string,
 }
 
@@ -25,21 +29,32 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 export const UserProfile: React.FC<IUserProfileProps> = (props) => {
     let { name, image } = props;
 
-    const { isLogged, isLoading: isUserLoading } = useAuth();
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
     const dispatch = useDispatch();
     const router = useRouter();
 
+    const selectAuthData = createSelector(
+        (state: RootState) => state.user.user,
+        (state: RootState) => state.user.isAuthenticated,
+        (state: RootState) => state.user.loading,
+        (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
+    );
+
+    const { user, isAuthenticated, loading } = useSelector(selectAuthData);
+
+    useGetUserQuery(undefined, {
+        skip: !isAuthenticated,
+    });
+
     const handleLogout = async () => {
         try {
-            // await logoutUser().unwrap();
+            await logoutUser().unwrap();
             dispatch(logout());
-            window.location.reload();
+            router.push('/sign-in');
         } catch (error) {
             console.error('Logout failed', error);
         }
     };
-
 
     const DropdownContent = (
         <div role="menu" aria-orientation="vertical" aria-labelledby="options-menu" className="w-40">
@@ -58,12 +73,13 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
                 Sign Out
             </button>
         </div>
-    )
+    );
 
-    if (isUserLoading) return <UserProfileSkeleton />
+    if (loading) {
+        return <UserProfileSkeleton />;
+    }
 
-    // shows Sign In button if user is not logged in
-    if (!isLogged && !isUserLoading)
+    if (!isAuthenticated) {
         return (
             <Link href="/sign-in">
                 <button type="button" className="inline-flex w-auto text-center items-center px-5 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
@@ -71,7 +87,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
                 </button>
             </Link>
         );
-
+    }
 
     return (
         <Dropdown content={DropdownContent}>
@@ -81,16 +97,12 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
                     <Image
                         src={image}
                         alt="Avatar"
-                        layout="fill"
-                        objectFit="cover"
-                        className="object-cover"
+                        fill
+                        style={{ objectFit: 'cover' }}
                         priority
                     />
                 </div>
             </div>
         </Dropdown>
-
     );
-}
-
-
+};

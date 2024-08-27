@@ -8,7 +8,8 @@ export type LoginResponse = string
 
 export interface IUser {
     id: string;
-    name: string;
-    email: string;
+    fullName: string;
+    profileImage: string;
+    username: string;
 }
 

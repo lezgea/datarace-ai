@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { ILoginRequest, LoginResponse } from './types/auth-types';
+import { ILoginRequest, IUser, LoginResponse } from './types/user-types';
+
 
 export const userApi = createApi({
     reducerPath: 'userApi',
@@ -19,7 +20,17 @@ export const userApi = createApi({
                 method: 'GET',
             }),
         }),
+        getUser: builder.query<IUser, void>({
+            query: () => ({
+                url: '/users',
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
-export const { useLoginUserMutation, useLogoutUserMutation } = userApi;
+export const {
+    useLoginUserMutation,
+    useLogoutUserMutation,
+    useGetUserQuery,
+} = userApi;
