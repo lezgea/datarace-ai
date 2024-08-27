@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Metadata } from 'next'
 import { useParams } from 'next/navigation';
 import { RaceItem, ResourceItem } from 'components/shared';
+import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
+import { RaceSelect } from '@components/shared/race-select';
 
 
 export const metadata: Metadata = {
@@ -12,17 +14,24 @@ export const metadata: Metadata = {
 };
 
 interface IRaceType {
-    title: string;
-    description: string;
-    img: string;
+    title: string,
+    description: string,
+    icon: React.ElementType,
+    type: string,
 }
 
-interface IRaceItemType extends IRaceType {
+interface IRaceItemType {
+    title: string,
+    description: string,
+    img: string,
     price: string,
     expiry_date: string | number,
 }
 
-interface IResourceItemType extends IRaceType {
+interface IResourceItemType {
+    title: string,
+    description: string,
+    img: string,
     duration: string,
     guided: string,
 }
@@ -32,37 +41,32 @@ const RACE_SELECTS: IRaceType[] = [
     {
         title: 'All races',
         description: '180 races',
-        img: '/svg/all_races.svg',
+        icon: RaceIcon,
+        type: "race",
     },
     {
         title: 'Enviroment',
         description: '180 races',
-        img: '/svg/environment.svg',
+        icon: EnvironmentIcon,
+        type: "environment",
     },
     {
         title: 'Education',
         description: '6 races',
-        img: '/svg/education.svg',
+        icon: EducationIcon,
+        type: "education",
     },
     {
         title: 'Oil & Industry',
         description: '6 races',
-        img: '/svg/drop.svg',
+        icon: DropIcon,
+        type: "industry",
     },
     {
-        title: 'Enviroment',
-        description: '180 races',
-        img: '/svg/environment.svg',
-    },
-    {
-        title: 'Enviroment',
-        description: '180 races',
-        img: '/svg/environment.svg',
-    },
-    {
-        title: 'Enviroment',
-        description: '180 races',
-        img: '/svg/environment.svg',
+        title: 'Technology',
+        description: '6 races',
+        icon: DropIcon,
+        type: "tech",
     },
 ];
 
@@ -192,32 +196,29 @@ const Home: React.FC = () => {
 
                 {/*---- BANNER SECTION */}
                 <section className="flex w-full justify-between items-center text-center">
-                    <a className="flex items-center">
+                    <div className="flex items-center min-w-[20%]">
                         <Image src="/svg/team-brainstorming.svg" alt="Team Brainstorming" width={400} height={300} priority />
-                    </a>
+                    </div>
                     <div className='px-20 space-y-7'>
                         <div className="flex justify-center content-center">
-                            <h1 className="text-5xl font-semibold">
-                                <img src={'/svg/draw.svg'} alt="draw" className="-mt-20 -ml-[60px]" />
+                            <h1 className="text-4xl font-semi text-gray-800">
+                                <StarsIcon className="-mt-20 -ml-[60px]" />
                                 Join the race to AI excellence
                             </h1>
                         </div>
-                        <p className="text-lg text-gray-700">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
-                        <button type="button" className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-gray-900 dark:bg-white dark:text-gray-800 rounded-xl shadow-md shadow-neutral-300 sm:w-auto hover:bg-blue-500 hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none focus:bg-blue-500">
-                            See races
-                            <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
+                        <p className="text-md text-gray-600">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                        <button type="button" className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
+                            See our races
                         </button>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center min-w-[20%]">
                         <Image src="/svg/human-right.svg" alt="Human Right" width={400} height={100} className="max-h-[400px]" priority />
                     </div>
                 </section>
 
                 {/*---- RACE BUTTONS */}
                 <section className="w-full overflow-x-auto py-20 hide-scrollbar">
-                    <div className="container mx-auto flex space-x-4">
+                    <div className="container mx-auto flex justify-center space-x-4">
                         {
                             RACE_SELECTS.map((item, i) =>
                                 <RaceSelect key={i} {...item} />
@@ -323,19 +324,4 @@ export default Home;
 
 interface IRacesSelectProps extends IRaceType { };
 
-const RaceSelect: React.FC<IRacesSelectProps> = (props) => {
-    let { title, description, img } = props
-
-    return (
-        <div className="min-w-[300px] w-[300px] h-md px-6 py-4 flex rounded-custom_md bg-custom_gray border border-transparent cursor-pointer shadow-sm hover:shadow-lg hover:border-blue transition-bg transition-shadow duration-200 ease-in group">
-            <div className="flex-shrink-0 transition-transform duration-300 ease-in-out transform group-hover:scale-105">
-                <Image src={img} alt="Feature 1" width="100" height="100" className="h-11 w-11" />
-            </div>
-            <div className='column px-4'>
-                <h4 className="text-md font-medium">{title}</h4>
-                <p className="text-md">{description}</p>
-            </div>
-        </div>
-    )
-};
 
