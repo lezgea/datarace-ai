@@ -7,18 +7,13 @@ import { Dropdown } from '@components/shared/dropdown';
 import { createSelector } from '@reduxjs/toolkit';
 import { logout } from '@slices/user-slice';
 import { RootState } from '@store/store';
+import getImgFromBase64 from '@utils/base64toImg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-
-interface IUserProfileProps {
-    name: string | undefined,
-    image: string,
-}
 
 const DROPDOWN_MENU: { route: string; label: string }[] = [
     { route: '/profile', label: 'Profile' },
@@ -26,12 +21,9 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 ];
 
 
-export const UserProfile: React.FC<IUserProfileProps> = (props) => {
-    let { name, image } = props;
-
+export const UserProfile: React.FC = () => {
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
     const dispatch = useDispatch();
-    const router = useRouter();
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.user,
@@ -42,15 +34,16 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
 
     const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
-    useGetUserQuery(undefined, {
-        skip: !isAuthenticated,
-    });
+    const userImage = React.useMemo(
+        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/png/user.png'),
+        [user?.profileImage]
+    );
+
 
     const handleLogout = async () => {
         try {
             await logoutUser().unwrap();
             dispatch(logout());
-            router.push('/sign-in');
         } catch (error) {
             console.error('Logout failed', error);
         }
@@ -92,12 +85,13 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
     return (
         <Dropdown content={DropdownContent}>
             <div className="flex items-center cursor-pointer group select-none">
-                <div className="hidden md:flex text-gray-600 font-regmed mr-3 group-hover:text-primary transition-all duration-200 ease-in-out">{name}</div>
+                <div className="hidden md:flex text-gray-600 font-regmed mr-3 group-hover:text-primary transition-all duration-200 ease-in-out">{user?.fullName}</div>
                 <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
                     <Image
-                        src={image}
+                        src={userImage}
                         alt="Avatar"
                         fill
+                        sizes="(max-width: 768px) 10vw, (max-width: 1200px) 10vw, 10vw"
                         style={{ objectFit: 'cover' }}
                         priority
                     />

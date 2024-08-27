@@ -14,7 +14,7 @@ interface IAuthState {
 const initialState: IAuthState = {
     isAuthenticated: false,
     user: null,
-    loading: false,
+    loading: true,
     error: null,
 };
 
@@ -22,6 +22,11 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        setAuthState: (state, action: PayloadAction<{ isAuthenticated: boolean, user: IUser | null }>) => {
+            state.isAuthenticated = action.payload.isAuthenticated;
+            state.user = action.payload.user;
+            state.loading = false;  // Loading is done once this action is dispatched
+        },
         logout: (state) => {
             state.isAuthenticated = false;
             state.loading = false;
@@ -116,6 +121,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { logout } = userSlice.actions;
+export const { setAuthState, logout } = userSlice.actions;
 
 export default userSlice.reducer;

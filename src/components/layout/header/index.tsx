@@ -5,13 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserProfile } from '../user-profile';
-import { Dropdown } from '@components/shared/dropdown';
-import { CloseIcon, HamburgerIcon } from '@assets/icons';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
-import { useGetUserQuery } from '@api/user-api';
-import { useSelector } from 'react-redux';
-import { RootState } from '@store/store';
+import { useAuthenticate } from 'hooks/use-auth';
 
 
 const NAV_ROUTES: { route: string; label: string }[] = [
@@ -27,12 +21,10 @@ const NAV_ROUTES: { route: string; label: string }[] = [
 export const Header: React.FC = () => {
     const pathname = usePathname();
 
+    useAuthenticate();
+
     // List of routes where the header should be hidden
     const hideHeaderRoutes = ["/sign-in", "/sign-up"];
-
-    const { data: userData, error, isLoading } = useGetUserQuery(undefined, {
-        skip: !Cookies.get('dtr-token'), // skips the query if the user is not logged in 
-    });
 
 
     if (!hideHeaderRoutes.includes(pathname)) {
@@ -42,7 +34,7 @@ export const Header: React.FC = () => {
                     {/* <HamburgerIcon className="flex lg:hidden" /> */}
                     {/* <CloseIcon className="flex lg:hidden" /> */}
                     <Link href="/" passHref className="flex items-center cursor-pointer w-full md:w-[20%]">
-                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority />
+                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-auto" />
                     </Link>
                     {
                         NAV_ROUTES.map((item, i) => (
@@ -57,10 +49,7 @@ export const Header: React.FC = () => {
                         ))
                     }
                     <div className="flex items-center justify-end w-[20%] h-full">
-                        <UserProfile
-                            name="Surname F."
-                            image="/png/pic1.png"
-                        />
+                        <UserProfile />
                     </div>
                 </nav>
             </header>

@@ -3,8 +3,13 @@ import Image from 'next/image';
 import { Metadata } from 'next'
 import { RaceItem } from 'components/shared';
 import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
-import { RaceSelect } from '@components/shared/race-select';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import { RaceSelect } from '@components/shared/race-select';
+
+// const RaceSelect = dynamic(() => import('@/components/shared/race-select').then(mod => mod.default), {
+//     ssr: false, // Optional: disable server-side rendering if needed
+// });
 
 
 export const metadata: Metadata = {
