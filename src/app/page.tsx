@@ -125,13 +125,13 @@ const Home: React.FC = () => {
                     </div>
                     <div className='px-20 space-y-7'>
                         <div className="flex justify-center content-center">
-                            <h1 className="text-4xl font-semi text-gray-800">
-                                <StarsIcon className="-mt-20 -ml-[60px]" />
+                            <StarsIcon className="-mt-10 -ml-[60px] star-icon-animation" />
+                            <h1 className="text-4xl font-semi text-gray-800 label-animation">
                                 Join the race to AI excellence
                             </h1>
                         </div>
-                        <p className="text-md text-gray-600">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
-                        <Link href="/races" className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
+                        <p className="text-md text-gray-600 description-animation">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                        <Link href="/races" className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none button-animation">
                             See our races
                         </Link>
                     </div>

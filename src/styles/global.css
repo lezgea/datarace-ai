@@ -111,6 +111,94 @@ body {
     }
 }
 
+@keyframes starIconAnimation {
+    0% {
+        opacity: 0.7;
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes buttonAnimation {
+    0% {
+        opacity: 0.7;
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(0);
+    }
+
+    90% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes mainPageLabelAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(1) translateY(-70vh);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(1) translateY(5vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes mainPageDescriptionAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.star-icon-animation {
+    @apply animate-[starIconAnimation_3s_ease-in-out];
+}
+
+.button-animation {
+    @apply animate-[buttonAnimation_2s_ease-in-out];
+}
+
+.label-animation {
+    @apply animate-[mainPageLabelAnimation_1.5s_ease-out];
+}
+
+.description-animation {
+    @apply animate-[mainPageDescriptionAnimation_2.5s_ease-out];
+}
+
 .truncate-text {
     display: -webkit-box;
     -webkit-line-clamp: 2;
