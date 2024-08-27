@@ -1,32 +1,43 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
+import Cookies from 'js-cookie';
 
-const axiosBaseQuery =
-    (
-        { baseUrl }: { baseUrl: string } = { baseUrl: '' }
-    ): BaseQueryFn<
-        {
-            url: string;
-            method: AxiosRequestConfig['method'];
-            data?: AxiosRequestConfig['data'];
-            params?: AxiosRequestConfig['params'];
-        },
-        unknown,
-        unknown
-    > =>
-        async ({ url, method, data, params }) => {
-            try {
-                const result = await axios({ url: baseUrl + url, method, data, params });
-                return { data: result.data };
-            } catch (axiosError) {
-                let err = axiosError as any;
-                return {
-                    error: {
-                        status: err.response?.status,
-                        data: err.response?.data || err.message,
-                    },
-                };
-            }
+interface AxiosBaseQueryArgs {
+    url: string;
+    method: AxiosRequestConfig['method'];
+    data?: any;
+}
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
+
+const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async (
+    { url, method, data }, // args: includes url, method, and data
+    api, // api: includes things like dispatch, getState
+    extraOptions // extraOptions: any additional options
+) => {
+    try {
+        const token = Cookies.get('dtr-token');
+
+        const result = await axios({
+            url: BASE_URL + url,
+            method,
+            data,
+            headers: {
+                Authorization: token ? `Bearer ${token}` : undefined,
+            },
+        });
+
+        return { data: result.data };
+    } catch (error) {
+        const axiosError = error as AxiosError;
+
+        return {
+            error: {
+                status: axiosError.response?.status,
+                data: axiosError.response?.data || axiosError.message,
+            },
         };
+    }
+};
 
 export default axiosBaseQuery;

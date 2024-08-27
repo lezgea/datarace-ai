@@ -41,9 +41,9 @@ const RACE_ITEMS: IRaceItemType[] = [
 
 
 const Profile: React.FC = () => {
-    const [testLoading, setTestLoading] = useState(true);
+    const [testLoading, setTestLoading] = React.useState<boolean>(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setTimeout(() => setTestLoading(false), 1000);
     }, []);
 
