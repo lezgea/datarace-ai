@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
                                 {pathname === item.route && (
                                     <div className="w-[7px] h-[7px] rounded-full bg-primary" />
                                 )}
-                                <Link href={item.route} className={`text-gray-600 hover:text-primary transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
+                                <Link href={item.route} className={`text-gray-600 text-sm hover:text-primary transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
                                     {item.label}
                                 </Link>
                             </li>

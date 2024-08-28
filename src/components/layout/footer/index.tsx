@@ -1,6 +1,7 @@
 "use client"; // This makes the component a Client Component
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import { LogoWhite } from '@assets/icons';
 
 
 export const Footer: React.FC = () => {
@@ -12,24 +13,13 @@ export const Footer: React.FC = () => {
     if (!hideHeaderRoutes.includes(pathname)) {
         return (
             <footer className="bg-dark">
-                <div className="mx-auto w-full max-w-screen-xl">
-                    <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+                <div className="container mx-auto w-full">
+                    <div className="grid gap-8 py-6 grid-cols-4 text-white">
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Company</h2>
-                            <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                                <li className="mb-4">
-                                    <a href="#" className=" hover:underline">About</a>
-                                </li>
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Careers</a>
-                                </li>
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Brand Center</a>
-                                </li>
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Blog</a>
-                                </li>
-                            </ul>
+                            <LogoWhite />
+                            <p>
+                                DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.
+                            </p>
                         </div>
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Help center</h2>

@@ -7,22 +7,27 @@ import { useGetUserQuery } from '@api/user-api';
 
 export const useAuthenticate = () => {
     const dispatch = useDispatch();
-
     const token = Cookies.get('dtr-token');
 
+    // Fetch user data only if the token exists
     const { data: userData, error, isLoading } = useGetUserQuery(undefined, {
-        skip: !token, // skips the query if the user is not logged in 
+        skip: !token,
     });
 
     useEffect(() => {
         if (token) {
-            // Optionally, fetch user data here or dispatch an action to fetch it
-            dispatch(
-                setAuthState({ isAuthenticated: true, user: userData || null })
-            );
+            if (!isLoading && !error) {
+                // Set auth state with user data
+                dispatch(
+                    setAuthState({ isAuthenticated: true, user: userData || null })
+                );
+            } else if (error) {
+                // Optionally, handle the error, such as clearing the token or logging the user out
+                dispatch(setAuthState({ isAuthenticated: false, user: null }));
+            }
         } else {
+            // No token, set auth state to unauthenticated
             dispatch(setAuthState({ isAuthenticated: false, user: null }));
         }
-    }, [dispatch, token]);
+    }, [dispatch, token, userData, error, isLoading]);
 };
-

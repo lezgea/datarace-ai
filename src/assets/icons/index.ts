@@ -18,10 +18,13 @@ import HamburgerIcon from './hamburger.svg';
 import CloseIcon from './close.svg';
 import StarsIcon from './stars.svg';
 import RacesIcon from './races.svg';
+import LogoWhite from './logo-white.svg';
+
 
 export {
     // logos
     DataraceLogo,
+    LogoWhite,
 
     // illustrations
     HumanRight,
