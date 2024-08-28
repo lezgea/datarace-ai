@@ -20,41 +20,42 @@ const NAV_ROUTES: { route: string; label: string }[] = [
 
 export const Header: React.FC = () => {
     const pathname = usePathname();
-
     useAuthenticate();
 
-    // List of routes where the header should be hidden
-    const hideHeaderRoutes = ["/sign-in", "/sign-up"];
+    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up"], []);
 
+    const shouldHideHeader = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname, hideHeaderRoutes]);
+    if (shouldHideHeader) return null;
 
-    if (!hideHeaderRoutes.includes(pathname)) {
-        return (
-            <header className="backdrop-blur-xl bg-white/60 w-full fixed z-10 h-[65px] border-b border-gray-200 select-none">
-                <nav className="container w-full mx-auto flex justify-between items-center py-0 h-full space-x-5">
-                    {/* <HamburgerIcon className="flex lg:hidden" /> */}
-                    {/* <CloseIcon className="flex lg:hidden" /> */}
-                    <Link href="/" passHref className="flex items-center cursor-pointer w-full md:w-[20%]">
-                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-auto" />
-                    </Link>
-                    {
-                        NAV_ROUTES.map((item, i) => (
-                            <li key={i} className="flex items-center space-x-1.5">
-                                {pathname === item.route && (
-                                    <div className="w-[7px] h-[7px] rounded-full bg-primary" />
-                                )}
-                                <Link href={item.route} className={`text-gray-600 text-sm hover:text-primary transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))
-                    }
-                    <div className="flex items-center justify-end w-[20%] h-full">
-                        <UserProfile />
-                    </div>
-                </nav>
-            </header>
-        )
-    }
-    return null;
-}
+    const navLinks = React.useMemo(() => {
+        return NAV_ROUTES.map((item, i) => (
+            <li key={i} className="relative flex items-center space-x-3">
+                {pathname === item.route && (
+                    <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primary" aria-hidden="true" />
+                )}
+                <Link href={item.route} className={`text-gray-600 hover:text-primary transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
+                    {item.label}
+                </Link>
+            </li>
+        ));
+    }, [pathname]);
 
+    
+    return (
+        <header className="backdrop-blur-xl bg-white/60 w-full fixed z-10 h-[65px] border-b border-gray-200 select-none">
+            <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center py-0 h-full space-x-5">
+                <Link href="/" passHref className="flex items-center cursor-pointer w-full md:w-[20%]">
+                    <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-auto" />
+                </Link>
+
+                <ul className="flex space-x-10 items-center">
+                    {navLinks}
+                </ul>
+
+                <div className="flex items-center justify-end w-[20%] h-full">
+                    <UserProfile />
+                </div>
+            </nav>
+        </header>
+    );
+};

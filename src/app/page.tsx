@@ -88,12 +88,11 @@ const RACE_ITEMS: IRaceItemType[] = [
 const Home: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
+            <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
             <main id="main-content" className="flex-grow bg-gray-50 py-40">
-
-                {/* BANNER SECTION */}
                 <section className="flex w-full justify-between items-center text-center">
                     <div className="flex items-center min-w-[20%] left-svg-animation">
-                        <Image src="/svg/team-brainstorming.svg" alt="Team Brainstorming" width={400} height={300} priority />
+                        <Image src="/svg/team-brainstorming.svg" alt="Illustration of a team brainstorming together" width={400} height={300} priority />
                     </div>
                     <div className='px-20 space-y-7'>
                         <div className="flex justify-center content-center">
@@ -108,11 +107,10 @@ const Home: React.FC = () => {
                         </Link>
                     </div>
                     <div className="flex items-center min-w-[20%] right-svg-animation">
-                        <Image src="/svg/human-right.svg" alt="Human Right" width={400} height={100} className="max-h-[400px]" priority />
+                        <Image src="/svg/human-right.svg" alt="Human rights illustration" width={400} height={100} className="max-h-[400px]" priority />
                     </div>
                 </section>
 
-                {/* RACE BUTTONS */}
                 <section className="w-full overflow-x-auto py-[6rem] hide-scrollbar">
                     <div className="container mx-auto flex justify-center space-x-4">
                         {RACE_SELECTS.map((item, i) => (
