@@ -17,11 +17,11 @@ export const RaceItem: React.FC<IRacesItemProps> = (props) => {
             <div className="overflow-hidden">
                 <Image
                     src={img}
-                    alt="Feature 1"
                     height="300"
                     width="300"
                     className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
                     loading="lazy"
+                    alt={title}
                 />
             </div>
             <div className='column p-6 space-y-3'>

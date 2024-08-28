@@ -19,6 +19,10 @@ import CloseIcon from './close.svg';
 import StarsIcon from './stars.svg';
 import RacesIcon from './races.svg';
 import LogoWhite from './logo-white.svg';
+import InstagramIcon from './instagram.svg';
+import TwitterIcon from './twitter.svg';
+import YoutubeIcon from './youtube.svg';
+import LinkedinIcon from './linkedin.svg';
 
 
 export {
@@ -31,6 +35,10 @@ export {
     TeamBrainStorming,
 
     // icons
+    LinkedinIcon,
+    YoutubeIcon,
+    TwitterIcon,
+    InstagramIcon,
     RacesIcon,
     StarsIcon,
     CloseIcon,

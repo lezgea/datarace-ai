@@ -9,7 +9,7 @@ interface IRaceSelectProps {
 }
 
 
-export const RaceSelect: React.FC<IRaceSelectProps> = (props) => {
+const RaceSelect: React.FC<IRaceSelectProps> = (props) => {
     let { type } = props;
 
     switch (type) {
@@ -21,6 +21,8 @@ export const RaceSelect: React.FC<IRaceSelectProps> = (props) => {
         default: return null;
     }
 };
+
+export default RaceSelect
 
 
 const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {

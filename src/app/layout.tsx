@@ -33,7 +33,7 @@ export default function RootLayout({
           <ToastProvider>
             <Header />
             {children}
-            {/* <Footer /> */}
+            <Footer />
           </ToastProvider>
         </ReduxProvider>
       </body>
