@@ -111,6 +111,38 @@ body {
     }
 }
 
+@keyframes leftSvgAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateX(-500%);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+@keyframes rightSvgAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateX(500%);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
 @keyframes starIconAnimation {
     0% {
         opacity: 0.7;
@@ -183,20 +215,28 @@ body {
 }
 
 
+.left-svg-animation {
+    @apply animate-[leftSvgAnimation_2s_ease-in-out];
+}
+
+.right-svg-animation {
+    @apply animate-[rightSvgAnimation_2s_ease-in-out];
+}
+
 .star-icon-animation {
-    @apply animate-[starIconAnimation_3s_ease-in-out];
+    @apply animate-[starIconAnimation_2.5s_ease-in-out];
 }
 
 .button-animation {
-    @apply animate-[buttonAnimation_2s_ease-in-out];
+    @apply animate-[buttonAnimation_1s_ease-in-out];
 }
 
 .label-animation {
-    @apply animate-[mainPageLabelAnimation_1.5s_ease-out];
+    @apply animate-[mainPageLabelAnimation_1.3s_ease-out];
 }
 
 .description-animation {
-    @apply animate-[mainPageDescriptionAnimation_2.5s_ease-out];
+    @apply animate-[mainPageDescriptionAnimation_2.3s_ease-out];
 }
 
 .truncate-text {
