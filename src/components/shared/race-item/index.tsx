@@ -39,7 +39,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                 <p className="text-md text-gray-500 truncate-text">{description}</p>
                 <div className="flex justify-between items-center">
                     <p className="text-[1.5rem] text-customBlue-900">{price}</p>
-                    <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primary group-active:scale-100">
+                    <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primaryLight group-active:scale-100">
                         <ArrowGreenIcon />
                     </div>
                     {/* <p className="bg-customBlue-500 text-sm content-center px-4 rounded-xl text-white">{expiry_date}</p> */}

@@ -31,9 +31,9 @@ export const Header: React.FC = () => {
         return NAV_ROUTES.map((item, i) => (
             <li key={i} className="relative flex items-center space-x-3">
                 {pathname === item.route && (
-                    <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primary" aria-hidden="true" />
+                    <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primaryLight" aria-hidden="true" />
                 )}
-                <Link href={item.route} className={`text-gray-600 hover:text-primary transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
+                <Link href={item.route} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
                     {item.label}
                 </Link>
             </li>

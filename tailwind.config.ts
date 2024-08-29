@@ -21,8 +21,9 @@ const config: Config = {
         '2xl': '1536px',
       },
       colors: {
-        primary: '#2CA67B',
-        primaryDark: '#238963',
+        primaryLight: '#2CA67B',
+        primary: '#248462',
+        primaryDark: '#1C644A',
         customBlue: {
           50: '#ebf5ff',
           100: '#e1effe',
