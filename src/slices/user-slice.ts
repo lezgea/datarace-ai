@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '../api/user-api';
-import { IUser, LoginResponse } from '@api/types/user-types';
+import { ILoginRequest, IUser, LoginResponse } from '@api/types/user-types';
 import Cookies from 'js-cookie';
-
 
 interface IAuthState {
     isAuthenticated: boolean;
@@ -32,11 +31,10 @@ const userSlice = createSlice({
             state.loading = false;
             state.user = null;
             state.error = null;
-            Cookies.remove('dtr-token')
+            Cookies.remove('dtr-token');
         },
     },
     extraReducers: (builder) => {
-        // handling loginUser mutation
         builder
             .addMatcher(
                 userApi.endpoints.loginUser.matchPending,
@@ -47,12 +45,20 @@ const userSlice = createSlice({
             )
             .addMatcher(
                 userApi.endpoints.loginUser.matchFulfilled,
-                (state, action: PayloadAction<LoginResponse>) => {
+                (state, action: PayloadAction<LoginResponse, string, { arg: { originalArgs: ILoginRequest } }>) => {
                     state.loading = false;
                     state.isAuthenticated = true;
-                    Cookies.set('dtr-token', action.payload, {
+
+                    const token = action.payload;
+                    const { rememberMe } = action.meta.arg.originalArgs;
+
+                    // Determine the expiration time based on rememberMe
+                    const expirationTime = rememberMe ? 23 / 24 : 50 / 1440; // 23 hours for rememberMe, 50 minutes otherwise
+
+                    // Store the token in the cookie with the appropriate expiration time
+                    Cookies.set('dtr-token', token, {
                         secure: process.env.NODE_ENV === 'production',
-                        expires: 7,
+                        expires: expirationTime,
                     });
                 }
             )
@@ -64,7 +70,6 @@ const userSlice = createSlice({
                 }
             );
 
-        // handling logoutUser mutation
         builder
             .addMatcher(
                 userApi.endpoints.logoutUser.matchPending,
@@ -90,7 +95,6 @@ const userSlice = createSlice({
                 }
             );
 
-        // handling getUser query
         builder
             .addMatcher(
                 userApi.endpoints.getUser.matchPending,
@@ -116,8 +120,6 @@ const userSlice = createSlice({
                     state.user = null;
                 }
             );
-
-
     },
 });
 

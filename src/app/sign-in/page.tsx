@@ -28,21 +28,27 @@ const validationSchema = Yup.object().shape({
 
 
 const SignIn: React.FC = () => {
-    let router = useRouter()
+    const router = useRouter();
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur',
     });
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     // RTK Query mutation hook
     const [loginUser, { isLoading, error }] = useLoginUserMutation();
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            await loginUser(data).unwrap();
-            router.push('/')
+            // Passing rememberMe along with the login data
+            const payload = {
+                ...data,
+                rememberMe: data.rememberMe || false,
+            };
+
+            await loginUser(payload).unwrap();
+            router.push('/');
         } catch (err: any) {
             if (err?.data?.code === "UNEXPECTED_EXCEPTION = USER_NOT_FOUND") {
                 toast.error("User is not found");
@@ -56,8 +62,6 @@ const SignIn: React.FC = () => {
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
     };
-
-    // if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen max-h-screen flex">
