@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { UserProfile } from '../user-profile';
 import { useAuthenticate } from 'hooks/use-auth';
 
-
 const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/', label: 'About Us' },
     { route: '/races', label: 'Races' },
@@ -17,16 +16,14 @@ const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/contact', label: 'Contact' },
 ];
 
-
 export const Header: React.FC = () => {
     const pathname = usePathname();
     useAuthenticate();
 
     const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up"], []);
+    const shouldHideHeader = hideHeaderRoutes.includes(pathname);
 
-    const shouldHideHeader = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname, hideHeaderRoutes]);
-    if (shouldHideHeader) return null;
-
+    // Ensure all hooks are called regardless of the condition
     const navLinks = React.useMemo(() => {
         return NAV_ROUTES.map((item, i) => (
             <li key={i} className="relative flex items-center space-x-3">
@@ -40,7 +37,9 @@ export const Header: React.FC = () => {
         ));
     }, [pathname]);
 
-    
+    // Return null only inside the render
+    if (shouldHideHeader) return null;
+
     return (
         <header className="backdrop-blur-xl bg-white/60 w-full fixed z-10 h-[65px] border-b border-gray-200 select-none">
             <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center py-0 h-full space-x-5">

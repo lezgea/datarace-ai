@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 const isAnalyze = process.env.ANALYZE === 'true';
 
 const nextConfig = {
-    // Add any other Next.js configuration here if needed
     sassOptions: {
         includePaths: [path.join(__dirname, 'src/styles')],
     },
@@ -30,6 +29,4 @@ const nextConfig = {
 };
 
 // Wrap your Next.js config with the bundle analyzer
-export default withBundleAnalyzer({
-    enabled: isAnalyze,
-})(nextConfig);
+export default withBundleAnalyzer({ enabled: isAnalyze })(nextConfig);

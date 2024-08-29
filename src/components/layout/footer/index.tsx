@@ -22,9 +22,9 @@ export const Footer: React.FC = () => {
 
     return (
         <footer className="bg-dark" role="contentinfo">
-            <div className="container mx-auto w-full py-[50px] space-y-12">
-                <section className="grid gap-10 grid-cols-[3fr_2fr_2fr_1fr] text-white">
-                    <div className="space-y-6 pr-40">
+            <div className="container mx-auto w-full py-[50px] px-10 md:px-0 space-y-12">
+                <section className="grid gap-10 grid-cols-1 md:grid-cols-[3fr_2fr_2fr_1fr] text-white text-center md:text-start">
+                    <div className="space-y-6 flex flex-col items-center md:items-start md:pr-40">
                         <LogoWhite aria-hidden="true" />
                         <p className="font-light text-sm">
                             DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.
@@ -74,9 +74,9 @@ export const Footer: React.FC = () => {
                     </div>
                 </section>
 
-                <section className="grid gap-10 grid-cols-[7fr_1fr]">
+                <section className="flex flex-col items-center gap-10 md:flex-row md:justify-between">
                     <span className="text-gray-400">DataRace</span>
-                    <div className="flex sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
+                    <div className="flex space-x-5 justify-center">
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <InstagramIcon />
                             <span className="sr-only">Instagram page</span>
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
                         </a>
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <YoutubeIcon />
-                            <span className="sr-only">Youtube page</span>
+                            <span className="sr-only">YouTube page</span>
                         </a>
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <LinkedinIcon />
@@ -95,6 +95,7 @@ export const Footer: React.FC = () => {
                         </a>
                     </div>
                 </section>
+
             </div>
         </footer>
     );
