@@ -1,11 +1,13 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserProfile } from '../user-profile';
 import { useAuthenticate } from 'hooks/use-auth';
+import { CloseIcon, HamburgerIcon } from '@assets/icons';
+import { Sidebar } from '../sidebar';
 
 const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/', label: 'About Us' },
@@ -19,11 +21,11 @@ const NAV_ROUTES: { route: string; label: string }[] = [
 export const Header: React.FC = () => {
     const pathname = usePathname();
     useAuthenticate();
+    const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
     const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up"], []);
     const shouldHideHeader = hideHeaderRoutes.includes(pathname);
 
-    // Ensure all hooks are called regardless of the condition
     const navLinks = React.useMemo(() => {
         return NAV_ROUTES.map((item, i) => (
             <li key={i} className="relative flex items-center space-x-3">
@@ -37,24 +39,40 @@ export const Header: React.FC = () => {
         ));
     }, [pathname]);
 
-    // Return null only inside the render
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
     if (shouldHideHeader) return null;
 
     return (
-        <header className="backdrop-blur-xl bg-white/60 w-full fixed z-10 h-[65px] border-b border-gray-200 select-none">
-            <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center py-0 h-full space-x-5">
-                <Link href="/" passHref className="flex items-center cursor-pointer w-full md:w-[20%]">
-                    <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-auto" />
-                </Link>
+        <>
+            <header className="backdrop-blur-xl bg-white/60 w-full fixed z-20 h-[65px] border-b border-gray-200 select-none">
+                <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-3 py-0 h-full space-x-5 md:px-0">
+                    <div className="flex items-center cursor-pointer lg:w-[20%] space-x-3">
+                        <div className="w-[30px] ml-3 flex lg:hidden">
+                            {
+                                isSidebarOpen
+                                    ? <CloseIcon onClick={toggleSidebar} />
+                                    : <HamburgerIcon onClick={toggleSidebar} />
+                            }
+                        </div>
+                        <Link href="/" passHref>
+                            <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-[160px] lg:w-[180px]" />
+                        </Link>
+                    </div>
 
-                <ul className="flex space-x-10 items-center">
-                    {navLinks}
-                </ul>
+                    <ul className="hidden lg:flex lg:space-x-6 xl:space-x-10 items-center">
+                        {navLinks}
+                    </ul>
 
-                <div className="flex items-center justify-end w-[20%] h-full">
-                    <UserProfile />
-                </div>
-            </nav>
-        </header>
+                    <div className="flex items-center justify-end lg:w-[20%] h-full">
+                        <UserProfile />
+                    </div>
+                </nav>
+            </header>
+
+            <div className="lg:hidden">
+                <Sidebar navLinks={navLinks} visible={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+            </div>
+        </>
     );
 };

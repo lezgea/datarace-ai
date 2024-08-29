@@ -91,11 +91,25 @@ const Home: React.FC = () => {
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
             <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 md:px-0 md:py-40">
                 <section className="flex flex-col w-full items-center text-center md:flex-row md:justify-between">
-                    <div className="flex md:hidden w-full py-10 items-center justify-center left-svg-animation">
-                        <Image src="/svg/team-brainstorming.svg" alt="Illustration of a team brainstorming together" width={270} height={300} priority />
+                    <div className="flex md:hidden w-full py-10 items-center justify-center">
+                        <Image
+                            src="/svg/team-brainstorming.svg"
+                            alt="Illustration of a team brainstorming together"
+                            width={270}
+                            height={300}
+                            priority
+                            sizes="(max-width: 768px) 270px, 400px"
+                        />
                     </div>
                     <div className="hidden md:flex items-center min-w-[20%] left-svg-animation">
-                        <Image src="/svg/team-brainstorm.svg" alt="Illustration of a team brainstorming together" width={400} height={300} priority />
+                        <Image
+                            src="/svg/team-brainstorm.svg"
+                            alt="Illustration of a team brainstorming together"
+                            width={400}
+                            height={300}
+                            priority
+                            sizes="(min-width: 769px) 400px"
+                        />
                     </div>
                     <div className='md:px-20 space-y-7'>
                         <div className="flex justify-center content-center">
@@ -104,13 +118,26 @@ const Home: React.FC = () => {
                                 Join the race to AI excellence
                             </h1>
                         </div>
-                        <p className="text-md text-gray-600 description-animation">DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.</p>
-                        <Link href="/races" className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none button-animation">
+                        <p className="text-md text-gray-600 description-animation">
+                            DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.
+                        </p>
+                        <Link
+                            href="/races"
+                            className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none button-animation"
+                        >
                             See our races
                         </Link>
                     </div>
                     <div className="hidden md:flex items-center min-w-[20%] right-svg-animation">
-                        <Image src="/svg/human-right.svg" alt="Human rights illustration" width={400} height={100} className="max-h-[400px]" priority />
+                        <Image
+                            src="/svg/human-right.svg"
+                            alt="Human rights illustration"
+                            width={400}
+                            height={100}
+                            className="max-h-[400px]"
+                            priority
+                            sizes="(min-width: 769px) 400px"
+                        />
                     </div>
                 </section>
 
