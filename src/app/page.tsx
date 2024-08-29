@@ -3,7 +3,6 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { RaceItem } from 'components/shared';
 import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
 
 export const metadata: Metadata = {
@@ -12,6 +11,8 @@ export const metadata: Metadata = {
 };
 
 const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
+const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
+
 
 interface IRaceType {
     title: string,
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
                             alt="Illustration of a team brainstorming together"
                             width={270}
                             height={300}
-                            priority
+                            loading="lazy"
                             sizes="(max-width: 768px) 270px, 400px"
                         />
                     </div>

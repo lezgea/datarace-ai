@@ -16,6 +16,7 @@ const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async 
     extraOptions // extraOptions: any additional options
 ) => {
     try {
+        console.log('BASE_URL:', BASE_URL);
         const token = Cookies.get('dtr-token');
         const result = await axios({
             url: BASE_URL + url,

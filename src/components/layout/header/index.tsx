@@ -18,6 +18,7 @@ const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/contact', label: 'Contact' },
 ];
 
+
 export const Header: React.FC = () => {
     const pathname = usePathname();
     useAuthenticate();

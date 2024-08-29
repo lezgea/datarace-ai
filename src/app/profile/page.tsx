@@ -1,9 +1,18 @@
 "use client";
 
 import React from 'react';
-import { Loader, RaceItem } from '@components/shared';
+import { Loader } from '@components/shared';
 import Image from 'next/image';
 import { BagIcon, LocationIcon } from '@assets/icons';
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '@store/store';
+import { useSelector } from 'react-redux';
+import getImgFromBase64 from '@utils/base64toImg';
+import dynamic from 'next/dynamic';
+import withProtectedRoute from '@utils/withProtectedRoute';
+
+
+const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
 
 
 interface IRaceItemType {
@@ -41,13 +50,28 @@ const RACE_ITEMS: IRaceItemType[] = [
 
 
 const Profile: React.FC = () => {
-    const [testLoading, setTestLoading] = React.useState<boolean>(true);
+    const selectAuthData = createSelector(
+        (state: RootState) => state.user.user,
+        (state: RootState) => state.user.isAuthenticated,
+        (state: RootState) => state.user.loading,
+        (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
+    );
 
-    React.useEffect(() => {
-        setTimeout(() => setTestLoading(false), 1000);
-    }, []);
+    const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
-    if (testLoading) return <Loader />;
+    const userImage = React.useMemo(
+        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/png/user.png'),
+        [user?.profileImage]
+    );
+
+    console.log('@@@@', user)
+    // const [testLoading, setTestLoading] = React.useState<boolean>(true);
+
+    // React.useEffect(() => {
+    //     setTimeout(() => setTestLoading(false), 1000);
+    // }, []);
+
+    if (loading) return <Loader />;
 
     return (
         <div className="min-h-screen flex flex-col p-5">
@@ -55,7 +79,7 @@ const Profile: React.FC = () => {
                 <section className="container flex flex-col items-center justify-between space-y-7 mx-auto p-10 border border-gray-300 rounded-3xl lg:flex-row lg:space-x-10 lg:space-y-0">
                     <div className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200">
                         <Image
-                            src="/png/pic1.png"
+                            src={userImage}
                             alt="Avatar"
                             layout="fill"
                             objectFit="cover"
@@ -65,11 +89,11 @@ const Profile: React.FC = () => {
                     </div>
                     <div className="w-full flex flex-col space-y-7 md:flex-row justify-start md:space-y-0">
                         <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-2">
-                            <p className="text-[2rem] font-medium">Mike Wiseman</p>
-                            <p className="text-md text-gray-500">@username45</p>
-                            <p className="text-md text-gray-500">mike.wiseman@gmail.com</p>
+                            <p className="text-[2rem] font-medium">{user?.fullName}</p>
+                            <p className="text-md text-gray-500">@{user?.username}</p>
+                            <p className="text-md text-gray-500">{user?.username}</p>
                         </div>
-                        <div className="w-full flex justify-center items-end md:justify-end">
+                        {/* <div className="w-full flex justify-center items-end md:justify-end">
                             <div className="flex flex-col items-center justify-end space-y-2 md:items-start">
                                 <div className="flex space-x-3">
                                     <LocationIcon />
@@ -80,14 +104,14 @@ const Profile: React.FC = () => {
                                     <p className="text-md text-gray-500">Project Manager at AILAB</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
                 <section className="container mx-auto pt-20 space-y-10">
                     <div className="flex justify-between content-center">
 
                     </div>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {
                             RACE_ITEMS.map((item, i) =>
                                 <RaceItem key={i} {...item} />
@@ -100,4 +124,5 @@ const Profile: React.FC = () => {
     );
 };
 
-export default Profile;
+
+export default withProtectedRoute(Profile);

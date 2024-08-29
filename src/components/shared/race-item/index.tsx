@@ -9,7 +9,7 @@ interface IRacesItemProps {
     expiry_date: string | number,
 };
 
-export const RaceItem: React.FC<IRacesItemProps> = (props) => {
+const RaceItem: React.FC<IRacesItemProps> = (props) => {
     let { title, description, img, expiry_date, price } = props
 
     return (
@@ -20,8 +20,8 @@ export const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     height="300"
                     width="300"
                     className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
-                    loading="lazy"
                     alt={title}
+                    priority
                 />
             </div>
             <div className='column p-6 space-y-3'>
@@ -35,3 +35,5 @@ export const RaceItem: React.FC<IRacesItemProps> = (props) => {
         </div>
     )
 };
+
+export default RaceItem;
