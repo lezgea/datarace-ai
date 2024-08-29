@@ -35,7 +35,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                 />
             </div>
             <div className="p-8 space-y-3">
-                <h4 className="text-xl font-medium text-customBlue-900">{title}</h4>
+                <h3 className="text-xl font-medium text-customBlue-900">{title}</h3>
                 <p className="text-md text-gray-500 truncate-text">{description}</p>
                 <div className="flex justify-between items-center">
                     <p className="text-[1.5rem] text-customBlue-900">{price}</p>

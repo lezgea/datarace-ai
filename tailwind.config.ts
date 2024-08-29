@@ -21,8 +21,8 @@ const config: Config = {
         '2xl': '1536px',
       },
       colors: {
-        primary: '#3EC491',
-        primaryDark: '#2da175',
+        primary: '#2CA67B',
+        primaryDark: '#238963',
         customBlue: {
           50: '#ebf5ff',
           100: '#e1effe',
@@ -37,9 +37,6 @@ const config: Config = {
         },
         dark: '#000',
         custom_gray: '#EFEFF2',
-        foreground: 'var(--foreground-rgb)',
-        backgroundStart: 'var(--background-start-rgb)',
-        backgroundEnd: 'var(--background-end-rgb)',
       },
       borderRadius: {
         custom_md: '24px',

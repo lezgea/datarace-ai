@@ -32,9 +32,9 @@ const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: 
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#FFB54D"} />
             </div>
             <div className="column px-4">
-                <h4 className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
+                <p className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
                     {title}
-                </h4>
+                </p>
                 <p className="text-md transition-colors duration-200 ease-in-out group-hover:text-white">
                     {description}
                 </p>
@@ -50,9 +50,9 @@ const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ title, description,
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#419A62"} />
             </div>
             <div className="column px-4">
-                <h4 className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
+                <p className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
                     {title}
-                </h4>
+                </p>
                 <p className="text-md transition-colors duration-200 ease-in-out group-hover:text-white">
                     {description}
                 </p>
@@ -68,9 +68,9 @@ const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, i
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#5D66EA"} />
             </div>
             <div className="column px-4">
-                <h4 className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
+                <p className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
                     {title}
-                </h4>
+                </p>
                 <p className="text-md transition-colors duration-200 ease-in-out group-hover:text-white">
                     {description}
                 </p>
@@ -86,9 +86,9 @@ const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, ic
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#57566D"} />
             </div>
             <div className="column px-4">
-                <h4 className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
+                <p className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
                     {title}
-                </h4>
+                </p>
                 <p className="text-md transition-colors duration-200 ease-in-out group-hover:text-white">
                     {description}
                 </p>
@@ -104,9 +104,9 @@ const TechTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: 
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#774CDC"} />
             </div>
             <div className="column px-4">
-                <h4 className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
+                <p className="text-md font-medium transition-colors duration-200 ease-in-out group-hover:text-white">
                     {title}
-                </h4>
+                </p>
                 <p className="text-md transition-colors duration-200 ease-in-out group-hover:text-white">
                     {description}
                 </p>

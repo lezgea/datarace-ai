@@ -1,33 +1,34 @@
 import React from 'react';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { DropIcon, EducationIcon, EnvironmentIcon, HumanRight, RaceIcon, StarsIcon, TeamBrainStorm, TeamBrainstorming } from '@assets/icons';
-import { Loader } from '@components/shared';
+import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
 
 export const metadata: Metadata = {
     title: "DataRace.ai",
     description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
 };
 
+// Dynamic imports for better performance
+const TeamBrainStorm = dynamic(() => import('@assets/icons/team-brainstorm.svg').then(mod => mod.default));
+const TeamBrainstorming = dynamic(() => import('@assets/icons/team-brainstorming.svg').then(mod => mod.default));
+const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mod => mod.default));
 const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
 
-
 interface IRaceType {
-    title: string,
-    description: string,
-    icon: React.ElementType,
-    type: string,
+    title: string;
+    description: string;
+    icon: React.ElementType;
+    type: string;
 }
 
 interface IRaceItemType {
-    title: string,
-    description: string,
-    img: string,
-    price: string,
-    expiry_date: string | number,
+    title: string;
+    description: string;
+    img: string;
+    price: string;
+    expiry_date: string | number;
 }
 
 const RACE_SELECTS: IRaceType[] = [
@@ -66,21 +67,21 @@ const RACE_SELECTS: IRaceType[] = [
 const RACE_ITEMS: IRaceItemType[] = [
     {
         title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
         img: '/png/pic1.png',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
     {
         title: 'Auctor ut luctus euismod euismod quam ut sapien.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
         img: '/png/pic2.png',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
     {
-        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.s',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
         img: '/png/pic3.png',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
@@ -99,10 +100,10 @@ const Home: React.FC = () => {
                     <div className="hidden md:flex items-center min-w-[20%] animate-left-svg">
                         <TeamBrainStorm />
                     </div>
-                    <div className='md:px-20 space-y-7'>
+                    <div className="md:px-20 space-y-7">
                         <div className="flex justify-center content-center">
                             <StarsIcon className="hidden md:flex -mt-10 md:-ml-[60px] animate-star" aria-hidden="true" />
-                            <h1 className="text-4xl font-semi text-gray-800 md:animate-main-label">
+                            <h1 className="text-4xl font-semibold text-gray-800">
                                 Join the race to AI excellence
                             </h1>
                         </div>
@@ -111,7 +112,8 @@ const Home: React.FC = () => {
                         </p>
                         <Link
                             href="/races"
-                            className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none animate-button"
+                            className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            aria-label="See our races"
                         >
                             See our races
                         </Link>
@@ -133,7 +135,7 @@ const Home: React.FC = () => {
                     <div className="flex justify-between">
                         <div className="space-y-3">
                             <h2 className="text-[32px] md:text-[40px]">Featured <strong>Competitions</strong></h2>
-                            <p className='text-md text-gray-700'>Get ready for an exciting race</p>
+                            <p className="text-md text-gray-700">Get ready for an exciting race</p>
                         </div>
                     </div>
                     <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
