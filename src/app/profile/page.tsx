@@ -64,7 +64,6 @@ const Profile: React.FC = () => {
         [user?.profileImage]
     );
 
-    console.log('@@@@', user)
     // const [testLoading, setTestLoading] = React.useState<boolean>(true);
 
     // React.useEffect(() => {

@@ -4,12 +4,15 @@ import { useSelector } from 'react-redux';
 import { useAuthenticate } from 'hooks/use-auth';
 import { RootState } from '@store/store';
 import { Loader } from '@components/shared';
+import { createSelector } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 
 const withProtectedRoute = (WrappedComponent: React.ComponentType) => {
     const ProtectedRoute = (props: any) => {
         const router = useRouter();
-        const { isAuthenticated } = useSelector((state: RootState) => state.user);
+        let isAuthenticated = Cookies.get('dtr-token')
+
         useAuthenticate(); // This will dispatch and set the auth state
 
         React.useEffect(() => {

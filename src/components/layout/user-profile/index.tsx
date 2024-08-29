@@ -10,6 +10,7 @@ import { RootState } from '@store/store';
 import getImgFromBase64 from '@utils/base64toImg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -24,6 +25,7 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 export const UserProfile: React.FC = () => {
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.user,
@@ -44,6 +46,7 @@ export const UserProfile: React.FC = () => {
         try {
             await logoutUser().unwrap();
             dispatch(logout());
+            router.push('/');
         } catch (error) {
             console.error('Logout failed', error);
         }

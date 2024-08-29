@@ -86,6 +86,27 @@ const RACE_ITEMS: IRaceItemType[] = [
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
+    {
+        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic2.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
+    {
+        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic1.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
+    {
+        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic2.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
 ];
 
 const Home: React.FC = () => {
@@ -134,7 +155,7 @@ const Home: React.FC = () => {
                 <section className="container mx-auto space-y-10">
                     <div className="flex justify-between">
                         <div className="space-y-3">
-                            <h2 className="text-[32px] md:text-[40px]">Featured <strong>Competitions</strong></h2>
+                            <h2 className="text-[32px] md:text-[2.3rem]">Featured <span className="font-medium">Competitions</span></h2>
                             <p className="text-md text-gray-700">Get ready for an exciting race</p>
                         </div>
                     </div>
