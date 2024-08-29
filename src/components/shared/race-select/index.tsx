@@ -27,7 +27,7 @@ export default RaceSelect
 
 const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {
     return (
-        <div className={`min-w-[250px] w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#FFB54D] transition-all duration-300 ease-in-out transform group`}>
+        <div className={`md:min-w-[250px] md:w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#FFB54D] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#FFB54D"} />
             </div>
@@ -45,7 +45,7 @@ const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: 
 
 const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {
     return (
-        <div className={`min-w-[250px] w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#419A62] transition-all duration-300 ease-in-out transform group`}>
+        <div className={`md:min-w-[250px] md:w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#419A62] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#419A62"} />
             </div>
@@ -63,7 +63,7 @@ const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ title, description,
 
 const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {
     return (
-        <div className={`min-w-[250px] w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#5D66EA] transition-all duration-300 ease-in-out transform group`}>
+        <div className={`md:min-w-[250px] md:w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#5D66EA] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#5D66EA"} />
             </div>
@@ -81,7 +81,7 @@ const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, i
 
 const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {
     return (
-        <div className={`min-w-[250px] w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#57566D] transition-all duration-300 ease-in-out transform group`}>
+        <div className={`md:min-w-[250px] md:w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#57566D] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#57566D"} />
             </div>
@@ -99,7 +99,7 @@ const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, ic
 
 const TechTypeSelect: React.FC<IRaceSelectProps> = ({ title, description, icon: Icon }) => {
     return (
-        <div className={`min-w-[250px] w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#774CDC] transition-all duration-300 ease-in-out transform group`}>
+        <div className={`md:min-w-[250px] md:w-[250px] h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#774CDC] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
                 <Icon className="text-current transition-colors duration-200 ease-in-out group-hover:fill-white" fill={"#774CDC"} />
             </div>

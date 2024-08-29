@@ -89,14 +89,17 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 py-40">
-                <section className="flex w-full justify-between items-center text-center">
-                    <div className="flex items-center min-w-[20%] left-svg-animation">
-                        <Image src="/svg/team-brainstorming.svg" alt="Illustration of a team brainstorming together" width={400} height={300} priority />
+            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 md:px-0 md:py-40">
+                <section className="flex flex-col w-full items-center text-center md:flex-row md:justify-between">
+                    <div className="flex md:hidden w-full py-10 items-center justify-center left-svg-animation">
+                        <Image src="/svg/team-brainstorming.svg" alt="Illustration of a team brainstorming together" width={270} height={300} priority />
                     </div>
-                    <div className='px-20 space-y-7'>
+                    <div className="hidden md:flex items-center min-w-[20%] left-svg-animation">
+                        <Image src="/svg/team-brainstorm.svg" alt="Illustration of a team brainstorming together" width={400} height={300} priority />
+                    </div>
+                    <div className='md:px-20 space-y-7'>
                         <div className="flex justify-center content-center">
-                            <StarsIcon className="-mt-10 -ml-[60px] star-icon-animation" aria-hidden="true" />
+                            <StarsIcon className="hidden md:flex -mt-10 md:-ml-[60px] star-icon-animation" aria-hidden="true" />
                             <h1 className="text-4xl font-semi text-gray-800 label-animation">
                                 Join the race to AI excellence
                             </h1>
@@ -106,13 +109,13 @@ const Home: React.FC = () => {
                             See our races
                         </Link>
                     </div>
-                    <div className="flex items-center min-w-[20%] right-svg-animation">
+                    <div className="hidden md:flex items-center min-w-[20%] right-svg-animation">
                         <Image src="/svg/human-right.svg" alt="Human rights illustration" width={400} height={100} className="max-h-[400px]" priority />
                     </div>
                 </section>
 
                 <section className="w-full overflow-x-auto py-[6rem] hide-scrollbar">
-                    <div className="container mx-auto flex justify-center space-x-4">
+                    <div className="container mx-auto flex flex-col justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0">
                         {RACE_SELECTS.map((item, i) => (
                             <RaceSelect key={i} {...item} />
                         ))}
@@ -122,11 +125,11 @@ const Home: React.FC = () => {
                 <section className="container mx-auto space-y-10">
                     <div className="flex justify-between">
                         <div className="space-y-3">
-                            <h2 className="text-[40px]">Featured <strong>Competitions</strong></h2>
+                            <h2 className="text-[32px] md:text-[40px]">Featured <strong>Competitions</strong></h2>
                             <p className='text-md text-gray-700'>Get ready for an exciting race</p>
                         </div>
                     </div>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
                         {RACE_ITEMS.map((item, i) => (
                             <RaceItem key={i} {...item} />
                         ))}

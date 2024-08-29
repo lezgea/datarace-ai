@@ -1,6 +1,4 @@
 import DataraceLogo from './datarace-logo.svg';
-import HumanRight from './human-right.svg';
-import TeamBrainStorming from './team-brainstorming.svg';
 import RaceIcon from './races.svg';
 import ArrowStyledIcon from './arrow_styled.svg';
 import DropIcon from './drop.svg';
@@ -29,10 +27,6 @@ export {
     // logos
     DataraceLogo,
     LogoWhite,
-
-    // illustrations
-    HumanRight,
-    TeamBrainStorming,
 
     // icons
     LinkedinIcon,
