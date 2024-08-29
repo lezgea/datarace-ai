@@ -1,5 +1,6 @@
 import { ArrowGreenIcon, BookmarkIcon } from "@assets/icons";
 import Image from "next/image";
+import Link from "next/link";
 
 
 interface IRacesItemProps {
@@ -14,7 +15,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
     let { title, description, img, expiry_date, price } = props
 
     return (
-        <div className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
+        <Link href="/races/124325t" className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
@@ -45,7 +46,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     {/* <p className="bg-customBlue-500 text-sm content-center px-4 rounded-xl text-white">{expiry_date}</p> */}
                 </div>
             </div>
-        </div>
+        </Link>
 
     )
 };
