@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import '../styles/global.css';
-import { Footer, Header } from "components";
+import { Footer, Header, Loader } from "components";
 import ReduxProvider from "providers/redux-provider";
 import ToastProvider from "@providers/toast-provider";
 

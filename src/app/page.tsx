@@ -3,7 +3,8 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
+import { DropIcon, EducationIcon, EnvironmentIcon, HumanRight, RaceIcon, StarsIcon, TeamBrainStorm, TeamBrainstorming } from '@assets/icons';
+import { Loader } from '@components/shared';
 
 export const metadata: Metadata = {
     title: "DataRace.ai",
@@ -93,52 +94,30 @@ const Home: React.FC = () => {
             <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 md:px-0 md:py-40">
                 <section className="flex flex-col w-full items-center text-center md:flex-row md:justify-between">
                     <div className="flex md:hidden w-full py-10 items-center justify-center">
-                        <Image
-                            src="/svg/team-brainstorming.svg"
-                            alt="Illustration of a team brainstorming together"
-                            width={270}
-                            height={300}
-                            loading="lazy"
-                            sizes="(max-width: 768px) 270px, 400px"
-                        />
+                        <TeamBrainstorming />
                     </div>
-                    <div className="hidden md:flex items-center min-w-[20%] left-svg-animation">
-                        <Image
-                            src="/svg/team-brainstorm.svg"
-                            alt="Illustration of a team brainstorming together"
-                            width={400}
-                            height={300}
-                            priority
-                            sizes="(min-width: 769px) 400px"
-                        />
+                    <div className="hidden md:flex items-center min-w-[20%] animate-left-svg">
+                        <TeamBrainStorm />
                     </div>
                     <div className='md:px-20 space-y-7'>
                         <div className="flex justify-center content-center">
-                            <StarsIcon className="hidden md:flex -mt-10 md:-ml-[60px] star-icon-animation" aria-hidden="true" />
-                            <h1 className="text-4xl font-semi text-gray-800 label-animation">
+                            <StarsIcon className="hidden md:flex -mt-10 md:-ml-[60px] animate-star" aria-hidden="true" />
+                            <h1 className="text-4xl font-semi text-gray-800 md:animate-main-label">
                                 Join the race to AI excellence
                             </h1>
                         </div>
-                        <p className="text-md text-gray-600 description-animation">
+                        <p className="text-md text-gray-600">
                             DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.
                         </p>
                         <Link
                             href="/races"
-                            className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none button-animation"
+                            className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none animate-button"
                         >
                             See our races
                         </Link>
                     </div>
-                    <div className="hidden md:flex items-center min-w-[20%] right-svg-animation">
-                        <Image
-                            src="/svg/human-right.svg"
-                            alt="Human rights illustration"
-                            width={400}
-                            height={100}
-                            className="max-h-[400px]"
-                            priority
-                            sizes="(min-width: 769px) 400px"
-                        />
+                    <div className="hidden md:flex items-center justify-end min-w-[20%] animate-right-svg">
+                        <HumanRight />
                     </div>
                 </section>
 

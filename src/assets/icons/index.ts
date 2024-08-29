@@ -21,6 +21,12 @@ import InstagramIcon from './instagram.svg';
 import TwitterIcon from './twitter.svg';
 import YoutubeIcon from './youtube.svg';
 import LinkedinIcon from './linkedin.svg';
+import ArrowGreenIcon from './arrow-green.svg';
+import BookmarkIcon from './bookmark.svg';
+import TeamBrainstorming from './team-brainstorming.svg';
+import TeamBrainStorm from './team-brainstorm.svg';
+import HumanRight from './human-right.svg';
+
 
 
 export {
@@ -28,7 +34,14 @@ export {
     DataraceLogo,
     LogoWhite,
 
+    // illustrations
+    TeamBrainstorming,
+    TeamBrainStorm,
+    HumanRight,
+
     // icons
+    BookmarkIcon,
+    ArrowGreenIcon,
     LinkedinIcon,
     YoutubeIcon,
     TwitterIcon,
