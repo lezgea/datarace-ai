@@ -12,8 +12,8 @@ import { Sidebar } from '../sidebar';
 const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/', label: 'About Us' },
     { route: '/races', label: 'Races' },
-    { route: '/courses', label: 'Courses' },
-    { route: '/community', label: 'Community' },
+    // { route: '/courses', label: 'Courses' },
+    // { route: '/community', label: 'Community' },
     { route: '/faq', label: 'FAQ' },
     { route: '/contact', label: 'Contact' },
 ];
