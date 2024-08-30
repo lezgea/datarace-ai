@@ -11,6 +11,9 @@ import { toast } from 'react-toastify';
 import { EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '@store/store';
+import { useSelector } from 'react-redux';
 
 
 interface IFormInput {
@@ -30,6 +33,13 @@ const validationSchema = Yup.object().shape({
 
 const SignIn: React.FC = () => {
     const router = useRouter();
+
+    const selectAuthData = createSelector(
+        (state: RootState) => state.user.isAuthenticated,
+        (isAuthenticated) => ({ isAuthenticated })
+    );
+
+    const { isAuthenticated } = useSelector(selectAuthData);
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -63,6 +73,9 @@ const SignIn: React.FC = () => {
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
     };
+
+    if (isAuthenticated) router.push('/')
+
 
     return (
         <div className="min-h-screen max-h-screen flex">
@@ -137,7 +150,7 @@ const SignIn: React.FC = () => {
                                 </span>
                                 <span className="ml-2 text-gray-700">Remember me</span>
                             </label>
-                            <a href="#" className="!text-gray-700 font-medium hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Forget password</a>
+                            <a href="#" className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">Forget password</a>
                         </div>
                         <button
                             type="submit"
@@ -155,7 +168,7 @@ const SignIn: React.FC = () => {
                         </button>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-blue-500 active:!text-blue-500 transition duration-200 ease-in-out transform">Sign up</a>
+                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>
             </div>
