@@ -26,6 +26,7 @@ import BookmarkIcon from './bookmark.svg';
 import TeamBrainstorming from './team-brainstorming.svg';
 import TeamBrainStorm from './team-brainstorm.svg';
 import HumanRight from './human-right.svg';
+import Teamwork from './teamwork.svg';
 
 
 
@@ -38,6 +39,7 @@ export {
     TeamBrainstorming,
     TeamBrainStorm,
     HumanRight,
+    Teamwork,
 
     // icons
     BookmarkIcon,

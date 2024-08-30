@@ -1,6 +1,6 @@
 "use client";
+
 import React, { useState } from 'react';
-import { Metadata } from 'next';
 import Image from 'next/image';
 import { useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -10,6 +10,7 @@ import { FormInput, Loader } from '@components/shared';
 import { toast } from 'react-toastify';
 import { EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 interface IFormInput {
@@ -87,9 +88,9 @@ const SignIn: React.FC = () => {
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20 overflow-y-scroll">
                 <div className="w-full mx-auto lg:max-w-md space-y-10">
-                    <a className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
-                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
-                    </a>
+                    <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
+                        <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
+                    </Link>
                     <div>
                         <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Log in</h2>
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
