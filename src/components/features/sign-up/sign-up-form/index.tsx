@@ -8,9 +8,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { EmailIcon, EyeClosedIcon, EyeIcon } from '@assets/icons';
 import { useRegisterUserMutation } from '@api/user-api';
 import { toast } from 'react-toastify';
-import EmailSent from '../email-sent';
 import Link from 'next/link';
 import Image from 'next/image';
+import { EmailSent } from '../email-sent';
 
 
 interface IFormInput {
@@ -32,7 +32,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
-const SignUpForm: React.FC = () => {
+export const SignUpForm: React.FC = () => {
     const [terms, acceptTerms] = React.useState<boolean>(false);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [emailSent, showEmailSent] = React.useState<boolean>(false);
@@ -60,7 +60,7 @@ const SignUpForm: React.FC = () => {
     };
 
 
-    if (emailSent) return <EmailSent />;
+    if (emailSent) return <EmailSent />
 
 
     return (
@@ -147,5 +147,3 @@ const SignUpForm: React.FC = () => {
         </div>
     )
 }
-
-export default SignUpForm;

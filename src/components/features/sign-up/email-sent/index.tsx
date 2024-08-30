@@ -3,7 +3,7 @@ import { Teamwork } from '@assets/icons';
 import Link from 'next/link';
 
 
-const EmailSent: React.FC = () => {
+export const EmailSent: React.FC = () => {
     return (
         <div className="flex flex-col w-full items-center justify-center mx-auto lg:max-w-md space-y-7 animate-right-svg text-center">
             <Teamwork />
@@ -22,4 +22,3 @@ const EmailSent: React.FC = () => {
     );
 }
 
-export default EmailSent;

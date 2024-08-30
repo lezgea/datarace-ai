@@ -10,6 +10,40 @@ export const metadata: Metadata = {
     description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
 };
 
+const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
+
+interface IRaceItemType {
+    title: string;
+    description: string;
+    img: string;
+    price: string;
+    expiry_date: string | number;
+}
+
+const RACE_ITEMS: IRaceItemType[] = [
+    {
+        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic1.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
+    {
+        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic2.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
+    {
+        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+        img: '/png/pic3.png',
+        price: '6000₼',
+        expiry_date: 'Ends in 2 days',
+    },
+]
+
 const TABS: { title: string, content: ReactNode }[] = [
     {
         title: "General overview",
@@ -42,23 +76,16 @@ const RaceDetails: React.FC = () => {
 
                 {/* Main Content */}
                 <main id="#main-content" className="overflow-hidden space-y-5">
-                    <div className="relative">
+                    <section className="relative">
                         <img src="/jpg/racebanner.jpg" alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
-                        <div className="absolute bottom-4 left-4 text-white text-lg font-semibold">
+                        <h1 className="absolute bottom-5 left-5 text-2xl text-white font-regmed bg-primary px-7 py-2 rounded-lg backdrop-blur-xl bg-black/40">
                             Kitablardan ekranlara keçid
-                        </div>
-                    </div>
+                        </h1>
+                    </section>
 
-                    <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 rounded-2xl border border-gray-30">
                         {/* Left Content */}
                         <div className="lg:col-span-2">
-                            {/* Tabs */}
-                            {/* <div className="flex space-x-6 border-b-2 border-gray-200 mb-6">
-                                <button className="pb-2 text-green-600 border-b-2 border-green-600">General overview</button>
-                                <button className="pb-2 text-gray-600">Data</button>
-                                <button className="pb-2 text-gray-600">Rules</button>
-                            </div> */}
-
                             <TabSelects tabs={TABS} />
                         </div>
 
@@ -92,13 +119,36 @@ const RaceDetails: React.FC = () => {
                             </div>
 
                             {/* Join Button */}
-                            <div className="text-center">
-                                <button className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition">
-                                    Join the Race
-                                </button>
+                            <button
+                                className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                aria-label="Join the Race"
+                            >
+                                Join the Race
+                            </button>
+                        </div>
+                    </section>
+
+                    <section className="container pt-20 px-auto space-y-10">
+                        <div className="flex justify-between">
+                            <div className="space-y-3">
+                                <h2 className="text-[32px] md:text-[2.3rem]">Featured <span className="font-medium">Competitions</span></h2>
+                                <p className="text-md text-gray-700">Get ready for an exciting race</p>
                             </div>
                         </div>
-                    </div>
+                        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
+                            {RACE_ITEMS.map((item, i) => (
+                                <RaceItem key={i} {...item} />
+                            ))}
+                        </div>
+                        <div className="flex justify-center">
+                            <Link href="/races" className="inline-flex w-auto text-center font-medium items-center px-6 py-3 text-gray-900 transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
+                                All races
+                                <svg className="rtl:rotate-180 w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </Link>
+                        </div>
+                    </section>
                 </main>
             </div>
         </div>

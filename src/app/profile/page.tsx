@@ -8,45 +8,29 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import getImgFromBase64 from '@utils/base64toImg';
-import dynamic from 'next/dynamic';
 import withProtectedRoute from '@utils/withProtectedRoute';
+import TabSelects from '@components/shared/tab-selects';
+import { AttendedRaces } from '@components/features';
 
 
-const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
-
-
-interface IRaceItemType {
-    title: string,
-    description: string,
-    img: string,
-    price: string,
-    expiry_date: string | number,
-}
-
-
-const RACE_ITEMS: IRaceItemType[] = [
+const TABS: { title: string, content: React.ReactNode }[] = [
     {
-        title: 'Elektrik kəsintiləri',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor adipiscing elit, sed do eiusmod tempor ',
-        img: '/png/pic2.png',
-        price: '6000 ₼',
-        expiry_date: 'Ends in 2 days',
+        title: "Attended races",
+        content: <AttendedRaces />,
     },
     {
-        title: 'Kitablardan ekranlara keçid',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-        img: '/png/pic3.png',
-        price: '6000 ₼',
-        expiry_date: 'Ends in 2 days',
+        title: "Bookmark",
+        content: <div>Bookmark</div>,
     },
     {
-        title: 'Qlobal istiləşmə',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
-        img: '/png/pic4.png',
-        price: '6000 ₼',
-        expiry_date: 'Ends in 2 days',
+        title: "Submitted projects",
+        content: <div>Submitted projects</div>,
     },
-];
+    {
+        title: "Settings",
+        content: <div>Settings</div>,
+    }
+]
 
 
 const Profile: React.FC = () => {
@@ -63,12 +47,6 @@ const Profile: React.FC = () => {
         () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
         [user?.profileImage]
     );
-
-    // const [testLoading, setTestLoading] = React.useState<boolean>(true);
-
-    // React.useEffect(() => {
-    //     setTimeout(() => setTestLoading(false), 1000);
-    // }, []);
 
     if (loading) return <Loader />;
 
@@ -106,17 +84,8 @@ const Profile: React.FC = () => {
                         </div> */}
                     </div>
                 </section>
-                <section className="container mx-auto pt-20 space-y-10">
-                    <div className="flex justify-between content-center">
-
-                    </div>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {
-                            RACE_ITEMS.map((item, i) =>
-                                <RaceItem key={i} {...item} />
-                            )
-                        }
-                    </div>
+                <section className="container mx-auto py-10 space-y-5">
+                    <TabSelects tabs={TABS} />
                 </section>
             </main>
         </div >

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import SignUpForm from '@components/features/sign-up/sign-up-form';
+import { SignUpForm } from '@components/features';
 import Link from 'next/link';
 
 
