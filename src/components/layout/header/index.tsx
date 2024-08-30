@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
         <>
             <header className="backdrop-blur-xl bg-white/60 w-full fixed z-20 h-[65px] border-b border-gray-200 select-none">
                 <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-3 py-0 h-full space-x-5 md:px-0">
-                    <div className="flex items-center cursor-pointer lg:w-[20%] space-x-3">
+                    <div className="flex items-center cursor-pointer lg:w-[20%] space-x-3 lg:space-x-0">
                         <div className="w-[30px] ml-3 flex lg:hidden">
                             {
                                 isSidebarOpen

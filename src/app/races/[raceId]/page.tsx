@@ -1,73 +1,65 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import TabSelects from '@components/shared/tab-selects';
+import { GeneralSection } from '@components/features/races/general-section';
 
 export const metadata: Metadata = {
     title: "Race Details | DataRace.ai",
     description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
 };
 
+const TABS: { title: string, content: ReactNode }[] = [
+    {
+        title: "General overview",
+        content: <GeneralSection />,
+    },
+    {
+        title: "Data",
+        content: <div>Data</div>,
+    },
+    {
+        title: "Rules",
+        content: <div>Rules</div>,
+    }
+]
 
 const RaceDetails: React.FC = () => {
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100 p-6">
-            <div className="max-w-6xl mx-auto py-20">
+        <div className="min-h-screen flex flex-col">
+            <div className="container mx-auto py-[6rem] space-y-5">
                 {/* Breadcrumb */}
-                <nav className="text-sm text-gray-600 mb-4">
-                    <Link href="/" className="hover:underline">Main page</Link> &gt;
-                    <Link href="/races" className="hover:underline"> Races</Link> &gt;
-                    Kitablardan ekranlara keçid
+                <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
+                    <Link href="/" className="hover:text-primaryLight">Main page</Link>
+                    <span className="text-lg">&gt;</span>
+                    <Link href="/races" className="hover:text-primaryLight">Races</Link>
+                    <span className="text-lg">&gt;</span>
+                    <span>Kitablardan ekranlara keçid</span>
                 </nav>
 
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
 
                 {/* Main Content */}
-                <main id="#main-content" className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <main id="#main-content" className="overflow-hidden space-y-5">
                     <div className="relative">
-                        <img src="/path-to-image.jpg" alt="Race Image" className="w-full h-64 object-cover" />
+                        <img src="/jpg/racebanner.jpg" alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <div className="absolute bottom-4 left-4 text-white text-lg font-semibold">
                             Kitablardan ekranlara keçid
                         </div>
                     </div>
 
-                    <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 rounded-2xl border border-gray-30">
                         {/* Left Content */}
                         <div className="lg:col-span-2">
                             {/* Tabs */}
-                            <div className="flex space-x-6 border-b-2 border-gray-200 mb-6">
+                            {/* <div className="flex space-x-6 border-b-2 border-gray-200 mb-6">
                                 <button className="pb-2 text-green-600 border-b-2 border-green-600">General overview</button>
                                 <button className="pb-2 text-gray-600">Data</button>
                                 <button className="pb-2 text-gray-600">Rules</button>
-                            </div>
+                            </div> */}
 
-                            {/* Description */}
-                            <div className="space-y-4">
-                                <h2 className="text-xl font-semibold">Description</h2>
-                                <p className="text-gray-700">
-                                    Arcu dictumst ac imperdiet egestas scelerisque dui vitae turpis purus. Dui dui vel ultricies augue consectetur dignissim lectus senectus at...
-                                </p>
-                                {/* Additional paragraphs can be added similarly */}
-                            </div>
-
-                            {/* Accordion (Evaluation, FAQ, Citation) */}
-                            <div className="mt-8 space-y-4">
-                                <div>
-                                    <button className="w-full flex justify-between items-center text-left font-semibold text-lg">
-                                        Evaluation <span>+</span>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button className="w-full flex justify-between items-center text-left font-semibold text-lg">
-                                        FAQ <span>+</span>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button className="w-full flex justify-between items-center text-left font-semibold text-lg">
-                                        Citation <span>+</span>
-                                    </button>
-                                </div>
-                            </div>
+                            <TabSelects tabs={TABS} />
                         </div>
 
                         {/* Right Sidebar */}
