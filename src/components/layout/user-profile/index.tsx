@@ -37,7 +37,7 @@ export const UserProfile: React.FC = () => {
     const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
     const userImage = React.useMemo(
-        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/png/user.png'),
+        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
         [user?.profileImage]
     );
 
@@ -89,7 +89,7 @@ export const UserProfile: React.FC = () => {
         <Dropdown content={DropdownContent}>
             <div className="flex items-center cursor-pointer group select-none">
                 <div className="hidden md:flex text-gray-600 font-regmed mr-3 group-hover:text-primary transition-all duration-200 ease-in-out">{user?.fullName}</div>
-                <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full overflow-hidden border border-bg-gray-200">
+                <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full overflow-hidden">
                     <Image
                         src={userImage}
                         alt="Avatar"

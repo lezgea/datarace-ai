@@ -15,8 +15,8 @@ const RaceDetails: React.FC = () => {
             <div className="max-w-6xl mx-auto py-20">
                 {/* Breadcrumb */}
                 <nav className="text-sm text-gray-600 mb-4">
-                    <a href="/" className="hover:underline">Main page</a> &gt;
-                    <a href="/races" className="hover:underline"> Races</a> &gt;
+                    <Link href="/" className="hover:underline">Main page</Link> &gt;
+                    <Link href="/races" className="hover:underline"> Races</Link> &gt;
                     Kitablardan ekranlara keçid
                 </nav>
 

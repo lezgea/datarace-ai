@@ -60,7 +60,7 @@ const Profile: React.FC = () => {
     const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
     const userImage = React.useMemo(
-        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/png/user.png'),
+        () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
         [user?.profileImage]
     );
 

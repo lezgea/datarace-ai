@@ -1,13 +1,16 @@
 "use client";
+
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { FormInput } from '@components/shared';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { EmailIcon, EyeClosedIcon, EyeIcon } from '@assets/icons';
+import { useRegisterUserMutation } from '@api/user-api';
+import { toast } from 'react-toastify';
 
 
 interface IFormInput {
@@ -31,18 +34,32 @@ const validationSchema = Yup.object().shape({
 
 
 const SignUp: React.FC = () => {
-    let router = useRouter()
+    let router = useRouter();
+    const [terms, acceptTerms] = React.useState<boolean>(false);
+    const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur',
     });
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
+    // RTK Query mutation hook
+    const [registerUser, { isLoading, error }] = useRegisterUserMutation();
+
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+        try {
+            await registerUser(data).unwrap();
+            // router.push('/');
+        } catch (err: any) {
+            console.error('Unknown error:', err);
+            toast.error(err.data?.code || 'An unexpected error occurred');
+        }
+    };
 
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
     };
+
 
     return (
         <div className="min-h-screen max-h-screen flex">
@@ -74,7 +91,7 @@ const SignUp: React.FC = () => {
                         <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Register with email</h2>
                         <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to sign up</p>
                     </div>
-                    <form className="space-y-5 select-none">
+                    <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
                             label='E-mail*'
                             type='email'
@@ -110,6 +127,7 @@ const SignUp: React.FC = () => {
                                 <input
                                     type="checkbox"
                                     className="hidden peer"
+                                    onChange={() => acceptTerms(!terms)}
                                 />
                                 {/* Custom checkbox */}
                                 <span className="w-6 h-6 rounded-lg border-2 border-gray-300 flex items-center justify-center bg-white peer-checked:bg-blue-400 peer-checked:border-transparent transition-colors duration-200">
@@ -127,8 +145,9 @@ const SignUp: React.FC = () => {
                             </label>
                         </div>
                         <button
+                            disabled={!terms}
                             type="submit"
-                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none focus:bg-primaryDark transition duration-200 ease-in-out transform"
+                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none focus:bg-primaryDark transition duration-200 ease-in-out transform disabled:bg-gray-400 disabled:ring-gray-400 disabled:cursor-not-allowed"
                         >
                             Sign up
                         </button>

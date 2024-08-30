@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '../api/user-api';
-import { ILoginRequest, IUser, LoginResponse } from '@api/types/user-types';
+import { ILoginRequest, IUser, LoginResponse, RegisterResponse } from '@api/types/user-types';
 import Cookies from 'js-cookie';
 
 interface IAuthState {
@@ -8,6 +8,7 @@ interface IAuthState {
     user: IUser | null;
     loading: boolean;
     error: string | null;
+    description: string | null;
 }
 
 const initialState: IAuthState = {
@@ -15,6 +16,7 @@ const initialState: IAuthState = {
     user: null,
     loading: true,
     error: null,
+    description: null,
 };
 
 const userSlice = createSlice({
@@ -35,6 +37,31 @@ const userSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        // REGISTER USER
+        builder
+            .addMatcher(
+                userApi.endpoints.registerUser.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.registerUser.matchFulfilled,
+                (state, action: PayloadAction<RegisterResponse>) => {
+                    state.loading = false;
+                    console.log('@@@', action.payload)
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.loginUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Login failed';
+                }
+            );
+
+        // LOGIN USER
         builder
             .addMatcher(
                 userApi.endpoints.loginUser.matchPending,
@@ -53,7 +80,7 @@ const userSlice = createSlice({
                     const { rememberMe } = action.meta.arg.originalArgs;
 
                     // Determine the expiration time based on rememberMe
-                    const expirationTime = rememberMe ? 23 / 24 : 50 / 1440; // 23 hours for rememberMe, 50 minutes otherwise
+                    const expirationTime = rememberMe ? 47 / 24 : 50 / 1440; // 47 hours for rememberMe, 50 minutes otherwise
 
                     // Store the token in the cookie with the appropriate expiration time
                     Cookies.set('dtr-token', token, {
@@ -70,6 +97,7 @@ const userSlice = createSlice({
                 }
             );
 
+        // LOGOUT USER
         builder
             .addMatcher(
                 userApi.endpoints.logoutUser.matchPending,
@@ -95,6 +123,7 @@ const userSlice = createSlice({
                 }
             );
 
+        // GET USER
         builder
             .addMatcher(
                 userApi.endpoints.getUser.matchPending,

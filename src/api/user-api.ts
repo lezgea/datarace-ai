@@ -1,12 +1,19 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { ILoginRequest, IUser, LoginResponse } from './types/user-types';
+import { ILoginRequest, IRegisterRequest, IUser, LoginResponse, RegisterResponse } from './types/user-types';
 
 
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: axiosBaseQuery,
     endpoints: (builder) => ({
+        registerUser: builder.mutation<RegisterResponse, IRegisterRequest>({
+            query: (credentials) => ({
+                url: '/users',
+                method: 'POST',
+                data: credentials,
+            }),
+        }),
         loginUser: builder.mutation<LoginResponse, ILoginRequest>({
             query: (credentials) => ({
                 url: '/users/login',
@@ -30,6 +37,7 @@ export const userApi = createApi({
 });
 
 export const {
+    useRegisterUserMutation,
     useLoginUserMutation,
     useLogoutUserMutation,
     useGetUserQuery,
