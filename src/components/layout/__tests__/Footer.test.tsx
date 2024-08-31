@@ -20,7 +20,6 @@ describe('Footer Component', () => {
 
         expect(screen.getByRole('contentinfo')).toBeInTheDocument();
         expect(screen.getByText('DataRace')).toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -30,7 +29,6 @@ describe('Footer Component', () => {
         const { asFragment } = render(<Footer />);
 
         expect(screen.queryByRole('contentinfo')).not.toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -43,7 +41,6 @@ describe('Footer Component', () => {
         expect(screen.getByText('About')).toBeInTheDocument();
         expect(screen.getByText('FAQ')).toBeInTheDocument();
         expect(screen.getByText('Terms and privacy policy')).toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -56,7 +53,6 @@ describe('Footer Component', () => {
         expect(screen.getByLabelText('Twitter page')).toBeInTheDocument();
         expect(screen.getByLabelText('YouTube page')).toBeInTheDocument();
         expect(screen.getByLabelText('LinkedIn page')).toBeInTheDocument();
-
         expect(asFragment).toMatchSnapshot();
     });
 });

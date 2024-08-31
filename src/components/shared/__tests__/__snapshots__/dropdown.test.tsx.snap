@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Component should match snapshot when dropdown is open 1`] = `
+<DocumentFragment>
+  <div
+    class="relative inline-block text-left"
+  >
+    <div
+      aria-expanded="true"
+      role="button"
+      tabindex="0"
+    >
+      <button>
+        Open Dropdown
+      </button>
+       
+    </div>
+    <div
+      class="origin-top-right absolute right-0 mt-2 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-2 transition-all duration-500 transform scale-100 opacity-100"
+    >
+      <div>
+        Dropdown Content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown Component should render the children and content correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="relative inline-block text-left"
+  >
+    <div
+      aria-expanded="false"
+      role="button"
+      tabindex="0"
+    >
+      <button>
+        Open Dropdown
+      </button>
+       
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -40,7 +40,6 @@ describe('UserProfile Component', () => {
         const { asFragment } = render(<UserProfile />);
 
         expect(screen.getByTestId('user-profile-skeleton')).toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -55,15 +54,11 @@ describe('UserProfile Component', () => {
 
         const userName = screen.getByText('John Doe');
         expect(userName).toBeInTheDocument();
-
         const dropdownTrigger = screen.getByRole('img', { name: 'Avatar' });
         expect(dropdownTrigger).toBeInTheDocument();
-
         fireEvent.click(dropdownTrigger);
-
         const signOutButton = screen.getByText('Sign Out');
         expect(signOutButton).toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 

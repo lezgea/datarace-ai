@@ -24,7 +24,6 @@ describe('Sidebar Component', () => {
 
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
         expect(screen.getByText('About Us')).toBeInTheDocument();
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -33,12 +32,10 @@ describe('Sidebar Component', () => {
             <Sidebar navLinks={mockNavLinks} visible={true} setSidebarOpen={mockSetSidebarOpen} />
         );
 
-        // Simulate clicking outside the sidebar
         fireEvent.mouseDown(document);
 
         // Assert that setSidebarOpen was called with false
         expect(mockSetSidebarOpen).toHaveBeenCalledWith(false);
-
         expect(asFragment()).toMatchSnapshot();
     });
 

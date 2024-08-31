@@ -9,11 +9,7 @@ describe('Divider Component', () => {
         const divider = container.firstChild;
 
         expect(divider).toHaveClass('w-full my-2 border-t');
-        expect(divider).toHaveStyle({
-            borderColor: 'gray-100',
-            borderTopWidth: '1px',
-        });
-
+        expect(divider).toHaveStyle({ borderColor: 'gray-100', borderTopWidth: '1px' });
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -21,10 +17,7 @@ describe('Divider Component', () => {
         const { container, asFragment } = render(<Divider color="red" />);
         const divider = container.firstChild;
 
-        expect(divider).toHaveStyle({
-            borderColor: 'red',
-        });
-
+        expect(divider).toHaveStyle({ borderColor: 'red' });
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -32,10 +25,7 @@ describe('Divider Component', () => {
         const { container, asFragment } = render(<Divider thickness="2px" />);
         const divider = container.firstChild;
 
-        expect(divider).toHaveStyle({
-            borderTopWidth: '2px',
-        });
-
+        expect(divider).toHaveStyle({ borderTopWidth: '2px' });
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -44,7 +34,6 @@ describe('Divider Component', () => {
         const divider = container.firstChild;
 
         expect(divider).toHaveClass('w-full my-4 border-t');
-
         expect(asFragment()).toMatchSnapshot();
     });
 
@@ -55,11 +44,7 @@ describe('Divider Component', () => {
         const divider = container.firstChild;
 
         expect(divider).toHaveClass('w-full my-6 border-t');
-        expect(divider).toHaveStyle({
-            borderColor: 'blue',
-            borderTopWidth: '3px',
-        });
-
+        expect(divider).toHaveStyle({ borderColor: 'blue', borderTopWidth: '3px' });
         expect(asFragment()).toMatchSnapshot();
     });
 });
