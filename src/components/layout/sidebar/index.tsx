@@ -1,15 +1,12 @@
 import React from 'react';
 
-
 interface ISidebarProps {
-    navLinks: React.ReactNode[],
-    visible: boolean,
-    setSidebarOpen: (val: boolean) => void,
+    navLinks: React.ReactNode[];
+    visible: boolean;
+    setSidebarOpen: (val: boolean) => void;
 }
 
-export const Sidebar: React.FC<ISidebarProps> = (props) => {
-    let { navLinks, visible, setSidebarOpen } = props
-
+export const Sidebar: React.FC<ISidebarProps> = ({ navLinks, visible, setSidebarOpen }) => {
     const sidebarRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
@@ -23,17 +20,26 @@ export const Sidebar: React.FC<ISidebarProps> = (props) => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [sidebarRef]);
+    }, [setSidebarOpen]);
 
     return (
-        <div className={`fixed inset-0 z-20 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform ${visible ? 'translate-x-0 opacity-1' : '-translate-x-full opacity-0'} lg:hidden`}>
-            <div className="relative w-64 h-[100%] bg-white shadow-xl py-8" ref={sidebarRef}>
-                <nav>
-                    <ul className="space-y-6 px-8">
-                        {navLinks}
-                    </ul>
-                </nav>
+        visible && (
+            <div
+                data-testid="sidebar"
+                className="fixed inset-0 z-20 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
+            >
+                <div
+                    className="relative w-64 h-[100%] bg-white shadow-xl py-8"
+                    ref={sidebarRef}
+                    onClick={(e) => e.stopPropagation()} // Prevent event propagation
+                >
+                    <nav>
+                        <ul className="space-y-6 px-8">
+                            {navLinks}
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
+        )
     );
 };

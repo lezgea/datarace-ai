@@ -79,19 +79,19 @@ export const Footer: React.FC = () => {
                     <div className="flex space-x-5 justify-center">
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <InstagramIcon />
-                            <span className="sr-only">Instagram page</span>
+                            <span className="sr-only" aria-label='Instagram page'>Instagram page</span>
                         </a>
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <TwitterIcon />
-                            <span className="sr-only">Twitter page</span>
+                            <span className="sr-only" aria-label='Twitter page'>Twitter page</span>
                         </a>
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <YoutubeIcon />
-                            <span className="sr-only">YouTube page</span>
+                            <span className="sr-only" aria-label='YouTube page'>YouTube page</span>
                         </a>
                         <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                             <LinkedinIcon />
-                            <span className="sr-only">LinkedIn page</span>
+                            <span className="sr-only" aria-label='LinkedIn page'>LinkedIn page</span>
                         </a>
                     </div>
                 </section>

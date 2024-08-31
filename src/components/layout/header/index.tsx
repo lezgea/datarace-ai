@@ -5,15 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserProfile } from '../user-profile';
-import { useAuthenticate } from 'hooks/use-auth';
+import { useAuthenticate } from '@hooks/use-auth';
 import { CloseIcon, HamburgerIcon } from '@assets/icons';
 import { Sidebar } from '../sidebar';
+
 
 const NAV_ROUTES: { route: string; label: string }[] = [
     { route: '/', label: 'About Us' },
     { route: '/races', label: 'Races' },
-    // { route: '/courses', label: 'Courses' },
-    // { route: '/community', label: 'Community' },
     { route: '/faq', label: 'FAQ' },
     { route: '/contact', label: 'Contact' },
 ];
@@ -44,6 +43,7 @@ export const Header: React.FC = () => {
 
     if (shouldHideHeader) return null;
 
+
     return (
         <>
             <header className="backdrop-blur-xl bg-white/60 w-full fixed z-20 h-[65px] border-b border-gray-200 select-none">
@@ -52,8 +52,8 @@ export const Header: React.FC = () => {
                         <div className="w-[30px] ml-3 flex lg:hidden">
                             {
                                 isSidebarOpen
-                                    ? <CloseIcon onClick={toggleSidebar} />
-                                    : <HamburgerIcon onClick={toggleSidebar} />
+                                    ? <CloseIcon onClick={toggleSidebar} data-testid="close-icon" />
+                                    : <HamburgerIcon onClick={toggleSidebar} data-testid="hamburger-icon" />
                             }
                         </div>
                         <Link href="/" passHref>
@@ -72,7 +72,11 @@ export const Header: React.FC = () => {
             </header>
 
             <div className="lg:hidden">
-                <Sidebar navLinks={navLinks} visible={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+                <Sidebar
+                    navLinks={navLinks}
+                    visible={isSidebarOpen}
+                    setSidebarOpen={setSidebarOpen}
+                />
             </div>
         </>
     );

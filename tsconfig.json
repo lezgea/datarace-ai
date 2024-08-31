@@ -5,22 +5,18 @@
       "dom.iterable",
       "esnext"
     ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve", // Or "react" for older React versions
     "incremental": true,
-    "noImplicitAny": true,
     "plugins": [
       {
         "name": "next"
@@ -28,39 +24,37 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@constants/*": [
-        "constants/*"
+      "@api/*": [
+        "api/*"
       ],
       "@assets/*": [
         "assets/*"
       ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
       "@providers/*": [
         "providers/*"
-      ],
-      "@store/*": [
-        "store/*"
       ],
       "@slices/*": [
         "slices/*"
       ],
-      "@api/*": [
-        "api/*"
-      ]
-    },
-    "forceConsistentCasingInFileNames": true
+      "@store/*": [
+        "store/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/layout/__tests__/Footer.test.tsx"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

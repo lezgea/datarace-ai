@@ -93,10 +93,10 @@ export const UserProfile: React.FC = () => {
                     <Image
                         src={userImage}
                         alt="Avatar"
-                        fill
+                        fill={true}
                         sizes="(max-width: 768px) 10vw, (max-width: 1200px) 10vw, 10vw"
                         style={{ objectFit: 'cover' }}
-                        priority
+                        priority={true}
                     />
                 </div>
             </div>
