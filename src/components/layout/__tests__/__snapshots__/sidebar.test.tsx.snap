@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar Component should close the sidebar when clicking outside of it 1`] = `
+<DocumentFragment>
+  <div
+    class="fixed inset-0 z-20 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
+    data-testid="sidebar"
+  >
+    <div
+      class="relative w-64 h-[100%] bg-white shadow-xl py-8"
+    >
+      <nav>
+        <ul
+          class="space-y-6 px-8"
+        >
+          <li>
+            About Us
+          </li>
+          <li>
+            Races
+          </li>
+          <li>
+            FAQ
+          </li>
+          <li>
+            Contact
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Sidebar Component should render correctly when sidebar is not visible 1`] = `<DocumentFragment />`;
+
+exports[`Sidebar Component should render the sidebar when visible is true 1`] = `
+<DocumentFragment>
+  <div
+    class="fixed inset-0 z-20 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
+    data-testid="sidebar"
+  >
+    <div
+      class="relative w-64 h-[100%] bg-white shadow-xl py-8"
+    >
+      <nav>
+        <ul
+          class="space-y-6 px-8"
+        >
+          <li>
+            About Us
+          </li>
+          <li>
+            Races
+          </li>
+          <li>
+            FAQ
+          </li>
+          <li>
+            Contact
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;

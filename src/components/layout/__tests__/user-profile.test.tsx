@@ -37,9 +37,11 @@ describe('UserProfile Component', () => {
             loading: true,
         });
 
-        render(<UserProfile />);
+        const { asFragment } = render(<UserProfile />);
 
         expect(screen.getByTestId('user-profile-skeleton')).toBeInTheDocument();
+
+        expect(asFragment()).toMatchSnapshot();
     });
 
     it('should render user profile and dropdown when authenticated', () => {
@@ -49,7 +51,7 @@ describe('UserProfile Component', () => {
             loading: false,
         });
 
-        render(<UserProfile />);
+        const { asFragment } = render(<UserProfile />);
 
         const userName = screen.getByText('John Doe');
         expect(userName).toBeInTheDocument();
@@ -61,6 +63,8 @@ describe('UserProfile Component', () => {
 
         const signOutButton = screen.getByText('Sign Out');
         expect(signOutButton).toBeInTheDocument();
+
+        expect(asFragment()).toMatchSnapshot();
     });
 
 });

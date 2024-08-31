@@ -43,7 +43,6 @@ export const Header: React.FC = () => {
 
     if (shouldHideHeader) return null;
 
-
     return (
         <>
             <header className="backdrop-blur-xl bg-white/60 w-full fixed z-20 h-[65px] border-b border-gray-200 select-none">
@@ -61,7 +60,7 @@ export const Header: React.FC = () => {
                         </Link>
                     </div>
 
-                    <ul className="hidden lg:flex lg:space-x-6 xl:space-x-10 items-center">
+                    <ul className="hidden lg:flex space-x-10 items-center">
                         {navLinks}
                     </ul>
 

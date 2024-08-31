@@ -18,19 +18,35 @@ describe('Sidebar Component', () => {
     });
 
     it('should render the sidebar when visible is true', () => {
-        render(<Sidebar navLinks={mockNavLinks} visible={true} setSidebarOpen={mockSetSidebarOpen} />);
+        const { asFragment } = render(
+            <Sidebar navLinks={mockNavLinks} visible={true} setSidebarOpen={mockSetSidebarOpen} />
+        );
 
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
         expect(screen.getByText('About Us')).toBeInTheDocument();
+
+        expect(asFragment()).toMatchSnapshot();
     });
 
     it('should close the sidebar when clicking outside of it', () => {
-        render(<Sidebar navLinks={mockNavLinks} visible={true} setSidebarOpen={mockSetSidebarOpen} />);
+        const { asFragment } = render(
+            <Sidebar navLinks={mockNavLinks} visible={true} setSidebarOpen={mockSetSidebarOpen} />
+        );
 
         // Simulate clicking outside the sidebar
         fireEvent.mouseDown(document);
 
         // Assert that setSidebarOpen was called with false
         expect(mockSetSidebarOpen).toHaveBeenCalledWith(false);
+
+        expect(asFragment()).toMatchSnapshot();
+    });
+
+    it('should render correctly when sidebar is not visible', () => {
+        const { asFragment } = render(
+            <Sidebar navLinks={mockNavLinks} visible={false} setSidebarOpen={mockSetSidebarOpen} />
+        );
+
+        expect(asFragment()).toMatchSnapshot();
     });
 });
