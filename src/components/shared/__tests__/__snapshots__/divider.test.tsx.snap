@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider Component should apply all custom props 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full my-6 border-t"
+    style="border-color: blue; border-top-width: 3px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Divider Component should render with custom color 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full my-2 border-t"
+    style="border-color: red; border-top-width: 1px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Divider Component should render with custom marginY 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full my-4 border-t"
+    style="border-top-width: 1px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Divider Component should render with custom thickness 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full my-2 border-t"
+    style="border-top-width: 2px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Divider Component should render with default props 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full my-2 border-t"
+    style="border-top-width: 1px;"
+  />
+</DocumentFragment>
+`;
