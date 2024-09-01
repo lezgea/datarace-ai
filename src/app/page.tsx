@@ -28,7 +28,7 @@ interface IRaceItemType {
     description: string;
     img: string;
     price: string;
-    expiry_date: string | number;
+    expiry_date: string;
 }
 
 const RACE_SELECTS: IRaceType[] = [
