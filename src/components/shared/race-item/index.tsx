@@ -8,7 +8,7 @@ interface IRacesItemProps {
     description: string;
     img: string;
     price: string,
-    expiry_date: string | number,
+    expiry_date: string,
 };
 
 const RaceItem: React.FC<IRacesItemProps> = (props) => {
@@ -32,7 +32,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     width="300"
                     className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
                     alt={title}
-                    priority
+                    priority={true}
                 />
             </div>
             <div className="p-8 space-y-3">

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader Component renders without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="loader-page-wrapper w-screen h-screen bg-white"
+  >
+    <div
+      class="loader-wrapper"
+    >
+      <div
+        class="overflow-box"
+      />
+      <img
+        alt="Logo"
+        class="loader"
+        data-nimg="1"
+        decoding="async"
+        fetchpriority="high"
+        height="50"
+        src="/svg/race.svg"
+        style="color: transparent;"
+        width="80"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
