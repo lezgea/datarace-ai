@@ -15,7 +15,7 @@ const LogoWhite = dynamic(() => import('@assets/icons').then(mod => mod.LogoWhit
 export const Footer: React.FC = () => {
     const pathname = usePathname();
 
-    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up"], []);
+    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/success"], []);
     const shouldHideFooter = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname]);
 
     if (shouldHideFooter) return null;

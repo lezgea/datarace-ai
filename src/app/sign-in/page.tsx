@@ -100,7 +100,7 @@ const SignIn: React.FC = () => {
 
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20 overflow-y-scroll">
-                <div className="w-full mx-auto lg:max-w-md space-y-10">
+                <div className="w-full mx-auto lg:max-w-md space-y-10 animate-right-svg">
                     <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                     </Link>
@@ -161,7 +161,7 @@ const SignIn: React.FC = () => {
                         <div className="text-center my-4">Or</div>
                         <button
                             type="button"
-                            className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform"
+                            className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform animate-button"
                         >
                             <GoogleIcon />
                             <span className="font-regmed">Login with Google</span>

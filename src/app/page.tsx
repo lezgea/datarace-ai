@@ -16,6 +16,7 @@ const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mo
 const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
 
+
 interface IRaceType {
     title: string;
     description: string;
@@ -178,4 +179,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Home
