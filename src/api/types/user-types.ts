@@ -22,3 +22,8 @@ export interface IUser {
     username: string;
 }
 
+export interface IActivateUserResponse {
+    error?: string;
+    message?: string;
+}
+
