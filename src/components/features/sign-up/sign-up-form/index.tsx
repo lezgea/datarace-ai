@@ -51,7 +51,7 @@ export const SignUpForm: React.FC = () => {
             showEmailSent(true);
         } catch (err: any) {
             console.error('Unknown error:', err);
-            toast.error(err.data?.code || 'An unexpected error occurred');
+            toast.error(err.data?.message || 'An unexpected error occurred');
         }
     };
 

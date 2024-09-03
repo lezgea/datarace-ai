@@ -1,18 +1,43 @@
+"use client";
+
 import React from 'react';
-import { Metadata } from 'next';
 import Image from 'next/image';
-import { SignUpForm } from '@components/features';
 import Link from 'next/link';
-import { SuccessfullOperation } from '@components/features/success';
+import { FailedOperation, SuccessfullOperation } from '@components/features/success';
+import { useActivateUserQuery } from '@api/user-api';
+import { Loader } from '@components/shared';
+import { useSearchParams } from 'next/navigation';
 
 
-export const metadata: Metadata = {
-    title: "Activation | DataRace.ai",
-    description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
+enum ErrorType {
+    EXCEED_REQUEST_COUNT = "EXCEED_REQUEST_COUNT",
+    NOT_FOUND = "NOT_FOUND"
+}
+
+const errorMessages = {
+    [ErrorType.EXCEED_REQUEST_COUNT]: "You have reached your request limit. Please wait for an hour before trying again.",
+    [ErrorType.NOT_FOUND]: "Your token has expired. Please register your account again to obtain a new one."
 };
 
+interface ApiError {
+    error: ErrorType;
+    message: string;
+}
 
 const Success: React.FC = () => {
+    const searchParams = useSearchParams();
+    const token = searchParams.get('token');
+
+    const { data, error, isLoading } = useActivateUserQuery(
+        { token: token || "" },
+        { skip: !token }
+    );
+
+    const apiError = (error as { data?: ApiError } | undefined)?.data;
+    const errorMessage = apiError && errorMessages[apiError.error];
+
+    if (isLoading) return <Loader />;
+
     return (
         <div className="min-h-screen max-h-screen flex">
             {/* Left side with image */}
@@ -30,13 +55,14 @@ const Success: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </Link>
                     <h1 className="text-4xl font-medium">Join the race to AI excellence</h1>
-                    <p className="text-lg text-gray-500">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                    <p className="text-lg text-gray-500">DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.</p>
                 </div>
             </div>
 
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20 overflow-y-scroll">
-                <SuccessfullOperation />
+                {errorMessage && <FailedOperation message={errorMessage} />}
+                {data && <SuccessfullOperation />}
             </div>
         </div>
     );

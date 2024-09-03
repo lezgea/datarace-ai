@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { ILoginRequest, IRegisterRequest, IUser, LoginResponse, RegisterResponse } from './types/user-types';
+import { IActivateUserResponse, ILoginRequest, IRegisterRequest, IUser, LoginResponse, RegisterResponse } from './types/user-types';
 
 
 export const userApi = createApi({
@@ -27,6 +27,12 @@ export const userApi = createApi({
                 method: 'GET',
             }),
         }),
+        activateUser: builder.query<IActivateUserResponse, { token: string }>({
+            query: ({ token }) => ({
+                url: `/users/active?token=${encodeURIComponent(token)}`,
+                method: 'GET',
+            }),
+        }),
         getUser: builder.query<IUser, void>({
             query: () => ({
                 url: '/users',
@@ -40,5 +46,6 @@ export const {
     useRegisterUserMutation,
     useLoginUserMutation,
     useLogoutUserMutation,
+    useActivateUserQuery,
     useGetUserQuery,
 } = userApi;

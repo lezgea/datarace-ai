@@ -61,6 +61,32 @@ const userSlice = createSlice({
                 }
             );
 
+        // ACTIVATE USER
+        builder
+            .addMatcher(
+                userApi.endpoints.activateUser.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.activateUser.matchFulfilled,
+                (state) => {
+                    state.loading = false;
+                    state.isAuthenticated = false;
+                    state.user = null;
+                    Cookies.remove('dtr-token'); // Remove old token (if exists) on successful activation
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.activateUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Activation failed';
+                }
+            );
+
         // LOGIN USER
         builder
             .addMatcher(
