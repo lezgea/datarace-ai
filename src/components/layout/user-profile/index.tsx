@@ -4,6 +4,7 @@ import { useGetUserQuery, useLogoutUserMutation } from '@api/user-api';
 import { UserProfileSkeleton } from '@components/shared';
 import Divider from '@components/shared/divider';
 import { Dropdown } from '@components/shared/dropdown';
+import { useAuthenticate } from '@hooks/use-auth';
 import { createSelector } from '@reduxjs/toolkit';
 import { logout } from '@slices/user-slice';
 import { RootState } from '@store/store';
@@ -27,6 +28,8 @@ export const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
+    const loading = useAuthenticate();
+
     const selectAuthData = createSelector(
         (state: RootState) => state.user.user,
         (state: RootState) => state.user.isAuthenticated,
@@ -34,7 +37,7 @@ export const UserProfile: React.FC = () => {
         (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
     );
 
-    const { user, isAuthenticated, loading } = useSelector(selectAuthData);
+    const { user, isAuthenticated, loading: isUserLoading } = useSelector(selectAuthData);
 
     const userImage = React.useMemo(
         () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),

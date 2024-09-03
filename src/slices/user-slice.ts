@@ -50,7 +50,6 @@ const userSlice = createSlice({
                 userApi.endpoints.registerUser.matchFulfilled,
                 (state, action: PayloadAction<RegisterResponse>) => {
                     state.loading = false;
-                    console.log('@@@', action.payload)
                 }
             )
             .addMatcher(

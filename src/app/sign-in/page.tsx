@@ -64,8 +64,7 @@ const SignIn: React.FC = () => {
             if (err?.data?.code === "UNEXPECTED_EXCEPTION = USER_NOT_FOUND") {
                 toast.error("User is not found");
             } else {
-                console.error('Unknown error:', err);
-                toast.error('An unexpected error occurred');
+                toast.error(err.data?.message || 'An unexpected error occurred');
             }
         }
     };

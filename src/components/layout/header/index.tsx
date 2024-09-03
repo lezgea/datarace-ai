@@ -20,7 +20,6 @@ const NAV_ROUTES: { route: string; label: string }[] = [
 
 export const Header: React.FC = () => {
     const pathname = usePathname();
-    useAuthenticate();
     const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
     const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/success"], []);
