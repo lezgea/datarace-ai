@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { UserProfile } from '../user-profile';
-import { useLogoutUserMutation } from '@api/user-api';
+import { useGetUserQuery, useLogoutUserMutation } from '@api/user-api';
 
 // Mocking necessary hooks and modules
 jest.mock('react-redux', () => ({
@@ -16,6 +16,7 @@ jest.mock('next/navigation', () => ({
 }));
 
 jest.mock('@api/user-api', () => ({
+    useGetUserQuery: jest.fn(),
     useLogoutUserMutation: jest.fn(),
 }));
 
@@ -28,6 +29,11 @@ describe('UserProfile Component', () => {
         (useRouter as jest.Mock).mockReturnValue({ push: mockRouterPush });
         (useDispatch as unknown as jest.Mock).mockReturnValue(mockDispatch);
         (useLogoutUserMutation as jest.Mock).mockReturnValue([mockLogoutUser, { isLoading: false, isError: false }]);
+        (useGetUserQuery as jest.Mock).mockReturnValue({
+            data: { name: 'John Doe' },
+            error: null,
+            isLoading: false,
+        });
     });
 
     it('should render the skeleton when loading', () => {

@@ -74,17 +74,24 @@ export const UserProfile: React.FC = () => {
         </div>
     );
 
-    if (loading) {
+    if (loading || isUserLoading) {
         return <UserProfileSkeleton />;
     }
 
     if (!isAuthenticated) {
         return (
-            <Link href="/sign-in">
-                <button type="button" className="inline-flex w-auto text-center items-center px-5 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                    Sign In
-                </button>
-            </Link>
+            <div className="flex space-x-3">
+                <Link href="/sign-in">
+                    <button type="button" className="inline-flex w-auto text-center items-center px-4 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                        Sign In
+                    </button>
+                </Link>
+                <Link href="/sign-up">
+                    <button type="button" className="hidden md:inline-flex w-auto text-center items-center px-4 py-2 text-white transition-all bg-gray-800 rounded-lg sm:w-auto hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                        Sign Up
+                    </button>
+                </Link>
+            </div>
         );
     }
 
