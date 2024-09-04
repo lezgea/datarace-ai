@@ -36,6 +36,7 @@ import MinusIcon from './minus.svg';
 import RaceFlag from './raceflag.svg';
 import CoinsIcon from './coins.svg';
 import CertificateIcon from './certificate.svg';
+import TechIcon from './tech.svg';
 
 
 
@@ -53,6 +54,7 @@ export {
     RaceFlag,
 
     // icons
+    TechIcon,
     CertificateIcon,
     CoinsIcon,
     PlusIcon,

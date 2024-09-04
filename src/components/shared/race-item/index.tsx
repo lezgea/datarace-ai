@@ -30,7 +30,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     src={img || "svg/noimg.svg"}
                     height="300"
                     width="300"
-                    className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110 h-[20rem] object-cover"
+                    className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110 h-[15rem] object-cover"
                     alt={title}
                     priority={true}
                 />

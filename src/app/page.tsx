@@ -2,7 +2,9 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
+import { StarsIcon } from '@assets/icons';
+import { useGetCategoriesQuery } from '@api/category-api';
+import { CategoriesSection } from '@components/features/home/categories-section';
 
 export const metadata: Metadata = {
     title: "DataRace.ai",
@@ -13,16 +15,8 @@ export const metadata: Metadata = {
 const TeamBrainStorm = dynamic(() => import('@assets/icons/team-brainstorm.svg').then(mod => mod.default));
 const TeamBrainstorming = dynamic(() => import('@assets/icons/team-brainstorming.svg').then(mod => mod.default));
 const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mod => mod.default));
-const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
 
-
-interface IRaceType {
-    title: string;
-    description: string;
-    icon: React.ElementType;
-    type: string;
-}
 
 interface IRaceItemType {
     title: string;
@@ -31,39 +25,6 @@ interface IRaceItemType {
     price: string;
     expiry_date: string;
 }
-
-const RACE_SELECTS: IRaceType[] = [
-    {
-        title: 'All races',
-        description: '180 races',
-        icon: RaceIcon,
-        type: "race",
-    },
-    {
-        title: 'Environment',
-        description: '180 races',
-        icon: EnvironmentIcon,
-        type: "environment",
-    },
-    {
-        title: 'Education',
-        description: '6 races',
-        icon: EducationIcon,
-        type: "education",
-    },
-    {
-        title: 'Oil & Industry',
-        description: '6 races',
-        icon: DropIcon,
-        type: "industry",
-    },
-    {
-        title: 'Technology',
-        description: '6 races',
-        icon: DropIcon,
-        type: "tech",
-    },
-];
 
 const RACE_ITEMS: IRaceItemType[] = [
     {
@@ -90,6 +51,7 @@ const RACE_ITEMS: IRaceItemType[] = [
 ];
 
 const Home: React.FC = () => {
+
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
@@ -125,11 +87,7 @@ const Home: React.FC = () => {
                 </section>
 
                 <section className="w-full overflow-x-auto py-[6rem] hide-scrollbar">
-                    <div className="container mx-auto flex flex-col justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-                        {RACE_SELECTS.map((item, i) => (
-                            <RaceSelect key={i} {...item} />
-                        ))}
-                    </div>
+                    <CategoriesSection />
                 </section>
 
                 <section className="container mx-auto space-y-10">
