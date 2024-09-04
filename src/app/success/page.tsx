@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FailedOperation, SuccessfullOperation } from '@components/features/success';
@@ -24,7 +24,7 @@ interface ApiError {
     message: string;
 }
 
-const Success: React.FC = () => {
+const SuccessPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
@@ -65,6 +65,14 @@ const Success: React.FC = () => {
                 {data && <SuccessfullOperation />}
             </div>
         </div>
+    );
+};
+
+const Success: React.FC = () => {
+    return (
+        <Suspense fallback={<Loader />}>
+            <SuccessPageContent />
+        </Suspense>
     );
 };
 
