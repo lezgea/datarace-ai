@@ -18,7 +18,7 @@ export const ExpandableInfoSection: React.FC<IExpandableInfoSectionProps> = (pro
                 <span className="w-full text-lg font-regmed">{title}</span>
                 {expanded ? <MinusIcon /> : <PlusIcon />}
             </div>
-            {expanded && <p>{description}</p>}
+            {expanded && <p className="font-light">{description}</p>}
         </div>
     )
 }
