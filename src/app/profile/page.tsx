@@ -16,8 +16,7 @@ import { AccountSettings, AttendedRaces } from '@components/features';
 const TABS: { title: string, content: React.ReactNode }[] = [
     {
         title: "Attended races",
-        // content: <AttendedRaces />,
-        content: <AccountSettings />,
+        content: <AttendedRaces />,
     },
     {
         title: "Bookmark",

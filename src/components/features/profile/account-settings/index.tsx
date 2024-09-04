@@ -6,14 +6,13 @@ import React, { useState } from 'react';
 import { Form, SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLogoutUserMutation, useRegisterUserMutation } from '@api/user-api';
+import { useLogoutUserMutation, useUpdateUserMutation } from '@api/user-api';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { logout } from '@slices/user-slice';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
-
 
 
 interface IAccountSettingsProps {
@@ -46,11 +45,8 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
 
     const { user, isAuthenticated, loading: isUserLoading } = useSelector(selectAuthData);
 
-    const [terms, acceptTerms] = React.useState<boolean>(false);
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
-    const [emailSent, showEmailSent] = React.useState<boolean>(false);
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
-
+    const [updateUser, { isLoading: updatLoading, isError: updateError, data }] = useUpdateUserMutation();
 
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -65,21 +61,13 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
         }
     }, [user, setValue]);
 
-    // RTK Query mutation hook
-    // const [registerUser, { isLoading, error }] = useRegisterUserMutation();
-
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        // try {
-        //     await registerUser(data).unwrap();
-        //     showEmailSent(true);
-        // } catch (err: any) {
-        //     console.error('Unknown error:', err);
-        //     toast.error(err.data?.message || 'An unexpected error occurred');
-        // }
-    };
-
-    const togglePasswordVisibility = (): void => {
-        setShowPassword(!showPassword);
+        try {
+            await updateUser({ id: user?.id || '', data: data }).unwrap();
+        } catch (err: any) {
+            console.error('Unknown error:', err);
+            toast.error(err.data?.message || 'An unexpected error occurred');
+        }
     };
 
     const handleLogout = async () => {
@@ -91,6 +79,13 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
             console.error('Logout failed', error);
         }
     };
+
+    const onCancel = () => {
+        if (user) {
+            setValue('fullname', user.fullName || '');
+            setValue('username', user.username || '');
+        }
+    }
 
 
     return (
@@ -123,11 +118,11 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
                     <button type="submit" className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                         Save
                     </button>
-                    <button type="button" className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-gray-800 rounded-lg hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                    <button type="button" onClick={onCancel} className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-gray-800 rounded-lg hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                         Cancel
                     </button>
                 </div>
-                <button className="flex w-40 space-x-2 text-center items-center px-4 py-2 text-gray-900 transition-all rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                <button onClick={handleLogout} className="flex w-40 space-x-2 text-center items-center px-4 py-2 text-gray-900 transition-all rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                     <span>Sign Out</span>
                     <SignOutIcon />
                 </button>

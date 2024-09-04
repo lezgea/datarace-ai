@@ -93,6 +93,10 @@ const userSlice = createSlice({
                 (state) => {
                     state.loading = true;
                     state.error = null;
+                    let token = Cookies.get('dtr-token')
+                    if (!!token) {
+                        Cookies.remove('dtr-token')
+                    }
                 }
             )
             .addMatcher(
