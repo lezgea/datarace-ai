@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetUserQuery, useLogoutUserMutation } from '@api/user-api';
-import { UserProfileSkeleton } from '@components/shared';
+import { ConfirmationModal, UserProfileSkeleton } from '@components/shared';
 import Divider from '@components/shared/divider';
 import { Dropdown } from '@components/shared/dropdown';
 import { useAuthenticate } from '@hooks/use-auth';
@@ -25,6 +25,7 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 
 export const UserProfile: React.FC = () => {
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
+    const [askModal, setAskModal] = React.useState<boolean>(false);
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -68,7 +69,11 @@ export const UserProfile: React.FC = () => {
                 </Link>
             ))}
             <Divider />
-            <button onClick={handleLogout} disabled={isLoading} className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+            <button
+                disabled={isLoading}
+                onClick={() => setAskModal(true)}
+                className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none"
+            >
                 Sign Out
             </button>
         </div>
@@ -110,6 +115,12 @@ export const UserProfile: React.FC = () => {
                     />
                 </div>
             </div>
+
+            <ConfirmationModal
+                visible={askModal}
+                onConfirm={handleLogout}
+                onClose={() => setAskModal(false)}
+            />
         </Dropdown>
     );
 };

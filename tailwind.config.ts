@@ -100,7 +100,7 @@ const config: Config = {
       animation: {
         'main-label': 'mainLabelAnimation 0.5s ease-in-out',
         'main-description': 'mainDescriptionAnimation 1s ease-in-out',
-        'button': 'buttonAnimation 1s ease-in-out',
+        'button': 'buttonAnimation 0.5s ease-in-out',
         'left-svg': 'leftSvgAnimation 1s ease-in-out',
         'right-svg': 'rightSvgAnimation 1s ease-in-out',
         'star': 'starAnimation 1.5s ease-in-out',

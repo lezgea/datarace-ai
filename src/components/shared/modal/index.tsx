@@ -21,7 +21,7 @@ export const Modal: React.FC<IModalProps> = (props) => {
         <>
             {visible ? (
                 <>
-                    <div onClick={handleBackgroundClick} className="flex h-full justify-center items-center overflow-x-hidden fixed top-0 inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.5)] animate-opacity">
+                    <div onClick={handleBackgroundClick} className="flex h-[100vh] justify-center items-center overflow-x-hidden fixed top-0 inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.5)] animate-opacity">
                         <div className="relative w-auto mx-auto">
                             <div className="min-w-[400px] min-h-[50px] border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 {content}

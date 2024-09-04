@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { DropIcon, EducationIcon, EnvironmentIcon, RaceIcon, StarsIcon } from '@assets/icons';
+import { CategoriesSection } from '@components/features/home';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -16,12 +16,6 @@ const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mo
 const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
 
-interface IRaceType {
-    title: string;
-    description: string;
-    icon: React.ElementType;
-    type: string;
-}
 
 interface IRaceItemType {
     title: string;
@@ -30,39 +24,6 @@ interface IRaceItemType {
     price: string;
     expiry_date: string;
 }
-
-const RACE_SELECTS: IRaceType[] = [
-    {
-        title: 'All races',
-        description: '180 races',
-        icon: RaceIcon,
-        type: "race",
-    },
-    {
-        title: 'Environment',
-        description: '180 races',
-        icon: EnvironmentIcon,
-        type: "environment",
-    },
-    {
-        title: 'Education',
-        description: '6 races',
-        icon: EducationIcon,
-        type: "education",
-    },
-    {
-        title: 'Oil & Industry',
-        description: '6 races',
-        icon: DropIcon,
-        type: "industry",
-    },
-    {
-        title: 'Technology',
-        description: '6 races',
-        icon: DropIcon,
-        type: "tech",
-    },
-];
 
 const RACE_ITEMS: IRaceItemType[] = [
     {
@@ -121,11 +82,7 @@ const Races: React.FC = () => {
                             <p className="text-md text-gray-700">Get ready for an exciting race</p>
                         </div>
                     </div>
-                    <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 overflow-x-auto hide-scrollbar">
-                        {RACE_SELECTS.map((item, i) => (
-                            <RaceSelect key={i} {...item} />
-                        ))}
-                    </div>
+                    <CategoriesSection />
                 </section>
 
                 <section className="container mx-auto space-y-10">
