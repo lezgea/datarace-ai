@@ -76,8 +76,8 @@ const RaceDetails: React.FC = () => {
 
                 {/* Main Content */}
                 <main id="#main-content" className="overflow-hidden space-y-5">
-                    <section className="relative">
-                        <img src="/jpg/racebanner.jpg" alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
+                    <section className="relative border rounded-2xl">
+                        <img src="/svg/noimg_large.svg" alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <h1 className="absolute bottom-5 left-5 text-2xl font-regmed bg-primary px-7 py-2 rounded-lg backdrop-blur-xl bg-white/60">
                             Kitablardan ekranlara keçid
                         </h1>
