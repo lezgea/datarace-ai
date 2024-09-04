@@ -6,7 +6,7 @@ import Link from "next/link";
 interface IRacesItemProps {
     title: string;
     description: string;
-    img: string;
+    img?: string;
     price: string,
     expiry_date: string,
 };
@@ -27,10 +27,10 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                 </div>
 
                 <Image
-                    src={img}
+                    src={img || "svg/noimg.svg"}
                     height="300"
                     width="300"
-                    className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
+                    className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110 h-[20rem] object-cover"
                     alt={title}
                     priority={true}
                 />

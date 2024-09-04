@@ -69,42 +69,21 @@ const RACE_ITEMS: IRaceItemType[] = [
     {
         title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic1.png',
+        img: '',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
     {
         title: 'Auctor ut luctus euismod euismod quam ut sapien.',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic2.png',
+        img: '',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
     {
         title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic3.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-    {
-        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic2.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-    {
-        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic1.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-    {
-        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic2.png',
+        img: '',
         price: '6000₼',
         expiry_date: 'Ends in 2 days',
     },
@@ -162,7 +141,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
                         {RACE_ITEMS.map((item, i) => (
-                            <RaceItem key={i} {...item} />
+                            <RaceItem key={i} {...item} img={item.img || "/svg/noimg.svg"} />
                         ))}
                     </div>
                     <div className="flex justify-center">
