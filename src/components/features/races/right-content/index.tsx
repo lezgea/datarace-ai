@@ -3,6 +3,7 @@
 import React from 'react';
 import { Modal } from '@components/shared';
 import { CertificateIcon, CoinsIcon, RaceFlag } from '@assets/icons';
+import { RacesSidebar } from '../races-sidebar';
 
 
 interface IRightContentProps {
@@ -12,10 +13,16 @@ interface IRightContentProps {
 export const RigthContent: React.FC<IRightContentProps> = (props) => {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [selectedOption, setSelectedOption] = React.useState<string>('option1');
+    const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(e.target.value);
     };
+
+    const onContinue = () => {
+        setSidebarOpen(true);
+        setShowModal(false);
+    }
 
     return (
         <div>
@@ -112,8 +119,12 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
             </div>
             <Modal
                 visible={showModal}
-                content={<ModalContent onClose={() => setShowModal(false)} />}
+                content={<ModalContent onConfirm={onContinue} />}
                 onClose={() => setShowModal(false)}
+            />
+            <RacesSidebar
+                visible={isSidebarOpen}
+                setSidebarOpen={setSidebarOpen}
             />
         </div>
     )
@@ -121,11 +132,11 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
 
 
 interface IModalContent {
-    onClose: () => void,
+    onConfirm: () => void,
 }
 
 const ModalContent: React.FC<IModalContent> = (props) => {
-    let { onClose } = props;
+    let { onConfirm } = props;
 
     return (
         <div className="flex flex-col max-w-[400px] items-center justify-center p-6 space-y-5 text-center">
@@ -133,7 +144,7 @@ const ModalContent: React.FC<IModalContent> = (props) => {
             <h2 className="text-3xl mx-3">You’re going to join the race</h2>
             <p>To join the race you have to read the conditions and accept them.</p>
             <button
-                onClick={() => onClose()}
+                onClick={onConfirm}
                 className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                 aria-label="Join the Race"
             >
