@@ -91,6 +91,11 @@ const config: Config = {
           '70%': { transform: 'scale(1.5)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        opacityAnimation: {
+          '0%': { opacity: '0', transform: 'scale(0)' },
+          '50%': { transform: 'scale(1.1)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
       },
       animation: {
         'main-label': 'mainLabelAnimation 0.5s ease-in-out',
@@ -98,7 +103,8 @@ const config: Config = {
         'button': 'buttonAnimation 1s ease-in-out',
         'left-svg': 'leftSvgAnimation 1s ease-in-out',
         'right-svg': 'rightSvgAnimation 1s ease-in-out',
-        'star': 'starAnimation 1.5s ease-in-out'
+        'star': 'starAnimation 1.5s ease-in-out',
+        'opacity': 'opacityAnimation 0.3s ease-in-out',
       },
     },
   },

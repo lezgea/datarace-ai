@@ -33,6 +33,9 @@ import WarningIcon from './warning.svg';
 import SignOutIcon from './sign-out.svg';
 import PlusIcon from './plus.svg';
 import MinusIcon from './minus.svg';
+import RaceFlag from './raceflag.svg';
+import CoinsIcon from './coins.svg';
+import CertificateIcon from './certificate.svg';
 
 
 
@@ -47,8 +50,11 @@ export {
     HumanRight,
     Teamwork,
     Failed,
+    RaceFlag,
 
     // icons
+    CertificateIcon,
+    CoinsIcon,
     PlusIcon,
     MinusIcon,
     SignOutIcon,

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
+import { Modal } from '@components/shared';
+import { RigthContent } from '@components/features';
 
 export const metadata: Metadata = {
     title: "Race Details | DataRace.ai",
@@ -83,49 +85,14 @@ const RaceDetails: React.FC = () => {
                         </h1>
                     </section>
 
-                    <section className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
                         {/* Left Content */}
-                        <div className="lg:col-span-2">
+                        <div className="lg:col-span-3">
                             <TabSelects tabs={TABS} />
                         </div>
 
                         {/* Right Sidebar */}
-                        <div className="space-y-6">
-                            {/* Prize */}
-                            <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg text-center">
-                                <p className="text-2xl font-semibold">$10,000</p>
-                                <p className="text-green-600 mt-2">Award points & Medals</p>
-                            </div>
-
-                            {/* Tags */}
-                            <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-2">Tags</h3>
-                                <div className="space-x-2">
-                                    <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">#Languages</span>
-                                    <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">#Learn</span>
-                                    <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">#Log loss</span>
-                                </div>
-                            </div>
-
-                            {/* Table of Content */}
-                            <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-2">Table of content</h3>
-                                <ul className="space-y-2">
-                                    <li className="text-green-600">Description</li>
-                                    <li>Evaluation</li>
-                                    <li>FAQ</li>
-                                    <li>Citation</li>
-                                </ul>
-                            </div>
-
-                            {/* Join Button */}
-                            <button
-                                className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                aria-label="Join the Race"
-                            >
-                                Join the Race
-                            </button>
-                        </div>
+                        <RigthContent />
                     </section>
 
                     <section className="container pt-20 px-auto space-y-10">
