@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import { setAuthState } from '@slices/user-slice';
 import { useGetUserQuery } from '@api/user-api';
 
-
 export const useAuthenticate = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(true);
@@ -33,9 +32,12 @@ export const useAuthenticate = () => {
 
     React.useEffect(() => {
         if (token) {
-            refetch();
+            setLoading(true);
+            refetch().finally(() => {
+                setLoading(false);
+            });
         }
-    }, [token, refetch]);
+    }, [token]);
 
     return loading;
 };

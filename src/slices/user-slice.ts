@@ -174,6 +174,30 @@ const userSlice = createSlice({
                     state.user = null;
                 }
             );
+
+        // UPDATE USER
+        builder
+            .addMatcher(
+                userApi.endpoints.updateUser.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.updateUser.matchFulfilled,
+                (state, action: PayloadAction<IUser>) => {
+                    state.loading = false;
+                    state.user = action.payload;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.updateUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to update user data';
+                }
+            );
     },
 });
 

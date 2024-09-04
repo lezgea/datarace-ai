@@ -39,6 +39,13 @@ export const userApi = createApi({
                 method: 'GET',
             }),
         }),
+        updateUser: builder.mutation<IUser, { id: string; data: Partial<IUser> }>({
+            query: ({ id, data }) => ({
+                url: `/users/${id}`,
+                method: 'PUT',
+                data,
+            }),
+        }),
     }),
 });
 
@@ -48,4 +55,5 @@ export const {
     useLogoutUserMutation,
     useActivateUserQuery,
     useGetUserQuery,
+    useUpdateUserMutation,
 } = userApi;

@@ -28,6 +28,9 @@ import TeamBrainStorm from './team-brainstorm.svg';
 import HumanRight from './human-right.svg';
 import Teamwork from './teamwork.svg';
 import Failed from './failed.svg';
+import PenIcon from './pen.svg';
+import WarningIcon from './warning.svg';
+import SignOutIcon from './sign-out.svg';
 
 
 
@@ -44,6 +47,9 @@ export {
     Failed,
 
     // icons
+    SignOutIcon,
+    WarningIcon,
+    PenIcon,
     BookmarkIcon,
     ArrowGreenIcon,
     LinkedinIcon,

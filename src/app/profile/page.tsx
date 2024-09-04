@@ -10,13 +10,14 @@ import { useSelector } from 'react-redux';
 import getImgFromBase64 from '@utils/base64toImg';
 import withProtectedRoute from '@utils/withProtectedRoute';
 import TabSelects from '@components/shared/tab-selects';
-import { AttendedRaces } from '@components/features';
+import { AccountSettings, AttendedRaces } from '@components/features';
 
 
 const TABS: { title: string, content: React.ReactNode }[] = [
     {
         title: "Attended races",
-        content: <AttendedRaces />,
+        // content: <AttendedRaces />,
+        content: <AccountSettings />,
     },
     {
         title: "Bookmark",
@@ -28,7 +29,7 @@ const TABS: { title: string, content: React.ReactNode }[] = [
     },
     {
         title: "Settings",
-        content: <div>Settings</div>,
+        content: <AccountSettings />,
     }
 ]
 
