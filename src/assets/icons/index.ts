@@ -31,6 +31,8 @@ import Failed from './failed.svg';
 import PenIcon from './pen.svg';
 import WarningIcon from './warning.svg';
 import SignOutIcon from './sign-out.svg';
+import PlusIcon from './plus.svg';
+import MinusIcon from './minus.svg';
 
 
 
@@ -47,6 +49,8 @@ export {
     Failed,
 
     // icons
+    PlusIcon,
+    MinusIcon,
     SignOutIcon,
     WarningIcon,
     PenIcon,
