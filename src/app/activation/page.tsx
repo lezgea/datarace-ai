@@ -3,7 +3,7 @@
 import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FailedOperation, SuccessfullOperation } from '@components/features/success';
+import { FailedOperation, SuccessfullOperation } from '@components/features/activation';
 import { useActivateUserQuery } from '@api/user-api';
 import { Loader } from '@components/shared';
 import { useSearchParams } from 'next/navigation';
@@ -24,7 +24,7 @@ interface ApiError {
     message: string;
 }
 
-const SuccessPageContent: React.FC = () => {
+const ActivationPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
@@ -68,12 +68,12 @@ const SuccessPageContent: React.FC = () => {
     );
 };
 
-const Success: React.FC = () => {
+const Activation: React.FC = () => {
     return (
         <Suspense fallback={<Loader />}>
-            <SuccessPageContent />
+            <ActivationPageContent />
         </Suspense>
     );
 };
 
-export default Success;
+export default Activation;
