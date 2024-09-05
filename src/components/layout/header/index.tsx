@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
     const pathname = usePathname();
     const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
-    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/success"], []);
+    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/activation"], []);
     const shouldHideHeader = hideHeaderRoutes.includes(pathname);
 
     const navLinks = React.useMemo(() => {
