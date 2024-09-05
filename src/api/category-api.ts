@@ -9,7 +9,7 @@ export const categoryApi = createApi({
     endpoints: (builder) => ({
         getCategories: builder.query<CategoriesResponse, void>({
             query: () => ({
-                url: '/categories/parents',
+                url: '/categories/all',
                 method: 'GET',
             }),
         }),
