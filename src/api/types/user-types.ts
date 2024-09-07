@@ -1,12 +1,12 @@
 export interface IRegisterRequest {
-    username: string;
+    email: string;
     password: string;
 }
 
 export type RegisterResponse = string
 
 export interface ILoginRequest {
-    username: string;
+    email: string;
     password: string;
     rememberMe?: boolean;
 }

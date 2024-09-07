@@ -14,13 +14,13 @@ import { EmailSent } from '../email-sent';
 
 
 interface IFormInput {
-    username: string;
+    email: string;
     password: string;
     confirmation: string;
 }
 
 const validationSchema = Yup.object().shape({
-    username: Yup.string()
+    email: Yup.string()
         .email('Invalid email')
         .required('Email is required'),
     password: Yup.string()
@@ -76,7 +76,7 @@ export const SignUpForm: React.FC = () => {
                 <FormInput
                     label='E-mail*'
                     type='email'
-                    name='username'
+                    name='email'
                     placeholder="example@company.com"
                     register={register}
                     errors={errors}
