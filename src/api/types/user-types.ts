@@ -6,7 +6,7 @@ export interface IRegisterRequest {
 export type RegisterResponse = string
 
 export interface ILoginRequest {
-    email: string;
+    emailOrNickname: string;
     password: string;
     rememberMe?: boolean;
 }

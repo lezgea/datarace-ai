@@ -16,9 +16,6 @@ interface IRaceType {
     type?: string,
 }
 
-type RaceSelectsType = IRaceType[];
-
-
 export const CategoriesSection: React.FC = () => {
     const { data: categories, error, isLoading } = useGetCategoriesQuery();
 

@@ -17,14 +17,14 @@ import { useSelector } from 'react-redux';
 
 
 interface IFormInput {
-    email: string;
+    emailOrNickname: string;
     password: string;
     rememberMe?: boolean;
 }
 
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    emailOrNickname: Yup.string().required('Email or nickname is required'),
     password: Yup.string()
         .required('Password is required')
         .min(3, 'Password must be at least 3 characters'),
@@ -109,9 +109,9 @@ const SignIn: React.FC = () => {
                     </div>
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
-                            label='E-mail*'
+                            label='E-mail or nickname*'
                             type='email'
-                            name='email'
+                            name='emailOrNickname'
                             placeholder="example@company.com"
                             register={register}
                             errors={errors}
