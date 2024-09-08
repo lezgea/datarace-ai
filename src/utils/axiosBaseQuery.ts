@@ -6,12 +6,13 @@ interface AxiosBaseQueryArgs {
     url: string;
     method: AxiosRequestConfig['method'];
     data?: any;
+    params?: Record<string, any>;
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async (
-    { url, method, data }, // args: includes url, method, and data
+    { url, method, data, params }, // args: includes url, method, and data
     api, // api: includes things like dispatch, getState
     extraOptions // extraOptions: any additional options
 ) => {
@@ -20,7 +21,8 @@ const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async 
         const result = await axios({
             url: BASE_URL + url,
             method,
-            data,
+            data: method !== 'GET' ? data : undefined,
+            params: method === 'GET' ? params : undefined,
             headers: {
                 Authorization: token ? `Bearer ${token}` : undefined,
             },

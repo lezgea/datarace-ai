@@ -5,6 +5,9 @@ import React from 'react';
 import { useGetCategoriesQuery } from '@api/category-api';
 import { RaceSelectSkeleton } from '@components/shared';
 import RaceSelect from '@components/shared/race-select';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
 
 // const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 
@@ -18,7 +21,10 @@ interface IRaceType {
 
 export const CategoriesSection: React.FC = () => {
     const { data: categories, error, isLoading } = useGetCategoriesQuery();
+    const dispatch = useDispatch();
 
+    // Access the selected category and categories from the Redux state
+    const { selectedCategory } = useSelector((state: RootState) => state.categories);
 
     if (isLoading) {
         return (

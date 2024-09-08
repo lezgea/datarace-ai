@@ -12,6 +12,9 @@ const nextConfig = {
     sassOptions: {
         includePaths: [path.join(__dirname, 'src/styles')],
     },
+    images: {
+        domains: ['beta.datarace.ai'],
+    },
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,

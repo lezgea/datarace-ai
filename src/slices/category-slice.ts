@@ -4,12 +4,14 @@ import { CategoriesResponse, ICategory } from '@api/types/category-types';
 
 interface ICategoryState {
     categories: ICategory[] | null;
+    selectedCategory: number,
     loading: boolean;
     error: string | null;
 }
 
 const initialState: ICategoryState = {
     categories: null,
+    selectedCategory: 1,
     loading: false,
     error: null,
 };
@@ -18,7 +20,9 @@ const categorySlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
-        // Optional manual setters if needed in the future
+        setSelectedCategory: (state, action: PayloadAction<number>) => {
+            state.selectedCategory = action.payload;
+        },
     },
     extraReducers: (builder) => {
         // GET CATEGORIES QUERY
@@ -47,5 +51,6 @@ const categorySlice = createSlice({
     },
 });
 
-// Export the reducer to be combined in the store
+export const { setSelectedCategory } = categorySlice.actions;
+
 export default categorySlice.reducer;
