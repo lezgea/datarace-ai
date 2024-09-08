@@ -2,6 +2,7 @@
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import RaceItem from '@components/shared/race-item';
+import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
 import Link from 'next/link';
 import React from 'react';
@@ -18,7 +19,7 @@ const CATEGORY_LABELS: Record<number, string> = {
 
 export const CompetitionsSection: React.FC = () => {
     const { selectedCategory } = useSelector((state: RootState) => state.categories);
-    const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
+    const [triggerGetCompetitions, { data: competitionsData, error, isLoading: competitionsLoading }] = useLazyGetCompetitionsQuery();
 
 
     React.useEffect(() => {
@@ -28,6 +29,8 @@ export const CompetitionsSection: React.FC = () => {
         });
     }, [selectedCategory, triggerGetCompetitions]);
 
+    if (competitionsLoading)
+        return <CompetitionsSkeleton />
 
     return (
         <>
