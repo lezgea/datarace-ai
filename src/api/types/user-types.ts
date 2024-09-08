@@ -16,10 +16,13 @@ export type LoginResponse = string
 
 
 export interface IUser {
-    id: string;
-    fullName: string;
-    profileImage: string;
-    username: string;
+    id: number | string,
+    fullName: string,
+    profileImage?: string,
+    nickname?: string,
+    email?: string,
+    phoneNumber?: string,
+    acceptNotification?: boolean,
 }
 
 export interface IActivateUserResponse {

@@ -110,7 +110,7 @@ const SignIn: React.FC = () => {
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
                             label='E-mail or nickname*'
-                            type='email'
+                            type='text'
                             name='emailOrNickname'
                             placeholder="example@company.com"
                             register={register}

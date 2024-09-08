@@ -16,7 +16,8 @@ import { AccountSettings, AttendedRaces } from '@components/features';
 const TABS: { title: string, content: React.ReactNode }[] = [
     {
         title: "Attended races",
-        content: <AttendedRaces />,
+        // content: <AttendedRaces />,
+        content: <AccountSettings />,
     },
     {
         title: "Bookmark",
@@ -67,8 +68,8 @@ const Profile: React.FC = () => {
                     <div className="w-full flex flex-col space-y-7 md:flex-row justify-start md:space-y-0">
                         <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-2">
                             <p className="text-[2rem] font-medium">{user?.fullName}</p>
-                            <p className="text-md text-gray-500">@{user?.username}</p>
-                            <p className="text-md text-gray-500">{user?.username}</p>
+                            <p className="text-md text-gray-500">{user?.email}</p>
+                            <p className="text-md text-gray-500">@{user?.nickname}</p>
                         </div>
                         {/* <div className="w-full flex justify-center items-end md:justify-end">
                             <div className="flex flex-col items-center justify-end space-y-2 md:items-start">

@@ -6,6 +6,7 @@ import { IActivateUserResponse, ILoginRequest, IRegisterRequest, IUser, LoginRes
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: axiosBaseQuery,
+    tagTypes: ['User'],
     endpoints: (builder) => ({
         registerUser: builder.mutation<RegisterResponse, IRegisterRequest>({
             query: (credentials) => ({
@@ -38,13 +39,15 @@ export const userApi = createApi({
                 url: '/users',
                 method: 'GET',
             }),
+            providesTags: ['User'],
         }),
-        updateUser: builder.mutation<IUser, { id: string; data: Partial<IUser> }>({
+        updateUser: builder.mutation<IUser, { id: number | string; data: Partial<IUser> }>({
             query: ({ id, data }) => ({
                 url: `/users/${id}`,
                 method: 'PUT',
                 data,
             }),
+            invalidatesTags: ['User'],
         }),
     }),
 });

@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation';
 import { logout } from '@slices/user-slice';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
+import { FormInput } from '@components/shared';
+import { useAuthenticate } from '@hooks/use-auth';
 
 
 interface IAccountSettingsProps {
@@ -20,13 +22,17 @@ interface IAccountSettingsProps {
 }
 
 interface IFormInput {
-    fullname: string;
-    username: string;
+    fullName: string,
+    email: string,
+    nickname?: string,
+    phoneNumber?: string,
 }
 
 const validationSchema = Yup.object().shape({
-    fullname: Yup.string().required('Fullname is required'),
-    username: Yup.string().email('Invalid email').required('Email is required'),
+    fullName: Yup.string().required('Fullname is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    nickname: Yup.string(),
+    phoneNumber: Yup.string(),
 });
 
 
@@ -56,14 +62,17 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
     React.useEffect(() => {
         if (user) {
             // Set default values when user data is available
-            setValue('fullname', user.fullName || '');
-            setValue('username', user.username || '');
+            setValue('fullName', user.fullName || '');
+            setValue('email', user.email || '');
+            setValue('nickname', user.nickname || '');
+            setValue('phoneNumber', user.phoneNumber || '');
         }
     }, [user, setValue]);
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
             await updateUser({ id: user?.id || '', data: data }).unwrap();
+            toast.success('User data updated successfully');
         } catch (err: any) {
             console.error('Unknown error:', err);
             toast.error(err.data?.message || 'An unexpected error occurred');
@@ -82,8 +91,10 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
 
     const onCancel = () => {
         if (user) {
-            setValue('fullname', user.fullName || '');
-            setValue('username', user.username || '');
+            setValue('fullName', user.fullName || '');
+            setValue('email', user.email || '');
+            setValue('nickname', user.nickname || '');
+            setValue('phoneNumber', user.phoneNumber || '');
         }
     }
 
@@ -97,20 +108,35 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
                     Verify now
                 </button>
             </div>
-            <form className="space-y-5 w-80" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-3 w-80" onSubmit={handleSubmit(onSubmit)}>
                 <FormEditInput
                     label='Fullname'
-                    type='fullname'
-                    name='fullname'
+                    type='string'
+                    name='fullName'
                     placeholder="Jon Doe"
                     register={register}
                     errors={errors}
                 />
                 <FormEditInput
                     label='Username'
-                    type='username'
-                    name='username'
-                    placeholder="@username"
+                    type='text'
+                    name='nickname'
+                    placeholder="@nickname"
+                    register={register}
+                    errors={errors}
+                />
+                <FormEditInput
+                    label='Contact'
+                    type='email'
+                    name='email'
+                    placeholder="email@example.com"
+                    register={register}
+                    errors={errors}
+                />
+                <FormEditInput
+                    type='string'
+                    name='phoneNumber'
+                    placeholder="phone"
                     register={register}
                     errors={errors}
                 />
@@ -118,7 +144,7 @@ export const AccountSettings: React.FC<IAccountSettingsProps> = (props) => {
                     <button type="submit" className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                         Save
                     </button>
-                    <button type="button" onClick={onCancel} className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-gray-800 rounded-lg hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                    <button type="button" onClick={onCancel} className="flex w-full text-center justify-center px-4 py-2 text-primaryDark transition-all border border-primaryDark rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                         Cancel
                     </button>
                 </div>
