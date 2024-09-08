@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '../api/user-api';
 import { ILoginRequest, IUser, LoginResponse, RegisterResponse } from '@api/types/user-types';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 interface IAuthState {
     isAuthenticated: boolean;
@@ -193,6 +194,7 @@ const userSlice = createSlice({
                 (state, action: PayloadAction<IUser>) => {
                     state.loading = false;
                     state.user = action.payload;
+                    toast.success(action.payload?.message || 'User data updated successfully');
                 }
             )
             .addMatcher(
@@ -200,6 +202,36 @@ const userSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to update user data';
+                }
+            );
+
+        // DELETE USER
+        builder
+            .addMatcher(
+                userApi.endpoints.deleteUser.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.deleteUser.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.user = null;
+                    let token = Cookies.get('dtr-token')
+                    if (!!token) {
+                        Cookies.remove('dtr-token')
+                    }
+                    toast.success('Your account has been deleted successfully');
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.deleteUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to delete user';
+                    toast.error('Unable to delete your account');
                 }
             );
     },

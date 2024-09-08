@@ -23,6 +23,7 @@ export interface IUser {
     email?: string,
     phoneNumber?: string,
     acceptNotification?: boolean,
+    message?: string,
 }
 
 export interface IActivateUserResponse {

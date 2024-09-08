@@ -37,6 +37,7 @@ const config: Config = {
           800: '#1e429f',
           900: '#282732',
         },
+        red: '#E13D4D',
         dark: '#000',
         custom_gray: '#EFEFF2',
       },

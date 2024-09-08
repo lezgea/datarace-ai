@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Loader } from '@components/shared';
+import { Loader, ProfileSectionSkeleton } from '@components/shared';
 import Image from 'next/image';
 import { BagIcon, LocationIcon } from '@assets/icons';
 import { createSelector } from '@reduxjs/toolkit';
@@ -16,8 +16,7 @@ import { AccountSettings, AttendedRaces } from '@components/features';
 const TABS: { title: string, content: React.ReactNode }[] = [
     {
         title: "Attended races",
-        // content: <AttendedRaces />,
-        content: <AccountSettings />,
+        content: <AttendedRaces />,
     },
     {
         title: "Bookmark",
@@ -49,7 +48,8 @@ const Profile: React.FC = () => {
         [user?.profileImage]
     );
 
-    if (loading) return <Loader />;
+    if (loading || !isAuthenticated)
+        return <ProfileSectionSkeleton />;
 
     return (
         <div className="min-h-screen flex flex-col p-5">
@@ -65,8 +65,8 @@ const Profile: React.FC = () => {
                             priority
                         />
                     </div>
-                    <div className="w-full flex flex-col space-y-7 md:flex-row justify-start md:space-y-0">
-                        <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-2">
+                    <div className="w-full flex flex-col space-y-5 md:flex-row justify-start md:space-y-0">
+                        <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-1">
                             <p className="text-[2rem] font-medium">{user?.fullName}</p>
                             <p className="text-md text-gray-500">{user?.email}</p>
                             <p className="text-md text-gray-500">@{user?.nickname}</p>

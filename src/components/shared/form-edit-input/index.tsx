@@ -33,7 +33,7 @@ export const FormEditInput: React.FC<IFormEditInputProps> = (props) => {
             <div className="relative">
                 {
                     !!label &&
-                    <label htmlFor={name} className="block text-lg text-gray-900 font-medium mb-2">
+                    <label htmlFor={name} className="block text-md text-gray-900 font-medium mb-2">
                         {label}
                     </label>
                 }
