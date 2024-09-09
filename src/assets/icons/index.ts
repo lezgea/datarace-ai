@@ -37,6 +37,8 @@ import RaceFlag from './raceflag.svg';
 import CoinsIcon from './coins.svg';
 import CertificateIcon from './certificate.svg';
 import TechIcon from './tech.svg';
+import ZipIcon from './zip.svg';
+import CheckIcon from './check.svg';
 
 
 
@@ -54,6 +56,8 @@ export {
     RaceFlag,
 
     // icons
+    CheckIcon,
+    ZipIcon,
     TechIcon,
     CertificateIcon,
     CoinsIcon,

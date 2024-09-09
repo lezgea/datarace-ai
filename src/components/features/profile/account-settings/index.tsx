@@ -22,6 +22,7 @@ interface IFormInput {
     email: string,
     nickname?: string,
     phoneNumber?: string,
+    profileFileId?: number | string,
 }
 
 const validationSchema = Yup.object().shape({
@@ -59,6 +60,7 @@ export const AccountSettings: React.FC = () => {
     React.useEffect(() => {
         if (user) {
             // Set default values when user data is available
+            setValue('profileFileId', user.profileFileId || 1);
             setValue('fullName', user.fullName || '');
             setValue('email', user.email || '');
             setValue('nickname', user.nickname || '');

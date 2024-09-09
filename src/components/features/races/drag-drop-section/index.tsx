@@ -5,6 +5,7 @@ import { useUploadResultMutation } from '@api/upload-api';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
+import { CheckIcon, ZipIcon } from '@assets/icons';
 
 interface FileUploaderProps {
     competitionId?: number | null,
@@ -104,16 +105,35 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
         onClose();
     }
 
+    let submitIsDisabled = isUploading || isFakeUploading || !file
+
+
     return (
-        <div className="flex flex-col justify-center items-center h-[300px] space-y-2">
-            {(isUploading || isFakeUploading) && (
-                <div className="relative w-full h-2 bg-gray-200 rounded-full">
-                    <div
-                        className="absolute top-0 h-full bg-primary rounded-full"
-                        style={{ width: `${uploadProgress}%` }}
-                    />
-                </div>
-            )}
+        <div className="flex flex-col justify-center items-center h-[300px] space-y-2 mb-40 pt-20">
+            <div className="w-full space-y-2">
+                {
+                    file &&
+                    <div className="flex items-center space-x-3">
+                        <ZipIcon className="w-7 h-7" />
+                        <div className="w-full">
+                            <p className="text-sm">{file.name}</p>
+                            <p className="text-xs text-gray-500 w-full">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                        </div>
+                        {(uploadProgress == 100) && <CheckIcon className="w-10 h-10" />}
+                    </div>
+                }
+                {
+                    (isUploading || isFakeUploading) &&
+                    <div className="relative w-full h-1 bg-gray-200 rounded-full">
+                        <div
+                            className="absolute top-0 h-full bg-primary rounded-full"
+                            style={{ width: `${uploadProgress}%` }}
+                        />
+                    </div>
+                }
+            </div>
+
+            {/* )} */}
             <div
                 className={`w-full h-full p-6 border-dashed border-2 rounded-xl ${isFakeUploading || isUploading ? 'border-primaryLight bg-primaryExtra' : 'border-gray-300 bg-white'
                     }`}
@@ -121,7 +141,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 onDragOver={(e) => e.preventDefault()}
             >
                 <div className="flex flex-col text-center h-[100%] items-center justify-center">
-                    {file ? (
+                    {file && (uploadProgress == 100) ? (
                         <>
                             <p className="text-primaryLight mb-4">{file.name} uploaded successfully!</p>
                             <button
@@ -158,10 +178,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
 
             <div className="bg-white absolute w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
                 <div className="flex space-x-3 p-5">
-                    <button onClick={handleUpload} disabled={isUploading || isFakeUploading} className="inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                    <button onClick={handleUpload} disabled={submitIsDisabled} className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-500' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}>
                         {isUploading ? "Uploading..." : "Submit"}
                     </button>
-                    <button onClick={onCloseSidebar} className="inline-flex w-auto text-center items-center px-10 py-2 text-primary transition-all border border-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                    <button onClick={onCloseSidebar} className="inline-flex w-auto text-center items-center px-10 py-2 text-primary transition-all border border-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none animate-button">
                         Cancel
                     </button>
                 </div>

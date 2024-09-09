@@ -19,6 +19,7 @@ export interface IUser {
     id: number | string,
     fullName: string,
     profileImage?: string,
+    profileFileId?: number | string,
     nickname?: string,
     email?: string,
     phoneNumber?: string,

@@ -47,14 +47,14 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
                 ref={sidebarRef}
                 onClick={(e) => e.stopPropagation()} // Prevent event propagation
             >
-                <div className="h-auto mt-8 p-5 space-y-4">
+                <div className="h-screen mt-8 px-5 pt-5 pb-[200px] space-y-4 overflow-auto">
                     <div className="relative border rounded-2xl">
                         <img src={competitionInfo?.imageUrl || "/svg/noimg_large.svg"} alt={competitionInfo?.name} className="w-full h-[10rem] rounded-2xl object-cover" />
                     </div>
                     <h2 className="text-2xl font-regmed">
                         {competitionInfo?.name}
                     </h2>
-                    <p className="text-sm font-light mb-2">{competitionInfo?.text}</p>
+                    <p className="text-sm font-light mb-2 truncate-text">{competitionInfo?.text}</p>
                     <Divider />
                     <h2 className="text-2xl font-regmed text-center">
                         Upload your solution
