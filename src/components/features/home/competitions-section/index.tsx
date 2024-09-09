@@ -26,7 +26,7 @@ export const CompetitionsSection: React.FC = () => {
     React.useEffect(() => {
         triggerGetCompetitions({
             categoryId: selectedCategory,
-            data: { page: 1, count: 6 },
+            data: { page: 0, count: 6 },
         });
     }, [selectedCategory, triggerGetCompetitions]);
 
