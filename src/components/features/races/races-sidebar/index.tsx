@@ -1,5 +1,7 @@
 import Divider from '@components/shared/divider';
+import { RootState } from '@store/store';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 interface IRacesSidebarProps {
     visible: boolean;
@@ -10,6 +12,8 @@ interface IRacesSidebarProps {
 export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebarOpen }) => {
     const sidebarRef = React.useRef<HTMLDivElement>(null);
     const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
 
 
     const handleFileUploadClick = () => {
@@ -44,14 +48,12 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
             >
                 <div className="h-auto mt-8 p-5 space-y-4">
                     <div className="relative border rounded-2xl">
-                        <img src="/svg/noimg_large.svg" alt="Race Image" className="w-full h-[10rem] rounded-2xl object-cover" />
+                        <img src={competitionInfo?.imageUrl || "/svg/noimg_large.svg"} alt={competitionInfo?.name} className="w-full h-[10rem] rounded-2xl object-cover" />
                     </div>
                     <h2 className="text-2xl font-regmed">
-                        Kitablardan ekranlara keçid
+                        {competitionInfo?.name}
                     </h2>
-                    <p className="text-sm mb-2">
-                        Arcu dictumst ac imperdiet egestas scelerisque dui vitae turpis purus. Dui dui vel ultricies augue consectetur dignissim lectus senectus at.
-                    </p>
+                    <p className="text-sm mb-2">{competitionInfo?.text}</p>
                     <Divider />
                     <h2 className="text-2xl font-regmed text-center">
                         Upload your solution

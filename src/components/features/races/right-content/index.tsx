@@ -1,19 +1,24 @@
 "use client";
 
 import React from 'react';
-import { Modal } from '@components/shared';
+import { CompetitionInfoRightSkeleton, Modal } from '@components/shared';
 import { CertificateIcon, CoinsIcon, RaceFlag } from '@assets/icons';
 import { RacesSidebar } from '../races-sidebar';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
 
 
 interface IRightContentProps {
 
 }
 
+
 export const RigthContent: React.FC<IRightContentProps> = (props) => {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [selectedOption, setSelectedOption] = React.useState<string>('option1');
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
+
+    const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(e.target.value);
@@ -23,6 +28,8 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
         setSidebarOpen(true);
         setShowModal(false);
     }
+
+    if (competitionLoading) return <CompetitionInfoRightSkeleton />
 
     return (
         <div>
@@ -35,7 +42,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CoinsIcon />
-                        <p className="text-xl font-regmed text-primary">$10,000</p>
+                        <p className="text-xl font-regmed text-primary">${competitionInfo?.awardAmount}</p>
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CertificateIcon />

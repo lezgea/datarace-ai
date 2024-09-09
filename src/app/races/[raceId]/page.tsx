@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
-import { Modal } from '@components/shared';
+import { Loader, Modal } from '@components/shared';
 import { RigthContent } from '@components/features';
 import { CompetitionsSection } from '@components/features/home';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
@@ -37,6 +37,8 @@ const RaceDetails: React.FC = () => {
     const params = useParams();
     const { raceId } = params;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: raceId as string }, { skip: !raceId });
+
+    // if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen flex flex-col">
