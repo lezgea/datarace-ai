@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import { useUploadResultMutation } from '@api/upload-api';
 import { toast } from 'react-toastify';
