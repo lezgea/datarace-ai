@@ -103,7 +103,9 @@ export const UserProfile: React.FC = () => {
     return (
         <Dropdown content={DropdownContent}>
             <div className="flex items-center cursor-pointer group select-none">
-                <div className="hidden md:flex text-gray-600 font-regmed mr-3 group-hover:text-primary transition-all duration-200 ease-in-out">{user?.fullName}</div>
+                <div className="hidden md:flex text-gray-600 font-regmed mr-3 group-hover:text-primary transition-all duration-200 ease-in-out">
+                    {user?.fullName?.split(" ")[0]}
+                </div>
                 <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full overflow-hidden">
                     <Image
                         src={userImage}

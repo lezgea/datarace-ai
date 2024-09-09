@@ -2,6 +2,7 @@ import Divider from '@components/shared/divider';
 import { RootState } from '@store/store';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import DragAndDropSection from '../drag-drop-section';
 
 interface IRacesSidebarProps {
     visible: boolean;
@@ -53,7 +54,7 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
                     <h2 className="text-2xl font-regmed">
                         {competitionInfo?.name}
                     </h2>
-                    <p className="text-sm mb-2">{competitionInfo?.text}</p>
+                    <p className="text-sm font-light mb-2">{competitionInfo?.text}</p>
                     <Divider />
                     <h2 className="text-2xl font-regmed text-center">
                         Upload your solution
@@ -75,23 +76,8 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
                             }
                         }}
                     />
-                    <button
-                        type="button"
-                        className="inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none"
-                        onClick={handleFileUploadClick}
-                    >
-                        Browse files
-                    </button>
-                </div>
-                <div className="bg-white absolute w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
-                    <div className="flex space-x-3 p-5">
-                        <button type="button" className="inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                            Submit
-                        </button>
-                        <button onClick={() => setSidebarOpen(false)} className="hidden md:inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-gray-800 rounded-lg sm:w-auto hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                            Cancel
-                        </button>
-                    </div>
+
+                    <DragAndDropSection onClose={() => setSidebarOpen(false)} />
                 </div>
             </div>
         </div>

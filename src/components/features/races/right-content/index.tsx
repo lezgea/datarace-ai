@@ -35,11 +35,11 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
             setShowModal(false);
         } catch (error: any) {
             if (error.data) {
-                toast.error(error.data?.message || 'Failed to join competition');
+                toast.error(error.data?.message || 'Failed to join competition', { position: "bottom-left" });
             } else if (error.error) {
-                toast.error(error.error || 'Failed to join competition');
+                toast.error(error.error || 'Failed to join competition', { position: "bottom-left" });
             } else {
-                toast.error('Failed to join competition');
+                toast.error('Failed to join competition', { position: "bottom-left" });
             }
             setShowModal(false);
         }
