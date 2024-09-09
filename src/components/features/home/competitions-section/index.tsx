@@ -18,8 +18,9 @@ const CATEGORY_LABELS: Record<number, string> = {
 };
 
 export const CompetitionsSection: React.FC = () => {
-    const { selectedCategory, loading } = useSelector((state: RootState) => state.categories);
-    const [triggerGetCompetitions, { data: competitionsData, error, isLoading: competitionsLoading }] = useLazyGetCompetitionsQuery();
+    const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
+    const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
+    const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
 
 
     React.useEffect(() => {
@@ -29,8 +30,9 @@ export const CompetitionsSection: React.FC = () => {
         });
     }, [selectedCategory, triggerGetCompetitions]);
 
-    if (loading || competitionsLoading)
+    if (categoryLoading || competitionLoading)
         return <CompetitionsSkeleton />
+
 
     return (
         <>

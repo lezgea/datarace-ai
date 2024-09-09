@@ -3,6 +3,10 @@ export interface ICompetitionsRequest {
     data: { page: number, count: number },
 }
 
+export interface ICompetitionInfoRequest {
+    id: string | number,
+}
+
 export interface ICompetition {
     id: number,
     name: string,

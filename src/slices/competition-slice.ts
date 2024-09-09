@@ -2,17 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { categoryApi } from '../api/category-api';
 import { CategoriesResponse, ICategory } from '@api/types/category-types';
 import { competitionApi } from '@api/competition-api';
-import { ICompetitionsResponse } from '@api/types/competition-types';
+import { ICompetition, ICompetitionsResponse } from '@api/types/competition-types';
+import { object } from 'yup';
 
 interface ICompetitionState {
-    competitions: ICompetitionsResponse | null;
+    competitions: ICompetitionsResponse | [];
+    competitionInfo: object,
     selectedCompetition: number,
     loading: boolean;
     error: string | null;
 }
 
 const initialState: ICompetitionState = {
-    competitions: null,
+    competitions: [],
+    competitionInfo: {},
     selectedCompetition: 1,
     loading: false,
     error: null,
@@ -48,6 +51,30 @@ const competitionSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to fetch competitions';
+                }
+            );
+
+        // GET COMPETITION INFO QUERY
+        builder
+            .addMatcher(
+                competitionApi.endpoints.getCompetitionInfo.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getCompetitionInfo.matchFulfilled,
+                (state, action: PayloadAction<ICompetition>) => {
+                    state.loading = false;
+                    state.competitionInfo = action.payload;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getCompetitionInfo.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to fetch competition info';
                 }
             );
     },
