@@ -6,27 +6,43 @@ import { CertificateIcon, CoinsIcon, RaceFlag } from '@assets/icons';
 import { RacesSidebar } from '../races-sidebar';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
+import { useJoinCompetitionMutation } from '@api/competition-api';
+import { toast } from 'react-toastify';
 
 
 interface IRightContentProps {
-
+    raceId: number | string,
 }
 
-
 export const RigthContent: React.FC<IRightContentProps> = (props) => {
+    let { raceId } = props;
+
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [selectedOption, setSelectedOption] = React.useState<string>('option1');
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
 
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
+    const [joinCompetition, { data, isError, isLoading }] = useJoinCompetitionMutation();
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(e.target.value);
     };
 
-    const onContinue = () => {
-        setSidebarOpen(true);
-        setShowModal(false);
+    const onJoinTheRace = async () => {
+        try {
+            await joinCompetition({ id: raceId }).unwrap();
+            setSidebarOpen(true);
+            setShowModal(false);
+        } catch (error: any) {
+            if (error.data) {
+                toast.error(error.data?.message || 'Failed to join competition');
+            } else if (error.error) {
+                toast.error(error.error || 'Failed to join competition');
+            } else {
+                toast.error('Failed to join competition');
+            }
+            setShowModal(false);
+        }
     }
 
     if (competitionLoading) return <CompetitionInfoRightSkeleton />
@@ -126,7 +142,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
             </div>
             <Modal
                 visible={showModal}
-                content={<ModalContent onConfirm={onContinue} />}
+                content={<ModalContent onConfirm={onJoinTheRace} />}
                 onClose={() => setShowModal(false)}
             />
             <RacesSidebar

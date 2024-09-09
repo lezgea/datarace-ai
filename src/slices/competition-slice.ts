@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { competitionApi } from '@api/competition-api';
-import { ICompetition, ICompetitionsResponse } from '@api/types/competition-types';
+import { ICompetition, ICompetitionsResponse, IMessageResponse } from '@api/types/competition-types';
+import { toast } from 'react-toastify';
 
 
 interface ICompetitionState {
-    competitions: ICompetitionsResponse | [];
+    competitions: ICompetitionsResponse | [],
     competitionInfo: ICompetition | null,
     selectedCompetition: number,
-    loading: boolean;
-    error: string | null;
+    loading: boolean,
+    error?: string | boolean,
+    success?: string | boolean,
+    message?: string,
 }
 
 const initialState: ICompetitionState = {
@@ -16,7 +19,9 @@ const initialState: ICompetitionState = {
     competitionInfo: null,
     selectedCompetition: 1,
     loading: false,
-    error: null,
+    error: false,
+    success: false,
+    message: '',
 };
 
 const competitionSlice = createSlice({
@@ -34,7 +39,7 @@ const competitionSlice = createSlice({
                 competitionApi.endpoints.getCompetitions.matchPending,
                 (state) => {
                     state.loading = true;
-                    state.error = null;
+                    state.error = false;
                 }
             )
             .addMatcher(
@@ -58,7 +63,7 @@ const competitionSlice = createSlice({
                 competitionApi.endpoints.getCompetitionInfo.matchPending,
                 (state) => {
                     state.loading = true;
-                    state.error = null;
+                    state.error = false;
                 }
             )
             .addMatcher(
@@ -73,6 +78,31 @@ const competitionSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to fetch competition info';
+                }
+            );
+
+        // JOIN COMPETITION MUTATION
+        builder
+            .addMatcher(
+                competitionApi.endpoints.joinCompetition.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.joinCompetition.matchFulfilled,
+                (state, action: PayloadAction<IMessageResponse>) => {
+                    state.loading = false;
+                    state.message = action.payload?.message;
+                    toast.success(action.payload?.message || 'Joined successfully');
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.joinCompetition.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to join competition';
                 }
             );
     },

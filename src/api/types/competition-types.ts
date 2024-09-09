@@ -1,3 +1,14 @@
+export interface IMessageResponse {
+    error?: string,
+    success?: string,
+    message?: string,
+    data?: {
+        success?: string,
+        error?: string,
+        message?: string,
+    }
+}
+
 export interface ICompetitionsRequest {
     categoryId: number;
     data: { page: number, count: number },

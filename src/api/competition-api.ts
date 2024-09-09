@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse } from './types/competition-types';
+import { ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, IMessageResponse } from './types/competition-types';
 
 
 export const competitionApi = createApi({
@@ -20,10 +20,17 @@ export const competitionApi = createApi({
                 method: 'GET',
             }),
         }),
+        joinCompetition: builder.mutation<IMessageResponse, ICompetitionInfoRequest>({
+            query: ({ id }) => ({
+                url: `/competitions/${id}/join`,
+                method: 'POST',
+            }),
+        }),
     }),
 });
 
 export const {
     useGetCompetitionInfoQuery,
     useLazyGetCompetitionsQuery,
+    useJoinCompetitionMutation,
 } = competitionApi;

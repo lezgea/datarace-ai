@@ -36,9 +36,9 @@ const TABS: { title: string, content: ReactNode }[] = [
 const RaceDetails: React.FC = () => {
     const params = useParams();
     const { raceId } = params;
-    const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: raceId as string }, { skip: !raceId });
+    const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
+    const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
 
-    // if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -70,7 +70,7 @@ const RaceDetails: React.FC = () => {
                         </div>
 
                         {/* Right Sidebar */}
-                        <RigthContent />
+                        <RigthContent raceId={competitionId} />
                     </section>
 
                     {/* <section className="container pt-20 px-auto space-y-10">
