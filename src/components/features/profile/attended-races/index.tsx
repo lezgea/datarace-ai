@@ -39,11 +39,11 @@ const RACE_ITEMS: IRaceItemType[] = [
 export const AttendedRaces: React.FC = () => {
     return (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {
+            {/* {
                 RACE_ITEMS.map((item, i) =>
                     <RaceItem key={i} {...item} />
                 )
-            }
+            } */}
         </div>
     )
 }

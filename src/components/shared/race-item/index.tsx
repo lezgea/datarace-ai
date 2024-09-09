@@ -36,9 +36,11 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     priority={true}
                 />
             </div>
-            <div className="p-8 space-y-3">
-                <h3 className="text-xl font-medium text-customBlue-900">{name}</h3>
-                <p className="text-md text-gray-500 truncate-text">{text}</p>
+            <div className="flex flex-col p-8 space-y-3 text-start items-between">
+                <div className="h-20">
+                    <h3 className="text-xl font-medium text-customBlue-900">{name}</h3>
+                    <p className="text-md text-gray-500 truncate-text">{text}</p>
+                </div>
                 <div className="flex justify-between items-center">
                     <p className="text-[1.5rem] text-customBlue-900">$ {awardAmount}</p>
                     <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primaryLight group-active:scale-100">

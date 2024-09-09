@@ -18,7 +18,7 @@ const CATEGORY_LABELS: Record<number, string> = {
 };
 
 export const CompetitionsSection: React.FC = () => {
-    const { selectedCategory } = useSelector((state: RootState) => state.categories);
+    const { selectedCategory, loading } = useSelector((state: RootState) => state.categories);
     const [triggerGetCompetitions, { data: competitionsData, error, isLoading: competitionsLoading }] = useLazyGetCompetitionsQuery();
 
 
@@ -29,13 +29,13 @@ export const CompetitionsSection: React.FC = () => {
         });
     }, [selectedCategory, triggerGetCompetitions]);
 
-    if (competitionsLoading)
+    if (loading || competitionsLoading)
         return <CompetitionsSkeleton />
 
     return (
         <>
             <div className="flex justify-between">
-                <div className="space-y-3">
+                <div className="w-full space-y-3">
                     <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">Competitions</span></h2>
                     <p className="text-md text-gray-700">Get ready for an exciting race</p>
                 </div>

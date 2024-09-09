@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { CategoriesSection } from '@components/features/home';
+import { CategoriesSection, CompetitionsSection } from '@components/features/home';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -85,26 +85,8 @@ const Races: React.FC = () => {
                     <CategoriesSection />
                 </section>
 
-                <section className="container mx-auto space-y-10">
-                    <div className="flex justify-center text-center">
-                        <div className="space-y-3">
-                            <h2 className="text-[32px] md:text-[2.3rem]">Active <span className="font-medium">Competitions</span></h2>
-                            <p className="text-md text-gray-700">Get ready for an exciting race</p>
-                        </div>
-                    </div>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
-                        {RACE_ITEMS.map((item, i) => (
-                            <RaceItem key={i} {...item} />
-                        ))}
-                    </div>
-                    <div className="flex justify-center">
-                        <Link href="/races" className="inline-flex w-auto text-center font-medium items-center px-6 py-3 text-gray-900 transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
-                            All races
-                            <svg className="rtl:rotate-180 w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </Link>
-                    </div>
+                <section className="container mx-auto text-center space-y-10">
+                    <CompetitionsSection />
                 </section>
             </main>
         </div>
