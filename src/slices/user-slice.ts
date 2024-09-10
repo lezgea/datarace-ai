@@ -76,7 +76,7 @@ const userSlice = createSlice({
                     state.loading = false;
                     state.isAuthenticated = false;
                     state.user = null;
-                    Cookies.remove('dtr-token'); // Remove old token (if exists) on successful activation
+                    Cookies.remove('dtr-token'); // Removes old token (if exists) on successful activation
                 }
             )
             .addMatcher(
@@ -84,6 +84,32 @@ const userSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Activation failed';
+                }
+            );
+
+        // CHANGE PASSWORD
+        builder
+            .addMatcher(
+                userApi.endpoints.changePassword.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.changePassword.matchFulfilled,
+                (state) => {
+                    state.loading = false;
+                    state.isAuthenticated = false;
+                    state.user = null;
+                    toast.success("Password has been changed successfully!")
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.changePassword.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Operation failed';
                 }
             );
 
@@ -121,6 +147,30 @@ const userSlice = createSlice({
             )
             .addMatcher(
                 userApi.endpoints.loginUser.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Login failed';
+                }
+            );
+
+        // FORGOT PASSWORD
+        builder
+            .addMatcher(
+                userApi.endpoints.forgotPassword.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.forgotPassword.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    toast.success("Email has been sent!")
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.forgotPassword.matchRejected,
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Login failed';

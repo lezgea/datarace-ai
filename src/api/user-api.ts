@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IActivateUserResponse, ILoginRequest, IRegisterRequest, IUser, LoginResponse, RegisterResponse } from './types/user-types';
+import { IActivateUserResponse, IChangeRequest, IForgetRequest, ILoginRequest, IRegisterRequest, IUser, LoginResponse, RegisterResponse } from './types/user-types';
 
 
 export const userApi = createApi({
@@ -20,6 +20,20 @@ export const userApi = createApi({
                 url: '/users/login',
                 method: 'POST',
                 data: credentials,
+            }),
+        }),
+        forgotPassword: builder.mutation<null, IForgetRequest>({
+            query: (credentials) => ({
+                url: '/users/forget-password',
+                method: 'POST',
+                data: credentials,
+            }),
+        }),
+        changePassword: builder.mutation<null, IChangeRequest>({
+            query: (credentials) => ({
+                url: `/users/change-password?token=${encodeURIComponent(credentials.token)}`,
+                method: 'POST',
+                data: { password: credentials.password },
             }),
         }),
         logoutUser: builder.mutation<string, void>({
@@ -67,4 +81,6 @@ export const {
     useGetUserQuery,
     useUpdateUserMutation,
     useDeleteUserMutation,
+    useForgotPasswordMutation,
+    useChangePasswordMutation,
 } = userApi;

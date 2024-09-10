@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useLoginUserMutation } from '@api/user-api';
+import { useForgotPasswordMutation, useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -17,21 +17,16 @@ import { useSelector } from 'react-redux';
 
 
 interface IFormInput {
-    emailOrNickname: string;
-    password: string;
-    rememberMe?: boolean;
+    email: string;
 }
 
 
 const validationSchema = Yup.object().shape({
-    emailOrNickname: Yup.string().required('Email or nickname is required'),
-    password: Yup.string()
-        .required('Password is required')
-        .min(3, 'Password must be at least 3 characters'),
+    email: Yup.string().required('Email or nickname is required'),
 });
 
 
-const SignIn: React.FC = () => {
+const ForgetPassword: React.FC = () => {
     const router = useRouter();
 
     const selectAuthData = createSelector(
@@ -48,21 +43,20 @@ const SignIn: React.FC = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     // RTK Query mutation hook
-    const [loginUser, { isLoading, error }] = useLoginUserMutation();
+    const [forgotPassword, { isLoading, error }] = useForgotPasswordMutation();
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
             // Passing rememberMe along with the login data
             const payload = {
                 ...data,
-                rememberMe: data.rememberMe || false,
             };
 
-            await loginUser(payload).unwrap();
+            await forgotPassword(payload).unwrap();
             router.push('/');
         } catch (err: any) {
             if (err?.data?.code === "UNEXPECTED_EXCEPTION = USER_NOT_FOUND") {
-                toast.error("User is not found");
+                toast.error("Email is not found");
             } else {
                 toast.error(err.data?.message || 'An unexpected error occurred');
             }
@@ -73,8 +67,7 @@ const SignIn: React.FC = () => {
         setShowPassword(!showPassword);
     };
 
-    if (isAuthenticated) router.push('/')
-
+    if (isLoading) return <Loader />
 
     return (
         <div className="min-h-screen max-h-screen flex">
@@ -104,66 +97,24 @@ const SignIn: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                     </Link>
                     <div>
-                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Log in</h2>
-                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
+                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Forgot password</h2>
+                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email to restore your password</p>
                     </div>
-                    <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="space-y-10 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
-                            label='E-mail or nickname*'
+                            label='E-mail*'
                             type='text'
-                            name='emailOrNickname'
+                            name='email'
                             placeholder="example@company.com"
                             register={register}
                             errors={errors}
                             icon={<EmailIcon />}
                         />
-                        <FormInput
-                            label='Password*'
-                            type={showPassword ? "text" : "password"}
-                            name='password'
-                            placeholder="Enter password"
-                            register={register}
-                            errors={errors}
-                            onClickIcon={togglePasswordVisibility}
-                            icon={showPassword ? <EyeIcon /> : <EyeClosedIcon />}
-                        />
-                        <div className="flex justify-between items-center pb-4 pt-1 select-none">
-                            <label className="inline-flex items-center cursor-pointer">
-                                {/* Hidden native checkbox */}
-                                <input
-                                    type="checkbox"
-                                    className="hidden peer"
-                                    {...register("rememberMe")}
-                                />
-                                {/* Custom checkbox */}
-                                <span className="w-6 h-6 rounded-lg border-2 border-gray-300 flex items-center justify-center bg-white peer-checked:bg-blue-400 peer-checked:border-transparent transition-colors duration-200">
-                                    {/* Checkmark Icon */}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-4 h-4 text-white hidden peer-checked:block"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
-                                </span>
-                                <span className="ml-2 text-gray-700">Remember me</span>
-                            </label>
-                            <Link href="/forgot" className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">Forgot password</Link>
-                        </div>
                         <button
                             type="submit"
                             className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none transition duration-200 ease-in-out transform"
                         >
-                            Login
-                        </button>
-                        <div className="text-center my-4">Or</div>
-                        <button
-                            type="button"
-                            className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform animate-button"
-                        >
-                            <GoogleIcon />
-                            <span className="font-regmed">Login with Google</span>
+                            Send
                         </button>
                     </form>
                     <p className="mt-6 text-center font-light">
@@ -175,4 +126,4 @@ const SignIn: React.FC = () => {
     );
 };
 
-export default SignIn;
+export default ForgetPassword;

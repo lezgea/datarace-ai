@@ -6,9 +6,18 @@ export interface IRegisterRequest {
 export type RegisterResponse = string
 
 export interface ILoginRequest {
-    emailOrNickname: string;
-    password: string;
-    rememberMe?: boolean;
+    emailOrNickname: string,
+    password: string,
+    rememberMe?: boolean,
+}
+
+export interface IForgetRequest {
+    email: string,
+}
+
+export interface IChangeRequest {
+    password: string,
+    token: string,
 }
 
 
@@ -28,6 +37,7 @@ export interface IUser {
 }
 
 export interface IActivateUserResponse {
+    success?: string;
     error?: string;
     message?: string;
 }
