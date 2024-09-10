@@ -45,7 +45,7 @@ const uploadSlice = createSlice({
                     state.loading = false;
                     state.progress = 100;
                     state.success = true;
-                    state.message = "Solution uploaded successfully!";
+                    state.message = "Solution has been uploaded successfully!";
                 }
             )
             .addMatcher(
@@ -55,6 +55,37 @@ const uploadSlice = createSlice({
                     state.progress = 0;
                     state.error = action.error?.message || 'Failed to upload solution';
                     toast.error(state.error, { position: "bottom-left" });
+                }
+            );
+
+        // UPLOAD AVATAR MUTATION
+        builder
+            .addMatcher(
+                uploadApi.endpoints.uploadAvatar.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.progress = 0;
+                    state.error = false;
+                    state.success = false;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.uploadAvatar.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.progress = 100;
+                    state.success = true;
+                    state.message = "Profile Image has been uploaded!";
+                    toast.success("Profile Image has been uploaded!")
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.uploadAvatar.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.progress = 0;
+                    state.error = action.error?.message || 'Failed to upload solution';
+                    toast.error(state.error);
                 }
             );
     },

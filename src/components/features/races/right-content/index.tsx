@@ -44,8 +44,6 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
         }
     }
 
-    console.log('@@@@', competitionInfo)
-
     if (competitionLoading) return <CompetitionInfoRightSkeleton />
 
     return (
@@ -59,7 +57,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CoinsIcon />
-                        <p className="text-xl font-regmed text-primary">${competitionInfo?.awardAmount}</p>
+                        <p className="text-xl font-regmed text-primary">{competitionInfo?.currencySymbol} {competitionInfo?.awardAmount}</p>
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CertificateIcon />

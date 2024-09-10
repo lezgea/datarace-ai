@@ -27,6 +27,7 @@ export interface ICompetition {
     lifeTimeDays: number,
     joinAvailable: boolean,
     uploadAvailable: boolean,
+    currencySymbol: string,
 }
 
 export interface ICompetitionsResponse {

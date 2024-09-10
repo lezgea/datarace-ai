@@ -10,10 +10,11 @@ interface IRacesItemProps {
     imageUrl?: string | null,
     awardAmount: number | string,
     lifeTimeDays: number | string,
+    currencySymbol: string,
 };
 
 const RaceItem: React.FC<IRacesItemProps> = (props) => {
-    let { id, name, text, imageUrl, lifeTimeDays, awardAmount } = props
+    let { id, name, text, imageUrl, lifeTimeDays, currencySymbol, awardAmount } = props
 
     return (
         <Link href={`/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
@@ -42,7 +43,7 @@ const RaceItem: React.FC<IRacesItemProps> = (props) => {
                     <p className="text-md text-gray-500 truncate-text">{text}</p>
                 </div>
                 <div className="flex justify-between items-center">
-                    <p className="text-[1.5rem] text-customBlue-900">$ {awardAmount}</p>
+                    <p className="text-[1.5rem] text-customBlue-900">{currencySymbol} {awardAmount}</p>
                     <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primaryLight group-active:scale-100">
                         <ArrowGreenIcon />
                     </div>

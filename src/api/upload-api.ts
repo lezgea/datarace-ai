@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IMessageResponse } from './types/competition-types';
-import { IResultUploadRequest } from './types/upload-types';
+import { IProfileImageUploadRequest, IResultUploadRequest } from './types/upload-types';
 
 
 export const uploadApi = createApi({
@@ -12,7 +12,14 @@ export const uploadApi = createApi({
             query: ({ competitionId, file }) => ({
                 url: `/files/upload/result/${competitionId}`,
                 method: 'POST',
-                data: file, // FormData is passed here
+                data: file,
+            }),
+        }),
+        uploadAvatar: builder.mutation<IMessageResponse, IProfileImageUploadRequest>({
+            query: ({ file }) => ({
+                url: '/files/upload/profile-image',
+                method: 'POST',
+                data: file,
             }),
         }),
     }),
@@ -20,4 +27,5 @@ export const uploadApi = createApi({
 
 export const {
     useUploadResultMutation,
+    useUploadAvatarMutation,
 } = uploadApi;

@@ -13,3 +13,7 @@ export interface IResultUploadRequest {
     competitionId: number | undefined;
     file: FormData;
 }
+
+export interface IProfileImageUploadRequest {
+    file: FormData;
+}
