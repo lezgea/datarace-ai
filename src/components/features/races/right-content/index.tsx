@@ -31,7 +31,6 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
     const onJoinTheRace = async () => {
         try {
             await joinCompetition({ id: raceId }).unwrap();
-            setSidebarOpen(true);
             setShowModal(false);
         } catch (error: any) {
             if (error.data) {
@@ -45,13 +44,15 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
         }
     }
 
+    console.log('@@@@', competitionInfo)
+
     if (competitionLoading) return <CompetitionInfoRightSkeleton />
 
     return (
         <div>
             <div className="space-y-7">
                 {/* Prize */}
-                <div className="space-y-2">
+                <div className="space-y-2 mb-auto">
                     <div className="flex space-x-3 mb-5">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
                         <span className="text-xl font-medium">Prize</span>
@@ -67,7 +68,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                 </div>
 
                 {/* Tags */}
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                     <div className="flex space-x-3 mb-5">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
                         <span className="text-xl font-medium">Tags</span>
@@ -86,10 +87,10 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                             <span>Log loss</span>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Table of Content */}
-                <div className="flex flex-col space-y-3">
+                {/* <div className="flex flex-col space-y-3">
                     <div className="flex space-x-3 mb-3">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
                         <span className="text-xl font-medium">Table of content</span>
@@ -129,16 +130,29 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         />
                         <span className="ml-2 text-gray-700">FAQ</span>
                     </label>
-                </div>
+                </div> */}
 
-                {/* Join Button */}
-                <button
-                    onClick={() => setShowModal(true)}
-                    className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                    aria-label="Join the Race"
-                >
-                    Join the Race
-                </button>
+                {/* Join Button */
+                    competitionInfo?.joinAvailable &&
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                        aria-label="Join the Race"
+                    >
+                        Join the Race
+                    </button>
+                }
+
+                {/* Upload Soulution Button */
+                    competitionInfo?.uploadAvailable &&
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                        aria-label="Join the Race"
+                    >
+                        Upload the Solution
+                    </button>
+                }
             </div>
             <Modal
                 visible={showModal}

@@ -25,6 +25,8 @@ export interface ICompetition {
     awardAmount: number,
     imageUrl: string | null,
     lifeTimeDays: number,
+    joinAvailable: boolean,
+    uploadAvailable: boolean,
 }
 
 export interface ICompetitionsResponse {
