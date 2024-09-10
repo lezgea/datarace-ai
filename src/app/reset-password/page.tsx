@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Image from 'next/image';
 import { useChangePasswordMutation, useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -31,7 +31,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
-const ResetPassword: React.FC = () => {
+const ResetPasswordContent: React.FC = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
@@ -144,6 +144,15 @@ const ResetPassword: React.FC = () => {
                 </div>
             </div>
         </div>
+    );
+};
+
+
+const ResetPassword: React.FC = () => {
+    return (
+        <Suspense fallback={<Loader />}>
+            <ResetPasswordContent />
+        </Suspense>
     );
 };
 
