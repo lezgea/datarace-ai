@@ -14,6 +14,31 @@ export interface ICompetitionsRequest {
     data: { page: number, count: number },
 }
 
+export interface IAttendedCompetitionsRequest {
+    data: { page: number, count: number },
+}
+
+export interface IAttendedCompetition {
+    competitionI: number,
+    competitionName: string,
+    text: string,
+    awardAmount: number,
+    currencySymbol: string,
+    lifeTimeDays: number,
+    fullName: string,
+    nickname: string,
+    phoneNumber: string | number,
+    resultFileId: string,
+    imageUrl?: string,
+}
+
+export interface IAttendedCompetitionsResponse {
+    userCompetitions: IAttendedCompetition[],
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
+}
+
 export interface ICompetitionInfoRequest {
     id: string | number,
 }

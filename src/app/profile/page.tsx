@@ -15,10 +15,6 @@ import { useUploadAvatarMutation } from '@api/upload-api';
 
 const TABS: { title: string, content: React.ReactNode }[] = [
     {
-        title: "Settings",
-        content: <AccountSettings />,
-    },
-    {
         title: "Attended races",
         content: <AttendedRaces />,
     },
@@ -29,6 +25,10 @@ const TABS: { title: string, content: React.ReactNode }[] = [
     {
         title: "Submitted projects",
         content: <div>Submitted projects</div>,
+    },
+    {
+        title: "Settings",
+        content: <AccountSettings />,
     },
 ]
 

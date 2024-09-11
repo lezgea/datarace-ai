@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { competitionApi } from '@api/competition-api';
-import { ICompetition, ICompetitionsResponse, IMessageResponse } from '@api/types/competition-types';
+import { IAttendedCompetitionsResponse, ICompetition, ICompetitionsResponse, IMessageResponse } from '@api/types/competition-types';
 import { toast } from 'react-toastify';
 
 
 interface ICompetitionState {
+    attended: IAttendedCompetitionsResponse | [],
     competitions: ICompetitionsResponse | [],
     competitionInfo: ICompetition | null,
     selectedCompetition: number,
@@ -15,6 +16,7 @@ interface ICompetitionState {
 }
 
 const initialState: ICompetitionState = {
+    attended: [],
     competitions: [],
     competitionInfo: null,
     selectedCompetition: 1,
@@ -51,6 +53,30 @@ const competitionSlice = createSlice({
             )
             .addMatcher(
                 competitionApi.endpoints.getCompetitions.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to fetch competitions';
+                }
+            );
+
+        // GET ATTENDED COMPETITIONS QUERY
+        builder
+            .addMatcher(
+                competitionApi.endpoints.getAttendedCompetitions.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getAttendedCompetitions.matchFulfilled,
+                (state, action: PayloadAction<IAttendedCompetitionsResponse>) => {
+                    state.loading = false;
+                    state.attended = action.payload;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getAttendedCompetitions.matchRejected,
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to fetch competitions';

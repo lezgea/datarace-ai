@@ -7,3 +7,4 @@ export * from './race-item-skeleton';
 export * from './competitions-skeleton';
 export * from './competition-info-section-skeleton';
 export * from './competition-info-right-skeleton';
+export * from './attended-competitions-skeleton';

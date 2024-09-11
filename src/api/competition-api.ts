@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, IMessageResponse } from './types/competition-types';
+import { IAttendedCompetitionsRequest, IAttendedCompetitionsResponse, ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, IMessageResponse } from './types/competition-types';
 
 
 export const competitionApi = createApi({
@@ -13,6 +13,13 @@ export const competitionApi = createApi({
                 url: `/competitions/${categoryId}/page`,
                 method: 'GET',
                 params: { page: data.page, count: data.count },
+            }),
+        }),
+        getAttendedCompetitions: builder.query<IAttendedCompetitionsResponse, IAttendedCompetitionsRequest>({
+            query: ({ data }) => ({
+                url: `/competitions/user/page`,
+                method: 'GET',
+                params: { page: data.page, count: data.count, criteria: {} },
             }),
         }),
         getCompetitionInfo: builder.query<ICompetition, ICompetitionInfoRequest>({
@@ -36,4 +43,5 @@ export const {
     useGetCompetitionInfoQuery,
     useLazyGetCompetitionsQuery,
     useJoinCompetitionMutation,
+    useLazyGetAttendedCompetitionsQuery,
 } = competitionApi;

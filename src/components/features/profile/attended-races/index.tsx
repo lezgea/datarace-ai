@@ -1,49 +1,82 @@
-import dynamic from 'next/dynamic';
-import React from 'react';
+"use client";
 
-const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
+import { useLazyGetAttendedCompetitionsQuery, useLazyGetCompetitionsQuery } from '@api/competition-api';
+import RaceItem from '@components/shared/race-item';
+import AttendedCompetitionsSkeleton from '@components/shared/skeletons/attended-competitions-skeleton';
+import { RootState } from '@store/store';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
-interface IRaceItemType {
-    title: string;
-    description: string;
-    img: string;
-    price: string;
-    expiry_date: string;
-}
-
-const RACE_ITEMS: IRaceItemType[] = [
-    {
-        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic1.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-    {
-        title: 'Auctor ut luctus euismod euismod quam ut sapien.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic2.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-    {
-        title: 'Euismod lacus eu leo arcu leo ultrices morbi nisl.',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-        img: '/png/pic3.png',
-        price: '6000₼',
-        expiry_date: 'Ends in 2 days',
-    },
-]
 
 export const AttendedRaces: React.FC = () => {
+    const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
+    const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
+    const [triggerGetCompetitions, { data: attendedCompetitionsData, error, isLoading }] = useLazyGetAttendedCompetitionsQuery();
+
+    const itemsPerPage = 6;
+
+
+    React.useEffect(() => {
+        triggerGetCompetitions({
+            data: { page: currentPage, count: itemsPerPage },
+        }).then((response) => {
+            if (response?.data?.totalElements) {
+                setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
+            } else {
+                setTotalPages(1)
+            }
+        });
+    }, [currentPage, triggerGetCompetitions]);
+
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages - 1) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
+
+
+    if (categoryLoading || competitionLoading || isLoading) {
+        return <AttendedCompetitionsSkeleton />;
+    }
+
     return (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* {
-                RACE_ITEMS.map((item, i) =>
+        <>
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {attendedCompetitionsData?.userCompetitions?.map((item, i) => (
                     <RaceItem key={i} {...item} />
-                )
-            } */}
-        </div>
-    )
-}
+                ))}
+            </div>
+
+            {/* Pagination Controls */
+                !!attendedCompetitionsData?.totalElements &&
+                <div className="flex justify-between items-center mt-6">
+                    <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPage === 0}
+                        className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {currentPage + 1} of {totalPages}</span>
+                    <button
+                        onClick={handleNextPage}
+                        disabled={currentPage >= totalPages - 1}
+                        className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                    >
+                        Next
+                    </button>
+                </div>
+            }
+        </>
+    );
+};
