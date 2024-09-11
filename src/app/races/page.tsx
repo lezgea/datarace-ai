@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { CategoriesSection, CompetitionsSection } from '@components/features/home';
+import { CompetitionsTable } from '@components/features';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -24,7 +25,7 @@ const Races: React.FC = () => {
                 </section>
 
                 <section className="container mx-auto text-center space-y-10">
-                    <CompetitionsSection />
+                    <CompetitionsTable />
                 </section>
             </main>
         </div>
