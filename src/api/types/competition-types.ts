@@ -19,7 +19,7 @@ export interface IAttendedCompetitionsRequest {
 }
 
 export interface IAttendedCompetition {
-    competitionI: number,
+    competitionId: number,
     competitionName: string,
     text: string,
     awardAmount: number,

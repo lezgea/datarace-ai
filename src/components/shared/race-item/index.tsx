@@ -4,7 +4,7 @@ import Link from "next/link";
 
 // Define the two types of props
 interface IAttendedCompetition {
-    competitionI: number,
+    competitionId: number,
     competitionName: string,
     text: string,
     awardAmount: number,
@@ -31,11 +31,11 @@ type RaceProps = IAttendedCompetition | IRacesItemProps;
 
 
 const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition => {
-    return (props as IAttendedCompetition).competitionI !== undefined;
+    return (props as IAttendedCompetition).competitionId !== undefined;
 };
 
 const RaceItem: React.FC<RaceProps> = (props) => {
-    const id = isAttendedCompetition(props) ? props.competitionI : props.id;
+    const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
     const text = props.text;
     const imageUrl = props.imageUrl || "svg/noimg.svg";
