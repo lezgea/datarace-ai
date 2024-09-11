@@ -42,7 +42,7 @@ export const CompetitionsSection: React.FC = () => {
                     <p className="text-md text-gray-700">Get ready for an exciting race</p>
                 </div>
             </div>
-            <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {competitionsData?.competitions?.map((item, i) => (
                     <RaceItem key={i} {...item} />
                 ))}

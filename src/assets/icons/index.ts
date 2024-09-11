@@ -39,6 +39,7 @@ import CertificateIcon from './certificate.svg';
 import TechIcon from './tech.svg';
 import ZipIcon from './zip.svg';
 import CheckIcon from './check.svg';
+import DownloadIcon from './download.svg';
 
 
 
@@ -56,6 +57,7 @@ export {
     RaceFlag,
 
     // icons
+    DownloadIcon,
     CheckIcon,
     ZipIcon,
     TechIcon,

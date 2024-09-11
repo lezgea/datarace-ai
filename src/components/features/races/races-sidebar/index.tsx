@@ -16,15 +16,6 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
     const fileInputRef = React.useRef<HTMLInputElement>(null);
 
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
-    // const { loading: isFilesLoading } = useSelector((state: RootState) => state.uploads);
-
-
-    const handleFileUploadClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
 
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -38,8 +29,6 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
         };
     }, [setSidebarOpen]);
 
-
-    // if (isFilesLoading) return <Loader />
 
     return (
         <div

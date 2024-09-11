@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
-import { CheckIcon, ZipIcon } from '@assets/icons';
-import { useGetResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
-import { Loader } from '@components/shared';
+import { CheckIcon, DownloadIcon, ZipIcon } from '@assets/icons';
+import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
+
 
 interface FileUploaderProps {
     competitionId?: number,
@@ -32,6 +32,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
         { id: competitionInfo?.id as number },
         { skip: !competitionInfo?.id }
     );
+    const [triggerDownloadResult, { isLoading: isDownloading }] = useLazyDownloadResultQuery();
 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,11 +90,11 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 competitionId: competitionInfo?.id,
                 file: formData,
             }).unwrap();
+            toast.success("Solution has been saved successfully!", { position: "bottom-left" })
             handleFileRemove();
             refetchResult();
-            // onClose();
         } catch (error) {
-            toast.error("Failed to upload the file.", {
+            toast.error("Failed to save the file.", {
                 position: "bottom-left",
             });
             console.error("Upload error: ", error);
@@ -105,6 +106,15 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
 
     const handleSubmit = async () => {
         try {
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
+
+                await saveResult({
+                    competitionId: competitionInfo?.id,
+                    file: formData,
+                }).unwrap();
+            }
             await triggerSubmitResult({ competitionId: competitionInfo?.id as number });
             await refetchCompetitionInfo();
             handleFileRemove();
@@ -118,11 +128,33 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
 
     const handleDownload = async () => {
         try {
-            // await submitResult().unwrap();
-            handleFileRemove();
-            onClose();
+            // Trigger the download result query
+            const result = await triggerDownloadResult({
+                resultFieldId: resultData?.id as number,
+            });
+
+            console.log('@@@@', result)
+            // Ensure we received valid data (assuming the file is returned as a string)
+            if (result.data && typeof result.data === 'string') {
+                // Convert the string into a Blob
+                const blob = new Blob([(result as any).data], { type: 'application/zip' }); // Adjust the MIME type as needed
+                const url = window.URL.createObjectURL(blob);
+
+                // Create an anchor element and trigger the download
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'downloaded_file.zip'); // Adjust file name accordingly
+                document.body.appendChild(link);
+                link.click();
+
+                // Clean up
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(link);
+            } else {
+                throw new Error("No file data received");
+            }
         } catch (error) {
-            toast.error("Failed to download the file.", { position: "bottom-left", });
+            toast.error("Failed to download the file.", { position: "bottom-left" });
             console.error("Download error: ", error);
         }
     };
@@ -138,8 +170,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
         onClose();
     }
 
-    let submitIsDisabled = !resultData?.id || isSaving || isSubmitting
-
+    let submitIsDisabled = !resultData?.id || isSaving || isSubmitting || isFakeUploading
+    let saveIsDisabled = !file || isSaving || isSubmitting || isFakeUploading
 
     return (
         <div className="flex flex-col justify-center items-center h-[300px] space-y-2 mb-40 pt-20">
@@ -155,7 +187,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                                 <p className="text-xs text-gray-500 w-full">{(file?.size / (1024 * 1024)).toFixed(2)} MB</p>
                             }
                         </div>
-                        {((uploadProgress == 100) || resultData?.id) && <CheckIcon className="w-10 h-10" />}
+                        <div className="flex space-x-3 items-center justify-center">
+                            {((uploadProgress == 100) || resultData?.id) && <CheckIcon className="w-10 h-10" />}
+                            {resultData?.id && <DownloadIcon onClick={handleDownload} className="w-6 h-6 cursor-pointer fill-gray-800 hover:fill-primaryLight" />}
+                        </div>
                     </div>
                 }
                 {
@@ -217,13 +252,14 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                     <button
                         onClick={handleSubmit}
                         disabled={submitIsDisabled}
-                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-500' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
+                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
                     >
                         {isSubmitting ? "Uploading..." : "Submit"}
                     </button>
                     <button
                         onClick={handleSave}
-                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-gray-800 hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none rounded-lg sm:w-auto animate-button`}
+                        disabled={saveIsDisabled}
+                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${saveIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-800 hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
                     >
                         {isSaving ? "Saving..." : "Save"}
                     </button>

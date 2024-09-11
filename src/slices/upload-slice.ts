@@ -47,8 +47,7 @@ const uploadSlice = createSlice({
                     state.loading = false;
                     state.progress = 100;
                     state.success = true;
-                    state.message = "Solution has been uploaded successfully!";
-                    toast.success(state.message, { position: "bottom-left" })
+                    state.message = "Solution has been saved successfully!";
                 }
             )
             .addMatcher(
@@ -56,7 +55,7 @@ const uploadSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.progress = 0;
-                    state.error = action.error?.message || 'Failed to upload solution';
+                    state.error = action.error?.message || 'Failed to save the solution';
                     toast.error(state.error, { position: "bottom-left" });
                 }
             );

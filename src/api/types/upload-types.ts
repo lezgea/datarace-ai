@@ -27,6 +27,8 @@ export interface IDownloadResultRequest {
     resultFieldId: number,
 }
 
+export type DownloadResultResponse = Blob;
+
 export interface IProfileImageUploadRequest {
     file: FormData,
 }

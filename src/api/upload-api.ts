@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IMessageResponse } from './types/competition-types';
-import { IDownloadResultRequest, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
+import { DownloadResultResponse, IDownloadResultRequest, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
 
 
 export const uploadApi = createApi({
@@ -21,10 +21,11 @@ export const uploadApi = createApi({
                 method: 'GET',
             }),
         }),
-        downloadResult: builder.query<IMessageResponse, IDownloadResultRequest>({
+        downloadResult: builder.query<DownloadResultResponse, IDownloadResultRequest>({
             query: ({ resultFieldId }) => ({
                 url: `/files/download/result/${resultFieldId}`,
                 method: 'GET',
+                responseHandler: (response: any) => response.blob(),
             }),
         }),
         submitResult: builder.query<IMessageResponse, ISubmitResultRequest>({
@@ -47,6 +48,6 @@ export const {
     useSaveResultMutation,
     useUploadAvatarMutation,
     useGetResultQuery,
-    useDownloadResultQuery,
+    useLazyDownloadResultQuery,
     useLazySubmitResultQuery,
 } = uploadApi;
