@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 interface IUploadState {
     loading: boolean;
     progress: number;
+    id: number,
     error?: string | boolean;
     success?: string | boolean;
     message?: string;
@@ -13,6 +14,7 @@ interface IUploadState {
 const initialState: IUploadState = {
     loading: false,
     progress: 0,
+    id: 0,
     error: false,
     success: false,
     message: '',
@@ -28,10 +30,10 @@ const uploadSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        // UPLOAD RESULT MUTATION
+        // SAVE RESULT MUTATION
         builder
             .addMatcher(
-                uploadApi.endpoints.uploadResult.matchPending,
+                uploadApi.endpoints.saveResult.matchPending,
                 (state) => {
                     state.loading = true;
                     state.progress = 0;
@@ -40,20 +42,103 @@ const uploadSlice = createSlice({
                 }
             )
             .addMatcher(
-                uploadApi.endpoints.uploadResult.matchFulfilled,
+                uploadApi.endpoints.saveResult.matchFulfilled,
                 (state, action) => {
                     state.loading = false;
                     state.progress = 100;
                     state.success = true;
                     state.message = "Solution has been uploaded successfully!";
+                    toast.success(state.message, { position: "bottom-left" })
                 }
             )
             .addMatcher(
-                uploadApi.endpoints.uploadResult.matchRejected,
+                uploadApi.endpoints.saveResult.matchRejected,
                 (state, action) => {
                     state.loading = false;
                     state.progress = 0;
                     state.error = action.error?.message || 'Failed to upload solution';
+                    toast.error(state.error, { position: "bottom-left" });
+                }
+            );
+
+        // GET RESULT QUERY
+        builder
+            .addMatcher(
+                uploadApi.endpoints.getResult.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                    state.success = false;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.getResult.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.success = true;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.getResult.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to fetch solution';
+                    toast.error(state.error, { position: "bottom-left" });
+                }
+            );
+
+        // DOWNLOAD RESULT QUERY
+        builder
+            .addMatcher(
+                uploadApi.endpoints.downloadResult.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                    state.success = false;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.downloadResult.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.success = true;
+                    state.message = "Solution has been downloaded successfully!";
+                    toast.success(state.message, { position: "bottom-left" })
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.downloadResult.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to download the solution';
+                    toast.error(state.error, { position: "bottom-left" });
+                }
+            );
+
+        // SUBMIT RESULT QUERY
+        builder
+            .addMatcher(
+                uploadApi.endpoints.submitResult.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                    state.success = false;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.submitResult.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.success = true;
+                    state.message = "Solution has been submitted successfully!";
+                    toast.success(state.message, { position: "bottom-left" })
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.submitResult.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to submit the solution';
                     toast.error(state.error, { position: "bottom-left" });
                 }
             );

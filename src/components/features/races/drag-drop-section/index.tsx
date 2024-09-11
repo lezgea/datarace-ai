@@ -1,14 +1,14 @@
 "use client"
 
 import React, { useState } from 'react';
-import { useUploadResultMutation } from '@api/upload-api';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import { CheckIcon, ZipIcon } from '@assets/icons';
+import { useSaveResultMutation, useSubmitResultQuery } from '@api/upload-api';
 
 interface FileUploaderProps {
-    competitionId?: number | null,
+    competitionId?: number,
     onClose: () => void,
 }
 
@@ -18,8 +18,12 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
     const [isUploading, setIsUploading] = useState(false);
     const [isFakeUploading, setIsFakeUploading] = useState(false);
 
-    const [uploadResult, { isLoading }] = useUploadResultMutation();
+    const [saveResult, { isLoading }] = useSaveResultMutation();
     const { competitionInfo } = useSelector((state: RootState) => state.competitions);
+    const { refetch: submitResult, isLoading: isSubmitting } = useSubmitResultQuery(
+        { competitionId: competitionInfo?.id as number },
+        { skip: true },
+    );
 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +65,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
     };
 
 
-    const handleUpload = async () => {
+    const handleSave = async () => {
         if (!file) {
             toast.error("Please select a file to upload.");
             return;
@@ -73,14 +77,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
             const formData = new FormData();
             formData.append("file", file);
 
-            await uploadResult({
+            await saveResult({
                 competitionId: competitionInfo?.id,
                 file: formData,
             }).unwrap();
-
-            toast.success("Solution has been uploaded successfully!", {
-                position: "bottom-left",
-            });
 
             handleFileRemove();
             onClose();
@@ -91,6 +91,18 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
             console.error("Upload error: ", error);
         } finally {
             setIsUploading(false);
+        }
+    };
+
+
+    const handleSubmit = async () => {
+        try {
+            await submitResult().unwrap();
+            handleFileRemove();
+            onClose();
+        } catch (error) {
+            toast.error("Failed to submit the file.", { position: "bottom-left", });
+            console.error("Submit error: ", error);
         }
     };
 
@@ -178,8 +190,18 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
 
             <div className="bg-white absolute w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
                 <div className="flex space-x-3 p-5">
-                    <button onClick={handleUpload} disabled={submitIsDisabled} className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-500' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}>
-                        {isUploading ? "Uploading..." : "Submit"}
+                    <button
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-500' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
+                    >
+                        {isSubmitting ? "Uploading..." : "Submit"}
+                    </button>
+                    <button
+                        onClick={handleSave}
+                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all bg-gray-800 hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none rounded-lg sm:w-auto animate-button`}
+                    >
+                        {isUploading ? "Saving..." : "Save"}
                     </button>
                     <button onClick={onCloseSidebar} className="inline-flex w-auto text-center items-center px-10 py-2 text-primary transition-all border border-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none animate-button">
                         Cancel

@@ -9,11 +9,28 @@ export interface IMessageResponse {
     }
 }
 
-export interface IResultUploadRequest {
-    competitionId: number | undefined;
-    file: FormData;
+export interface IResultSaveRequest {
+    competitionId: number | undefined,
+    file: FormData,
+}
+
+export interface IGetResultRequest {
+    competitionId: number | undefined,
+    userId: number,
+}
+
+export interface IGetResultResponse {
+    id: number,
+}
+
+export interface IDownloadResultRequest {
+    resultFieldId: number,
 }
 
 export interface IProfileImageUploadRequest {
-    file: FormData;
+    file: FormData,
+}
+
+export interface ISubmitResultRequest {
+    competitionId: number,
 }

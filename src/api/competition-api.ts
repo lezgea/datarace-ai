@@ -6,6 +6,7 @@ import { ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetiti
 export const competitionApi = createApi({
     reducerPath: 'competitionApi',
     baseQuery: axiosBaseQuery,
+    tagTypes: ['Competition'],
     endpoints: (builder) => ({
         getCompetitions: builder.query<ICompetitionsResponse, ICompetitionsRequest>({
             query: ({ categoryId, data }) => ({
@@ -19,12 +20,14 @@ export const competitionApi = createApi({
                 url: `/competitions/${id}`,
                 method: 'GET',
             }),
+            providesTags: ['Competition'],
         }),
         joinCompetition: builder.mutation<IMessageResponse, ICompetitionInfoRequest>({
             query: ({ id }) => ({
                 url: `/competitions/${id}/join`,
                 method: 'POST',
             }),
+            invalidatesTags: ['Competition'],
         }),
     }),
 });
