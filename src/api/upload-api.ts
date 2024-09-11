@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IMessageResponse } from './types/competition-types';
-import { DownloadResultResponse, IDownloadResultRequest, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
+import { DownloadResultResponse, IDownloadResultRequest, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IProfileImageUploadResponse, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
 
 
 export const uploadApi = createApi({
@@ -34,7 +34,7 @@ export const uploadApi = createApi({
                 method: 'GET',
             }),
         }),
-        uploadAvatar: builder.mutation<IMessageResponse, IProfileImageUploadRequest>({
+        uploadAvatar: builder.mutation<IProfileImageUploadResponse, IProfileImageUploadRequest>({
             query: ({ file }) => ({
                 url: '/files/upload/profile-image',
                 method: 'POST',

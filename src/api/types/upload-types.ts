@@ -33,6 +33,10 @@ export interface IProfileImageUploadRequest {
     file: FormData,
 }
 
+export interface IProfileImageUploadResponse {
+    id: number,
+}
+
 export interface ISubmitResultRequest {
     competitionId: number,
 }

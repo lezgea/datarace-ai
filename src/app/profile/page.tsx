@@ -11,6 +11,7 @@ import withProtectedRoute from '@utils/withProtectedRoute';
 import TabSelects from '@components/shared/tab-selects';
 import { AccountSettings, AttendedRaces } from '@components/features';
 import { useUploadAvatarMutation } from '@api/upload-api';
+import { useUpdateUserMutation } from '@api/user-api';
 
 
 const TABS: { title: string, content: React.ReactNode }[] = [
@@ -30,14 +31,14 @@ const TABS: { title: string, content: React.ReactNode }[] = [
         title: "Settings",
         content: <AccountSettings />,
     },
-]
+];
+
 
 const Profile: React.FC = () => {
-    const [hovering, setHovering] = useState(false);  // State to manage hover effect
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);  // State for selected image file
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);  // State for error messages
+    const [hovering, setHovering] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();  // Use the mutation hook
+    const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.user,
@@ -45,6 +46,7 @@ const Profile: React.FC = () => {
         (state: RootState) => state.user.loading,
         (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
     );
+    const [updateUser, { isLoading: updateLoading, isError: updateError, data }] = useUpdateUserMutation();
 
     const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
@@ -53,39 +55,38 @@ const Profile: React.FC = () => {
         [user?.profileImage]
     );
 
-    // Function to handle file selection and upload
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        const uploadedFile = e.target.files?.[0];
+        if (!uploadedFile) {
+            setErrorMessage("Please select a file to upload.");
+            return;
+        }
 
-            // Validate file type
-            if (!validTypes.includes(file.type)) {
-                setErrorMessage('Only PNG and JPG files are allowed.');
-                setSelectedFile(null);
-                return;
-            }
+        try {
+            const formData = new FormData();
+            formData.append("file", uploadedFile);
 
-            setSelectedFile(file);
-            setErrorMessage(null); // Reset error message if file is valid
+            let response = await uploadAvatar({ file: formData }).unwrap();
+            await updateUser({
+                id: user?.id || '',
+                data: {
+                    profileFileId: response?.id,
+                    fullName: user?.fullName,
+                    email: user?.email,
+                    nickname: user?.nickname,
+                    phoneNumber: user?.phoneNumber,
+                }
+            }).unwrap();
 
-            // Upload the image
-            try {
-                const formData = new FormData();
-                formData.append('file', file);
-
-                const response = await uploadAvatar({ file: formData }).unwrap();
-                console.log('Image uploaded successfully:', response);
-                setErrorMessage(null);
-            } catch (error) {
-                setErrorMessage('Failed to upload the image. Please try again.');
-                console.error('Error during upload:', error);
-            }
+            setErrorMessage(null);
+        } catch (error) {
+            setErrorMessage("Profile image upload failed.");
         }
     };
 
-    if (loading || !isAuthenticated)
+    if (loading || !isAuthenticated) {
         return <ProfileSectionSkeleton />;
+    }
 
     return (
         <div className="min-h-screen flex flex-col p-5">
@@ -107,23 +108,27 @@ const Profile: React.FC = () => {
 
                         {hovering && (
                             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                {/* Label makes the hover area clickable */}
                                 <label
                                     htmlFor="image-upload"
-                                    className="cursor-pointer bg-white text-black px-4 py-2 rounded-lg"
+                                    className="cursor-pointer bg-none text-white text-xs px-4 py-2 border border-1 border-white rounded-full"
                                 >
                                     {isLoading ? 'Uploading...' : 'Upload Image'}
                                 </label>
-                                <input
-                                    id="image-upload"
-                                    type="file"
-                                    className="hidden"
-                                    accept="image/png, image/jpeg"
-                                    onChange={handleImageChange}
-                                    disabled={isLoading}
-                                />
                             </div>
                         )}
+
+                        {/* Invisible input */}
+                        <input
+                            id="image-upload"
+                            type="file"
+                            className="absolute inset-0 opacity-0 cursor-pointer"
+                            accept="image/png, image/jpeg"
+                            onChange={handleImageChange}
+                            disabled={isLoading}
+                        />
                     </div>
+
                     <div className="w-full flex flex-col space-y-5 md:flex-row justify-start md:space-y-0">
                         <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-1">
                             <p className="text-[2rem] font-medium">{user?.fullName}</p>
@@ -144,7 +149,7 @@ const Profile: React.FC = () => {
                     <TabSelects tabs={TABS} />
                 </section>
             </main>
-        </div >
+        </div>
     );
 };
 
