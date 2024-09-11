@@ -24,10 +24,9 @@ const AboutUs: React.FC = () => {
                         <span className="text-lg">&gt;</span>
                         <span>About Us</span>
                     </nav>
-                    <AboutSection title="Who we are" />
-                    <AboutSection title="Guidelines" />
-                    <AboutSection title="Security" />
-                    <AboutSection title="Our team" />
+                    <AboutSection description="Welcome to Datarace, a competitive platform powered by the Azerbaijan Artificial Intelligence Laboratory (AILab). We are dedicated to advancing data science and artificial intelligence by offering a space where enthusiasts, researchers, and professionals can collaborate, compete, and innovate." />
+                    <AboutSection description="Datarace hosts a range of exciting AI competitions, giving participants the chance to solve real-world challenges and showcase their skills. From predictive analytics to cutting-edge machine learning models, these competitions span various AI applications. To motivate and reward excellence, Datarace offers attractive prizes for top performers, driving innovation and pushing the limits of AI technology." />
+                    <AboutSection description="Whether you're a beginner or an expert, Datarace provides the tools and opportunities to accelerate your growth in the AI field. Join us, compete with the best, win prizes, and be part of the future of artificial intelligence!" />
                 </main>
             </div>
         </Suspense>

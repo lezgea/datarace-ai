@@ -25,9 +25,7 @@ const FAQ: React.FC = () => {
                         <span className="text-lg">&gt;</span>
                         <span>FAQ</span>
                     </nav>
-                    <HelpSection title="Account" />
                     <HelpSection title="General" />
-                    <HelpSection title="Datasets" />
                 </main>
             </div>
         </Suspense>

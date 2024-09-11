@@ -18,7 +18,7 @@ export const CompetitionInfoRightSkeleton: React.FC = () => {
             </div>
 
             {/* Tags Skeleton */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
                 <div className="flex space-x-3 mb-5">
                     <div className="h-[30px] w-[2px] bg-primaryLight" />
                     <span className="text-xl font-medium">Tags</span>
@@ -33,10 +33,10 @@ export const CompetitionInfoRightSkeleton: React.FC = () => {
                         />
                     ))}
                 </div>
-            </div>
+            </div> */}
 
             {/* Table of Content Skeleton */}
-            <div className="flex flex-col space-y-3">
+            {/* <div className="flex flex-col space-y-3">
                 <div className="flex space-x-3 mb-3">
                     <div className="h-[30px] w-[2px] bg-primaryLight" />
                     <span className="text-xl font-medium">Table of content</span>
@@ -47,7 +47,7 @@ export const CompetitionInfoRightSkeleton: React.FC = () => {
                         <Skeleton width="120px" height="20px" className="rounded-md" />
                     </div>
                 ))}
-            </div>
+            </div> */}
 
             {/* Join Button Skeleton */}
             <Skeleton width="100%" height="50px" className="rounded-lg" />
