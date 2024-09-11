@@ -83,7 +83,6 @@ const uploadSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to fetch solution';
-                    toast.error(state.error, { position: "bottom-left" });
                 }
             );
 

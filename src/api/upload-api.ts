@@ -48,5 +48,5 @@ export const {
     useUploadAvatarMutation,
     useGetResultQuery,
     useDownloadResultQuery,
-    useSubmitResultQuery,
+    useLazySubmitResultQuery,
 } = uploadApi;
