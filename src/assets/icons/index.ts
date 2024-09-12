@@ -40,6 +40,7 @@ import TechIcon from './tech.svg';
 import ZipIcon from './zip.svg';
 import CheckIcon from './check.svg';
 import DownloadIcon from './download.svg';
+import CheckFilledIcon from './checkfilled.svg';
 
 
 
@@ -57,6 +58,7 @@ export {
     RaceFlag,
 
     // icons
+    CheckFilledIcon,
     DownloadIcon,
     CheckIcon,
     ZipIcon,
