@@ -131,28 +131,28 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                 </div> */}
 
                 {/* Join Button */
-                    // competitionInfo?.joinAvailable &&
-                    // <button
-                    //     onClick={() => setShowModal(true)}
-                    //     className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                    //     aria-label="Join the Race"
-                    // >
-                    //     Join the Race
-                    // </button>
+                    competitionInfo?.joinAvailable &&
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                        aria-label="Join the Race"
+                    >
+                        Join the Race
+                    </button>
                 }
                 {/* Upload Soulution Button */
-                    // competitionInfo?.uploadAvailable &&
-                    // <button
-                    //     onClick={() => setSidebarOpen(true)}
-                    //     className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                    //     aria-label="Join the Race"
-                    // >
-                    //     Upload the Solution
-                    // </button>
+                    competitionInfo?.uploadAvailable &&
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                        aria-label="Join the Race"
+                    >
+                        Upload the Solution
+                    </button>
                 }
                 {/* Submittion Notification for submitted users */
-                    // !competitionInfo?.joinAvailable &&
-                    // !competitionInfo?.uploadAvailable &&
+                    !competitionInfo?.joinAvailable &&
+                    !competitionInfo?.uploadAvailable &&
                     <div className="flex align-center justify-center space-x-3 pt-10">
                         <CheckFilledIcon className="w-10 h-10" />
                         <span className="text-sm text-gray-500">You have already submitted your solution for this competition</span>

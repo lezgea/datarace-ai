@@ -7,6 +7,7 @@ import { RootState } from '@store/store';
 import { CheckIcon, DownloadIcon, ZipIcon } from '@assets/icons';
 import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
+import { ConfirmationModal } from '@components/shared';
 
 
 interface FileUploaderProps {
@@ -15,6 +16,7 @@ interface FileUploaderProps {
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) => {
+    const [askModal, showAskModal] = React.useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isUploading, setIsUploading] = useState(false);
@@ -133,8 +135,6 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 resultFieldId: resultData?.id as number,
             });
 
-            console.log('@@@@', result)
-            // Ensure we received valid data (assuming the file is returned as a string)
             if (result.data && typeof result.data === 'string') {
                 // Convert the string into a Blob
                 const blob = new Blob([(result as any).data], { type: 'application/zip' }); // Adjust the MIME type as needed
@@ -247,10 +247,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 </div>
             </div>
 
-            <div className="bg-white absolute w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
+            <div className="bg-white absolute left-0 w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
                 <div className="flex space-x-3 p-5">
                     <button
-                        onClick={handleSubmit}
+                        onClick={() => showAskModal(true)}
                         disabled={submitIsDisabled}
                         className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
                     >
@@ -268,6 +268,12 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                     </button>
                 </div>
             </div>
+
+            <ConfirmationModal
+                visible={askModal}
+                onConfirm={handleSubmit}
+                onClose={() => showAskModal(false)}
+            />
         </div>
     );
 };
