@@ -10,19 +10,18 @@ export const metadata: Metadata = {
 
 
 const Contact: React.FC = () => {
-    return <Loader />
-    // return (
-    //     <Suspense fallback={<Loader />}>
-    //         <div className="min-h-screen flex flex-col">
-    //             <main className="flex-grow bg-gray-50 py-40">
-    //                 <section className="container mx-auto text-center">
-    //                     <h1 className="text-4xl font-medium mb-4">Contact</h1>
-    //                     <p className="text-lg text-gray-700 mb-8">Some amazing description goes here</p>
-    //                 </section>
-    //             </main>
-    //         </div>
-    //     </Suspense>
-    // );
+    return (
+        <Suspense fallback={<Loader />}>
+            <div className="min-h-screen flex flex-col">
+                <main className="flex-grow bg-gray-50 py-40">
+                    <section className="container mx-auto text-center">
+                        <h1 className="text-4xl font-medium mb-4">Contact</h1>
+                        <p className="text-lg text-gray-700 mb-8">Some amazing description goes here</p>
+                    </section>
+                </main>
+            </div>
+        </Suspense>
+    );
 };
 
 export default Contact;
