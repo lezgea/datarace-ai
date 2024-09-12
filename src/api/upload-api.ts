@@ -25,7 +25,8 @@ export const uploadApi = createApi({
             query: ({ resultFieldId }) => ({
                 url: `/files/download/result/${resultFieldId}`,
                 method: 'GET',
-                responseHandler: (response: any) => response.blob(),
+                headers: { 'Content-Type': 'application/zip' },
+                // responseHandler: (response: any) => response.blob(),
             }),
         }),
         submitResult: builder.query<IMessageResponse, ISubmitResultRequest>({

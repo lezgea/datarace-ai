@@ -6,6 +6,7 @@ interface AxiosBaseQueryArgs {
     url: string;
     method: AxiosRequestConfig['method'];
     data?: any;
+    headers?: any,
     params?: Record<string, any>;
     onUploadProgress?: (progressEvent: AxiosProgressEvent) => void; // Add support for upload progress
 }
@@ -13,7 +14,7 @@ interface AxiosBaseQueryArgs {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async (
-    { url, method, data, params, onUploadProgress },
+    { url, method, data, params, headers, onUploadProgress },
     api,
     extraOptions
 ) => {
@@ -27,6 +28,7 @@ const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async 
             headers: {
                 Authorization: token ? `Bearer ${token}` : undefined,
                 'Content-Type': data instanceof FormData ? 'multipart/form-data' : 'application/json',
+                ...headers,
             },
             onUploadProgress, // Handle progress tracking here
         });

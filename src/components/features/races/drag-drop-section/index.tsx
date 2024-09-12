@@ -8,7 +8,11 @@ import { CheckIcon, DownloadIcon, ZipIcon } from '@assets/icons';
 import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { ConfirmationModal } from '@components/shared';
+import { saveAs } from 'file-saver';
+import Cookies from 'js-cookie';
 
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 interface FileUploaderProps {
     competitionId?: number,
@@ -130,32 +134,23 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
 
     const handleDownload = async () => {
         try {
-            // Trigger the download result query
-            const result = await triggerDownloadResult({
-                resultFieldId: resultData?.id as number,
+            const token = Cookies.get('dtr-token');
+            const response = await fetch(BASE_URL + `/files/download/result/${resultData?.id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/zip',
+                },
             });
 
-            if (result.data && typeof result.data === 'string') {
-                // Convert the string into a Blob
-                const blob = new Blob([(result as any).data], { type: 'application/zip' }); // Adjust the MIME type as needed
-                const url = window.URL.createObjectURL(blob);
-
-                // Create an anchor element and trigger the download
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', 'downloaded_file.zip'); // Adjust file name accordingly
-                document.body.appendChild(link);
-                link.click();
-
-                // Clean up
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(link);
-            } else {
-                throw new Error("No file data received");
+            if (!response.ok) {
+                throw new Error('Failed to download the file');
             }
+
+            const blob = await response.blob();
+            saveAs(blob, 'filename.zip');
         } catch (error) {
-            toast.error("Failed to download the file.", { position: "bottom-left" });
-            console.error("Download error: ", error);
+            console.error('Error downloading the file:', error);
         }
     };
 
