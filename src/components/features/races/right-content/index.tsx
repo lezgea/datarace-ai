@@ -22,6 +22,8 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
 
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
+
     const [joinCompetition, { data, isError, isLoading }] = useJoinCompetitionMutation();
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,9 +150,10 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         aria-label="Join the Race"
                     >
                         Upload the Solution
-                    </button>
+                    </button> 
                 }
                 {/* Submittion Notification for submitted users */
+                    isAuthenticated &&
                     !competitionInfo?.joinAvailable &&
                     !competitionInfo?.uploadAvailable &&
                     <div className="flex align-center justify-center space-x-3 pt-10">
