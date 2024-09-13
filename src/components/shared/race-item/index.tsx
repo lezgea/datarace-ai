@@ -43,7 +43,6 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     const currencySymbol = props.currencySymbol;
     const awardAmount = props.awardAmount;
 
-    console.log(Math.abs(lifeTimeDays as number))
     let endedText = Math.abs(lifeTimeDays as number) > 1 ? `Ended ${Math.abs(lifeTimeDays as number)} days ago` : 'Ended 1 day ago';
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
 

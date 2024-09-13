@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Image from 'next/image';
 import { useLoginUserMutation } from '@api/user-api';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -9,11 +9,13 @@ import * as Yup from 'yup';
 import { FormInput, Loader } from '@components/shared';
 import { toast } from 'react-toastify';
 import { EmailIcon, EyeClosedIcon, EyeIcon, GoogleIcon, } from '@assets/icons';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+
 
 
 interface IFormInput {
@@ -31,8 +33,10 @@ const validationSchema = Yup.object().shape({
 });
 
 
-const SignIn: React.FC = () => {
+const SignInContent: React.FC = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const token = searchParams.get('token');
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.isAuthenticated,
@@ -68,6 +72,17 @@ const SignIn: React.FC = () => {
             }
         }
     };
+
+    React.useEffect(() => {
+        if (token) {
+            router.push('/');
+            Cookies.set('dtr-token', token as string, {
+                secure: process.env.NODE_ENV === 'production',
+                expires: 47 / 24,
+            });
+        }
+    }, [token]);
+
 
     const togglePasswordVisibility = (): void => {
         setShowPassword(!showPassword);
@@ -158,13 +173,14 @@ const SignIn: React.FC = () => {
                             Login
                         </button>
                         <div className="text-center my-4">Or</div>
-                        <button
+                        <Link
+                            href="https://beta.datarace.ai/oauth2/authorization/google"
                             type="button"
                             className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform animate-button"
                         >
                             <GoogleIcon />
                             <span className="font-regmed">Login with Google</span>
-                        </button>
+                        </Link>
                     </form>
                     <p className="mt-6 text-center font-light">
                         Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
@@ -174,5 +190,13 @@ const SignIn: React.FC = () => {
         </div>
     );
 };
+
+const SignIn: React.FC = () => {
+    return (
+        <Suspense fallback={<Loader />}>
+            <SignInContent />
+        </Suspense>
+    )
+}
 
 export default SignIn;
