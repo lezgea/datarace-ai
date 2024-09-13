@@ -15,7 +15,7 @@ export interface ICompetitionsRequest {
 }
 
 export interface IAttendedCompetitionsRequest {
-    data: { page: number, count: number },
+    data: { page: number, count: number, userHasSubmitted?: boolean },
 }
 
 export interface IAttendedCompetition {

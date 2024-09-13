@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import getImgFromBase64 from '@utils/base64toImg';
 import withProtectedRoute from '@utils/withProtectedRoute';
 import TabSelects from '@components/shared/tab-selects';
-import { AccountSettings, AttendedRaces } from '@components/features';
+import { AccountSettings, AttendedRaces, SubmittedProjects } from '@components/features';
 import { useUploadAvatarMutation } from '@api/upload-api';
 import { useUpdateUserMutation } from '@api/user-api';
 
@@ -20,12 +20,12 @@ const TABS: { title: string, content: React.ReactNode }[] = [
         content: <AttendedRaces />,
     },
     {
-        title: "Bookmark",
-        content: <div>Bookmark</div>,
+        title: "Bookmarks",
+        content: <div>Bookmarks</div>,
     },
     {
         title: "Submitted projects",
-        content: <div>Submitted projects</div>,
+        content: <SubmittedProjects />,
     },
     {
         title: "Settings",

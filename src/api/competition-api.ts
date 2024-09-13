@@ -19,7 +19,7 @@ export const competitionApi = createApi({
             query: ({ data }) => ({
                 url: `/competitions/user/page`,
                 method: 'GET',
-                params: { page: data.page, count: data.count, criteria: {} },
+                params: { page: data.page, count: data.count, userHasSubmitted: data.userHasSubmitted, criteria: {}, },
             }),
         }),
         getCompetitionInfo: builder.query<ICompetition, ICompetitionInfoRequest>({
