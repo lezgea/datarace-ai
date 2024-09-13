@@ -32,7 +32,9 @@ export default function RootLayout({
         <ReduxProvider>
           <ToastProvider>
             <Header />
-            {children}
+            <div className="min-h-screen">
+              {children}
+            </div>
             <Footer />
           </ToastProvider>
         </ReduxProvider>

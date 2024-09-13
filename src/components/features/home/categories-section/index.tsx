@@ -29,7 +29,7 @@ export const CategoriesSection: React.FC = () => {
     if (isLoading) {
         return (
             <div className="container mx-auto flex flex-col justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-                {[...Array(5)].map((index) => (
+                {[...Array(5)].map((_, index) => (
                     <RaceSelectSkeleton key={index} />
                 ))}
             </div>

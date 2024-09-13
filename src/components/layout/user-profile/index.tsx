@@ -9,6 +9,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { logout } from '@slices/user-slice';
 import { RootState } from '@store/store';
 import getImgFromBase64 from '@utils/base64toImg';
+import { Turret_Road } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -111,8 +112,7 @@ export const UserProfile: React.FC = () => {
                         src={userImage}
                         alt="Avatar"
                         fill={true}
-                        sizes="(max-width: 768px) 10vw, (max-width: 1200px) 10vw, 10vw"
-                        style={{ objectFit: 'cover' }}
+                        className="object-cover"
                         priority={true}
                     />
                 </div>

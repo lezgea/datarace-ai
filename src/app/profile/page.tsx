@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Loader, ProfileSectionSkeleton } from '@components/shared';
+import { ProfileSectionSkeleton } from '@components/shared';
 import Image from 'next/image';
-import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import getImgFromBase64 from '@utils/base64toImg';
@@ -12,6 +11,7 @@ import TabSelects from '@components/shared/tab-selects';
 import { AccountSettings, AttendedRaces, SubmittedProjects } from '@components/features';
 import { useUploadAvatarMutation } from '@api/upload-api';
 import { useUpdateUserMutation } from '@api/user-api';
+import { truncate } from 'lodash';
 
 
 const TABS: { title: string, content: React.ReactNode }[] = [
@@ -35,20 +35,13 @@ const TABS: { title: string, content: React.ReactNode }[] = [
 
 
 const Profile: React.FC = () => {
-    const [hovering, setHovering] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [hovering, setHovering] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+    const [isClient, setIsClient] = React.useState<boolean>(false);
+    const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.user);
 
     const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();
-
-    const selectAuthData = createSelector(
-        (state: RootState) => state.user.user,
-        (state: RootState) => state.user.isAuthenticated,
-        (state: RootState) => state.user.loading,
-        (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
-    );
     const [updateUser, { isLoading: updateLoading, isError: updateError, data }] = useUpdateUserMutation();
-
-    const { user, isAuthenticated, loading } = useSelector(selectAuthData);
 
     const userImage = React.useMemo(
         () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
@@ -84,6 +77,14 @@ const Profile: React.FC = () => {
         }
     };
 
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+
+    if (!isClient) return null;
+
     if (loading || !isAuthenticated) {
         return <ProfileSectionSkeleton />;
     }
@@ -100,10 +101,9 @@ const Profile: React.FC = () => {
                         <Image
                             src={userImage}
                             alt="Avatar"
-                            layout="fill"
-                            objectFit="cover"
+                            fill={true}
                             className="object-cover"
-                            priority
+                            priority={true}
                         />
 
                         {hovering && (

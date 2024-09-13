@@ -1,19 +1,18 @@
 "use client";
 
-import { useLazyGetAttendedCompetitionsQuery, useLazyGetCompetitionsQuery } from '@api/competition-api';
+import React from 'react';
+import { useLazyGetAttendedCompetitionsQuery } from '@api/competition-api';
 import RaceItem from '@components/shared/race-item';
 import AttendedCompetitionsSkeleton from '@components/shared/skeletons/attended-competitions-skeleton';
 import { RootState } from '@store/store';
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
 
 export const AttendedRaces: React.FC = () => {
-    const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = React.useState(0);
+    const [totalPages, setTotalPages] = React.useState(1);
     const [triggerGetCompetitions, { data: attendedCompetitionsData, error, isLoading }] = useLazyGetAttendedCompetitionsQuery();
 
     const itemsPerPage = 6;
@@ -45,12 +44,12 @@ export const AttendedRaces: React.FC = () => {
     };
 
 
-    if (categoryLoading || competitionLoading || isLoading) {
+    if (competitionLoading || isLoading) {
         return <AttendedCompetitionsSkeleton />;
     }
 
     return (
-        <>
+        <div>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {attendedCompetitionsData?.userCompetitions?.map((item, i) => (
                     <RaceItem key={i} {...item} />
@@ -77,6 +76,6 @@ export const AttendedRaces: React.FC = () => {
                     </button>
                 </div>
             }
-        </>
+        </div>
     );
 };

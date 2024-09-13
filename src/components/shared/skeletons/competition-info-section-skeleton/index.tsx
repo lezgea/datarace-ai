@@ -1,9 +1,11 @@
+"use client"
+
 import React from 'react';
 import Skeleton from '../skeleton';
 
 export const CompetitionInfoSectionSkeleton: React.FC = () => {
     return (
-        <>
+        <div>
             {/* Description Skeleton */}
             <div className="space-y-4">
                 <Skeleton width="150px" height="24px" className="rounded-md" />
@@ -18,7 +20,7 @@ export const CompetitionInfoSectionSkeleton: React.FC = () => {
                 <Skeleton width="100%" height="40px" className="rounded-md" />
                 <Skeleton width="100%" height="40px" className="rounded-md" />
             </div>
-        </>
+        </div>
     );
 };
 

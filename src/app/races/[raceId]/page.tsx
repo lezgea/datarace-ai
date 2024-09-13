@@ -1,21 +1,12 @@
 "use client";
 
 import React, { ReactNode } from 'react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
-import { Loader, Modal } from '@components/shared';
 import { RigthContent } from '@components/features';
-import { CompetitionsSection } from '@components/features/home';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
-import { useParams, useRouter } from 'next/navigation';
-
-// export const metadata: Metadata = {
-//     title: "Race Details | DataRace.ai",
-//     description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
-// };
+import { useParams } from 'next/navigation';
 
 
 const TABS: { title: string, content: ReactNode }[] = [

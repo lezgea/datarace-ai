@@ -3,7 +3,6 @@ import { RootState } from '@store/store';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import DragAndDropSection from '../drag-drop-section';
-import { Loader } from '@components/shared';
 
 
 interface IRacesSidebarProps {
@@ -36,7 +35,7 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
             className={`fixed inset-0 z-20 overflow-hidden bg-[rgba(0,0,0,.5)] top-[65px] transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
             <div
-                className={`fixed top-0 right-0 w-[60%] h-full items-between bg-white shadow-xl py-8 transition-transform transform ${visible ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`fixed top-0 right-0 w-full md:w-[60%] h-full items-between bg-white shadow-xl py-8 transition-transform transform ${visible ? 'translate-x-0' : 'translate-x-full'}`}
                 ref={sidebarRef}
                 onClick={(e) => e.stopPropagation()} // Prevent event propagation
             >

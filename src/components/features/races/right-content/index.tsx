@@ -46,7 +46,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
         }
     }
 
-    if (competitionLoading) return <CompetitionInfoRightSkeleton />
+    // if (competitionLoading) return <CompetitionInfoRightSkeleton />
 
     return (
         <div>
@@ -150,7 +150,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         aria-label="Join the Race"
                     >
                         Upload the Solution
-                    </button> 
+                    </button>
                 }
                 {/* Submittion Notification for submitted users */
                     isAuthenticated &&

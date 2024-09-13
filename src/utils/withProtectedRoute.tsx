@@ -18,9 +18,9 @@ const withProtectedRoute = (WrappedComponent: React.ComponentType) => {
             }
         }, [isAuthenticated, router]);
 
-        if (!isAuthenticated) {
-            return <Loader />
-        }
+        // if (!isAuthenticated) {
+        //     return <Loader />
+        // }
 
         return <WrappedComponent {...props} />;
     };

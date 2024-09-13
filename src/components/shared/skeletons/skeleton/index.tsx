@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import classNames from 'classnames';
 
@@ -27,7 +29,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
                 className
             )}
             style={styles}
-        />
+        ></div>
     );
 };
 
