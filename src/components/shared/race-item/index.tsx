@@ -43,12 +43,16 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     const currencySymbol = props.currencySymbol;
     const awardAmount = props.awardAmount;
 
+    console.log(Math.abs(lifeTimeDays as number))
+    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `Ended ${Math.abs(lifeTimeDays as number)} days ago` : 'Ended 1 day ago';
+    let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
+
     return (
         <Link href={`/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
-                        <p className="text-sm font-regmed">Ends in {lifeTimeDays} days</p>
+                        <p className="text-sm font-regmed">{lifeTimeText}</p>
                     </div>
                     <div className="inline-flex bg-white bg-opacity-50 backdrop-blur-xl p-2 flex-shrink-0 rounded-full">
                         <BookmarkIcon />
