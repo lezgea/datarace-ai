@@ -3,7 +3,7 @@
 exports[`Loader Component renders without errors 1`] = `
 <DocumentFragment>
   <div
-    class="loader-page-wrapper w-screen h-screen bg-white"
+    class="loader-page-wrapper w-screen min-h-screen bg-white/3"
   >
     <div
       class="loader-wrapper"

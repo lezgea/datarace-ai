@@ -32,14 +32,7 @@ export const UserProfile: React.FC = () => {
 
     const loading = useAuthenticate();
 
-    const selectAuthData = createSelector(
-        (state: RootState) => state.user.user,
-        (state: RootState) => state.user.isAuthenticated,
-        (state: RootState) => state.user.loading,
-        (user, isAuthenticated, loading) => ({ user, isAuthenticated, loading })
-    );
-
-    const { user, isAuthenticated, loading: isUserLoading } = useSelector(selectAuthData);
+    const { user, isAuthenticated, loading: isUserLoading } = useSelector((state: RootState) => state.user);
 
     const userImage = React.useMemo(
         () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
