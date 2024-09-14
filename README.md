@@ -14,8 +14,8 @@ DataRace AI is a cutting-edge platform designed for data scientists and AI enthu
 To get started, clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-repo/datarace-ai.git
-cd datarace-ai
+git clone git@github.com:aaicenter/datarace-web-client.git
+cd datarace-web-client
 npm install
 ```
 
