@@ -15,6 +15,8 @@ interface IAttendedCompetition {
     phoneNumber: string | number,
     resultFileId: string,
     imageUrl?: string,
+    t?: (val: string) => string,
+    lng?: string,
 }
 
 interface IRacesItemProps {
@@ -25,6 +27,8 @@ interface IRacesItemProps {
     awardAmount: number | string,
     lifeTimeDays: number | string,
     currencySymbol: string,
+    t?: (val: string) => string,
+    lng?: string,
 }
 
 type RaceProps = IAttendedCompetition | IRacesItemProps;
@@ -35,6 +39,8 @@ const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition 
 };
 
 const RaceItem: React.FC<RaceProps> = (props) => {
+    let lng = props.lng;
+    const t = props.t;
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
     const text = props.text;
@@ -47,7 +53,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
 
     return (
-        <Link href={`/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
+        <Link href={`/${lng}/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">

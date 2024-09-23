@@ -6,7 +6,6 @@ import { StarsIcon } from '@assets/icons';
 import { CategoriesSection } from '@components/features/home/categories-section';
 import { CompetitionsSection } from '@components/features/home';
 import { IParamsLanguage } from 'types/lang-types';
-import { useLanguage } from '@providers/language-provider';
 import { useTranslation } from 'app/i18n';
 
 export const metadata: Metadata = {
@@ -47,7 +46,7 @@ const Home: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
                             {t('description')}
                         </p>
                         <Link
-                            href="/races"
+                            href={`${lng}/races`}
                             className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                             aria-label="See our races"
                         >

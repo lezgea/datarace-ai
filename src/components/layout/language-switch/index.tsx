@@ -8,6 +8,7 @@ const LanguageSwitcher = () => {
     const router = useRouter();
     const pathname = usePathname();  // Current path
     const { lng } = useLanguage();  // Current language from context or state
+    let lngToShow = lng === 'az' ? 'en' : 'az'
 
     const changeLanguage = () => {
         let newLng = (languages[0] === lng) ? languages[1] : languages[0]
@@ -25,7 +26,7 @@ const LanguageSwitcher = () => {
                 onClick={changeLanguage}
                 className={'font-medium border border-[3px] border-primaryLight rounded-full min-w-[40px] min-h-[40px] max-h-[40px] max-w-[40px] flex items-center justify-center'}
             >
-                {lng.toUpperCase()}
+                {lngToShow.toUpperCase()}
             </button>
         </div>
     );

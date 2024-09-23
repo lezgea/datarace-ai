@@ -3,6 +3,7 @@
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
+import { useLanguage } from '@providers/language-provider';
 import { RootState } from '@store/store';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -17,7 +18,14 @@ const CATEGORY_LABELS: Record<number, string> = {
     5: "Technology",
 };
 
-export const CompetitionsTable: React.FC = () => {
+interface ICompetitionsTable {
+    lng?: string,
+    t?: (val: string) => string,
+}
+
+export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
+    const { t, lng } = useLanguage();
+
     const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
     const [currentPage, setCurrentPage] = useState(0);
@@ -72,7 +80,7 @@ export const CompetitionsTable: React.FC = () => {
 
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {competitionsData?.competitions?.map((item, i) => (
-                    <RaceItem key={i} {...item} />
+                    <RaceItem key={i} {...item} lng={lng} />
                 ))}
             </div>
 
@@ -84,7 +92,7 @@ export const CompetitionsTable: React.FC = () => {
                         disabled={currentPage === 0}
                         className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
                     >
-                        Previous
+                        {t('previous')}
                     </button>
                     <span>Page {currentPage + 1} of {totalPages}</span>
                     <button
@@ -92,7 +100,7 @@ export const CompetitionsTable: React.FC = () => {
                         disabled={currentPage >= totalPages - 1}
                         className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
                     >
-                        Next
+                        {t('next')}
                     </button>
                 </div>
             }

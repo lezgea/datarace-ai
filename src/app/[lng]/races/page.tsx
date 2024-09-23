@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { CategoriesSection, CompetitionsSection } from '@components/features/home';
 import { CompetitionsTable } from '@components/features';
+import { useLanguage } from '@providers/language-provider';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 
 const Races: React.FC = () => {
+
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>

@@ -19,12 +19,16 @@ import { useDispatch } from 'react-redux';
 
 
 const DROPDOWN_MENU: { route: string; label: string }[] = [
-    { route: '/profile', label: 'Profile' },
-    { route: '/races', label: 'Races' },
+    { route: '/profile', label: 'profile' },
+    { route: '/races', label: 'races' },
 ];
 
+interface IUserProfileProps {
+    t?: (val: string) => string,
+    lng?: string,
+}
 
-export const UserProfile: React.FC = () => {
+export const UserProfile: React.FC<IUserProfileProps> = ({ t, lng }) => {
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
     const [askModal, setAskModal] = React.useState<boolean>(false);
     const dispatch = useDispatch();
@@ -55,11 +59,11 @@ export const UserProfile: React.FC = () => {
             {DROPDOWN_MENU.map((item, index) => (
                 <Link
                     key={index}
-                    href={item.route}
+                    href={`/${lng}${item.route}`}
                     className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary rounded-md transition-all duration-200 ease-in-out"
                     role="menuitem"
                 >
-                    {item.label}
+                    {t(item.label)}
                 </Link>
             ))}
             <Divider />
@@ -68,7 +72,7 @@ export const UserProfile: React.FC = () => {
                 onClick={() => setAskModal(true)}
                 className="flex w-full text-sm text-medium text-center justify-center px-5 py-2 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none"
             >
-                Sign Out
+                {t('signOut')}
             </button>
         </div>
     );

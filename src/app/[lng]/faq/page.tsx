@@ -4,6 +4,8 @@ import { ExpandableInfoSection, Loader } from '@components/shared';
 import Link from 'next/link';
 import { PlusIcon } from '@assets/icons';
 import { HelpSection } from '@components/features';
+import { IParamsLanguage } from 'types/lang-types';
+import { useTranslation } from 'app/i18n';
 
 
 export const metadata: Metadata = {
@@ -12,20 +14,22 @@ export const metadata: Metadata = {
 };
 
 
-const FAQ: React.FC = () => {
+const FAQ: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
+    const { t } = await useTranslation(lng);
+
     return (
         <Suspense fallback={<Loader />}>
             <div className="min-h-screen flex flex-col">
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
                 <main id="main-content" className="container mx-auto flex-grow px-5 py-10 md:px-0 md:py-[6rem]">
-                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">FAQ</h1>
+                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">{t('faq')}</h1>
                     {/* Breadcrumb */}
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">Main page</Link>
+                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span>FAQ</span>
+                        <span>{t('faq')}</span>
                     </nav>
-                    <HelpSection title="General" />
+                    <HelpSection title="General" t={t} />
                 </main>
             </div>
         </Suspense>
