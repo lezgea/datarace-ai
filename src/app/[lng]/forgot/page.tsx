@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 interface IFormInput {
@@ -22,12 +22,8 @@ interface IFormInput {
 }
 
 
-const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email or nickname is required'),
-});
-
-
 const ForgetPassword: React.FC = () => {
+    const t = useTranslations();
     const lng = useLocale();
     const router = useRouter();
 
@@ -37,6 +33,10 @@ const ForgetPassword: React.FC = () => {
     );
 
     const { isAuthenticated } = useSelector(selectAuthData);
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().required(t('emailNicknameIsRequired')),
+    });
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -87,8 +87,8 @@ const ForgetPassword: React.FC = () => {
                     <a className="flex cursor-pointer justify-center mb-10" href="/">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </a>
-                    <h1 className="text-4xl font-medium">Join the race to AI excellence</h1>
-                    <p className="text-lg text-gray-500">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                    <h1 className="text-4xl font-medium">{t('title')}</h1>
+                    <p className="text-lg text-gray-500">{t('description')}</p>
                 </div>
             </div>
 
@@ -99,12 +99,12 @@ const ForgetPassword: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                     </Link>
                     <div>
-                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Forgot password</h2>
-                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email to restore your password</p>
+                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">{t('forgotPassword')}</h2>
+                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">{t('restorePasswordText')}</p>
                     </div>
                     <form className="space-y-10 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
-                            label='E-mail*'
+                            label={`${t('email')}*`}
                             type='text'
                             name='email'
                             placeholder="example@company.com"
@@ -116,11 +116,11 @@ const ForgetPassword: React.FC = () => {
                             type="submit"
                             className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none transition duration-200 ease-in-out transform"
                         >
-                            Send
+                            {t('send')}
                         </button>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
+                        {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
                     </p>
                 </div>
             </div>

@@ -15,8 +15,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-import { useLocale } from 'next-intl';
-
+import { useLocale, useTranslations } from 'next-intl';
 
 
 interface IFormInput {
@@ -26,15 +25,8 @@ interface IFormInput {
 }
 
 
-const validationSchema = Yup.object().shape({
-    emailOrNickname: Yup.string().required('Email or nickname is required'),
-    password: Yup.string()
-        .required('Password is required')
-        .min(3, 'Password must be at least 3 characters'),
-});
-
-
 const SignInContent: React.FC = () => {
+    const t = useTranslations();
     const lng = useLocale();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -46,6 +38,14 @@ const SignInContent: React.FC = () => {
     );
 
     const { isAuthenticated } = useSelector(selectAuthData);
+
+
+    const validationSchema = Yup.object().shape({
+        emailOrNickname: Yup.string().required(t('emailNicknameIsRequired')),
+        password: Yup.string()
+            .required(t('passwordIsRequired'))
+            .min(3, t('atLeast3Characters')),
+    });
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -109,8 +109,8 @@ const SignInContent: React.FC = () => {
                     <a className="flex cursor-pointer justify-center mb-10" href="/">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </a>
-                    <h1 className="text-4xl font-medium">Join the race to AI excellence</h1>
-                    <p className="text-lg text-gray-500">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                    <h1 className="text-4xl font-medium">{t('title')}</h1>
+                    <p className="text-lg text-gray-500">{t('description')}</p>
                 </div>
             </div>
 
@@ -121,12 +121,12 @@ const SignInContent: React.FC = () => {
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                     </Link>
                     <div>
-                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">Log in</h2>
-                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">Enter your email and password to log in</p>
+                        <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">{t('logIn')}</h2>
+                        <p className="mb-4 text-sm text-gray-600 lg:text-start text-center">{t('enterEmailPasswordToLogIn')}</p>
                     </div>
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
-                            label='E-mail or nickname*'
+                            label={`${t('emailOrNickname')}*`}
                             type='text'
                             name='emailOrNickname'
                             placeholder="example@company.com"
@@ -135,10 +135,10 @@ const SignInContent: React.FC = () => {
                             icon={<EmailIcon />}
                         />
                         <FormInput
-                            label='Password*'
+                            label={`${t('password')}*`}
                             type={showPassword ? "text" : "password"}
                             name='password'
-                            placeholder="Enter password"
+                            placeholder={t('enterPassword')}
                             register={register}
                             errors={errors}
                             onClickIcon={togglePasswordVisibility}
@@ -164,28 +164,28 @@ const SignInContent: React.FC = () => {
                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                 </span>
-                                <span className="ml-2 text-gray-700">Remember me</span>
+                                <span className="ml-2 text-gray-700">{t('rememberMe')}</span>
                             </label>
-                            <Link href={`/${lng}/forgot`} className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">Forgot password</Link>
+                            <Link href={`/${lng}/forgot`} className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('forgotPassword')}</Link>
                         </div>
                         <button
                             type="submit"
                             className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none transition duration-200 ease-in-out transform"
                         >
-                            Login
+                            {t('logIn')}
                         </button>
-                        <div className="text-center my-4">Or</div>
+                        <div className="text-center my-4">{t('or')}</div>
                         <Link
                             href="https://beta.datarace.ai/oauth2/authorization/google"
                             type="button"
                             className="w-full h-[50px] bg-none text-primary py-2 rounded-xl hover:bg-black ring-2 ring-primary hover:ring-black hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:outline-none hover:-tranneutral-y-px focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2 transition duration-200 ease-in-out transform animate-button"
                         >
                             <GoogleIcon />
-                            <span className="font-regmed">Login with Google</span>
+                            <span className="font-regmed">{t('loginWithGoogle')}</span>
                         </Link>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
+                        {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
                     </p>
                 </div>
             </div>

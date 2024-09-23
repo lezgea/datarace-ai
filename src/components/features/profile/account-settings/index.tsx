@@ -14,6 +14,7 @@ import { logout } from '@slices/user-slice';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { ConfirmationModal } from '@components/shared';
+import { useTranslations } from 'next-intl';
 
 
 
@@ -34,6 +35,7 @@ const validationSchema = Yup.object().shape({
 
 
 export const AccountSettings: React.FC = () => {
+    const t = useTranslations();
     const dispatch = useDispatch();
     const router = useRouter();
     const [logoutModal, setLogoutModal] = React.useState<boolean>(false);
@@ -111,14 +113,14 @@ export const AccountSettings: React.FC = () => {
             <div className="space-y-5">
                 <div className="flex items-center border border-gray-300 px-5 py-3 rounded-2xl space-x-5">
                     <WarningIcon className="w-10 h-10" />
-                    <div className="w-full font-medium">Verify your account with your phone number</div>
+                    <div className="w-full font-medium">{t('verifyYourAccount')}</div>
                     <button className="inline-flex min-w-[150px] text-center font-medium items-center justify-center px-6 py-3 text-primaryLight transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
-                        Verify now
+                        {t('verifyNow')}
                     </button>
                 </div>
                 <form className="space-y-4 w-full sm:w-80" onSubmit={handleSubmit(onSubmit)}>
                     <FormEditInput
-                        label='Fullname'
+                        label={t('fullName')}
                         type='string'
                         name='fullName'
                         placeholder="Jon Doe"
@@ -126,7 +128,7 @@ export const AccountSettings: React.FC = () => {
                         errors={errors}
                     />
                     <FormEditInput
-                        label='Username'
+                        label={t('userName')}
                         type='text'
                         name='nickname'
                         placeholder="@nickname"
@@ -135,7 +137,7 @@ export const AccountSettings: React.FC = () => {
                     />
                     <div className="space-y-2">
                         <FormEditInput
-                            label='Contact'
+                            label={t('contact')}
                             type='email'
                             name='email'
                             placeholder="email@example.com"
@@ -153,10 +155,10 @@ export const AccountSettings: React.FC = () => {
 
                     <div className="flex w-full space-x-3 py-4">
                         <button type="submit" className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                            Save
+                            {t('save')}
                         </button>
                         <button type="button" onClick={onCancel} className="flex w-full text-center justify-center px-4 py-2 text-primaryDark transition-all border border-primaryDark rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                            Cancel
+                            {t('cancel')}
                         </button>
                     </div>
                 </form>
@@ -164,14 +166,14 @@ export const AccountSettings: React.FC = () => {
                 <div className="w-full">
                     <div className="flex space-x-3 mb-2">
                         <div className="h-[25px] w-[2px] bg-red" />
-                        <span className="text-lg font-medium">Delete your account</span>
+                        <span className="text-lg font-medium">{t('deleteYourAccount')}</span>
                     </div>
-                    <p className="text-sm mb-4">Canceling account deletion can be changed within 30 days.</p>
+                    <p className="text-sm mb-4">{t('deleteAccDescription')}</p>
                     <button type="button" onClick={() => setDeleteModal(true)} className="mb-10 flex w-full sm:w-40 text-center justify-center px-4 py-2 text-red transition-all border border-red rounded-lg hover:bg-red hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                        Delete
+                        {t('delete')}
                     </button>
                     <button onClick={() => setLogoutModal(true)} className="flex w-full sm:w-40 text-center justify-center px-4 py-2 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                        <span>Sign Out</span>
+                        <span>{t('signOut')}</span>
                     </button>
                 </div>
             </div>

@@ -12,29 +12,33 @@ import { AccountSettings, AttendedRaces, SubmittedProjects } from '@components/f
 import { useUploadAvatarMutation } from '@api/upload-api';
 import { useUpdateUserMutation } from '@api/user-api';
 import { truncate } from 'lodash';
+import { useTranslations } from 'next-intl';
 
-
-const TABS: { title: string, content: React.ReactNode }[] = [
-    {
-        title: "Attended races",
-        content: <AttendedRaces />,
-    },
-    {
-        title: "Bookmarks",
-        content: <div>Bookmarks</div>,
-    },
-    {
-        title: "Submitted projects",
-        content: <SubmittedProjects />,
-    },
-    {
-        title: "Settings",
-        content: <AccountSettings />,
-    },
-];
 
 
 const Profile: React.FC = () => {
+    const t = useTranslations();
+
+    const TABS: { title: string, content: React.ReactNode }[] = [
+        {
+            title: t('attendedRaces'),
+            content: <AttendedRaces />,
+        },
+        {
+            title: t('bookmarks'),
+            content: <div>Bookmarks</div>,
+        },
+        {
+            title: t('submittedProjects'),
+            content: <SubmittedProjects />,
+        },
+        {
+            title: t('settings'),
+            content: <AccountSettings />,
+        },
+    ];
+
+
     const [hovering, setHovering] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const [isClient, setIsClient] = React.useState<boolean>(false);

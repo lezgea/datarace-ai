@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { SignUpForm } from '@components/features';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 
 export const metadata: Metadata = {
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 
 
 const SignUp: React.FC = () => {
+    const t = useTranslations();
+
     return (
         <div className="min-h-screen max-h-screen flex">
             {/* Left side with image */}
@@ -28,8 +31,8 @@ const SignUp: React.FC = () => {
                     <Link className="flex cursor-pointer justify-center mb-10" href="/">
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </Link>
-                    <h1 className="text-4xl font-medium">Join the race to AI excellence</h1>
-                    <p className="text-lg text-gray-500">DataRace is an innovative platform designed to bring data scientists and Al enthusiasts together to compete in data-driven challenges.</p>
+                    <h1 className="text-4xl font-medium">{t('title')}</h1>
+                    <p className="text-lg text-gray-500">{t('description')}</p>
                 </div>
             </div>
 

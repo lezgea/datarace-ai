@@ -4,13 +4,14 @@ import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 
 export const CompetitionsSection: React.FC = () => {
+    const lng = useLocale();
     const t = useTranslations();
 
     const CATEGORY_LABELS: Record<number, string> = {
@@ -51,7 +52,7 @@ export const CompetitionsSection: React.FC = () => {
                 ))}
             </div>
             <div className="flex justify-center">
-                <Link href="/races" className="inline-flex w-auto text-center font-medium items-center px-6 py-3 text-gray-900 transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
+                <Link href={`/${lng}/races`} className="inline-flex w-auto text-center font-medium items-center px-6 py-3 text-gray-900 transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
                     {t('allRaces')}
                     <svg className="rtl:rotate-180 w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />

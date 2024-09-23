@@ -107,5 +107,16 @@
   "deleteYourAccount": "Delete your account",
   "deleteAccDescription": "Canceling account deletion can be changed within 30 days.",
   "delete": "Delete",
-  "signOut": "Sign Out"
+  "signOut": "Sign Out",
+  "emailNicknameIsRequired": "Email or nickname is required",
+  "logIn": "Log in",
+  "enterEmailPasswordToLogIn": "Enter your email and password to log in",
+  "emailOrNickname": "E-mail or nickname",
+  "rememberMe": "Remember me",
+  "loginWithGoogle": "Login with Google",
+  "dontHaveAnAccount": "Don't have an account?",
+  "forgotPassword": "Forgot password",
+  "password": "Password",
+  "restorePasswordText": "Enter your email to restore your password",
+  "send": "Send"
 }

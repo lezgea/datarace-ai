@@ -39,7 +39,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
                     type={type}
                     id={name}
                     placeholder={placeholder}
-                    className={`w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border ${errors[name] ? 'ring-2 ring-red-500' : 'border-gray-300'
+                    className={`w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
                         } rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                     style={inputStyle}
                     {...register(name)}
@@ -50,7 +50,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
             </div>
             {
                 errors[name] && (
-                    <p className="text-red-500 text-sm mt-1">{(errors[name]?.message as string) || ''}</p>
+                    <p className="text-gray-400 text-sm mt-1">{(errors[name]?.message as string) || ''}</p>
                 )
             }
         </div>

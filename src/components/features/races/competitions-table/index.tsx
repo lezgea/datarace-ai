@@ -10,13 +10,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
-const CATEGORY_LABELS: Record<number, string> = {
-    1: "All",
-    2: "Environment",
-    3: "Education",
-    4: "Oil & Industry",
-    5: "Technology",
-};
 
 interface ICompetitionsTable {
     lng?: string,
@@ -34,6 +27,13 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
     const itemsPerPage = 6;
 
+    const CATEGORY_LABELS: Record<number, string> = {
+        1: t('all'),
+        2: "Environment",
+        3: "Education",
+        4: "Oil & Industry",
+        5: "Technology",
+    };
 
     React.useEffect(() => {
         triggerGetCompetitions({
