@@ -10,6 +10,7 @@ import { CloseIcon, HamburgerIcon } from '@assets/icons';
 import { Sidebar } from '../sidebar';
 import { useLanguage } from '@providers/language-provider';
 import { useTranslation } from 'app/i18n';
+import LanguageSwitcher from '../language-switch';
 
 
 
@@ -68,8 +69,9 @@ export const Header: React.FC = () => {
                         {navLinks}
                     </ul>
 
-                    <div className="flex items-center justify-end lg:w-[20%] h-full">
+                    <div className="flex items-center justify-end lg:w-[20%] h-full gap-4">
                         <UserProfile />
+                        <LanguageSwitcher />
                     </div>
                 </nav>
             </header>
