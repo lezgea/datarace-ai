@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
         <div>
             <button
                 onClick={changeLanguage}
-                className={'font-medium border border-[3px] border-primaryLight rounded-full min-w-[40px] min-h-[40px] max-h-[40px] max-w-[40px] flex items-center justify-center'}
+                className={'font-medium border border-[3px] border-primaryLight rounded-full min-w-[40px] min-h-[40px] max-h-[40px] max-w-[40px] flex items-center justify-center hover:bg-primaryLight hover:text-white'}
             >
                 {lngToShow.toUpperCase()}
             </button>

@@ -15,6 +15,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
+import { useLocale } from 'next-intl';
 
 
 
@@ -34,6 +35,7 @@ const validationSchema = Yup.object().shape({
 
 
 const SignInContent: React.FC = () => {
+    const lng = useLocale();
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
@@ -164,7 +166,7 @@ const SignInContent: React.FC = () => {
                                 </span>
                                 <span className="ml-2 text-gray-700">Remember me</span>
                             </label>
-                            <Link href="/forgot" className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">Forgot password</Link>
+                            <Link href={`/${lng}/forgot`} className="!text-gray-700 font-medium hover:!text-primaryLight transition duration-200 ease-in-out transform">Forgot password</Link>
                         </div>
                         <button
                             type="submit"
@@ -183,7 +185,7 @@ const SignInContent: React.FC = () => {
                         </Link>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
+                        Don't have an account? <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>
             </div>

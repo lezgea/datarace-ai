@@ -4,7 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const InstagramIcon = dynamic(() => import('@assets/icons').then(mod => mod.InstagramIcon), { ssr: false });
 const TwitterIcon = dynamic(() => import('@assets/icons').then(mod => mod.TwitterIcon), { ssr: false });
@@ -14,10 +14,11 @@ const LogoWhite = dynamic(() => import('@assets/icons').then(mod => mod.LogoWhit
 
 
 export const Footer: React.FC = () => {
+    const lng = useLocale();
     const t = useTranslations();
     const pathname = usePathname();
 
-    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/activation", "/forgot", "/reset-password"], []);
+    const hideHeaderRoutes = React.useMemo(() => [`/${lng}/sign-in`, `/${lng}/sign-up`, `/${lng}/activation`, `/${lng}/forgot`, `/${lng}/reset-password`], []);
     const shouldHideFooter = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname]);
 
     if (shouldHideFooter) return null;

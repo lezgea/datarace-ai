@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Image from 'next/image';
 import { EmailSent } from '../email-sent';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 interface IFormInput {
@@ -22,6 +22,7 @@ interface IFormInput {
 
 
 export const SignUpForm: React.FC = () => {
+    const lng = useLocale();
     const t = useTranslations();
 
     const [terms, acceptTerms] = React.useState<boolean>(false);
@@ -78,7 +79,7 @@ export const SignUpForm: React.FC = () => {
             </div>
             <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                 <FormInput
-                    label={`${t('email') }*`}
+                    label={`${t('email')}*`}
                     type='email'
                     name='email'
                     placeholder="example@company.com"
@@ -147,7 +148,7 @@ export const SignUpForm: React.FC = () => {
                 </Link>
             </form>
             <p className="mt-6 text-center font-light">
-                {t('haveAnAccount')} <a href="/sign-in" className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signIn')}</a>
+                {t('haveAnAccount')} <a href={`/${lng}/sign-in`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signIn')}</a>
             </p>
         </div>
     )

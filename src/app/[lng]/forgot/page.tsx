@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
+import { useLocale } from 'next-intl';
 
 
 interface IFormInput {
@@ -27,6 +28,7 @@ const validationSchema = Yup.object().shape({
 
 
 const ForgetPassword: React.FC = () => {
+    const lng = useLocale();
     const router = useRouter();
 
     const selectAuthData = createSelector(
@@ -118,7 +120,7 @@ const ForgetPassword: React.FC = () => {
                         </button>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        Don't have an account? <a href="/sign-up" className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
+                        Don't have an account? <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">Sign up</a>
                     </p>
                 </div>
             </div>

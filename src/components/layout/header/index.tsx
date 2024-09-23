@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
     const pathname = usePathname();
     const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
-    const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/activation", "/forgot", "/reset-password"], []);
+    const hideHeaderRoutes = React.useMemo(() => [`/${lng}/sign-in`, `/${lng}/sign-up`, `/${lng}/activation`, `/${lng}/forgot`, `/${lng}/reset-password`], []);
     const shouldHideHeader = hideHeaderRoutes.includes(pathname);
 
 
