@@ -1,4 +1,5 @@
 import { ArrowGreenIcon, BookmarkIcon } from "@assets/icons";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,8 +40,7 @@ const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition 
 };
 
 const RaceItem: React.FC<RaceProps> = (props) => {
-    let lng = props.lng;
-    const t = props.t;
+    let lng = useLocale();
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
     const text = props.text;

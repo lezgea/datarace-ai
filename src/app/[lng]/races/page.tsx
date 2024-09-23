@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { CategoriesSection, CompetitionsSection } from '@components/features/home';
 import { CompetitionsTable } from '@components/features';
-import { useLanguage } from '@providers/language-provider';
+import { useTranslations } from 'next-intl';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 
 const Races: React.FC = () => {
+    const t = useTranslations();
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -19,8 +20,8 @@ const Races: React.FC = () => {
                 <section className="container mx-auto w-full space-y-10">
                     <div className="flex justify-between">
                         <div className="space-y-3">
-                            <h2 className="text-[32px] md:text-[2.3rem]">Choose your <span className="font-medium">Competitions</span></h2>
-                            <p className="text-md text-gray-700">Get ready for an exciting race</p>
+                            <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('chooseYourCompetitions')}</h2>
+                            <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                         </div>
                     </div>
                     <CategoriesSection />

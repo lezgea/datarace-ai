@@ -1,15 +1,16 @@
 import { ExpandableInfoSection } from '@components/shared';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 
 interface IHelpSectionProps {
     title: string,
     items?: [{ title: string, description: string }],
-    t: (val: string) => string,
 }
 
 export const HelpSection: React.FC<IHelpSectionProps> = (props) => {
-    let { title, items, t } = props;
+    let { title, items } = props;
+    const t = useTranslations();
 
     return (
         <section className="py-5 space-y-2">

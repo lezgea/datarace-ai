@@ -4,6 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const InstagramIcon = dynamic(() => import('@assets/icons').then(mod => mod.InstagramIcon), { ssr: false });
 const TwitterIcon = dynamic(() => import('@assets/icons').then(mod => mod.TwitterIcon), { ssr: false });
@@ -13,6 +14,7 @@ const LogoWhite = dynamic(() => import('@assets/icons').then(mod => mod.LogoWhit
 
 
 export const Footer: React.FC = () => {
+    const t = useTranslations();
     const pathname = usePathname();
 
     const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/activation", "/forgot", "/reset-password"], []);
@@ -27,31 +29,31 @@ export const Footer: React.FC = () => {
                     <div className="space-y-6 flex flex-col items-center md:items-start md:pr-40">
                         <LogoWhite aria-hidden="true" />
                         <p className="font-light text-sm">
-                            DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.
+                            {t('footerDescription')}
                         </p>
                     </div>
                     <div className="space-y-6">
-                        <h2 className="font-semibold">Company</h2>
+                        <h2 className="font-semibold">{t('company')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="/about-us" className="hover:text-primary">About</Link>
+                                <Link href="/about-us" className="hover:text-primary">{t('aboutUs')}</Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="hover:text-primary">FAQ</Link>
+                                <Link href="/faq" className="hover:text-primary">{t('faq')}</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">Terms and privacy policy</Link>
+                                <Link href="#" className="hover:text-primary">{t('termsTitle')}</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="space-y-6">
-                        <h2 className="font-semibold">Races</h2>
+                        <h2 className="font-semibold">{t('races')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="/races" className="hover:text-primary">Active races</Link>
+                                <Link href="/races" className="hover:text-primary">{t('activeRaces')}</Link>
                             </li>
                             <li>
-                                <Link href="/courses" className="hover:text-primary">Courses</Link>
+                                <Link href="/courses" className="hover:text-primary">{t('courses')}</Link>
                             </li>
                             <li>
                                 <Link href="#" className="hover:text-primary">Proqram təminatı mühəndisliyi</Link>
@@ -59,16 +61,16 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
                     <div className="space-y-6">
-                        <h2 className="font-semibold">Contact us</h2>
+                        <h2 className="font-semibold">{t('contact')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="#" className="hover:text-primary">Email</Link>
+                                <Link href="#" className="hover:text-primary">{t('email')}</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">Phone</Link>
+                                <Link href="#" className="hover:text-primary">{t('phone')}</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">Address</Link>
+                                <Link href="#" className="hover:text-primary">{t('address')}</Link>
                             </li>
                         </ul>
                     </div>

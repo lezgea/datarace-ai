@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import { useJoinCompetitionMutation } from '@api/competition-api';
 import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 
 interface IRightContentProps {
@@ -17,6 +18,7 @@ interface IRightContentProps {
 export const RigthContent: React.FC<IRightContentProps> = (props) => {
     let { raceId } = props;
 
+    const t = useTranslations();
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [selectedOption, setSelectedOption] = React.useState<string>('option1');
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
@@ -55,7 +57,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                 <div className="space-y-2 mb-auto">
                     <div className="flex space-x-3 mb-5">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
-                        <span className="text-xl font-medium">Prize</span>
+                        <span className="text-xl font-medium">{t('prize')}</span>
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CoinsIcon />
@@ -63,7 +65,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                     </div>
                     <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
                         <CertificateIcon />
-                        <p className="text-md text-primary">Award points & Medals</p>
+                        <p className="text-md text-primary">{t('awardMedals')}</p>
                     </div>
                 </div>
 
@@ -139,7 +141,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                         aria-label="Join the Race"
                     >
-                        Join the Race
+                        {t('joinTheRace')}
                     </button>
                 }
                 {/* Upload Soulution Button */
@@ -149,7 +151,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                         aria-label="Join the Race"
                     >
-                        Upload the Solution
+                        {t('uploadTheSolution')}
                     </button>
                 }
                 {/* Submittion Notification for submitted users */
@@ -158,7 +160,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                     !competitionInfo?.uploadAvailable &&
                     <div className="flex align-center justify-center space-x-3 pt-10">
                         <CheckFilledIcon className="w-10 h-10" />
-                        <span className="text-sm text-gray-500">You have already submitted your solution for this competition</span>
+                        <span className="text-sm text-gray-500">{t('submittedDescription')}</span>
                     </div>
                 }
             </div>
@@ -183,17 +185,19 @@ interface IModalContent {
 const ModalContent: React.FC<IModalContent> = (props) => {
     let { onConfirm } = props;
 
+    const t = useTranslations();
+
     return (
         <div className="flex flex-col max-w-[400px] items-center justify-center p-6 space-y-5 text-center">
             <RaceFlag />
-            <h2 className="text-3xl mx-3">You’re going to join the race</h2>
-            <p>To join the race you have to read the conditions and accept them.</p>
+            <h2 className="text-3xl mx-3">{t('joinTheRaceDescription')}</h2>
+            <p>{t('readAcceptTerms')}</p>
             <button
                 onClick={onConfirm}
                 className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                 aria-label="Join the Race"
             >
-                Continue
+                {t('continue')}
             </button>
         </div>
     )

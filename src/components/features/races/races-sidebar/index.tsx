@@ -3,6 +3,7 @@ import { RootState } from '@store/store';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import DragAndDropSection from '../drag-drop-section';
+import { useTranslations } from 'next-intl';
 
 
 interface IRacesSidebarProps {
@@ -11,6 +12,7 @@ interface IRacesSidebarProps {
 }
 
 export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebarOpen }) => {
+    const t = useTranslations();
     const sidebarRef = React.useRef<HTMLDivElement>(null);
     const fileInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -46,10 +48,9 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
                     <h2 className="text-2xl font-regmed">{competitionInfo?.name}</h2>
                     <p className="text-sm font-light mb-2 truncate-text">{competitionInfo?.text}</p>
                     <Divider />
-                    <h2 className="text-2xl font-regmed text-center">Upload your solution</h2>
+                    <h2 className="text-2xl font-regmed text-center">{t('uploadYourSolution')}</h2>
                     <p className="text-sm mb-2 text-center px-10">
-                        You can upload your solution and submit your project.
-                        Bear in mind you can only submit one solution for each project. Before submission you can save your project and replace file but after submission it will not possible.
+                        {t('uploadSubmitWarning')}
                     </p>
 
                     {/* Hidden file input */}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { PlusIcon } from '@assets/icons';
 import { HelpSection } from '@components/features';
 import { IParamsLanguage } from 'types/lang-types';
-import { useTranslation } from 'app/i18n';
+import { useTranslations } from 'next-intl';
 
 
 export const metadata: Metadata = {
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 
-const FAQ: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
-    const { t } = await useTranslation(lng);
+const FAQ: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
+    const t = useTranslations();
 
     return (
         <Suspense fallback={<Loader />}>
@@ -29,7 +29,7 @@ const FAQ: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
                         <span className="text-lg">&gt;</span>
                         <span>{t('faq')}</span>
                     </nav>
-                    <HelpSection title="General" t={t} />
+                    <HelpSection title={t('general')} />
                 </main>
             </div>
         </Suspense>

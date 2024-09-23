@@ -10,6 +10,7 @@ import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { ConfirmationModal } from '@components/shared';
 import { saveAs } from 'file-saver';
 import Cookies from 'js-cookie';
+import { useTranslations } from 'next-intl';
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
@@ -20,6 +21,7 @@ interface FileUploaderProps {
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) => {
+    const t = useTranslations();
     const [askModal, showAskModal] = React.useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -209,7 +211,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 <div className="flex flex-col text-center h-[100%] items-center justify-center">
                     {file && (uploadProgress == 100) ? (
                         <>
-                            <p className="text-primaryLight mb-4">{file.name} uploaded successfully!</p>
+                            <p className="text-primaryLight mb-4">{file.name} {t('uploadedSuccessfully')}!</p>
                             <button
                                 onClick={handleFileRemove}
                                 className="mb-10 inline-flex w-full sm:w-40 text-center justify-center px-4 py-2 text-white bg-red transition-all border border-red rounded-lg hover:bg-red hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px focus:shadow-none"
@@ -219,7 +221,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                         </>
                     ) : (
                         <div className="space-y-4">
-                            <p className="text-gray-500">Drag and drop files here</p>
+                            <p className="text-gray-500">{t('dragDropFiles')}</p>
                             <p className="text-gray-500 text-lg">OR</p>
                             <input
                                 type="file"
@@ -232,10 +234,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                                 htmlFor="file-upload"
                                 className="inline-flex cursor-pointer w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px focus:shadow-none"
                             >
-                                {resultData?.id ? "Upload New File" : "Browse File"}
+                                {resultData?.id ? t('uploadNewFile') : t('browseFile')}
                             </label>
                             <p className="text-gray-500 text-sm">
-                                Accepted file type .zip (File limit 50MB)
+                                {t('acceptFileLimit')}
                             </p>
                         </div>
                     )}
@@ -249,17 +251,17 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                         disabled={submitIsDisabled}
                         className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
                     >
-                        {isSubmitting ? "Uploading..." : "Submit"}
+                        {isSubmitting ? t('uploading') : t('submit')}
                     </button>
                     <button
                         onClick={handleSave}
                         disabled={saveIsDisabled}
                         className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${saveIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-800 hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
                     >
-                        {isSaving ? "Saving..." : "Save"}
+                        {isSaving ? t('saving') : t('save')}
                     </button>
                     <button onClick={onCloseSidebar} className="inline-flex w-auto text-center items-center px-10 py-2 text-primary transition-all border border-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none animate-button">
-                        Cancel
+                        {t('cancel')}
                     </button>
                 </div>
             </div>

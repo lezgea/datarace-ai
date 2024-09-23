@@ -5,11 +5,10 @@ import { ConfirmationModal, UserProfileSkeleton } from '@components/shared';
 import Divider from '@components/shared/divider';
 import { Dropdown } from '@components/shared/dropdown';
 import { useAuthenticate } from '@hooks/use-auth';
-import { createSelector } from '@reduxjs/toolkit';
 import { logout } from '@slices/user-slice';
 import { RootState } from '@store/store';
 import getImgFromBase64 from '@utils/base64toImg';
-import { Turret_Road } from 'next/font/google';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -24,11 +23,13 @@ const DROPDOWN_MENU: { route: string; label: string }[] = [
 ];
 
 interface IUserProfileProps {
-    t?: (val: string) => string,
-    lng?: string,
+    // t?: (val: string) => string,
+    // lng?: string,
 }
 
-export const UserProfile: React.FC<IUserProfileProps> = ({ t, lng }) => {
+export const UserProfile: React.FC<IUserProfileProps> = () => {
+    const lng = useLocale();
+    const t = useTranslations();
     const [logoutUser, { isLoading, isError, error }] = useLogoutUserMutation();
     const [askModal, setAskModal] = React.useState<boolean>(false);
     const dispatch = useDispatch();
@@ -86,12 +87,12 @@ export const UserProfile: React.FC<IUserProfileProps> = ({ t, lng }) => {
             <div className="flex space-x-3">
                 <Link href="/sign-in">
                     <button type="button" className="inline-flex w-auto text-center items-center px-4 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                        Sign In
+                        {t('signIn')}
                     </button>
                 </Link>
                 <Link href="/sign-up">
                     <button type="button" className="hidden md:inline-flex w-auto text-center items-center px-4 py-2 text-white transition-all bg-gray-800 rounded-lg sm:w-auto hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
-                        Sign Up
+                        {t('signUp')}
                     </button>
                 </Link>
             </div>

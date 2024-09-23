@@ -3,8 +3,8 @@
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
-import { useLanguage } from '@providers/language-provider';
 import { RootState } from '@store/store';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ interface ICompetitionsTable {
 }
 
 export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
-    const { t, lng } = useLanguage();
+    const t = useTranslations();
 
     const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
@@ -73,14 +73,14 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         <>
             <div className="flex justify-between">
                 <div className="w-full space-y-3">
-                    <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">Competitions</span></h2>
-                    <p className="text-md text-gray-700">Get ready for an exciting race</p>
+                    <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">{t('competitions')}</span></h2>
+                    <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                 </div>
             </div>
 
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {competitionsData?.competitions?.map((item, i) => (
-                    <RaceItem key={i} {...item} lng={lng} />
+                    <RaceItem key={i} {...item} />
                 ))}
             </div>
 
@@ -94,7 +94,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
                     >
                         {t('previous')}
                     </button>
-                    <span>Page {currentPage + 1} of {totalPages}</span>
+                    <span>{t('page')} {currentPage + 1} of {totalPages}</span>
                     <button
                         onClick={handleNextPage}
                         disabled={currentPage >= totalPages - 1}

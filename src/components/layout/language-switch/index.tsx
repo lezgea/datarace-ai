@@ -1,17 +1,22 @@
 "use client";
 
+import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
-import { useLanguage } from '@providers/language-provider';  // Assuming you have a provider to track language state
-import { languages } from 'app/i18n/settings';  // Assuming you have defined available languages
+
+
+const LANGS = [
+    { code: 'en', name: 'English' },
+    { code: 'az', name: 'Azerbaijani' },
+];
 
 const LanguageSwitcher = () => {
     const router = useRouter();
     const pathname = usePathname();  // Current path
-    const { lng } = useLanguage();  // Current language from context or state
+    const lng = useLocale();  // Current language from context or state
     let lngToShow = lng === 'az' ? 'en' : 'az'
 
     const changeLanguage = () => {
-        let newLng = (languages[0] === lng) ? languages[1] : languages[0]
+        let newLng = (LANGS[0]?.code === lng) ? LANGS[1]?.code : LANGS[0]?.code
 
         if (newLng === lng) return;  // No need to change if the selected language is already active
 

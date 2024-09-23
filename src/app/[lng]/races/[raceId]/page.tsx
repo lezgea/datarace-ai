@@ -7,28 +7,33 @@ import { GeneralSection } from '@components/features/races/general-section';
 import { RigthContent } from '@components/features';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
-
-const TABS: { title: string, content: ReactNode }[] = [
-    {
-        title: "General overview",
-        content: <GeneralSection />,
-    },
-    {
-        title: "Data",
-        content: <div>Data</div>,
-    },
-    {
-        title: "Rules",
-        content: <div>Rules</div>,
-    }
-]
 
 const RaceDetails: React.FC = () => {
+    const t = useTranslations();
+    const lng = useLocale();
     const params = useParams();
     const { raceId } = params;
     const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
+
+
+
+    const TABS: { title: string, content: ReactNode }[] = [
+        {
+            title: t('generalOverview'),
+            content: <GeneralSection />,
+        },
+        {
+            title: t('data'),
+            content: <div>Data</div>,
+        },
+        {
+            title: t('rules'),
+            content: <div>Rules</div>,
+        }
+    ]
 
 
     return (
@@ -36,9 +41,9 @@ const RaceDetails: React.FC = () => {
             <div className="container mx-auto py-[6rem] space-y-5">
                 {/* Breadcrumb */}
                 <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                    <Link href="/" className="hover:text-primaryLight">Main page</Link>
+                    <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
                     <span className="text-lg">&gt;</span>
-                    <Link href="/races" className="hover:text-primaryLight">Races</Link>
+                    <Link href={`/${lng}/races`} className="hover:text-primaryLight">{t('races')}</Link>
                     <span className="text-lg">&gt;</span>
                     <span>{competitionInfo?.name}</span>
                 </nav>

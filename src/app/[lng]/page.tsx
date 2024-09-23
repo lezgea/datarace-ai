@@ -6,7 +6,7 @@ import { StarsIcon } from '@assets/icons';
 import { CategoriesSection } from '@components/features/home/categories-section';
 import { CompetitionsSection } from '@components/features/home';
 import { IParamsLanguage } from 'types/lang-types';
-import { useTranslation } from 'app/i18n';
+import { useTranslations } from 'next-intl';
 
 export const metadata: Metadata = {
     title: "DataRace.ai",
@@ -21,8 +21,8 @@ const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod =
 
 
 
-const Home: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
-    const { t } = await useTranslation(lng)
+const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
+    const t = useTranslations();
 
     return (
         <div className="min-h-screen flex flex-col">

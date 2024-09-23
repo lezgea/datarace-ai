@@ -4,7 +4,7 @@ import { Loader } from '@components/shared';
 import Link from 'next/link';
 import { AboutSection } from '@components/features/about';
 import { IParamsLanguage } from 'types/lang-types';
-import { useTranslation } from 'app/i18n';
+import { useTranslations } from 'next-intl';
 
 
 export const metadata: Metadata = {
@@ -13,20 +13,20 @@ export const metadata: Metadata = {
 };
 
 
-const AboutUs: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
-    const { t } = await useTranslation(lng);
+const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
+    const t = useTranslations();
 
     return (
         <Suspense fallback={<Loader />}>
             <div className="min-h-screen flex flex-col">
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
                 <main id="main-content" className="container mx-auto flex-grow px-5 py-10 md:px-0 md:py-[6rem]">
-                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">About Us</h1>
+                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">{t('aboutUs')}</h1>
                     {/* Breadcrumb */}
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">Main page</Link>
+                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span>About Us</span>
+                        <span>{t('aboutUs')}</span>
                     </nav>
                     <AboutSection description={t('aboutUsText1')} />
                     <AboutSection description={t('aboutUsText2')} />

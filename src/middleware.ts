@@ -1,36 +1,25 @@
-import acceptLanguage from 'accept-language';
-import { fallbackLng, languages } from 'app/i18n/settings';
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
+import { routing } from './i18n/routing';
 
+// Create middleware
+const intlMiddleware = createMiddleware(routing);
 
-acceptLanguage.languages(languages);
+export default function middleware(req: NextRequest) {
+    const { pathname } = req.nextUrl;
+
+    // Prevent URLs like /en/en/path
+    const localePattern = /^\/(az|en)\/\1/;
+    if (localePattern.test(pathname)) {
+        const correctedPath = pathname.replace(localePattern, '/$1');
+        return NextResponse.redirect(new URL(correctedPath, req.url));
+    }
+
+    // Run the next-intl middleware
+    return intlMiddleware(req);
+}
 
 export const config = {
-  matcher: ['/', '/(en|az)/:path*'],
+    // Match only internationalized pathnames
+    matcher: ['/', '/(az|en)/:path*'],
 };
-
-const cookieName = 'i18next';
-
-export function middleware(req: NextRequest) {
-  let lng;
-  if (req.cookies.has(cookieName)) lng = acceptLanguage.get(req.cookies.get(cookieName)?.value);
-  if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'));
-  if (!lng) lng = fallbackLng;
-
-  NextResponse.redirect(new URL(`/${lng}${req.nextUrl.search}`, req.url));
-
-  if (req.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL(`/${lng}${req.nextUrl.search}`, req.url));
-  }
-
-  if (req.headers.has('referer')) {
-    const refererUrl = new URL(req.headers.get('referer') as string);
-    const lngInReferer = languages.find((l: string) => refererUrl.pathname.startsWith(`/${l}`));
-    const response = NextResponse.next();
-    if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
-    return response;
-  }
-
-  return NextResponse.next();
-}

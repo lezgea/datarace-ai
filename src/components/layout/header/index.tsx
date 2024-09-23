@@ -1,22 +1,20 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UserProfile } from '../user-profile';
-import { useAuthenticate } from '@hooks/use-auth';
 import { CloseIcon, HamburgerIcon } from '@assets/icons';
 import { Sidebar } from '../sidebar';
-import { useLanguage } from '@providers/language-provider';
-import { useTranslation } from 'app/i18n';
+import { useLocale, useTranslations } from 'next-intl';
+import { UserProfile } from '../user-profile';
 import LanguageSwitcher from '../language-switch';
 
 
 
 export const Header: React.FC = () => {
-    const { t, lng } = useLanguage();
-    // const { t } = useTranslation(lng);
+    const lng = useLocale();
+    const t = useTranslations();
     const pathname = usePathname();
     const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -37,7 +35,7 @@ export const Header: React.FC = () => {
                 {pathname === `/${lng}${item.route}` && (
                     <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primaryLight" aria-hidden="true" />
                 )}
-                <Link href={`/${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}>
+                <Link href={`${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}>
                     {item.label}
                 </Link>
             </li>
@@ -70,7 +68,7 @@ export const Header: React.FC = () => {
                     </ul>
 
                     <div className="flex items-center justify-end lg:w-[20%] h-full gap-4">
-                        <UserProfile t={t} lng={lng} />
+                        <UserProfile />
                         <LanguageSwitcher />
                     </div>
                 </nav>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from '../modal';
+import { useTranslations } from 'next-intl';
 
 
 interface IConfirmationModalProps {
@@ -31,26 +32,27 @@ interface IModalContent {
 }
 
 const ModalContent: React.FC<IModalContent> = (props) => {
+    const t = useTranslations();
     let { onConfirm, onClose } = props;
 
     return (
         <div className="flex flex-col max-w-[400px] items-center justify-center p-6 space-y-5 text-center">
-            <h2 className="text-3xl mx-3">Are you sure ?</h2>
-            <p className='font-light'>This action cannot be undone. Are you sure you want to confirm this action?</p>
+            <h2 className="text-3xl mx-3">{t('areYouSure')}</h2>
+            <p className='font-light'>{t('actionCannotBeUndone')}</p>
             <div className="flex space-x-3">
                 <button
                     onClick={onConfirm}
                     className="flex w-full text-center justify-center items-center px-6 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                     aria-label="Join the Race"
                 >
-                    Confirm
+                    {t('confirm')}
                 </button>
                 <button
                     onClick={onClose}
                     className="flex w-full text-center justify-center px-4 py-2 text-primaryDark transition-all border border-primaryDark rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none animate-button"
                     aria-label="Join the Race"
                 >
-                    Cancel
+                    {t('cancel')}
                 </button>
             </div>
         </div>

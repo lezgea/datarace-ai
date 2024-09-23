@@ -4,6 +4,7 @@ import { setSelectedCategory } from '@slices/category-slice';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
 
 
 interface IRaceSelectProps {
@@ -66,6 +67,8 @@ export default RaceSelect
 
 
 const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitionsCount, onClick }) => {
+    const t = useTranslations();
+
     return (
         <div onClick={onClick} className={`lg:min-w-[250px] lg:w-[250px] ${selected ? 'bg-[#FFB54D]' : 'bg-none'} h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#FFB54D] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
@@ -76,7 +79,7 @@ const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitio
                     {name}
                 </p>
                 <p className={`text-md text-gray-400 transition-colors duration-200 ease-in-out group-hover:text-white ${selected ? 'text-white' : 'text-none'}`}>
-                    {competitionsCount} races
+                    {competitionsCount} {t('races').toLowerCase()}
                 </p>
             </div>
         </div>
@@ -84,6 +87,8 @@ const RaceTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitio
 }
 
 const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitionsCount, onClick }) => {
+    const t = useTranslations();
+
     return (
         <div onClick={onClick} className={`lg:min-w-[250px] lg:w-[250px] ${selected ? 'bg-[#419A62]' : 'bg-none'} h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#419A62] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
@@ -94,7 +99,7 @@ const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, com
                     {name}
                 </p>
                 <p className={`text-md text-gray-400 transition-colors duration-200 ease-in-out group-hover:text-white ${selected ? 'text-white' : 'text-none'}`}>
-                    {competitionsCount} races
+                    {competitionsCount} {t('races').toLowerCase()}
                 </p>
             </div>
         </div>
@@ -102,6 +107,8 @@ const EnvironmentTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, com
 }
 
 const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitionsCount, onClick }) => {
+    const t = useTranslations();
+
     return (
         <div onClick={onClick} className={`lg:min-w-[250px] lg:w-[250px] ${selected ? 'bg-[#5D66EA]' : 'bg-none'} h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#5D66EA] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
@@ -112,7 +119,7 @@ const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, compe
                     {name}
                 </p>
                 <p className={`text-md text-gray-400 transition-colors duration-200 ease-in-out group-hover:text-white ${selected ? 'text-white' : 'text-none'}`}>
-                    {competitionsCount} races
+                    {competitionsCount} {t('races').toLowerCase()}
                 </p>
             </div>
         </div>
@@ -120,6 +127,8 @@ const EducationTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, compe
 }
 
 const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitionsCount, onClick }) => {
+    const t = useTranslations();
+
     return (
         <div onClick={onClick} className={`lg:min-w-[250px] lg:w-[250px] ${selected ? 'bg-[#57566D]' : 'bg-none'} h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#57566D] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
@@ -130,7 +139,7 @@ const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, compet
                     {name}
                 </p>
                 <p className={`text-md text-gray-400 transition-colors duration-200 ease-in-out group-hover:text-white ${selected ? 'text-white' : 'text-none'}`}>
-                    {competitionsCount} races
+                    {competitionsCount} {t('races').toLowerCase()}
                 </p>
             </div>
         </div>
@@ -138,6 +147,8 @@ const IndustryTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, compet
 }
 
 const TechTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitionsCount, onClick }) => {
+    const t = useTranslations();
+
     return (
         <div onClick={onClick} className={`lg:min-w-[250px] lg:w-[250px] ${selected ? 'bg-[#774CDC]' : 'bg-none'} h-md px-6 py-4 flex rounded-2xl border border-gray-200 cursor-pointer shadow-sm hover:bg-[#774CDC] transition-all duration-300 ease-in-out transform group`}>
             <div className="flex-shrink-0 transition-all duration-300 ease-in-out transform">
@@ -148,7 +159,7 @@ const TechTypeSelect: React.FC<IRaceSelectProps> = ({ selected, name, competitio
                     {name}
                 </p>
                 <p className={`text-md text-gray-400 transition-colors duration-200 ease-in-out group-hover:text-white ${selected ? 'text-white' : 'text-none'}`}>
-                    {competitionsCount} races
+                    {competitionsCount} {t('races').toLowerCase()}
                 </p>
             </div>
         </div>
