@@ -5,6 +5,9 @@ import { Metadata } from 'next';
 import { StarsIcon } from '@assets/icons';
 import { CategoriesSection } from '@components/features/home/categories-section';
 import { CompetitionsSection } from '@components/features/home';
+import { IParamsLanguage } from 'types/lang-types';
+import { useLanguage } from '@providers/language-provider';
+import { useTranslation } from 'app/i18n';
 
 export const metadata: Metadata = {
     title: "DataRace.ai",
@@ -19,7 +22,9 @@ const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod =
 
 
 
-const Home: React.FC = () => {
+const Home: React.FC<IParamsLanguage> = async ({ params: { lng } }) => {
+    const { t } = await useTranslation(lng)
+
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
@@ -35,18 +40,18 @@ const Home: React.FC = () => {
                         <div className="flex justify-center content-center">
                             <StarsIcon className="hidden md:flex -mt-10 md:-ml-[60px] animate-star" aria-hidden="true" />
                             <h1 className="text-4xl font-semibold text-gray-800">
-                                Join the race to AI excellence
+                                {t('title')}
                             </h1>
                         </div>
                         <p className="text-md text-gray-600">
-                            DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.
+                            {t('description')}
                         </p>
                         <Link
                             href="/races"
                             className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                             aria-label="See our races"
                         >
-                            See our races
+                            {t('seeOurRaces')}
                         </Link>
                     </div>
                     <div className="hidden md:flex items-center justify-end min-w-[20%] animate-right-svg">

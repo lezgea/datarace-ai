@@ -23,8 +23,8 @@ interface IOptions {
   keyPrefix?: string;
 }
 
-export async function useTranslation(lng: string, ns: string | string[], options: IOptions = {}) {
-  const i18nextInstance = await initI18next(lng, ns);
+export async function useTranslation(lng: string, ns?: 'common', options: IOptions = {}) {
+  const i18nextInstance = await initI18next(lng, ns = 'common');
   return {
     t: i18nextInstance.getFixedT(lng, Array.isArray(ns) ? ns[0] : ns, options.keyPrefix),
     i18n: i18nextInstance,

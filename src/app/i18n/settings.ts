@@ -1,7 +1,7 @@
 import { InitOptions } from 'i18next';
 
 export const fallbackLng = 'az';
-export const languages = [fallbackLng, 'en', 'tr', 'ru'];
+export const languages = [fallbackLng, 'en']
 export const defaultNS = 'translation';
 
 export function getOptions(lng = fallbackLng, ns = defaultNS) {

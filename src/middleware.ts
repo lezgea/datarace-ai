@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 acceptLanguage.languages(languages);
 
 export const config = {
-  matcher: '/:lng*',
+  matcher: ['/', '/(en|az)/:path*'],
 };
 
 const cookieName = 'i18next';
@@ -17,6 +17,8 @@ export function middleware(req: NextRequest) {
   if (req.cookies.has(cookieName)) lng = acceptLanguage.get(req.cookies.get(cookieName)?.value);
   if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'));
   if (!lng) lng = fallbackLng;
+
+  NextResponse.redirect(new URL(`/${lng}${req.nextUrl.search}`, req.url));
 
   if (req.nextUrl.pathname === '/') {
     return NextResponse.redirect(new URL(`/${lng}${req.nextUrl.search}`, req.url));

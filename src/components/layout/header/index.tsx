@@ -8,22 +8,27 @@ import { UserProfile } from '../user-profile';
 import { useAuthenticate } from '@hooks/use-auth';
 import { CloseIcon, HamburgerIcon } from '@assets/icons';
 import { Sidebar } from '../sidebar';
+import { useLanguage } from '@providers/language-provider';
+import { useTranslation } from 'app/i18n';
 
-
-const NAV_ROUTES: { route: string; label: string }[] = [
-    { route: '/about-us', label: 'About Us' },
-    { route: '/races', label: 'Races' },
-    { route: '/faq', label: 'FAQ' },
-    { route: '/contact', label: 'Contact' },
-];
 
 
 export const Header: React.FC = () => {
+    const { t, lng } = useLanguage();
+    // const { t } = useTranslation(lng);
     const pathname = usePathname();
     const [isSidebarOpen, setSidebarOpen] = React.useState(false);
 
     const hideHeaderRoutes = React.useMemo(() => ["/sign-in", "/sign-up", "/activation", "/forgot", "/reset-password"], []);
     const shouldHideHeader = hideHeaderRoutes.includes(pathname);
+
+
+    const NAV_ROUTES: { route: string; label: string }[] = [
+        { route: '/about-us', label: t('aboutUs') },
+        { route: '/races', label: t('races') },
+        { route: '/faq', label: t('faq') },
+        { route: '/contact', label: t('contact') },
+    ];
 
     const navLinks = React.useMemo(() => {
         return NAV_ROUTES.map((item, i) => (
@@ -31,7 +36,7 @@ export const Header: React.FC = () => {
                 {pathname === item.route && (
                     <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primaryLight" aria-hidden="true" />
                 )}
-                <Link href={item.route} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
+                <Link href={`/${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === item.route ? 'font-medium' : ''}`}>
                     {item.label}
                 </Link>
             </li>
