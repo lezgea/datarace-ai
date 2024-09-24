@@ -3,3 +3,4 @@ export * from './right-content';
 export * from './races-sidebar';
 export * from './drag-drop-section';
 export * from './competitions-table';
+export * from './score-board-section';

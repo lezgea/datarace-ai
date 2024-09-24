@@ -2,11 +2,13 @@
 
 import { CompetitionInfoSectionSkeleton } from '@components/shared';
 import { RootState } from '@store/store';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
 
 export const GeneralSection: React.FC = () => {
+    const t = useTranslations();
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
     const [isClient, setIsClient] = useState(false);
 
@@ -30,17 +32,17 @@ export const GeneralSection: React.FC = () => {
             <div className="mt-8 space-y-4" >
                 <div>
                     <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        Evaluation <span>+</span>
+                        {t('evaluation')} <span>+</span>
                     </button>
                 </div>
                 <div>
                     <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        FAQ <span>+</span>
+                        {t('faq')} <span>+</span>
                     </button>
                 </div>
                 <div>
                     <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        Citation <span>+</span>
+                        {t('citation')} <span>+</span>
                     </button>
                 </div>
             </div>

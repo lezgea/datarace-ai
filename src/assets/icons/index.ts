@@ -41,6 +41,9 @@ import ZipIcon from './zip.svg';
 import CheckIcon from './check.svg';
 import DownloadIcon from './download.svg';
 import CheckFilledIcon from './checkfilled.svg';
+import ExplorerIcon from './explorer.svg';
+import InnovatorIcon from './innovator.svg';
+import ArchitectIcon from './architect.svg';
 
 
 
@@ -58,6 +61,9 @@ export {
     RaceFlag,
 
     // icons
+    ExplorerIcon,
+    InnovatorIcon,
+    ArchitectIcon,
     CheckFilledIcon,
     DownloadIcon,
     CheckIcon,

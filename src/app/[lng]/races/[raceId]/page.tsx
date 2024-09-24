@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
-import { RigthContent } from '@components/features';
+import { RigthContent, ScoreBoardSection } from '@components/features';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -22,6 +22,10 @@ const RaceDetails: React.FC = () => {
 
     const TABS: { title: string, content: ReactNode }[] = [
         {
+            title: t('scoreBoard'),
+            content: <ScoreBoardSection />,
+        },
+        {
             title: t('generalOverview'),
             content: <GeneralSection />,
         },
@@ -32,7 +36,7 @@ const RaceDetails: React.FC = () => {
         {
             title: t('rules'),
             content: <div>Rules</div>,
-        }
+        },
     ]
 
 
