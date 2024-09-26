@@ -29,11 +29,14 @@ export interface IAttendedCompetition {
     awardAmount: number,
     currencySymbol: string,
     lifeTimeDays: number,
-    fullName?: string,
+    fullName: string,
     nickname: string,
-    phoneNumber?: string | number,
-    resultFileId?: string,
+    phoneNumber: string | number,
+    resultFileId: string,
     imageUrl?: string,
+}
+
+export interface IScoreboard extends IAttendedCompetition {
     profileImageUrl?: string,
     score?: number,
     rank?: number,
@@ -47,7 +50,7 @@ export interface IAttendedCompetitionsResponse {
 }
 
 export interface IScoreboardResponse {
-    userCompetitions: IAttendedCompetition[],
+    userCompetitions: IScoreboard[],
     hasNext: boolean,
     lastPageNumber: number,
     totalElements: number,
