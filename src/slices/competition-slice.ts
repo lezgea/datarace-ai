@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { competitionApi } from '@api/competition-api';
-import { IAttendedCompetitionsResponse, ICompetition, ICompetitionsResponse, IMessageResponse } from '@api/types/competition-types';
+import { IAttendedCompetitionsResponse, ICompetition, ICompetitionsResponse, IMessageResponse, IScoreboardResponse } from '@api/types/competition-types';
 import { toast } from 'react-toastify';
 
 
 interface ICompetitionState {
     attended: IAttendedCompetitionsResponse | [],
+    scoreboard: IScoreboardResponse | [],
     competitions: ICompetitionsResponse | [],
     competitionInfo: ICompetition | null,
     selectedCompetition: number,
@@ -18,6 +19,7 @@ interface ICompetitionState {
 const initialState: ICompetitionState = {
     attended: [],
     competitions: [],
+    scoreboard: [],
     competitionInfo: null,
     selectedCompetition: 1,
     loading: false,
@@ -77,6 +79,30 @@ const competitionSlice = createSlice({
             )
             .addMatcher(
                 competitionApi.endpoints.getAttendedCompetitions.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to fetch competitions';
+                }
+            );
+
+        // GET SCOREBOARD QUERY
+        builder
+            .addMatcher(
+                competitionApi.endpoints.getScoreBoard.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getScoreBoard.matchFulfilled,
+                (state, action: PayloadAction<IScoreboardResponse>) => {
+                    state.loading = false;
+                    state.scoreboard = action.payload;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.getScoreBoard.matchRejected,
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to fetch competitions';

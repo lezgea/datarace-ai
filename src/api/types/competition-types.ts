@@ -18,6 +18,10 @@ export interface IAttendedCompetitionsRequest {
     data: { page: number, count: number, userHasSubmitted?: boolean },
 }
 
+export interface IScoreboardRequest {
+    data: { page: number, count: number, competitionId?: string | number },
+}
+
 export interface IAttendedCompetition {
     competitionId: number,
     competitionName: string,
@@ -25,14 +29,24 @@ export interface IAttendedCompetition {
     awardAmount: number,
     currencySymbol: string,
     lifeTimeDays: number,
-    fullName: string,
+    fullName?: string,
     nickname: string,
-    phoneNumber: string | number,
-    resultFileId: string,
+    phoneNumber?: string | number,
+    resultFileId?: string,
     imageUrl?: string,
+    profileImageUrl?: string,
+    score?: number,
+    rank?: number,
 }
 
 export interface IAttendedCompetitionsResponse {
+    userCompetitions: IAttendedCompetition[],
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
+}
+
+export interface IScoreboardResponse {
     userCompetitions: IAttendedCompetition[],
     hasNext: boolean,
     lastPageNumber: number,

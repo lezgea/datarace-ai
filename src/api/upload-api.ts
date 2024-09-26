@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IMessageResponse } from './types/competition-types';
-import { DownloadResultResponse, IDownloadResultRequest, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IProfileImageUploadResponse, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
+import { DownloadResultResponse, IDownloadResultRequest, IGetDatasetRequest, IGetDatasetResponse, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IProfileImageUploadResponse, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
 
 
 export const uploadApi = createApi({
@@ -21,9 +21,23 @@ export const uploadApi = createApi({
                 method: 'GET',
             }),
         }),
+        getDataset: builder.query<IGetDatasetResponse, IGetDatasetRequest>({
+            query: ({ competitionId }) => ({
+                url: `/files/data/${competitionId}`,
+                method: 'GET',
+            }),
+        }),
         downloadResult: builder.query<DownloadResultResponse, IDownloadResultRequest>({
             query: ({ resultFieldId }) => ({
                 url: `/files/download/result/${resultFieldId}`,
+                method: 'GET',
+                headers: { 'Content-Type': 'application/zip' },
+                // responseHandler: (response: any) => response.blob(),
+            }),
+        }),
+        downloadData: builder.query<DownloadResultResponse, IDownloadResultRequest>({
+            query: ({ dataFieldId }) => ({
+                url: `/files/download/data/${dataFieldId}`,
                 method: 'GET',
                 headers: { 'Content-Type': 'application/zip' },
                 // responseHandler: (response: any) => response.blob(),
@@ -50,5 +64,7 @@ export const {
     useUploadAvatarMutation,
     useGetResultQuery,
     useLazyDownloadResultQuery,
+    useLazyDownloadDataQuery,
     useLazySubmitResultQuery,
+    useLazyGetDatasetQuery,
 } = uploadApi;

@@ -1,44 +1,55 @@
 "use client";
 
-import { ArchitectIcon, ExplorerIcon, InnovatorIcon } from '@assets/icons';
+import { useLazyGetScoreBoardQuery } from '@api/competition-api';
 import { CompetitionInfoSectionSkeleton } from '@components/shared';
 import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
-
-const data = [
-    {
-        id: 1,
-        branch: '1',
-        user: { name: 'John Doe', img: '' },
-        level: <ArchitectIcon className="h-10 w-10" />,
-        membership: '3 month',
-        role: 'role'
-    },
-    {
-        id: 2,
-        branch: '2',
-        user: { name: 'Jane Smith', img: '' },
-        level: <ExplorerIcon className="h-10 w-10" />,
-        membership: '3 month',
-        role: 'role'
-    },
-    {
-        id: 3,
-        branch: '3',
-        user: { name: 'Bob Johnson', img: '' },
-        level: <InnovatorIcon className="h-10 w-10" />,
-        membership: '3 month',
-        role: 'role'
-    },
-];
 
 export const ScoreBoardSection: React.FC = () => {
     const t = useTranslations();
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
     const [isClient, setIsClient] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
+    const [triggerGetScoreBoard, { data: scoreBoardData, error, isLoading }] = useLazyGetScoreBoardQuery();
+
+    const itemsPerPage = 10;
+
+
+    React.useEffect(() => {
+        triggerGetScoreBoard({
+            data: { page: currentPage, count: itemsPerPage, competitionId: competitionInfo?.id },
+        }).then((response) => {
+            if (response?.data?.totalElements) {
+                setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
+            } else {
+                setTotalPages(1)
+            }
+        });
+    }, [currentPage, triggerGetScoreBoard, competitionInfo?.id]);
+
+
+    React.useEffect(() => {
+        setCurrentPage(0);
+    }, []);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages - 1) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
+
 
     useEffect(() => {
         setIsClient(true);  // This ensures the code runs only on the client side
@@ -46,64 +57,68 @@ export const ScoreBoardSection: React.FC = () => {
 
     if (!isClient) return null; // Avoid rendering on the server to prevent mismatch
 
-    if (competitionLoading) return <CompetitionInfoSectionSkeleton />
 
     return (
         <Suspense fallback={<CompetitionInfoSectionSkeleton />}>
-            <div className='flex gap-5 mb-5'>
-                <div className='flex inline-flex items-center border border-gray-300 rounded-2xl py-4 px-5 gap-3'>
-                    <ExplorerIcon />
-                    <div>
-                        <h3 className='font-semibold text-lg'>Explorer</h3>
-                        <p className='text-sm'>180 racer</p>
-                    </div>
-                </div>
-                <div className='flex inline-flex items-center border border-gray-300 rounded-2xl py-4 px-5 gap-3'>
-                    <InnovatorIcon />
-                    <div>
-                        <h3 className='font-semibold text-lg'>Innovator</h3>
-                        <p className='text-sm'>180 racer</p>
-                    </div>
-                </div>
-                <div className='flex inline-flex items-center border border-gray-300 rounded-2xl py-4 px-5 gap-3'>
-                    <ArchitectIcon />
-                    <div>
-                        <h3 className='font-semibold text-lg'>Architect</h3>
-                        <p className='text-sm'>180 racer</p>
-                    </div>
-                </div>
-            </div>
+
             <div className="overflow-x-auto">
                 <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
                     {/* Table Header */}
                     <thead className="text-gray-600">
                         <tr>
-                            <th className="py-3 px-6 text-left font-semibold">Branch</th>
-                            <th className="py-3 px-6 text-left font-semibold">Name</th>
-                            <th className="py-3 px-6 text-left font-semibold">Level</th>
-                            {/* <th className="py-3 px-6 text-left font-semibold">Membership</th> */}
-                            <th className="py-3 px-6 text-left font-semibold">Role</th>
+                            <th className="py-3 px-6 text-left font-semibold">Rank</th>
+                            <th className="py-3 px-6 text-left font-semibold">User</th>
+                            <th className="py-3 px-6 text-left font-semibold">Score</th>
                         </tr>
                     </thead>
 
                     {/* Table Body */}
                     <tbody>
-                        {data.map((row, index) => (
+                        {scoreBoardData?.userCompetitions.map((row, index) => (
                             <tr
-                                key={row.id}
+                                key={row.competitionId}
                                 className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                                     }`}
                             >
-                                <td className="py-3 px-6">{row.branch}</td>
-                                <td className="py-3 px-6">{row.user.name}</td>
-                                <td className="py-3 px-6">{row.level}</td>
-                                {/* <td className="py-3 px-6">{row.membership}</td> */}
-                                <td className="py-3 px-6">{row.role}</td>
+                                <td className="py-3 px-6">{row.rank}</td>
+                                <td className="flex items-center py-3 px-6 space-x-2">
+                                    <Image
+                                        src={row.profileImageUrl || '/png/user.png'}
+                                        alt={row.nickname}
+                                        className='w-[30px] h-[30px] rounded-full'
+                                        width={10}
+                                        height={10}
+                                    />
+                                    <div>{row.nickname}</div>
+                                </td>
+                                <td className="py-3 px-6">{row.score}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+
+            {/* Pagination Controls */
+                !!scoreBoardData?.totalElements &&
+                <div className="flex justify-between items-center mt-6">
+                    <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPage === 0}
+                        className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                    >
+                        {t('previous')}
+                    </button>
+                    <span>{t('page')} {currentPage + 1} of {totalPages}</span>
+                    <button
+                        onClick={handleNextPage}
+                        disabled={currentPage >= totalPages - 1}
+                        className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                    >
+                        {t('next')}
+                    </button>
+                </div>
+            }
         </Suspense>
     )
 }

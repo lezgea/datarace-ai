@@ -23,8 +23,21 @@ export interface IGetResultResponse {
     id: number,
 }
 
+export interface IDataset {
+    id: number | undefined,
+    fileName: string,
+}
+
+export interface IGetDatasetRequest {
+    competitionId: number | undefined,
+}
+
+export interface IGetDatasetResponse extends Array<IDataset> { }
+
+
 export interface IDownloadResultRequest {
-    resultFieldId: number,
+    resultFieldId?: number,
+    dataFieldId?: number,
 }
 
 export type DownloadResultResponse = Blob;
