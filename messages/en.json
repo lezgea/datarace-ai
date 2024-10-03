@@ -118,5 +118,6 @@
   "forgotPassword": "Forgot password",
   "password": "Password",
   "restorePasswordText": "Enter your email to restore your password",
-  "send": "Send"
+  "send": "Send",
+  "accept": "Accept"
 }

@@ -118,5 +118,6 @@
   "forgotPassword": "Şifrəni unutmusunuz",
   "password": "Şifrə",
   "restorePasswordText": "Şifrənizi bərpa etmək üçün e-mailinizi daxil edin",
-  "send": "Göndər"
+  "send": "Göndər",
+  "accept": "Qəbul et"
 }
