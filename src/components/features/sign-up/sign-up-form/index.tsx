@@ -247,7 +247,7 @@ const TermsModalContent: React.FC<ITermsModalContent> = (props) => {
                     <strong className="font-medium">2.2.</strong> Əgər İstifadəçi daxil edilmiş dəyişikliklərlə razı deyilsə, o Portaldan istifadəni dayandıra bilər. Əgər İstifadəçi Portaldan istifadə etməyə davam edirsə, o, dəyişiklilərlə razılaşmış sayılır və bütün dəyişiklikləri və Məxfilik qaydasının yeni redaksiyasını bütövlükdə qəbul etmiş hesab edilir.
                 </p>
             </div>
-            <div className="flex w-full space-x-3 absolute bg-white p-4 bottom-0">
+            <div className="flex w-full space-x-3 absolute bg-white p-4 bottom-0 rounded-xl">
                 <button onClick={onConfirm} className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                     {t('accept')}
                 </button>

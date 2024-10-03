@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
         <>
             <header className="backdrop-blur-xl bg-white/60 w-full fixed z-30 h-[65px] border-b border-gray-200 select-none">
                 <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-3 py-0 h-full space-x-5 md:px-0">
-                    <div className="flex items-center cursor-pointer lg:w-[20%] space-x-3 lg:space-x-0">
+                    <div className="flex items-center cursor-pointer lg:w-[25%] space-x-3 lg:space-x-0">
                         <div className="w-[30px] ml-3 flex lg:hidden">
                             {
                                 isSidebarOpen
@@ -63,11 +63,11 @@ export const Header: React.FC = () => {
                         </Link>
                     </div>
 
-                    <ul className="hidden lg:flex space-x-10 items-center">
+                    <ul className="hidden lg:flex lg:text-sm xl:text-md space-x-10 items-center">
                         {navLinks}
                     </ul>
 
-                    <div className="flex items-center justify-end lg:w-[20%] h-full gap-4">
+                    <div className="flex items-center justify-end lg:w-[30%] h-full gap-4">
                         <UserProfile />
                         <LanguageSwitcher />
                     </div>

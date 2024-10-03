@@ -119,5 +119,12 @@
   "password": "Password",
   "restorePasswordText": "Enter your email to restore your password",
   "send": "Send",
-  "accept": "Accept"
+  "accept": "Accept",
+  "contactDescription": "Feel free to share your questions and suggestions with us.",
+  "contactInformation": "Contact Information",
+  "emailAddress": "Email Address",
+  "socialLinks": "Social Media Links",
+  "subject": "Subject",
+  "message": "Message",
+  "nameAndSurname": "Name and Surname"
 }
