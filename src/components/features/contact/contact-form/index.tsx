@@ -69,7 +69,7 @@ export const ContactForm: React.FC = () => {
     return (
         <div className="w-full mx-auto animate-right-svg">
             <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex space-x-5">
+                <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 md:space-y-0">
                     <FormInput
                         label={`${t('nameAndSurname')}*`}
                         type='email'

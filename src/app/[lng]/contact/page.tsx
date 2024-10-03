@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
             <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 lg:px-0 lg:py-[7rem] space-y-20">
-                <section className="container flex flex-col md:flex-row mx-auto w-full justify-between">
+                <section className="container flex flex-col lg:flex-row mx-auto w-full justify-between space-y-20 lg:space-y-0">
                     <div className="justify-between space-y-[50px]">
                         <div className="space-y-3">
                             <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('contact')}</h2>
@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex w-[50%]">
+                    <div className="flex lg:w-[50%]">
                         <ContactForm />
                     </div>
                 </section>
