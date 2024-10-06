@@ -24,7 +24,7 @@ export interface IGetResultResponse {
 }
 
 export interface IDataset {
-    id: number | undefined,
+    dataFileId: number,
     fileName: string,
 }
 

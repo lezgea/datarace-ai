@@ -75,11 +75,11 @@ export const DataSets: React.FC = () => {
                     <tbody>
                         {dataSet?.map((row, index) => (
                             <tr
-                                key={row.id}
+                                key={row.dataFileId}
                                 className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                                     }`}
                             >
-                                <td className="py-3 px-6">{row.id}</td>
+                                <td className="py-3 px-6">{row.dataFileId}</td>
                                 <td className="w-full py-3 px-6">{row.fileName}</td>
                                 <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer">
                                     Download
