@@ -9,12 +9,14 @@ import { useRegisterUserMutation } from '@api/user-api';
 import { toast } from 'react-toastify';
 // import { EmailSent } from '../email-sent';
 import { useLocale, useTranslations } from 'next-intl';
+import { useSendContactDetailsMutation } from '@api/contact-api';
 
 
 interface IFormInput {
+    fullName: string;
     email: string;
-    password: string;
-    confirmation: string;
+    subject: string;
+    message: string;
 }
 
 
@@ -22,21 +24,11 @@ export const ContactForm: React.FC = () => {
     const lng = useLocale();
     const t = useTranslations();
 
-    const [terms, acceptTerms] = React.useState<boolean>(false);
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
-    const [emailSent, showEmailSent] = React.useState<boolean>(false);
-    const [termsModal, setTermsModal] = React.useState<boolean>(false);
-
     const validationSchema = Yup.object().shape({
-        email: Yup.string()
-            .email(t('invalidEmail'))
-            .required(t('emailIsRequired')),
-        password: Yup.string()
-            .required(t('passwordIsRequired'))
-            .min(3, t('atLeast3Characters')),
-        confirmation: Yup.string()
-            .required(t('passwordConfirmationIsRequired'))
-            .oneOf([Yup.ref('password')], t('passwordMustMatch')),
+        fullName: Yup.string().required(t('Full name is required')),
+        email: Yup.string().email(t('invalidEmail')).required(t('emailIsRequired')),
+        subject: Yup.string().required(t('Subject is required')),
+        message: Yup.string().required(t('Message is required')),
     });
 
 
@@ -46,20 +38,17 @@ export const ContactForm: React.FC = () => {
     });
 
     // RTK Query mutation hook
-    const [registerUser, { isLoading, error }] = useRegisterUserMutation();
+    const [sendContactDetails, { isLoading, error }] = useSendContactDetailsMutation()
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        // try {
-        //     await registerUser(data).unwrap();
-        //     showEmailSent(true);
-        // } catch (err: any) {
-        //     console.error('Unknown error:', err);
-        //     toast.error(err.data?.message || 'An unexpected error occurred');
-        // }
-    };
-
-    const togglePasswordVisibility = (): void => {
-        setShowPassword(!showPassword);
+        try {
+            console.log('@@@@@')
+            await sendContactDetails(data).unwrap();
+            // showEmailSent(true);
+        } catch (err: any) {
+            console.error('Unknown error:', err);
+            toast.error(err.data?.message || 'An unexpected error occurred');
+        }
     };
 
 
@@ -72,8 +61,8 @@ export const ContactForm: React.FC = () => {
                 <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 md:space-y-0">
                     <FormInput
                         label={`${t('nameAndSurname')}*`}
-                        type='email'
-                        name='email'
+                        type='text'
+                        name='fullName'
                         placeholder="Jhon Doe"
                         register={register}
                         errors={errors}
@@ -90,7 +79,7 @@ export const ContactForm: React.FC = () => {
                 <FormInput
                     label={`${t('subject')}*`}
                     type="text"
-                    name='confirmation'
+                    name='subject'
                     placeholder={t('subject')}
                     register={register}
                     errors={errors}
@@ -98,7 +87,7 @@ export const ContactForm: React.FC = () => {
                 <FormInput
                     isTextarea={true}
                     label={`${t('message')}*`}
-                    name='confirmation'
+                    name='message'
                     placeholder={t('message')}
                     register={register}
                     errors={errors}
