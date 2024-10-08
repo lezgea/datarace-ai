@@ -8,14 +8,29 @@ const intlMiddleware = createMiddleware(routing);
 export default function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
-    // Prevent URLs like /en/en/path
-    const localePattern = /^\/(az|en)\/\1/;
+    // Define locales and the default locale
+    const locales = ['az', 'en'];
+    const defaultLocale = 'en';
+
+    // Regular expression to prevent duplicate locales
+    const localePattern = new RegExp(`^/(az|en)(/\\1)+`);
+
+    // Check for duplicate locales in the path
     if (localePattern.test(pathname)) {
         const correctedPath = pathname.replace(localePattern, '/$1');
         return NextResponse.redirect(new URL(correctedPath, req.url));
     }
 
-    // Run the next-intl middleware
+    // Split the pathname into segments
+    const segments = pathname.split('/').filter(Boolean); // Filter out empty segments
+
+    // If the pathname does not start with a locale, prepend the default locale
+    if (segments.length === 0 || !locales.includes(segments[0])) {
+        const correctedPath = `/${defaultLocale}${pathname}`;
+        return NextResponse.redirect(new URL(correctedPath, req.url));
+    }
+
+    // Proceed to the next middleware if it starts with a valid locale
     return intlMiddleware(req);
 }
 

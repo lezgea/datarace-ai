@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
                 {pathname === `/${lng}${item.route}` && (
                     <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primaryLight" aria-hidden="true" />
                 )}
-                <Link href={`${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}>
+                <Link href={`/${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}>
                     {item.label}
                 </Link>
             </li>
