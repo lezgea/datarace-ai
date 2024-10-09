@@ -6,6 +6,10 @@ import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+import { saveAs } from 'file-saver';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 
 export const DataSets: React.FC = () => {
@@ -50,6 +54,29 @@ export const DataSets: React.FC = () => {
     };
 
 
+    const handleDownload = async (fileName: string, dataFileId: number) => {
+        try {
+            const token = Cookies.get('dtr-token');
+            const response = await fetch(BASE_URL + `/files/download/data/${dataFileId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'text/csv', // Update to the appropriate content type for CSV
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to download the file');
+            }
+
+            const blob = await response.blob();
+            saveAs(blob, `${fileName}`); // Change the file extension to .csv
+        } catch (error) {
+            console.error('Error downloading the file:', error);
+        }
+    };
+
+
     useEffect(() => {
         setIsClient(true);  // This ensures the code runs only on the client side
     }, []);
@@ -81,7 +108,7 @@ export const DataSets: React.FC = () => {
                             >
                                 <td className="py-3 px-6">{row.dataFileId}</td>
                                 <td className="w-full py-3 px-6">{row.fileName}</td>
-                                <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer">
+                                <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" onClick={() => handleDownload(row.fileName, row.dataFileId)}>
                                     Download
                                 </td>
                             </tr>
