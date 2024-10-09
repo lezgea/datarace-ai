@@ -6,3 +6,4 @@ export * from './skeletons';
 export * from './expandable-info-section';
 export * from './modal';
 export * from './confirmation-modal';
+export * from './dataset-item';

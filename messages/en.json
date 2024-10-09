@@ -126,5 +126,7 @@
   "socialLinks": "Social Media Links",
   "subject": "Subject",
   "message": "Message",
-  "nameAndSurname": "Name and Surname"
+  "nameAndSurname": "Name and Surname",
+  "datasets": "Datasets",
+  "allDatasets": "All datasets"
 }

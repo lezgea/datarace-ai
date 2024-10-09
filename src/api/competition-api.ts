@@ -24,7 +24,7 @@ export const competitionApi = createApi({
         }),
         getScoreBoard: builder.query<IScoreboardResponse, IScoreboardRequest>({
             query: ({ data }) => ({
-                url: `/competitions/page`,
+                url: `/competitions/score/page`,
                 method: 'GET',
                 params: { page: data.page, count: data.count, competitionId: data.competitionId },
             }),
