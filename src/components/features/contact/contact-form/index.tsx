@@ -25,14 +25,14 @@ export const ContactForm: React.FC = () => {
     const t = useTranslations();
 
     const validationSchema = Yup.object().shape({
-        fullName: Yup.string().required(t('Full name is required')),
+        fullName: Yup.string().required('Full name is required'),
         email: Yup.string().email(t('invalidEmail')).required(t('emailIsRequired')),
-        subject: Yup.string().required(t('Subject is required')),
-        message: Yup.string().required(t('Message is required')),
+        subject: Yup.string().required('Subject is required'),
+        message: Yup.string().required('Message is required'),
     });
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur',
     });
@@ -42,12 +42,13 @@ export const ContactForm: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            console.log('@@@@@')
             await sendContactDetails(data).unwrap();
-            // showEmailSent(true);
+            toast.success("We have received your data and will get back to you shortly!");
+            reset();
         } catch (err: any) {
             console.error('Unknown error:', err);
             toast.error(err.data?.message || 'An unexpected error occurred');
+            console.log('@@@@', err)
         }
     };
 
