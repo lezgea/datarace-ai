@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 
-export const DataSets: React.FC = () => {
+export const Datasets: React.FC = () => {
     const t = useTranslations();
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
     const [isClient, setIsClient] = useState(false);

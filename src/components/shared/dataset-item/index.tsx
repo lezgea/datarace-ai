@@ -1,4 +1,4 @@
-import { ArrowGreenIcon, BookmarkIcon } from "@assets/icons";
+import { ArrowGreenIcon, BookmarkIcon, HeartIcon } from "@assets/icons";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,7 +58,7 @@ const DatasetItem: React.FC<RaceProps> = (props) => {
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
 
     return (
-        <Link href={`/${lng}/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
+        <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     {/* <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
@@ -78,18 +78,31 @@ const DatasetItem: React.FC<RaceProps> = (props) => {
                     priority={true}
                 />
             </div>
-            <div className="flex flex-col p-8 space-y-3 text-start items-between">
-                <div className="">
-                    <h3 className="text-xl font-medium text-customBlue-900">Euismod lacus eu leo arcu leo ultrices morbi nisl.</h3>
-                    <p className="text-md text-gray-500 truncate-text">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                    <p className="text-md text-gray-500 truncate-text">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+            <div className="flex flex-col p-8 space-y-5 text-start items-between">
+                <div className="space-y-2">
+                    <h3 className="text-xl font-medium text-customBlue-900 mb-3">Euismod lacus eu leo arcu leo ultrices morbi nisl.</h3>
+                    <p className="text-md text-gray-500 truncate-text">by <strong>Name Surname</strong></p>
+                    <p className="text-md text-gray-500 truncate-text font-light">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                    <div className="flex aitems-center justify-between">
+                        <p className="text-md text-gray-500 truncate-text">Usability <strong>9.4</strong>, 1MB</p>
+                        <p className="text-md text-gray-500 truncate-text font-light">1 File (CSV)</p>
+                    </div>
                     {/* <p className="text-md text-gray-500 truncate-text">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> */}
                 </div>
                 <div className="flex justify-between items-center">
-                    {/* <p className="text-[1.5rem] text-customBlue-900">{currencySymbol} {awardAmount}</p> */}
-                    {/* <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primaryLight group-active:scale-100">
-                        <ArrowGreenIcon />
-                    </div> */}
+                    <div className="flex items-center gap-2">
+                        <HeartIcon />
+                        <div>24</div>
+                    </div>
+                    <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
+                        <Image
+                            src={"/png/user.png"}
+                            alt="Avatar"
+                            fill={true}
+                            className="object-cover"
+                            priority={true}
+                        />
+                    </div>
                 </div>
             </div>
         </Link>

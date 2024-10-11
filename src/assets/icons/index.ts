@@ -44,6 +44,7 @@ import CheckFilledIcon from './checkfilled.svg';
 import ExplorerIcon from './explorer.svg';
 import InnovatorIcon from './innovator.svg';
 import ArchitectIcon from './architect.svg';
+import HeartIcon from './heart.svg';
 
 
 
@@ -61,6 +62,7 @@ export {
     RaceFlag,
 
     // icons
+    HeartIcon,
     ExplorerIcon,
     InnovatorIcon,
     ArchitectIcon,

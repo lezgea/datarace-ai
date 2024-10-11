@@ -128,5 +128,7 @@
   "message": "Message",
   "nameAndSurname": "Name and Surname",
   "datasets": "Datasets",
-  "allDatasets": "All datasets"
+  "allDatasets": "All datasets",
+  "createDataset": "Create Dataset",
+  "downloadDataset": "Download Dataset"
 }

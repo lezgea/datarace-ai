@@ -66,9 +66,9 @@ const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                     <CompetitionsSection />
                 </section>
 
-                {/* <section className="container mx-auto space-y-10">
+                <section className="container mx-auto space-y-10">
                     <DatasetsSection />
-                </section> */}
+                </section>
             </main>
         </div>
     );
