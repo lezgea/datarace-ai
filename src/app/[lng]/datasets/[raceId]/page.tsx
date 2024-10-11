@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
-import { DataSets, RigthContent, ScoreBoardSection } from '@components/features';
+import { DatasetsSection, RigthContent, ScoreBoardSection } from '@components/features';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -23,7 +23,7 @@ const DatasetDetails: React.FC = () => {
     const TABS: { title: string, content: ReactNode }[] = [
         {
             title: t('data'),
-            content: <DataSets />,
+            content: <DatasetsSection />,
         },
         {
             title: t('generalOverview'),
