@@ -79,24 +79,24 @@ export const MyDatasetsTable: React.FC<ICompetitionsTable> = () => {
             </div>
 
             {/* Pagination Controls */
-                !!competitionsData?.totalCount &&
-                <div className="flex justify-between items-center mt-6">
-                    <button
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 0}
-                        className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('previous')}
-                    </button>
-                    <span>{t('page')} {currentPage + 1} of {totalPages}</span>
-                    <button
-                        onClick={handleNextPage}
-                        disabled={currentPage >= totalPages - 1}
-                        className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('next')}
-                    </button>
-                </div>
+                // !!competitionsData?.totalCount &&
+                // <div className="flex justify-between items-center mt-6">
+                //     <button
+                //         onClick={handlePreviousPage}
+                //         disabled={currentPage === 0}
+                //         className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                //     >
+                //         {t('previous')}
+                //     </button>
+                //     <span>{t('page')} {currentPage + 1} of {totalPages}</span>
+                //     <button
+                //         onClick={handleNextPage}
+                //         disabled={currentPage >= totalPages - 1}
+                //         className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
+                //     >
+                //         {t('next')}
+                //     </button>
+                // </div>
             }
         </>
     );

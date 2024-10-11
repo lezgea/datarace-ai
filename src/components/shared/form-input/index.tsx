@@ -3,7 +3,7 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 
 interface IFormInputProps {
-    label: string;
+    label?: string;
     type?: string;
     placeholder: string;
     errors: FieldErrors;
@@ -34,9 +34,12 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
     return (
         <div className="relative w-full">
             <div className="relative">
-                <label htmlFor={name} className="block text-gray-700 mb-2" style={labelStyle}>
-                    {label}
-                </label>
+                {
+                    !!label &&
+                    <label htmlFor={name} className="block text-gray-700 mb-2" style={labelStyle}>
+                        {label}
+                    </label>
+                }
                 {
                     isTextarea
                         ?

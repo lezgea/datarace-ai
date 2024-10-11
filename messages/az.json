@@ -73,6 +73,8 @@
   "uploadSuccessfully": "Yüklənmə uğurla başa çatdı",
   "dragDropFiles": "Faylları bura sürükləyib yerləşdirin",
   "acceptFileLimit": "Qəbul edilən fayl formatı .zip (Limit 50MB)",
+  "acceptFileLimitCsv": "Qəbul edilən fayl formatı .csv (Limit 5MB)",
+  "acceptImageFileLimit": "Qəbul edilən fayl formatı .png .jpg .webp (Limit 2MB)",
   "uploadNewFile": "Yeni fayl yükləyin",
   "browseFile": "Faylı göstərin",
   "uploading": "Yüklənmə...",

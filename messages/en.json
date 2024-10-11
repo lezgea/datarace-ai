@@ -73,6 +73,8 @@
   "uploadSuccessfully": "uploaded successfully",
   "dragDropFiles": "Drag and drop files here",
   "acceptFileLimit": "Accepted file type .zip (File limit 50MB)",
+  "acceptFileLimitCsv": "Accepted file type .csv (File limit 5MB)",
+  "acceptImageFileLimit": "Accepted file type .png .jpg .webp (File limit 2MB)",
   "uploadNewFile": "Upload New File",
   "browseFile": "Browse File",
   "uploading": "Uploading...",
@@ -130,5 +132,6 @@
   "datasets": "Datasets",
   "allDatasets": "All datasets",
   "createDataset": "Create Dataset",
-  "downloadDataset": "Download Dataset"
+  "downloadDataset": "Download Dataset",
+  "myDatasets": "My Datasets"
 }
