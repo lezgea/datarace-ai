@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import TabSelects from '@components/shared/tab-selects';
 import { GeneralSection } from '@components/features/races/general-section';
-import { DataSets, RigthContent, ScoreBoardSection } from '@components/features';
+import { DatasetsSection, RigthContent, ScoreBoardSection } from '@components/features';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -18,12 +18,10 @@ const RaceDetails: React.FC = () => {
     const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
 
-
-
     const TABS: { title: string, content: ReactNode }[] = [
         {
             title: t('data'),
-            content: <DataSets />,
+            content: <DatasetsSection />,
         },
         {
             title: t('generalOverview'),
