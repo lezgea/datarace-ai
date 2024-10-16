@@ -1,93 +1,49 @@
+import { IDataset } from "@api/types/dataset-types";
 import { ArrowGreenIcon, BookmarkIcon, HeartIcon } from "@assets/icons";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 
-const DATASETS = [
-
-]
-
-// Define the two types of props
-interface IAttendedCompetition {
-    competitionId: number,
-    competitionName: string,
-    text: string,
-    awardAmount: number,
-    currencySymbol: string,
-    lifeTimeDays: number,
-    fullName: string,
-    nickname: string,
-    phoneNumber: string | number,
-    resultFileId: string,
-    imageUrl?: string,
-    t?: (val: string) => string,
-    lng?: string,
-}
-
-interface IRacesItemProps {
-    id: number | string,
-    name: string,
-    text: string,
-    imageUrl?: string | null,
-    awardAmount: number | string,
-    lifeTimeDays: number | string,
-    currencySymbol: string,
-    t?: (val: string) => string,
-    lng?: string,
-}
-
-type RaceProps = IAttendedCompetition | IRacesItemProps;
+type DatasetProps = IDataset;
 
 
-const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition => {
-    return (props as IAttendedCompetition).competitionId !== undefined;
-};
-
-const DatasetItem: React.FC<RaceProps> = (props) => {
+const DatasetItem: React.FC<DatasetProps> = (props) => {
     let lng = useLocale();
-    const id = isAttendedCompetition(props) ? props.competitionId : props.id;
-    const name = isAttendedCompetition(props) ? props.competitionName : props.name;
-    const text = props.text;
-    const imageUrl = props.imageUrl || "svg/noimg.svg";
-    const lifeTimeDays = props.lifeTimeDays;
-    const currencySymbol = props.currencySymbol;
-    const awardAmount = props.awardAmount;
 
-    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `Ended ${Math.abs(lifeTimeDays as number)} days ago` : 'Ended 1 day ago';
-    let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
+    let { id, title, description, visibility, userDto } = props
+    const imageUrl = props.imageUrl || "svg/noimg.svg";
+
 
     return (
         <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
-                <div className="absolute z-10 flex justify-between items-center w-full p-4">
-                    {/* <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
-                        <p className="text-sm font-regmed">{lifeTimeText}</p>
+                {
+                    !!visibility &&
+                    <div className="absolute z-10 flex justify-between items-center w-full p-4">
+                        <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
+                            <p className={`text-sm text-white px-3 py-1 rounded-md font-regmed ${visibility === 'PRIVATE' ? 'bg-black' : 'bg-blue-300'}`}>{visibility}</p>
+                        </div>
                     </div>
-                    <div className="inline-flex bg-white bg-opacity-50 backdrop-blur-xl p-2 flex-shrink-0 rounded-full">
-                        <BookmarkIcon />
-                    </div> */}
-                </div>
-
+                }
                 <Image
-                    src={'/png/dataset1.png'}
+                    src={imageUrl}
                     height="300"
                     width="300"
                     className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110 h-[15rem] object-cover"
-                    alt={name}
+                    alt={title}
                     priority={true}
                 />
             </div>
             <div className="flex flex-col p-8 space-y-5 text-start items-between">
                 <div className="space-y-2">
-                    <h3 className="text-xl font-medium text-customBlue-900 mb-3">Euismod lacus eu leo arcu leo ultrices morbi nisl.</h3>
-                    <p className="text-md text-gray-500 truncate-text">by <strong>Name Surname</strong></p>
-                    <p className="text-md text-gray-500 truncate-text font-light">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                    <h3 className="text-xl font-medium text-customBlue-900 mb-3">{title}</h3>
+                    <p className="text-md text-gray-500 truncate-text">by <strong>{userDto?.fullName}</strong></p>
+                    <p className="text-md text-gray-500 truncate-text font-light">{description}</p>
                     <div className="flex aitems-center justify-between">
                         <p className="text-md text-gray-500 truncate-text">Usability <strong>9.4</strong>, 1MB</p>
                         <p className="text-md text-gray-500 truncate-text font-light">1 File (CSV)</p>
                     </div>
-                    {/* <p className="text-md text-gray-500 truncate-text">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p> */}
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">

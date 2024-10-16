@@ -1,14 +1,13 @@
 "use client";
 
-import { useLazyGetCompetitionsQuery } from '@api/competition-api';
-import DatasetItem from '@components/shared/dataset-item';
-import RaceItem from '@components/shared/race-item';
-import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
+import React, { useState } from 'react';
+import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
 import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
+import DatasetItem from '@components/shared/dataset-item';
+import { NoData } from '@components/shared';
 
 
 
@@ -20,25 +19,15 @@ interface ICompetitionsTable {
 export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
     const t = useTranslations();
 
-    const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
-    const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
+    const { loading: datasetsLoading } = useSelector((state: RootState) => state.datasets);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
-    const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
+    const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
 
     const itemsPerPage = 6;
 
-    const CATEGORY_LABELS: Record<number, string> = {
-        1: t('all'),
-        2: "Environment",
-        3: "Education",
-        4: "Oil & Industry",
-        5: "Technology",
-    };
-
     React.useEffect(() => {
-        triggerGetCompetitions({
-            categoryId: selectedCategory,
+        triggerGetDatasets({
             data: { page: currentPage, count: itemsPerPage },
         }).then((response) => {
             if (response?.data?.totalCount) {
@@ -47,12 +36,8 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
                 setTotalPages(1)
             }
         });
-    }, [currentPage, selectedCategory, triggerGetCompetitions]);
+    }, [currentPage, triggerGetDatasets]);
 
-
-    React.useEffect(() => {
-        setCurrentPage(0);
-    }, [selectedCategory]);
 
     const handleNextPage = () => {
         if (currentPage < totalPages - 1) {
@@ -66,20 +51,25 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         }
     };
 
-    if (categoryLoading || competitionLoading || isLoading) {
+
+    if (datasetsLoading || isLoading) {
         return <CompetitionsSkeleton />;
+    }
+
+    if (!datasetsLoading && !isLoading && !datasetsData?.userDatasets?.length) {
+        return <NoData />
     }
 
     return (
         <>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {competitionsData?.competitions?.map((item, i) => (
+                {datasetsData?.userDatasets?.map((item, i) => (
                     <DatasetItem key={i} {...item} />
                 ))}
             </div>
 
             {/* Pagination Controls */
-                !!competitionsData?.totalCount &&
+                !!datasetsData?.totalCount &&
                 <div className="flex justify-between items-center mt-6">
                     <button
                         onClick={handlePreviousPage}

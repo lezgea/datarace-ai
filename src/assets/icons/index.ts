@@ -45,6 +45,7 @@ import ExplorerIcon from './explorer.svg';
 import InnovatorIcon from './innovator.svg';
 import ArchitectIcon from './architect.svg';
 import HeartIcon from './heart.svg';
+import NoDataSvg from './no-data.svg';
 
 
 
@@ -60,6 +61,7 @@ export {
     Teamwork,
     Failed,
     RaceFlag,
+    NoDataSvg,
 
     // icons
     HeartIcon,
