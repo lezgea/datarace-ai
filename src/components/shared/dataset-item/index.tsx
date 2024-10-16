@@ -19,10 +19,10 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
         <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
                 {
-                    !!visibility &&
+                    !!visibility && visibility === 'PRIVATE' &&
                     <div className="absolute z-10 flex justify-between items-center w-full p-4">
-                        <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
-                            <p className={`text-sm text-white px-3 py-1 rounded-md font-regmed ${visibility === 'PRIVATE' ? 'bg-black' : 'bg-blue-300'}`}>{visibility}</p>
+                        <div className={`inline-flex px-4 py-2 bg-black bg-opacity-70 backdrop-blur-xl flex-shrink-0 rounded-xl`}>
+                            <p className={`text-sm text-white rounded-md font-regmed`}>{visibility}</p>
                         </div>
                     </div>
                 }

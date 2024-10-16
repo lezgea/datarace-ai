@@ -30,8 +30,8 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         triggerGetDatasets({
             data: { page: currentPage, count: itemsPerPage },
         }).then((response) => {
-            if (response?.data?.totalCount) {
-                setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
+            if (response?.data?.totalElements) {
+                setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
             } else {
                 setTotalPages(1)
             }
@@ -69,7 +69,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
             </div>
 
             {/* Pagination Controls */
-                !!datasetsData?.totalCount &&
+                !!datasetsData?.totalElements &&
                 <div className="flex justify-between items-center mt-6">
                     <button
                         onClick={handlePreviousPage}

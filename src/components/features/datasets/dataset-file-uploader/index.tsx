@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
-import { CheckIcon, DownloadIcon, ZipIcon } from '@assets/icons';
+import { CheckIcon, DocUpload, DownloadIcon, ZipIcon } from '@assets/icons';
 import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { ConfirmationModal } from '@components/shared';
@@ -20,7 +20,7 @@ interface FileUploaderProps {
     onClose: () => void,
 }
 
-const DatasetUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) => {
+const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) => {
     const t = useTranslations();
     const [askModal, showAskModal] = React.useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
@@ -49,17 +49,6 @@ const DatasetUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }
             setFile(uploadedFile);
             setUploadProgress(0);
             startFakeUpload();
-        }
-    };
-
-
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        const droppedFile = event.dataTransfer.files[0];
-        if (droppedFile) {
-            setFile(droppedFile);
-            setUploadProgress(0);
-            startFakeUpload(); // Start fake upload on drop
         }
     };
 
@@ -157,6 +146,55 @@ const DatasetUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }
     };
 
 
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const uploadedFile = event.target.files?.[0];
+        if (uploadedFile) {
+            try {
+                const formData = new FormData();
+                formData.append("file", uploadedFile);
+
+                await uploadOriginalFile({
+                    competitionId: competitionId,
+                    file: formData,
+                }).unwrap();
+                toast.success("Solution has been saved successfully!")
+            } catch (error) {
+                toast.error("Failed to save the file.", {
+                    position: "bottom-left",
+                });
+                console.error("Upload error: ", error);
+            } finally {
+
+            }
+        }
+    };
+
+    const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        const droppedFile = event.dataTransfer.files[0];
+        if (droppedFile) {
+            try {
+                const formData = new FormData();
+                formData.append("file", droppedFile);
+
+                await uploadOriginalFile({
+                    competitionId: competitionId,
+                    file: formData,
+                }).unwrap();
+                toast.success("Solution has been saved successfully!", { position: "bottom-left" });
+
+            } catch (error) {
+                toast.error("Failed to save the file.", {
+                    position: "bottom-left",
+                });
+                console.error("Upload error: ", error);
+            } finally {
+
+            }
+        }
+    };
+
+
     const handleFileRemove = () => {
         setFile(null);
         setUploadProgress(0);
@@ -201,78 +239,41 @@ const DatasetUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }
                 }
             </div>
 
-            {/* )} */}
             <div
-                className={`w-full h-full p-6 border-dashed border-2 rounded-xl ${isFakeUploading || isUploading ? 'border-primaryLight bg-primaryExtra' : 'border-gray-300 bg-white'
-                    }`}
+                className={`w-full h-full p-6 border rounded-2xl border-gray-200 bg-white hover:border-bluePrimary cursor-pointer`}
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
             >
-                <div className="flex flex-col text-center h-[100%] items-center justify-center">
-                    {file && (uploadProgress == 100) ? (
-                        <>
-                            <p className="text-primaryLight mb-4">{file.name} {t('uploadedSuccessfully')}!</p>
-                            <button
-                                onClick={handleFileRemove}
-                                className="mb-10 inline-flex w-full sm:w-40 text-center justify-center px-4 py-2 text-white bg-red transition-all border border-red rounded-lg hover:bg-red hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px focus:shadow-none"
-                            >
-                                Remove File
-                            </button>
-                        </>
-                    ) : (
-                        <div className="space-y-4">
-                            <p className="text-gray-500">{t('dragDropFiles')}</p>
-                            <p className="text-gray-500 text-lg">OR</p>
-                            <input
-                                type="file"
-                                className="hidden"
-                                id="file-upload"
-                                accept=".csv"
-                                onChange={handleFileChange}
-                            />
+                <div className="flex text-start h-[100%] items-center gap-4">
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="file-upload"
+                        accept=".csv"
+                        onChange={handleFileUpload}
+                    />
+                    <label htmlFor="file-upload" className='p-3 bg-bluePrimaryLight rounded-xl cursor-pointer'>
+                        <DocUpload />
+                    </label>
+                    <div>
+                        <div className="flex gap-2 font-medium">
                             <label
                                 htmlFor="file-upload"
-                                className="inline-flex cursor-pointer w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px focus:shadow-none"
+                                className="inline-flex cursor-pointer w-auto text-center text-bluePrimary items-center transition-all underline rounded-lg sm:w-auto"
                             >
-                                {resultData?.id ? t('uploadNewFile') : t('browseFile')}
+                                Upload
                             </label>
-                            <p className="text-gray-500 text-sm">
-                                {t('acceptFileLimitCsv')}
-                            </p>
+                            <span>or drag and drop file here</span>
                         </div>
-                    )}
+
+                        <p className="text-gray-400 text-md">
+                            Accepted file type .csv (File limit 5MB)
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div className="bg-white absolute left-0 w-full bottom-0 shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.10)]">
-                <div className="flex space-x-3 p-5">
-                    <button
-                        onClick={() => showAskModal(true)}
-                        disabled={submitIsDisabled}
-                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${submitIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
-                    >
-                        {isSubmitting ? t('uploading') : t('submit')}
-                    </button>
-                    {/* <button
-                        onClick={handleSave}
-                        disabled={saveIsDisabled}
-                        className={`inline-flex w-auto text-center items-center px-10 py-2 text-white transition-all ${saveIsDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-800 hover:bg-dark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none'} rounded-lg sm:w-auto animate-button`}
-                    >
-                        {isSaving ? t('saving') : t('save')}
-                    </button>
-                    <button onClick={onCloseSidebar} className="inline-flex w-auto text-center items-center px-10 py-2 text-primary transition-all border border-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none animate-button">
-                        {t('cancel')}
-                    </button> */}
-                </div>
-            </div>
-
-            <ConfirmationModal
-                visible={askModal}
-                onConfirm={handleSubmit}
-                onClose={() => showAskModal(false)}
-            />
         </div>
     );
 };
 
-export default DatasetUploader;
+export default DatasetFileUploader;

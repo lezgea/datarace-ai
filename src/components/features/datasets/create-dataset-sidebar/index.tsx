@@ -1,15 +1,13 @@
-import Divider from '@components/shared/divider';
-import { RootState } from '@store/store';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import DragAndDropSection from '../dataset-uploader';
 import { useTranslations } from 'next-intl';
-import DatasetUploader from '../dataset-uploader';
 import { FormInput } from '@components/shared';
-import { useRegisterUserMutation } from '@api/user-api';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import DatasetImageUploader from '../dataset-image-uploader';
+import { useCreateDatasetMutation } from '@api/datasets-api';
+import { toast } from 'react-toastify';
+import { IDatasetCreateRequest } from '@api/types/dataset-types';
 
 
 interface IDatasetSidebarProps {
@@ -17,39 +15,42 @@ interface IDatasetSidebarProps {
     setSidebarOpen: (val: boolean) => void;
 }
 
-interface IFormInput {
-    title: string;
-    description: string;
-}
+interface IFormInput extends IDatasetCreateRequest { }
 
 export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, setSidebarOpen }) => {
     const t = useTranslations();
     const sidebarRef = React.useRef<HTMLDivElement>(null);
-    const fileInputRef = React.useRef<HTMLInputElement>(null);
+    const [imageId, setImageId] = React.useState<number>(0);
 
-    const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
-
-    const [registerUser, { isLoading, error }] = useRegisterUserMutation();
+    const [createDataset, { isLoading, error }] = useCreateDatasetMutation();
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(t('titleIsRequired')),
         description: Yup.string().required(t('descriptionIsRequired'))
     });
 
-
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
+    const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur',
     });
 
+    const visibility = watch('visibility');
+
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        // try {
-        //     await registerUser(data).unwrap();
-        //     showEmailSent(true);
-        // } catch (err: any) {
-        //     console.error('Unknown error:', err);
-        //     toast.error(err.data?.message || 'An unexpected error occurred');
-        // }
+        try {
+            await createDataset({
+                datasetImageId: imageId,
+                ...data
+            }).unwrap();
+            toast.success('Dataset has been created');
+            setSidebarOpen(false);
+            reset();
+            setImageId(0);
+            setValue('visibility', 'PUBLIC');
+        } catch (err: any) {
+            console.error('Unknown error:', err);
+            toast.error(err.data?.message || 'An unexpected error occurred');
+        }
     };
 
     React.useEffect(() => {
@@ -65,6 +66,11 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
     }, [setSidebarOpen]);
 
 
+    React.useEffect(() => {
+        setValue('visibility', 'PUBLIC')
+    }, [])
+
+
     return (
         <div
             data-testid="sidebar-overlay"
@@ -73,57 +79,13 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
             <div
                 className={`fixed top-0 right-0 w-full md:w-[40%] h-full items-between bg-white shadow-xl py-20 transition-transform transform ${visible ? 'translate-x-0' : 'translate-x-full'}`}
                 ref={sidebarRef}
-                onClick={(e) => e.stopPropagation()} // Prevent event propagation
+                onClick={(e) => e.stopPropagation()}
             >
                 <div className="px-5 text-start space-y-1 overflow-auto space-y-5">
-                    {/* <h2 className="text-2xl font-regmed text-center">Add Your Dataset Information</h2> */}
-                    {/* <Divider /> */}
-
-                    {/* <label>Image</label> */}
-                    <div
-                        className={`w-full h-[200px] p-6 border-dashed border-2 rounded-xl border-gray-300 bg-white`}
-                        onDrop={() => { }}
-                        onDragOver={(e) => e.preventDefault()}
-                    >
-                        <div className="flex flex-col text-center h-[100%] items-center justify-center">
-                            <div className="space-y-4">
-                                <input
-                                    type="file"
-                                    className="hidden"
-                                    id="file-upload"
-                                    accept=".csv"
-                                    onChange={() => { }}
-                                />
-                                <label
-                                    htmlFor="file-upload"
-                                    className="inline-flex cursor-pointer w-auto text-center items-center px-10 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px focus:shadow-none"
-                                >
-                                    Upload Dataset Image
-                                </label>
-                                <p className="text-gray-500 text-sm">
-                                    {t('acceptImageFileLimit')}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Hidden file input */}
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        className="hidden"
-                        onChange={(e) => {
-                            const files = e.target.files;
-                            if (files && files.length > 0) {
-                                console.log('Selected file:', files[0]);
-                            }
-                        }}
-                    />
-
+                    <DatasetImageUploader setImageId={setImageId} />
 
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
-                            // label={`${t('title')}*`}
                             type='text'
                             name='title'
                             placeholder="Dataset Title"
@@ -132,23 +94,39 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                         />
                         <FormInput
                             isTextarea
-                            // label={`${t('description')}*`}
                             name='description'
                             placeholder="Dataset Description"
                             register={register}
                             errors={errors}
                         />
-                        {/* <button
-                            type="submit"
-                            className="w-full h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none focus:bg-primaryDark transition duration-200 ease-in-out transform disabled:bg-gray-400 disabled:ring-gray-400 disabled:cursor-not-allowed"
-                        >
-                            {t('signUp')}
-                        </button> */}
+                        <div id="visibility" className='flex gap-3'>
+                            <div
+                                className={`flex items-center text-center px-4 py-2 rounded-xl cursor-pointer ${visibility === 'PRIVATE' ? 'bg-primary text-white' : 'text-primary border border-primary'}`}
+                                onClick={() => setValue('visibility', 'PRIVATE')}
+                            >
+                                PRIVATE
+                            </div>
+                            <div
+                                className={`flex items-center text-center px-4 py-2 rounded-xl cursor-pointer ${visibility === 'PUBLIC' ? 'bg-primary text-white' : 'text-primary border border-primary'}`}
+                                onClick={() => setValue('visibility', 'PUBLIC')}
+                            >
+                                PUBLIC
+                            </div>
+                        </div>
+
+                        <div className="absolute px-4 py-3 left-0 bottom-0 w-full border-t">
+                            <button
+                                type='submit'
+                                className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            >
+                                Create Dataset
+                            </button>
+                        </div>
                     </form>
 
                     {
-                        visible &&
-                        <DatasetUploader onClose={() => setSidebarOpen(false)} />
+                        // visible &&
+                        // <DatasetUploader onClose={() => setSidebarOpen(false)} />
                     }
                 </div>
             </div>

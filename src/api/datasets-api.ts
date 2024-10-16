@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IDatasetsRequest, IDatasetsResponse } from './types/dataset-types';
+import { IDatasetCreateRequest, IDatasetsRequest, IDatasetsResponse } from './types/dataset-types';
+import { IMessageResponse } from './types/competition-types';
 
 
 export const datasetsApi = createApi({
@@ -24,38 +25,19 @@ export const datasetsApi = createApi({
             }),
             providesTags: ['MyDatasets'],
         }),
-        // getAttendedCompetitions: builder.query<IAttendedCompetitionsResponse, IAttendedCompetitionsRequest>({
-        //     query: ({ data }) => ({
-        //         url: `/competitions/user/page`,
-        //         method: 'GET',
-        //         params: { page: data.page, count: data.count, userHasSubmitted: data.userHasSubmitted, criteria: {}, },
-        //     }),
-        // }),
-        // getScoreBoard: builder.query<IScoreboardResponse, IScoreboardRequest>({
-        //     query: ({ data }) => ({
-        //         url: `/competitions/score/page`,
-        //         method: 'GET',
-        //         params: { page: data.page, count: data.count, competitionId: data.competitionId },
-        //     }),
-        // }),
-        // getCompetitionInfo: builder.query<ICompetition, ICompetitionInfoRequest>({
-        //     query: ({ id }) => ({
-        //         url: `/competitions/${id}`,
-        //         method: 'GET',
-        //     }),
-        //     providesTags: ['Competition'],
-        // }),
-        // joinCompetition: builder.mutation<IMessageResponse, ICompetitionInfoRequest>({
-        //     query: ({ id }) => ({
-        //         url: `/competitions/${id}/join`,
-        //         method: 'POST',
-        //     }),
-        //     invalidatesTags: ['Competition'],
-        // }),
+        createDataset: builder.mutation<IMessageResponse, IDatasetCreateRequest>({
+            query: (data) => ({
+                url: `/datasets`,
+                method: 'POST',
+                data: data,
+            }),
+            invalidatesTags: ['AllDatasets', 'MyDatasets'],
+        }),
     }),
 });
 
 export const {
     useLazyGetAllDatasetsQuery,
     useLazyGetMyDatasetsQuery,
+    useCreateDatasetMutation,
 } = datasetsApi;

@@ -46,6 +46,7 @@ import InnovatorIcon from './innovator.svg';
 import ArchitectIcon from './architect.svg';
 import HeartIcon from './heart.svg';
 import NoDataSvg from './no-data.svg';
+import DocUpload from './doc-upload.svg';
 
 
 
@@ -64,6 +65,7 @@ export {
     NoDataSvg,
 
     // icons
+    DocUpload,
     HeartIcon,
     ExplorerIcon,
     InnovatorIcon,

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useLazyGetAllDatasetsQuery, useLazyGetMyDatasetsQuery } from '@api/datasets-api';
+import { useLazyGetMyDatasetsQuery } from '@api/datasets-api';
 import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
@@ -30,8 +30,8 @@ export const MyDatasetsTable: React.FC<ICompetitionsTable> = () => {
         triggerGetDatasets({
             data: { page: currentPage, count: itemsPerPage },
         }).then((response) => {
-            if (response?.data?.totalCount) {
-                setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
+            if (response?.data?.totalElements) {
+                setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
             } else {
                 setTotalPages(1)
             }
@@ -51,7 +51,6 @@ export const MyDatasetsTable: React.FC<ICompetitionsTable> = () => {
         }
     };
 
-    console.log('$$$$$$', datasetsData)
 
     if (datasetsLoading || isLoading) {
         return <CompetitionsSkeleton />;
@@ -70,7 +69,7 @@ export const MyDatasetsTable: React.FC<ICompetitionsTable> = () => {
             </div>
 
             {/* Pagination Controls */
-                !!datasetsData?.totalCount &&
+                !!datasetsData?.totalElements &&
                 <div className="flex justify-between items-center mt-6">
                     <button
                         onClick={handlePreviousPage}

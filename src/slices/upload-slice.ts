@@ -226,6 +226,33 @@ const uploadSlice = createSlice({
                     toast.error(state.error);
                 }
             );
+
+        // UPLOAD DATASET IMAGE MUTATION
+        builder
+            .addMatcher(
+                uploadApi.endpoints.uploadDatasetImage.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                    state.success = false;
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.uploadDatasetImage.matchFulfilled,
+                (state, action) => {
+                    state.loading = false;
+                    state.success = true;
+                    state.message = "Dataset Image has been uploaded!";
+                }
+            )
+            .addMatcher(
+                uploadApi.endpoints.uploadDatasetImage.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to upload the dataset image';
+                    toast.error(state.error);
+                }
+            );
     },
 });
 
