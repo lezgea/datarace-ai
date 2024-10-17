@@ -1,6 +1,7 @@
 "use client";
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
+import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
 import DatasetItem from '@components/shared/dataset-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
@@ -14,27 +15,17 @@ export const DatasetsSection: React.FC = () => {
     const lng = useLocale();
     const t = useTranslations();
 
-    const CATEGORY_LABELS: Record<number, string> = {
-        1: t('all'),
-        2: "Environment",
-        3: "Education",
-        4: "Oil & Industry",
-        5: "Technology",
-    };
-
-    const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
-    const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
-    const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
+    const { loading: datasetsLoading } = useSelector((state: RootState) => state.datasets);
+    const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
 
 
     React.useEffect(() => {
-        triggerGetCompetitions({
-            categoryId: selectedCategory,
+        triggerGetDatasets({
             data: { page: 0, count: 6 },
         });
-    }, [selectedCategory, triggerGetCompetitions]);
+    }, [triggerGetDatasets]);
 
-    if (categoryLoading || competitionLoading)
+    if (datasetsLoading)
         return <CompetitionsSkeleton />
 
 
@@ -47,7 +38,7 @@ export const DatasetsSection: React.FC = () => {
                 </div>
             </div>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {competitionsData?.competitions?.map((item, i) => (
+                {datasetsData?.userDatasets?.map((item, i) => (
                     <DatasetItem key={i} {...item} />
                 ))}
             </div>
