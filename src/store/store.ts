@@ -16,7 +16,7 @@ export const store = configureStore({
         user: userReducer,
         categories: categoryReducer,
         competitions: competitionReducer,
-        datasets: competitionReducer,
+        datasets: datasetsReducer,
         uploads: uploadReducer,
         [userApi.reducerPath]: userApi.reducer,
         [categoryApi.reducerPath]: categoryApi.reducer,
