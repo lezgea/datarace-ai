@@ -153,10 +153,10 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
                 const formData = new FormData();
                 formData.append("file", uploadedFile);
 
-                await uploadOriginalFile({
-                    competitionId: competitionId,
-                    file: formData,
-                }).unwrap();
+                // await uploadOriginalFile({
+                //     competitionId: competitionId,
+                //     file: formData,
+                // }).unwrap();
                 toast.success("Solution has been saved successfully!")
             } catch (error) {
                 toast.error("Failed to save the file.", {
@@ -177,10 +177,10 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
                 const formData = new FormData();
                 formData.append("file", droppedFile);
 
-                await uploadOriginalFile({
-                    competitionId: competitionId,
-                    file: formData,
-                }).unwrap();
+                // await uploadOriginalFile({
+                //     competitionId: competitionId,
+                //     file: formData,
+                // }).unwrap();
                 toast.success("Solution has been saved successfully!", { position: "bottom-left" });
 
             } catch (error) {
