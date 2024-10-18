@@ -32,3 +32,18 @@ export interface IDatasetsResponse {
     lastPageNumber: boolean,
     totalElements: number,
 }
+
+
+export interface IDatasetInfoRequest {
+    id: string | number,
+}
+
+
+export interface IDatasetUpdateRequest {
+    dataId: string,
+    title: string,
+    description: string,
+    visibility?: string,
+    usability?: number,
+    datasetImageId?: number,
+}

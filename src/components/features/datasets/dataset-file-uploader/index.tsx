@@ -17,10 +17,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || '';
 
 interface FileUploaderProps {
     competitionId?: number,
-    onClose: () => void,
+    onClose?: () => void,
 }
 
-const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) => {
+const DatasetFileUploader: React.FC<FileUploaderProps> = () => {
     const t = useTranslations();
     const [askModal, showAskModal] = React.useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
@@ -115,7 +115,7 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
             await triggerSubmitResult({ competitionId: competitionInfo?.id as number });
             await refetchCompetitionInfo();
             handleFileRemove();
-            onClose();
+            // onClose();
         } catch (error) {
             toast.error("Failed to submit the file.", { position: "bottom-left", });
             console.error("Submit error: ", error);
@@ -157,7 +157,7 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
                 //     competitionId: competitionId,
                 //     file: formData,
                 // }).unwrap();
-                toast.success("Solution has been saved successfully!")
+                toast.success("File has been added successfully!")
             } catch (error) {
                 toast.error("Failed to save the file.", {
                     position: "bottom-left",
@@ -181,7 +181,7 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
                 //     competitionId: competitionId,
                 //     file: formData,
                 // }).unwrap();
-                toast.success("Solution has been saved successfully!", { position: "bottom-left" });
+                toast.success("File has been added successfully!");
 
             } catch (error) {
                 toast.error("Failed to save the file.", {
@@ -202,7 +202,7 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
 
     const onCloseSidebar = () => {
         handleFileRemove();
-        onClose();
+        // onClose();
     }
 
     let submitIsDisabled = !resultData?.id || isSaving || isSubmitting || isFakeUploading
@@ -210,35 +210,6 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClo
 
     return (
         <div className="flex flex-col justify-center items-center mb-40">
-            <div className="w-full space-y-2">
-                {
-                    (file || resultData?.id) &&
-                    <div className="flex items-center space-x-3">
-                        <ZipIcon className="w-9 h-9" />
-                        <div className="w-full">
-                            <p className="text-sm">{file?.name || "1 solution file has been saved"}</p>
-                            {
-                                file &&
-                                <p className="text-xs text-gray-500 w-full">{(file?.size / (1024 * 1024)).toFixed(2)} MB</p>
-                            }
-                        </div>
-                        <div className="flex space-x-3 items-center justify-center">
-                            {((uploadProgress == 100) || resultData?.id) && <CheckIcon className="w-10 h-10" />}
-                            {resultData?.id && <DownloadIcon onClick={handleDownload} className="w-6 h-6 cursor-pointer fill-gray-800 hover:fill-primaryLight" />}
-                        </div>
-                    </div>
-                }
-                {
-                    (isUploading || isFakeUploading) &&
-                    <div className="relative w-full h-1 bg-gray-200 rounded-full">
-                        <div
-                            className="absolute top-0 h-full bg-primary rounded-full"
-                            style={{ width: `${uploadProgress}%` }}
-                        />
-                    </div>
-                }
-            </div>
-
             <div
                 className={`w-full h-full p-6 border rounded-2xl border-gray-200 bg-white hover:border-bluePrimary cursor-pointer`}
                 onDrop={handleDrop}
