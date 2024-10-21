@@ -11,6 +11,7 @@ import { IDatasetCreateRequest } from '@api/types/dataset-types';
 import { useUpdateUserMutation } from '@api/user-api';
 import { useParams } from 'next/navigation';
 import DatasetFileUploader from '../dataset-file-uploader';
+import { DatasetFiles } from '../dataset-files';
 
 
 interface IDatasetSidebarProps {
@@ -125,7 +126,11 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                             </div>
                         </div>
 
-                        <DatasetFileUploader />
+                        <DatasetFiles
+                            datasetId={datasetId}
+                            files={datasetInfo?.datasetFileDownloadDto}
+                            refetch={refetch}
+                        />
 
                         <div className="py-5 flex w-full justify-end border-t bg-white">
                             <button

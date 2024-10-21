@@ -53,3 +53,8 @@ export interface IProfileImageUploadResponse {
 export interface ISubmitResultRequest {
     competitionId: number,
 }
+
+export interface IDatasetFileUploadRequest {
+    datasetId: number | string | undefined,
+    file: FormData,
+}

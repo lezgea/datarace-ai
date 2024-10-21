@@ -4,6 +4,7 @@ export interface IDataset {
     description: string,
     imageUrl?: string | null,
     visibility?: string,
+    datasetFileDownloadDto?: IDatasetFilesDto[],
     userDto: {
         email: string,
         fullName: string,
@@ -11,6 +12,12 @@ export interface IDataset {
         phoneNumber: string,
         username: string,
     }
+}
+
+export interface IDatasetFilesDto {
+    id: number,
+    fileName: string,
+    fileType: string,
 }
 
 export interface IDatasetsRequest {

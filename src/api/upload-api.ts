@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
 import { IMessageResponse } from './types/competition-types';
-import { DownloadResultResponse, IDownloadResultRequest, IGetDatasetRequest, IGetDatasetResponse, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IProfileImageUploadResponse, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
+import { DownloadResultResponse, IDatasetFileUploadRequest, IDownloadResultRequest, IGetDatasetRequest, IGetDatasetResponse, IGetResultRequest, IGetResultResponse, IProfileImageUploadRequest, IProfileImageUploadResponse, IResultSaveRequest, ISubmitResultRequest } from './types/upload-types';
 
 
 export const uploadApi = createApi({
@@ -63,6 +63,13 @@ export const uploadApi = createApi({
                 data: file,
             }),
         }),
+        uploadDatasetFile: builder.mutation<IProfileImageUploadResponse, IDatasetFileUploadRequest>({
+            query: ({ datasetId, file }) => ({
+                url: `/files/upload/dataset/${datasetId}`,
+                method: 'POST',
+                data: file,
+            }),
+        }),
     }),
 });
 
@@ -75,4 +82,5 @@ export const {
     useLazySubmitResultQuery,
     useLazyGetDatasetQuery,
     useUploadDatasetImageMutation,
+    useUploadDatasetFileMutation,
 } = uploadApi;

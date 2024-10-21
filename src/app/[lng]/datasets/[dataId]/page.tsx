@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useGetDatasetInfoQuery } from '@api/datasets-api';
 import { UpdateDatasetSidebar } from '@components/features/datasets/update-dataset-sidebar';
+import { DatasetFiles } from '@components/features/datasets/dataset-files';
 
 
 const DatasetDetails: React.FC = () => {
@@ -79,12 +80,14 @@ const DatasetDetails: React.FC = () => {
                     <section className="p-8 gap-8 rounded-2xl border border-gray-30">
                         <p>{datasetInfo?.description}</p>
                     </section>
-                    <button
-                        className="inline-flex w-auto text-center items-center px-6 py-3 text-white transition-all bg-primary rounded-xl sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                        aria-label="Upload Dataset"
-                    >
-                        {t('downloadDataset')}
-                    </button>
+
+                    <section>
+                        <DatasetFiles
+                            datasetId={datasetId}
+                            files={datasetInfo?.datasetFileDownloadDto}
+                            refetch={refetch}
+                        />
+                    </section>
                 </main>
             </div>
 
