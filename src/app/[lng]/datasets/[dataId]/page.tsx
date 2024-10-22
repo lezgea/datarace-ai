@@ -57,13 +57,16 @@ const DatasetDetails: React.FC = () => {
                         <span>{datasetInfo?.title}</span>
                     </nav>
 
-                    <button
-                        aria-label="Upload Dataset"
-                        className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                        onClick={() => setSidebarOpen(true)}
-                    >
-                        Edit Dataset
-                    </button>
+                    {
+                        datasetInfo?.isEditable &&
+                        <button
+                            aria-label="Upload Dataset"
+                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            onClick={() => setSidebarOpen(true)}
+                        >
+                            Edit Dataset
+                        </button>
+                    }
                 </div>
 
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
@@ -84,6 +87,7 @@ const DatasetDetails: React.FC = () => {
                     <section>
                         <DatasetFiles
                             datasetId={datasetId}
+                            isEditable={datasetInfo?.isEditable}
                             files={datasetInfo?.datasetFileDownloadDto}
                             refetch={refetch}
                         />

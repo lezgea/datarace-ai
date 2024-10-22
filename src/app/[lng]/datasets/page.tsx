@@ -1,3 +1,5 @@
+"use client"
+
 import React, { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
@@ -5,25 +7,28 @@ import { DatasetsTable } from '@components/features/datasets/datasets-table';
 import { MyDatasetsTable } from '@components/features/datasets/my-datasets-table';
 import { DatasetsHeaderSection } from '@components/features/datasets/datasets-header';
 import TabSelects from '@components/shared/tab-selects';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
 
 
-export const metadata: Metadata = {
-    title: "Datasets | DataRace.ai",
-    description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
-};
+// export const metadata: Metadata = {
+//     title: "Datasets | DataRace.ai",
+//     description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
+// };
 
 
 const Datasets: React.FC = () => {
     const t = useTranslations();
+    const { user, isAuthenticated, loading: isUserLoading } = useSelector((state: RootState) => state.user);
 
     const TABS: { title: string, content: ReactNode }[] = [
         {
-            title: t('myDatasets'),
-            content: <MyDatasetsTable />,
-        },
-        {
             title: t('allDatasets'),
             content: <DatasetsTable />,
+        },
+        {
+            title: t('myDatasets'),
+            content: <MyDatasetsTable />,
         },
     ]
 

@@ -4,6 +4,7 @@ export interface IDataset {
     description: string,
     imageUrl?: string | null,
     visibility?: string,
+    isEditable?: boolean,
     datasetFileDownloadDto?: IDatasetFilesDto[],
     userDto: {
         email: string,

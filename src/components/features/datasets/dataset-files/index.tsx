@@ -12,11 +12,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://beta.datarace.
 
 interface IOriginalFilesProps {
     datasetId: number | string | undefined,
+    isEditable?: boolean,
     files?: IDatasetFilesDto[],
     refetch: () => void,
 }
 
-export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, refetch }) => {
+export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, isEditable, refetch }) => {
     // const [triggerGetFiles, { data: files, isLoading: datasetsLoading }] = useLazyGetOriginalFilesQuery();
     const [uploadDatasetFile] = useUploadDatasetFileMutation();
     const [deleteDatasetFile] = useDeleteDatasetMutation();
@@ -141,9 +142,12 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                             <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
                                                 Download
                                             </div>
-                                            <div onClick={() => onDeleteFile(row.id)}>
-                                                <TrashIcon />
-                                            </div>
+                                            {
+                                                isEditable &&
+                                                <div onClick={() => onDeleteFile(row.id)}>
+                                                    <TrashIcon />
+                                                </div>
+                                            }
                                         </div>
                                     </td>
                                 </tr>
@@ -153,39 +157,42 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                 </div>
             }
 
-            <div
-                className={`w-full h-full p-6 border rounded-2xl border-gray-200 bg-white hover:border-bluePrimary cursor-pointer`}
-                onDrop={handleDrop}
-                onDragOver={(e) => e.preventDefault()}
-            >
-                <div className="flex text-start h-[100%] items-center gap-4">
-                    <input
-                        type="file"
-                        className="hidden"
-                        id="file-upload"
-                        accept=".xls,.docx,.txt,.csv"
-                        onChange={handleOriginalFileUpload}
-                    />
-                    <label htmlFor="file-upload" className='p-3 bg-bluePrimaryLight rounded-xl cursor-pointer'>
-                        <DocUpload />
-                    </label>
-                    <div>
-                        <div className="flex gap-2 font-medium">
-                            <label
-                                htmlFor="file-upload"
-                                className="inline-flex cursor-pointer w-auto text-center text-bluePrimary items-center transition-all underline rounded-lg sm:w-auto"
-                            >
-                                Upload
-                            </label>
-                            <span>or drag and drop file here</span>
-                        </div>
+            {
+                isEditable &&
+                <div
+                    className={`w-full h-full p-6 border rounded-2xl border-gray-200 bg-white hover:border-bluePrimary cursor-pointer`}
+                    onDrop={handleDrop}
+                    onDragOver={(e) => e.preventDefault()}
+                >
+                    <div className="flex text-start h-[100%] items-center gap-4">
+                        <input
+                            type="file"
+                            className="hidden"
+                            id="file-upload"
+                            accept=".xls,.docx,.txt,.csv"
+                            onChange={handleOriginalFileUpload}
+                        />
+                        <label htmlFor="file-upload" className='p-3 bg-bluePrimaryLight rounded-xl cursor-pointer'>
+                            <DocUpload />
+                        </label>
+                        <div>
+                            <div className="flex gap-2 font-medium">
+                                <label
+                                    htmlFor="file-upload"
+                                    className="inline-flex cursor-pointer w-auto text-center text-bluePrimary items-center transition-all underline rounded-lg sm:w-auto"
+                                >
+                                    Upload
+                                </label>
+                                <span>or drag and drop file here</span>
+                            </div>
 
-                        <p className="text-gray-400 text-md">
-                            Accepted file types are xls, docx, txt, or csv (File limit 50MB)
-                        </p>
+                            <p className="text-gray-400 text-md">
+                                Accepted file types are xls, docx, txt, or csv (File limit 50MB)
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </section>
     )
 }
