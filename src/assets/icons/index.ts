@@ -47,6 +47,7 @@ import ArchitectIcon from './architect.svg';
 import HeartIcon from './heart.svg';
 import NoDataSvg from './no-data.svg';
 import DocUpload from './doc-upload.svg';
+import TrashIcon from './trash.svg';
 
 
 
@@ -65,6 +66,7 @@ export {
     NoDataSvg,
 
     // icons
+    TrashIcon,
     DocUpload,
     HeartIcon,
     ExplorerIcon,

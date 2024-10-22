@@ -48,6 +48,13 @@ export const datasetsApi = createApi({
             }),
             invalidatesTags: ['DatasetInfo'],
         }),
+        deleteDataset: builder.mutation<void, { id: number | string }>({
+            query: ({ id }) => ({
+                url: `/files/dataset/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['DatasetInfo'],
+        }),
     }),
 });
 
@@ -57,4 +64,5 @@ export const {
     useCreateDatasetMutation,
     useGetDatasetInfoQuery,
     useUpdateDatasetMutation,
+    useDeleteDatasetMutation,
 } = datasetsApi;

@@ -20,12 +20,12 @@ const RaceDetails: React.FC = () => {
 
     const TABS: { title: string, content: ReactNode }[] = [
         {
-            title: t('data'),
-            content: <DatasetsSection />,
-        },
-        {
             title: t('generalOverview'),
             content: <GeneralSection />,
+        },
+        {
+            title: t('data'),
+            content: <DatasetsSection />,
         },
         {
             title: t('rules'),

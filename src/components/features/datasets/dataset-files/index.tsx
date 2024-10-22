@@ -2,9 +2,10 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { saveAs } from 'file-saver';
-import { DocUpload } from '@assets/icons';
+import { DocUpload, TrashIcon } from '@assets/icons';
 import { useUploadDatasetFileMutation } from '@api/upload-api';
 import { IDatasetFilesDto } from '@api/types/dataset-types';
+import { useDeleteDatasetMutation } from '@api/datasets-api';
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://beta.datarace.ai/v1';
@@ -18,6 +19,7 @@ interface IOriginalFilesProps {
 export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, refetch }) => {
     // const [triggerGetFiles, { data: files, isLoading: datasetsLoading }] = useLazyGetOriginalFilesQuery();
     const [uploadDatasetFile] = useUploadDatasetFileMutation();
+    const [deleteDatasetFile] = useDeleteDatasetMutation();
 
 
     const handleDownload = async (fileName: string, datasetFileId: number | undefined) => {
@@ -94,7 +96,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
 
     const onDeleteFile = async (fileId: any) => {
         try {
-            // await deleteFile({ id: fileId });
+            await deleteDatasetFile({ id: fileId });
             toast.success("File has been deteleted")
         } catch (err) {
             console.log(err);
@@ -135,10 +137,12 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                     <td className="w-full py-3 px-6">{row.fileName}</td>
                                     <td className="w-full py-3 px-6">{row.fileType}</td>
                                     <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" >
-                                        <div className='flex space-x-3'>
+                                        <div className='flex space-x-6'>
                                             <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
-                                                {/* <DownloadIcon /> */}
                                                 Download
+                                            </div>
+                                            <div onClick={() => onDeleteFile(row.id)}>
+                                                <TrashIcon />
                                             </div>
                                         </div>
                                     </td>
