@@ -1,14 +1,15 @@
 "use client";
 
 import React from 'react';
-import { CompetitionInfoRightSkeleton, Modal } from '@components/shared';
+import { AuthModal, CompetitionInfoRightSkeleton, Modal } from '@components/shared';
 import { CertificateIcon, CheckFilledIcon, CoinsIcon, RaceFlag } from '@assets/icons';
 import { RacesSidebar } from '../races-sidebar';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import { useJoinCompetitionMutation } from '@api/competition-api';
 import { toast } from 'react-toastify';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 
 interface IRightContentProps {
@@ -18,8 +19,11 @@ interface IRightContentProps {
 export const RigthContent: React.FC<IRightContentProps> = (props) => {
     let { raceId } = props;
 
+    let lng = useLocale();
     const t = useTranslations();
+    const router = useRouter();
     const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [selectedOption, setSelectedOption] = React.useState<string>('option1');
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
 
@@ -144,6 +148,18 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         {t('joinTheRace')}
                     </button>
                 }
+
+                {/* Join Button for not Authentificated Users */
+                    !isAuthenticated &&
+                    <button
+                        onClick={() => setShowAuthModal(true)}
+                        className="flex w-full text-center justify-center items-center px-6 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                        aria-label="Join the Race"
+                    >
+                        {t('joinTheRace')}
+                    </button>
+                }
+
                 {/* Upload Soulution Button */
                     competitionInfo?.uploadAvailable &&
                     <button
@@ -168,6 +184,12 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                 visible={showModal}
                 content={<ModalContent onConfirm={onJoinTheRace} />}
                 onClose={() => setShowModal(false)}
+            />
+            <AuthModal
+                visible={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
+                onSignUp={() => router.push(`/${lng}/sign-up`)}
+                onConfirm={() => router.push(`/${lng}/sign-in`)}
             />
             <RacesSidebar
                 visible={isSidebarOpen}

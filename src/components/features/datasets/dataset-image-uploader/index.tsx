@@ -15,7 +15,7 @@ interface ImageUploaderProps {
 const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId }) => {
     const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
     const [uploadDatasetImage, { isLoading }] = useUploadDatasetImageMutation();
-
+    const [initialImage, setInitialImage] = React.useState<string>('');
 
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFile = e.target.files?.[0];
@@ -36,13 +36,17 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId 
         }
     };
 
+    React.useEffect(() => {
+        if (image) setInitialImage(image);
+    }, [image])
+
     return (
         <div>
             <label className="block font-semibold text-gray-900">
                 Image Upload
             </label>
             {
-                (uploadedImage || image) ?
+                (uploadedImage || initialImage) ?
                     <>
                         <div
                             id="FileUpload"
@@ -58,12 +62,13 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId 
                                     />
                                     :
                                     <img
-                                        src={image} // Create a URL for the uploaded image
+                                        src={initialImage} // Create a URL for the uploaded image
                                         alt="Uploaded Preview"
                                         className="w-full h-full object-cover"
                                     />
                             }
                             <button
+                                onClick={() => setInitialImage('')}
                                 className="absolute z-2330 w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark shadow-neutral-300 focus:shadow-none animate-button"
                             >
                                 Delete Image

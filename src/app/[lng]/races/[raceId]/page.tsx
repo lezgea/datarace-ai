@@ -28,10 +28,6 @@ const RaceDetails: React.FC = () => {
             content: <DatasetsSection />,
         },
         {
-            title: t('rules'),
-            content: <div>Rules</div>,
-        },
-        {
             title: t('scoreBoard'),
             content: <ScoreBoardSection />,
         },
@@ -70,10 +66,6 @@ const RaceDetails: React.FC = () => {
                         {/* Right Sidebar */}
                         <RigthContent raceId={competitionId} />
                     </section>
-
-                    {/* <section className="container pt-20 px-auto space-y-10">
-                        <CompetitionsSection />
-                    </section> */}
                 </main>
             </div>
         </div>
