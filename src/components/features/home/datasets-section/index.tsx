@@ -2,6 +2,7 @@
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
+import { NoData } from '@components/shared';
 import DatasetItem from '@components/shared/dataset-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
@@ -28,6 +29,15 @@ export const DatasetsSection: React.FC = () => {
     if (datasetsLoading)
         return <CompetitionsSkeleton />
 
+    if (!datasetsLoading && !isLoading && !datasetsData?.userDatasets?.length) {
+        return (
+            <div>
+                <h2 className="text-[32px] md:text-[2.3rem]">Datasets</h2>
+                <p className="text-md text-gray-700">{t('competitionDescription')}</p>
+                <NoData />
+            </div>
+        )
+    }
 
     return (
         <>

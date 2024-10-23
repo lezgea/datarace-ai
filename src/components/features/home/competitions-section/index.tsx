@@ -1,6 +1,7 @@
 "use client";
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
+import { NoData } from '@components/shared';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
@@ -36,6 +37,16 @@ export const CompetitionsSection: React.FC = () => {
 
     if (categoryLoading || competitionLoading)
         return <CompetitionsSkeleton />
+
+    if (!categoryLoading && !competitionLoading && !isLoading && !competitionsData?.competitions?.length) {
+        return (
+            <div>
+                <h2 className="text-[32px] md:text-[2.3rem]">Competitions</h2>
+                <p className="text-md text-gray-700">{t('competitionDescription')}</p>
+                <NoData />
+            </div>
+        )
+    }
 
 
     return (

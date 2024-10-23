@@ -6,6 +6,7 @@ import RaceItem from '@components/shared/race-item';
 import AttendedCompetitionsSkeleton from '@components/shared/skeletons/attended-competitions-skeleton';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
+import { NoData } from '@components/shared';
 
 
 export const SubmittedProjects: React.FC = () => {
@@ -45,6 +46,10 @@ export const SubmittedProjects: React.FC = () => {
 
     if (competitionLoading || isLoading) {
         return <AttendedCompetitionsSkeleton />;
+    }
+
+    if (!competitionLoading && !isLoading && !attendedCompetitionsData?.userCompetitions?.length) {
+        return <NoData />
     }
 
     return (

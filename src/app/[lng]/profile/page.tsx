@@ -24,10 +24,10 @@ const Profile: React.FC = () => {
             title: t('attendedRaces'),
             content: <AttendedRaces />,
         },
-        {
-            title: t('bookmarks'),
-            content: <div>Bookmarks</div>,
-        },
+        // {
+        //     title: t('bookmarks'),
+        //     content: <div>Bookmarks</div>,
+        // },
         {
             title: t('submittedProjects'),
             content: <SubmittedProjects />,

@@ -128,6 +128,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
 
                         <DatasetFiles
                             datasetId={datasetId}
+                            isEditable={datasetInfo?.isEditable}
                             files={datasetInfo?.datasetFileDownloadDto}
                             refetch={refetch}
                         />

@@ -12,6 +12,7 @@ export interface IDataset {
         id: number,
         phoneNumber: string,
         username: string,
+        userImageUrl?: string,
     }
 }
 

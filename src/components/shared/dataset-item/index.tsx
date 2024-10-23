@@ -52,7 +52,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                     </div>
                     <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
                         <Image
-                            src={"/png/user.png"}
+                            src={userDto?.userImageUrl || "/png/user.png"}
                             alt="Avatar"
                             fill={true}
                             className="object-cover"
