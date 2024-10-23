@@ -39,7 +39,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                 <div className="space-y-2">
                     <h3 className="text-xl font-medium text-customBlue-900 truncate-text mb-3">{title}</h3>
                     <div className="flex justify-between">
-                        <p className="text-md text-gray-500 truncate-text">by <strong>{userDto?.fullName.split(' ')[0]}</strong></p>
+                        <p className="text-md text-gray-500 truncate-text">by <strong>{userDto?.fullName}</strong></p>
                         <p className="text-md text-gray-500 truncate-text font-light">{!!datasetFileDownloadDto?.length ? `${datasetFileDownloadDto?.length} File (CSV)` : ` `}</p>
                     </div>
                     <p className="text-md text-gray-500 truncate-text font-light">{description}</p>
