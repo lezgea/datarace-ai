@@ -24,26 +24,6 @@ const DatasetDetails: React.FC = () => {
     const { data: datasetInfo, error, isLoading, refetch } = useGetDatasetInfoQuery({ id: dataId as string }, { skip: !dataId });
 
 
-    const TABS: { title: string, content: ReactNode }[] = [
-        {
-            title: t('data'),
-            content: <DatasetsSection />,
-        },
-        {
-            title: t('generalOverview'),
-            content: <GeneralSection />,
-        },
-        {
-            title: t('rules'),
-            content: <div>Rules</div>,
-        },
-        {
-            title: t('scoreBoard'),
-            content: <ScoreBoardSection />,
-        },
-    ]
-
-
     return (
         <div className="min-h-screen flex flex-col">
             <div className="container mx-auto py-[6rem] space-y-5">

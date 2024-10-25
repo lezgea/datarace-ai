@@ -11,7 +11,7 @@ export const datasetsApi = createApi({
     endpoints: (builder) => ({
         getAllDatasets: builder.query<IDatasetsResponse, IDatasetsRequest>({
             query: ({ data }) => ({
-                url: `/datasets/users/page?isMyDataset=false`,
+                url: `/datasets/public/page?isMyDataset=false`,
                 method: 'GET',
                 params: { page: data.page, count: data.count },
             }),
@@ -19,7 +19,7 @@ export const datasetsApi = createApi({
         }),
         getMyDatasets: builder.query<IDatasetsResponse, IDatasetsRequest>({
             query: ({ data }) => ({
-                url: `/datasets/users/page?isMyDataset=true`,
+                url: `/datasets/public/page?isMyDataset=true`,
                 method: 'GET',
                 params: { page: data.page, count: data.count },
             }),

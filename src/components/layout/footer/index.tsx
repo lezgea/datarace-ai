@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
     const t = useTranslations();
     const pathname = usePathname();
 
-    const hideHeaderRoutes = React.useMemo(() => [`/${lng}/sign-in`, `/${lng}/sign-up`, `/${lng}/activation`, `/${lng}/forgot`, `/${lng}/reset-password`], []);
+    const hideHeaderRoutes = React.useMemo(() => [`/${lng}/sign-in`, `/${lng}/sign-up`, `/${lng}/activation`, `/${lng}/forgot`, `/${lng}/reset-password`, `/${lng}/coming`], []);
     const shouldHideFooter = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname]);
 
     if (shouldHideFooter) return null;
@@ -37,10 +37,10 @@ export const Footer: React.FC = () => {
                         <h2 className="font-semibold">{t('company')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="/about-us" className="hover:text-primary">{t('aboutUs')}</Link>
+                                <Link href={`/${lng}/about-us`} className="hover:text-primary">{t('aboutUs')}</Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="hover:text-primary">{t('faq')}</Link>
+                                <Link href={`/${lng}/faq`} className="hover:text-primary">{t('faq')}</Link>
                             </li>
                             <li>
                                 <Link href="#" className="hover:text-primary">{t('termsTitle')}</Link>
@@ -51,13 +51,13 @@ export const Footer: React.FC = () => {
                         <h2 className="font-semibold">{t('races')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="/races" className="hover:text-primary">{t('activeRaces')}</Link>
+                                <Link href={`/${lng}/races`} className="hover:text-primary">{t('activeRaces')}</Link>
                             </li>
                             <li>
-                                <Link href="/courses" className="hover:text-primary">{t('courses')}</Link>
+                                <Link href={`/${lng}/coming`} className="hover:text-primary">{t('courses')}</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">Proqram təminatı mühəndisliyi</Link>
+                                <Link href={`/${lng}/coming`} className="hover:text-primary">Proqram təminatı mühəndisliyi</Link>
                             </li>
                         </ul>
                     </div>
@@ -66,9 +66,6 @@ export const Footer: React.FC = () => {
                         <ul className="text-sm font-light space-y-4">
                             <li>
                                 <Link href="#" className="hover:text-primary">{t('email')}</Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary">{t('phone')}</Link>
                             </li>
                             <li>
                                 <Link href="#" className="hover:text-primary">{t('address')}</Link>

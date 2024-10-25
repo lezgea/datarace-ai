@@ -25,6 +25,7 @@ const axiosBaseQuery: BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> = async 
             method,
             data: method !== 'GET' ? data : undefined,
             params: method === 'GET' ? params : undefined,
+            maxRedirects: 0,
             headers: {
                 Authorization: token ? `Bearer ${token}` : undefined,
                 'Content-Type': data instanceof FormData ? 'multipart/form-data' : 'application/json',
