@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { TermsModal } from '@components/shared';
 
 const InstagramIcon = dynamic(() => import('@assets/icons').then(mod => mod.InstagramIcon), { ssr: false });
 const TwitterIcon = dynamic(() => import('@assets/icons').then(mod => mod.TwitterIcon), { ssr: false });
@@ -17,6 +18,7 @@ export const Footer: React.FC = () => {
     const lng = useLocale();
     const t = useTranslations();
     const pathname = usePathname();
+    const [termsModal, setTermsModal] = React.useState(false);
 
     const hideHeaderRoutes = React.useMemo(() => [`/${lng}/sign-in`, `/${lng}/sign-up`, `/${lng}/activation`, `/${lng}/forgot`, `/${lng}/reset-password`, `/${lng}/coming`], []);
     const shouldHideFooter = React.useMemo(() => hideHeaderRoutes.includes(pathname), [pathname]);
@@ -43,7 +45,7 @@ export const Footer: React.FC = () => {
                                 <Link href={`/${lng}/faq`} className="hover:text-primary">{t('faq')}</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">{t('termsTitle')}</Link>
+                                <Link href="#" onClick={() => setTermsModal(true)} className="hover:text-primary">{t('termsTitle')}</Link>
                             </li>
                         </ul>
                     </div>
@@ -95,8 +97,13 @@ export const Footer: React.FC = () => {
                         </a>
                     </div>
                 </section>
-
             </div>
+
+            <TermsModal
+                visible={termsModal}
+                onConfirm={() => setTermsModal(false)}
+                onClose={() => setTermsModal(false)}
+            />
         </footer>
     );
 };

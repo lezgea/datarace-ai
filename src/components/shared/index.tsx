@@ -9,3 +9,4 @@ export * from './confirmation-modal';
 export * from './dataset-item';
 export * from './no-data';
 export * from './auth-modal';
+export * from './terms-modal';
