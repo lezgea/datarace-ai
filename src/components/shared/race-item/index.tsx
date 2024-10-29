@@ -44,7 +44,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
     const text = props.text;
-    const imageUrl = props.imageUrl || "svg/noimg.svg";
+    const imageUrl = !!props?.imageUrl ? props.imageUrl : "/svg/noimg.svg";
     const lifeTimeDays = props.lifeTimeDays;
     const currencySymbol = props.currencySymbol;
     const awardAmount = props.awardAmount;
