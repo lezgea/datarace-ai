@@ -64,6 +64,7 @@ export interface ICompetition {
     id: number,
     name: string,
     text: string,
+    rules?: string,
     awardAmount: number,
     imageUrl: string | null,
     lifeTimeDays: number,

@@ -22,29 +22,19 @@ export const GeneralSection: React.FC = () => {
 
     return (
         <Suspense fallback={<CompetitionInfoSectionSkeleton />}>
-            {/* Description */}
-            <div className="space-y-4" >
-                <h2 className="text-lg font-semibold">Description</h2>
-                <p className="text-gray-700 font-light">{competitionInfo?.text}</p>
-            </div>
-
-            {/* Accordion (Evaluation, FAQ, Citation) */}
-            <div className="mt-8 space-y-4" >
-                <div>
-                    <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        {t('evaluation')} <span>+</span>
-                    </button>
+            <div className='space-y-10'>
+                {/* Description */}
+                <div className="space-y-4" >
+                    <h2 className="text-lg text-primary font-semibold">Description</h2>
+                    <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: competitionInfo?.text || '' }} />
                 </div>
-                <div>
-                    <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        {t('faq')} <span>+</span>
-                    </button>
-                </div>
-                <div>
-                    <button className="w-full flex justify-between items-center text-lg text-left font-semibold">
-                        {t('citation')} <span>+</span>
-                    </button>
-                </div>
+                {
+                    !!competitionInfo?.rules &&
+                    <div className="space-y-4" >
+                        <h3 className="text-lg text-primary font-semibold">Rules</h3>
+                        <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: competitionInfo?.rules }} />
+                    </div>
+                }
             </div>
         </Suspense>
     )
