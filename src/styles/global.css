@@ -114,3 +114,9 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.description-font * {
+    font-size: 16px;
+    font-weight: 400;
+    /* Set to your desired font size */
+}

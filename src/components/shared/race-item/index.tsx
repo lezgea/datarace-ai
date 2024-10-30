@@ -76,7 +76,9 @@ const RaceItem: React.FC<RaceProps> = (props) => {
             <div className="flex flex-col p-8 space-y-3 text-start items-between">
                 <div className="h-20">
                     <h3 className="text-xl font-medium text-customBlue-900">{name}</h3>
-                    <p className="text-md text-gray-500 truncate-text">{text}</p>
+                    <p className="text-md text-gray-500 truncate-text description-font">
+                        <div dangerouslySetInnerHTML={{ __html: text }}></div>
+                    </p>
                 </div>
                 <div className="flex justify-between items-center">
                     <p className="text-[1.5rem] text-customBlue-900">{currencySymbol} {awardAmount}</p>

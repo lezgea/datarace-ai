@@ -1,7 +1,7 @@
 "use client";
 
 import { useLazyGetScoreBoardQuery } from '@api/competition-api';
-import { CompetitionInfoSectionSkeleton } from '@components/shared';
+import { CompetitionInfoSectionSkeleton, NoData } from '@components/shared';
 import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -57,6 +57,9 @@ export const ScoreBoardSection: React.FC = () => {
 
     if (!isClient) return null; // Avoid rendering on the server to prevent mismatch
 
+    if (!competitionLoading && !isLoading && !scoreBoardData?.userCompetitions?.length) {
+        return <NoData />
+    }
 
     return (
         <Suspense fallback={<CompetitionInfoSectionSkeleton />}>

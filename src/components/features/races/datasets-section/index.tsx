@@ -1,7 +1,7 @@
 "use client";
 
 import { useLazyGetDatasetQuery } from '@api/upload-api';
-import { CompetitionInfoSectionSkeleton } from '@components/shared';
+import { CompetitionInfoSectionSkeleton, NoData } from '@components/shared';
 import { RootState } from '@store/store';
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState, Suspense } from 'react';
@@ -83,6 +83,10 @@ export const DatasetsSection: React.FC = () => {
 
     if (!isClient) return null; // Avoid rendering on the server to prevent mismatch
 
+
+    if (!competitionLoading && !isLoading && !dataSet?.length) {
+        return <NoData />
+    }
 
     return (
         <Suspense fallback={<CompetitionInfoSectionSkeleton />}>
