@@ -1,13 +1,12 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FailedOperation, SuccessfullOperation } from '@components/features/activation';
 import { useActivateUserQuery } from '@api/user-api';
 import { Loader } from '@components/shared';
 import { useSearchParams } from 'next/navigation';
-
 
 enum ErrorType {
     EXCEED_REQUEST_COUNT = "EXCEED_REQUEST_COUNT",
@@ -28,17 +27,24 @@ const ActivationPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
-    const { data, error, isSuccess, isLoading } = useActivateUserQuery(
+    // Fetch user activation on page load if the token exists
+    const { data, error, isSuccess, isLoading, refetch } = useActivateUserQuery(
         { token: token || "" },
         { skip: !token }
     );
+
+    useEffect(() => {
+        if (token) {
+            refetch(); // Ensure the query is run on page load when the token is available
+        }
+    }, [token, refetch]);
 
     const apiError = (error as { data?: ApiError } | undefined)?.data;
     const errorMessage = apiError && errorMessages[apiError.error];
 
     if (isLoading) return <Loader />;
 
-    console.log('@@@@@', isSuccess)
+    console.log('@@@@@', data);
 
     return (
         <div className="min-h-screen max-h-screen flex">
