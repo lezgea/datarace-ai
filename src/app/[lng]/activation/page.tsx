@@ -28,13 +28,18 @@ const ActivationPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
-    const { data, error, isLoading } = useActivateUserQuery(
+    const { data, error, isLoading, refetch } = useActivateUserQuery(
         { token: token || "" },
-        { skip: !token }
+        { skip: true }
     );
 
     const apiError = (error as { data?: ApiError } | undefined)?.data;
     const errorMessage = apiError && errorMessages[apiError.error];
+
+
+    React.useEffect(() => {
+        if (token) refetch()
+    }, [token]);
 
     if (isLoading) return <Loader />;
 
