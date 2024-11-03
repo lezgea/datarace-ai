@@ -7,7 +7,7 @@ export const SuccessfullOperation: React.FC = () => {
     return (
         <div className="flex flex-col w-full items-center justify-center mx-auto max-w-sm space-y-7 animate-right-svg text-center">
             <Teamwork />
-            <h2 className="text-[2.3rem] font-regmed">Activated!</h2>
+            <h2 className="text-[2.3rem] font-regmed text-primary">Activated Successfully!</h2>
             <p className="text-sm text-gray-600">
                 Your account has been activated
             </p>

@@ -28,20 +28,17 @@ const ActivationPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
-    const { data, error, isLoading, refetch } = useActivateUserQuery(
+    const { data, error, isSuccess, isLoading } = useActivateUserQuery(
         { token: token || "" },
-        { skip: true }
+        { skip: !token }
     );
 
     const apiError = (error as { data?: ApiError } | undefined)?.data;
     const errorMessage = apiError && errorMessages[apiError.error];
 
-
-    React.useEffect(() => {
-        if (token) refetch()
-    }, [token]);
-
     if (isLoading) return <Loader />;
+
+    console.log('@@@@@', isSuccess)
 
     return (
         <div className="min-h-screen max-h-screen flex">
@@ -67,7 +64,7 @@ const ActivationPageContent: React.FC = () => {
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20 overflow-y-scroll">
                 {errorMessage && <FailedOperation message={errorMessage} />}
-                {data && <SuccessfullOperation />}
+                {isSuccess && <SuccessfullOperation />}
             </div>
         </div>
     );
