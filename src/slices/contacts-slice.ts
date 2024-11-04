@@ -52,7 +52,7 @@ const contactsSlice = createSlice({
                 contactsApi.endpoints.sendContactDetails.matchFulfilled,
                 (state, action) => {
                     state.loading = false;
-                    toast.success("Successfull operation!")
+                    // toast.success("Successfull operation!")
                 }
             )
             .addMatcher(

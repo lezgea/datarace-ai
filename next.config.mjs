@@ -18,7 +18,7 @@ const nextConfig = {
         includePaths: [path.join(__dirname, 'src/styles')],
     },
     images: {
-        domains: ['beta.datarace.ai'],
+        domains: ['api.datarace.ai'],
     },
     webpack(config) {
         config.module.rules.push({

@@ -5,9 +5,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useRegisterUserMutation } from '@api/user-api';
 import { toast } from 'react-toastify';
-// import { EmailSent } from '../email-sent';
 import { useLocale, useTranslations } from 'next-intl';
 import { useSendContactDetailsMutation } from '@api/contact-api';
 
@@ -42,18 +40,14 @@ export const ContactForm: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            await sendContactDetails(data).unwrap();
-            toast.success("We have received your data and will get back to you shortly!");
+            await sendContactDetails(data);
+            toast.success("Success! We have received your data and will get back to you shortly!");
             reset();
         } catch (err: any) {
             console.error('Unknown error:', err);
-            toast.error(err.data?.message || 'An unexpected error occurred');
-            console.log('@@@@', err)
+            toast.error(err.data?.message || err);
         }
     };
-
-
-    // if (emailSent) return <EmailSent />
 
 
     return (
