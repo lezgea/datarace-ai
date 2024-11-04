@@ -44,7 +44,6 @@ const ActivationPageContent: React.FC = () => {
 
     if (isLoading) return <Loader />;
 
-    console.log('@@@@@', data);
 
     return (
         <div className="min-h-screen max-h-screen flex">
