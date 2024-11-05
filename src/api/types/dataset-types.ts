@@ -34,6 +34,7 @@ export interface IDatasetCreateRequest {
     usability?: number,
     datasetImageId?: number | null,
     datasetProfileImageId?: number,
+    // datasetFileDownloadDto?: IDatasetFilesDto[],
 }
 
 
@@ -57,4 +58,5 @@ export interface IDatasetUpdateRequest {
     visibility?: string,
     usability?: number,
     datasetProfileImageId?: number | null,
+    datasetFileDownloadDto: number[] | [],
 }

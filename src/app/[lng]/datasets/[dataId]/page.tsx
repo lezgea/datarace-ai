@@ -60,7 +60,7 @@ const DatasetDetails: React.FC = () => {
                         </h1>
                     </section>
                     <section className="p-8 gap-8 rounded-2xl border border-gray-30">
-                        <p>{datasetInfo?.description}</p>
+                        <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
                     </section>
                     <section>
                         <DatasetFiles
@@ -77,7 +77,7 @@ const DatasetDetails: React.FC = () => {
                 visible={isSidebarOpen}
                 setSidebarOpen={setSidebarOpen}
             />
-        </div>
+        </div >
     );
 };
 

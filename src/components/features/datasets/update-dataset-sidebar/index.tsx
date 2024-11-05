@@ -56,6 +56,10 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
         try {
             await updateDataset({
                 dataId: dataId as string,
+                datasetFileDownloadDto:
+                    !!datasetInfo?.datasetFileDownloadDto?.length
+                        ? [...datasetInfo?.datasetFileDownloadDto?.map(item => item.id)]
+                        : [],
                 ...data
             }).unwrap();
             toast.success('Dataset has been updated!');
@@ -83,7 +87,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
         }
     }, [datasetInfo])
 
-    console.log('@@@@@@', imageId)
+    console.log('@@@@@@', datasetInfo)
     React.useEffect(() => {
         setValue('datasetProfileImageId', imageId || undefined)
     }, [imageId])
@@ -100,7 +104,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                 onClick={(e) => e.stopPropagation()}
             >
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="realtive px-5 text-start space-y-1 overflow-auto space-y-5">
+                    <div className="realtive px-5 text-start space-y-1 overflow-auto space-y-5 mb-40">
                         <DatasetImageUploader setImageId={setImageId} image={datasetInfo?.imageUrl || ''} />
                         <div className="space-y-5 select-none">
                             <FormInput
@@ -130,12 +134,12 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                     PUBLIC
                                 </div>
                             </div>
-                            <DatasetFiles
+                            {/* <DatasetFiles
                                 datasetId={datasetId}
                                 isEditable={datasetInfo?.isEditable}
                                 files={datasetInfo?.datasetFileDownloadDto}
                                 refetch={refetch}
-                            />
+                            /> */}
                         </div>
                     </div>
                     <div className="py-3 px-5 flex w-full gap-3 border-t">

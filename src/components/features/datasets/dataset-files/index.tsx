@@ -108,53 +108,54 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
 
     return (
         <section className="space-y-5 py-5 border-gray-200">
-            <h2 className="text-2xl font-semibold text-black dark:text-white">
-                Files
-            </h2>
-
             {
                 !!files?.length &&
-                <div className="overflow-x-auto border rounded-2xl">
-                    <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
-                        {/* Table Header */}
-                        <thead className="text-gray-600">
-                            <tr>
-                                <th className="py-3 px-6 text-left font-semibold">Id</th>
-                                <th className="py-3 px-6 text-left font-semibold">Filename</th>
-                                <th className="py-3 px-6 text-left font-semibold">Type</th>
-                                <th className="py-3 px-6 text-left font-semibold"></th>
-                            </tr>
-                        </thead>
-
-                        {/* Table Body */}
-                        <tbody>
-                            {files?.map((row: any, index: number) => (
-                                <tr
-                                    key={row.id}
-                                    className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                                        }`}
-                                >
-                                    <td className="py-3 px-6">{row.id}</td>
-                                    <td className="w-full py-3 px-6">{row.fileName}</td>
-                                    <td className="w-full py-3 px-6">{row.fileType}</td>
-                                    <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" >
-                                        <div className='flex space-x-6'>
-                                            <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
-                                                Download
-                                            </div>
-                                            {
-                                                isEditable &&
-                                                <div onClick={() => onDeleteFile(row.id)}>
-                                                    <TrashIcon />
-                                                </div>
-                                            }
-                                        </div>
-                                    </td>
+                <>
+                    <h2 className="text-2xl font-semibold text-black dark:text-white">
+                        Files
+                    </h2>
+                    <div className="overflow-x-auto border rounded-2xl">
+                        <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
+                            {/* Table Header */}
+                            <thead className="text-gray-600">
+                                <tr>
+                                    <th className="py-3 px-6 text-left font-semibold">Id</th>
+                                    <th className="py-3 px-6 text-left font-semibold">Filename</th>
+                                    <th className="py-3 px-6 text-left font-semibold">Type</th>
+                                    <th className="py-3 px-6 text-left font-semibold"></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+
+                            {/* Table Body */}
+                            <tbody>
+                                {files?.map((row: any, index: number) => (
+                                    <tr
+                                        key={row.id}
+                                        className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                                            }`}
+                                    >
+                                        <td className="py-3 px-6">{row.id}</td>
+                                        <td className="w-full py-3 px-6">{row.fileName}</td>
+                                        <td className="w-full py-3 px-6">{row.fileType}</td>
+                                        <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" >
+                                            <div className='flex space-x-6'>
+                                                <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
+                                                    Download
+                                                </div>
+                                                {
+                                                    isEditable &&
+                                                    <div onClick={() => onDeleteFile(row.id)}>
+                                                        <TrashIcon />
+                                                    </div>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </>
             }
 
             {
