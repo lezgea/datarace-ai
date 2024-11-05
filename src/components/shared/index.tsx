@@ -11,3 +11,4 @@ export * from './no-data';
 export * from './auth-modal';
 export * from './terms-modal';
 export * from './footer-terms-modal';
+export * from './text-editor';

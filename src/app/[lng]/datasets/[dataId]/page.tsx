@@ -41,7 +41,7 @@ const DatasetDetails: React.FC = () => {
                         datasetInfo?.isEditable &&
                         <button
                             aria-label="Upload Dataset"
-                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                             onClick={() => setSidebarOpen(true)}
                         >
                             Edit Dataset
@@ -59,11 +59,9 @@ const DatasetDetails: React.FC = () => {
                             {datasetInfo?.title}
                         </h1>
                     </section>
-
                     <section className="p-8 gap-8 rounded-2xl border border-gray-30">
                         <p>{datasetInfo?.description}</p>
                     </section>
-
                     <section>
                         <DatasetFiles
                             datasetId={datasetId}

@@ -9,7 +9,7 @@ import { UseFormSetValue } from 'react-hook-form';
 
 interface ImageUploaderProps {
     image?: string,
-    setImageId: (val: number) => void,
+    setImageId: (val: number | null) => void,
 }
 
 const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId }) => {
@@ -36,15 +36,20 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId 
         }
     };
 
+    const onDeleteImage = () => {
+        setInitialImage('');
+        setImageId(null);
+    }
+
     React.useEffect(() => {
         if (image) setInitialImage(image);
     }, [image])
 
     return (
         <div>
-            <label className="block font-semibold text-gray-900">
+            {/* <label className="block font-semibold text-gray-900">
                 Image Upload
-            </label>
+            </label> */}
             {
                 (uploadedImage || initialImage) ?
                     <>
@@ -68,7 +73,7 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId 
                                     />
                             }
                             <button
-                                onClick={() => setInitialImage('')}
+                                onClick={onDeleteImage}
                                 className="absolute z-2330 w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark shadow-neutral-300 focus:shadow-none animate-button"
                             >
                                 Delete Image

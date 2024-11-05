@@ -107,7 +107,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
 
 
     return (
-        <section className="space-y-5 border-t py-10 border-gray-200">
+        <section className="space-y-5 py-5 border-gray-200">
             <h2 className="text-2xl font-semibold text-black dark:text-white">
                 Files
             </h2>

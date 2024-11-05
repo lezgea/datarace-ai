@@ -2,6 +2,7 @@ export interface IDataset {
     id: number | string,
     title: string,
     description: string,
+    imageId?: number,
     imageUrl?: string | null,
     visibility?: string,
     isEditable?: boolean,
@@ -31,7 +32,8 @@ export interface IDatasetCreateRequest {
     description: string,
     visibility?: string,
     usability?: number,
-    datasetImageId?: number,
+    datasetImageId?: number | null,
+    datasetProfileImageId?: number,
 }
 
 
@@ -54,5 +56,5 @@ export interface IDatasetUpdateRequest {
     description: string,
     visibility?: string,
     usability?: number,
-    datasetImageId?: number,
+    datasetProfileImageId?: number | null,
 }

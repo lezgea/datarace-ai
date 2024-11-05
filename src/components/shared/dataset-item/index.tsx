@@ -14,7 +14,6 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
     let { id, title, description, visibility, userDto, datasetFileDownloadDto } = props
     const imageUrl = props.imageUrl || "svg/noimg.svg";
 
-
     return (
         <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none">
             <div className="relative overflow-hidden">
