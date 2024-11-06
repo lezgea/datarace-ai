@@ -114,7 +114,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                     <h2 className="text-2xl font-semibold text-black dark:text-white">
                         Files
                     </h2>
-                    <div className="overflow-x-auto border rounded-2xl">
+                    <div className="overflow-x-auto border rounded-2xl bg-white">
                         <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
                             {/* Table Header */}
                             <thead className="text-gray-600">

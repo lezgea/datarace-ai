@@ -59,7 +59,7 @@ const DatasetDetails: React.FC = () => {
                             {datasetInfo?.title}
                         </h1>
                     </section>
-                    <section className="p-8 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-8 gap-8 rounded-2xl border border-gray-30 bg-white">
                         <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
                     </section>
                     <section>
