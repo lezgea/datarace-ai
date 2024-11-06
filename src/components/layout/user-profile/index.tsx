@@ -84,9 +84,9 @@ export const UserProfile: React.FC<IUserProfileProps> = () => {
 
     if (!isAuthenticated) {
         return (
-            <div className="flex space-x-3">
+            <div className="flex space-x-1 md:space-x-3">
                 <Link href={`/${lng}/sign-in`}>
-                    <button type="button" className="inline-flex w-auto text-center items-center px-4 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                    <button type="button" className="inline-flex w-auto text-center items-center px-3 md:px-4 py-2 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
                         {t('signIn')}
                     </button>
                 </Link>

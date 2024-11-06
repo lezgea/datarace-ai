@@ -25,7 +25,7 @@ const DatasetDetails: React.FC = () => {
 
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen px-5 flex flex-col">
             <div className="container mx-auto py-[6rem] space-y-5">
                 {/* Breadcrumb */}
                 <div className="flex justify-between">
