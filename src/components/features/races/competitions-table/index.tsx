@@ -69,6 +69,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         return <CompetitionsSkeleton />;
     }
 
+
     return (
         <>
             <div className="flex justify-between">

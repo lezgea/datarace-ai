@@ -71,6 +71,7 @@ export interface ICompetition {
     joinAvailable: boolean,
     uploadAvailable: boolean,
     currencySymbol: string,
+    tags?: { id?: number, name: string }[],
 }
 
 export interface ICompetitionsResponse {

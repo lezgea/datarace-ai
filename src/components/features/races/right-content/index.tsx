@@ -63,37 +63,33 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
                         <span className="text-xl font-medium">{t('prize')}</span>
                     </div>
-                    <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
+                    <div className="flex items-center border border-primaryLight rounded-xl px-6 py-4 space-x-3">
                         <CoinsIcon />
-                        <p className="text-xl font-regmed text-primary">{competitionInfo?.currencySymbol} {competitionInfo?.awardAmount}</p>
+                        <p className="text-2xl font-regmed text-primary">{competitionInfo?.currencySymbol} {competitionInfo?.awardAmount}</p>
                     </div>
-                    <div className="inline-flex items-center border border-primaryLight bg-primaryExtra rounded-xl px-6 py-4 space-x-3">
+                    <div className="flex items-center border border-primaryLight rounded-xl px-6 py-4 space-x-3">
                         <CertificateIcon />
-                        <p className="text-md text-primary">{t('awardMedals')}</p>
+                        <p className="text-md text-gray-500">{t('awardMedals')}</p>
                     </div>
                 </div>
 
                 {/* Tags */}
-                {/* <div className="space-y-2">
+                <div className="space-y-2">
                     <div className="flex space-x-3 mb-5">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
                         <span className="text-xl font-medium">Tags</span>
                     </div>
                     <div className="space-y-2">
-                        <div className="inline-block text-sm px-4 py-2 text-[1rem] rounded-full border border-dark space-x-2 mr-2">
-                            <span className="text-primaryLight">#</span>
-                            <span>Languages</span>
-                        </div>
-                        <div className="inline-block text-sm px-4 py-2 text-[1rem] rounded-full border border-dark space-x-2 mr-2">
-                            <span className="text-primaryLight">#</span>
-                            <span>Learn</span>
-                        </div>
-                        <div className="inline-block text-sm px-4 py-2 text-[1rem] rounded-full border border-dark space-x-2 mr-2">
-                            <span className="text-primaryLight">#</span>
-                            <span>Log loss</span>
-                        </div>
+                        {
+                            competitionInfo?.tags?.map((tag, index) =>
+                                <div className="inline-block text-sm px-4 py-2 text-[1rem] rounded-lg space-x-2 mr-2 bg-gray-100">
+                                    <span className="text-primaryLight">#</span>
+                                    <span>{tag.name}</span>
+                                </div>
+                            )
+                        }
                     </div>
-                </div> */}
+                </div>
 
                 {/* Table of Content */}
                 {/* <div className="flex flex-col space-y-3">
