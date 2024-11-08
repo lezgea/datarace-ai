@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import DatasetItem from '@components/shared/dataset-item';
 import { NoData } from '@components/shared';
+import { useDispatch } from 'react-redux';
+import { setDatasetCount } from '@slices/dataset-slice';
 
 
 
@@ -19,7 +21,8 @@ interface ICompetitionsTable {
 export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
     const t = useTranslations();
 
-    const { loading: datasetsLoading } = useSelector((state: RootState) => state.datasets);
+    const dispatch = useDispatch();
+    const { loading: datasetsLoading, datasetsCount } = useSelector((state: RootState) => state.datasets);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
@@ -31,6 +34,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
             data: { page: currentPage, count: itemsPerPage },
         }).then((response) => {
             if (response?.data?.totalElements) {
+                dispatch(setDatasetCount(response?.data?.totalElements));
                 setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
             } else {
                 setTotalPages(1)
@@ -51,6 +55,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         }
     };
 
+    console.log('@@@@', datasetsData)
 
     if (datasetsLoading || isLoading) {
         return <CompetitionsSkeleton />;

@@ -5,6 +5,7 @@ import { IDatasetsResponse } from '@api/types/dataset-types';
 
 interface IDatasetState {
     datasets: IDatasetsResponse | [],
+    datasetsCount: number,
     loading: boolean,
     error?: string | boolean,
     success?: string | boolean,
@@ -13,6 +14,7 @@ interface IDatasetState {
 
 const initialState: IDatasetState = {
     datasets: [],
+    datasetsCount: 0,
     loading: false,
     error: false,
     success: false,
@@ -23,9 +25,9 @@ const datasetSlice = createSlice({
     name: 'datasets',
     initialState,
     reducers: {
-        // setSelectedCategory: (state, action: PayloadAction<number>) => {
-        //     state.selectedCategory = action.payload;
-        // },
+        setDatasetCount: (state, action: PayloadAction<number>) => {
+            state.datasetsCount = action.payload;
+        },
     },
     extraReducers: (builder) => {
         // GET ALL DATASETS QUERY
@@ -80,6 +82,6 @@ const datasetSlice = createSlice({
     },
 });
 
-export const { } = datasetSlice.actions;
+export const { setDatasetCount } = datasetSlice.actions;
 
 export default datasetSlice.reducer;
