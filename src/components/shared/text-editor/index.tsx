@@ -47,6 +47,7 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
                 ref={editor}
                 value={initialValue || ''}
                 config={config}
+                className="bg-primary"
                 onBlur={handleEditorChange}
                 onChange={handleEditorChange}
             />
