@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import JoditEditor from 'jodit-react';
+
 
 interface ITextEditorProps {
     label?: string;
@@ -15,6 +17,9 @@ interface ITextEditorProps {
 const TextEditor: React.FC<ITextEditorProps> = (props) => {
     const { name, label, initialValue, register, setValue } = props;
 
+    const editor = React.useRef(null);
+    const [content, setContent] = React.useState<string>('');
+
     // Register the field with react-hook-form
     useEffect(() => {
         register(name);
@@ -24,6 +29,16 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
         setValue(name, content);
     };
 
+    const config = {
+        readonly: false,
+        height: 400,
+        // toolbarButtonSize: 'middle',
+        buttons: ['bold', 'italic', 'underline', 'link', 'unlink', 'source'],
+        uploader: {
+            insertImageAsBase64URI: true,
+        },
+    };
+
     return (
         <>
             {label && (
@@ -31,7 +46,18 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
                     {label}
                 </label>
             )}
-            <Editor
+            <JoditEditor
+                // id={name}
+                ref={editor}
+                value={initialValue || ''}
+                config={config}
+                // tabIndex={1} // tabIndex of textarea
+                onBlur={handleEditorChange}
+                // initialValue={initialValue}
+                onChange={handleEditorChange}
+            />
+
+            {/* <Editor
                 id={name}
                 apiKey='ph415vw3hy5asd60xywrf8et7mdh21vf9bjwezyld0gnou6v'
                 init={{
@@ -61,7 +87,7 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
                 }}
                 initialValue={initialValue}
                 onEditorChange={handleEditorChange} // Capture editor content changes
-            />
+            /> */}
         </>
     );
 };
