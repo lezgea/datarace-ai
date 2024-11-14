@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IDataset, IDatasetCreateCommentRequest, IDatasetCreateRequest, IDatasetInfoRequest, IDatasetsRequest, IDatasetsResponse, IDatasetUpdateRequest } from './types/dataset-types';
+import { IDataset, IDatasetCreateCommentRequest, IDatasetCreateRequest, IDatasetInfoRequest, IDatasetsRequest, IDatasetsResponse, IDatasetUpdateRequest, IGetDatasetCommentsRequest, IGetDatasetCommentsResponse } from './types/dataset-types';
 import { IMessageResponse } from './types/competition-types';
 
 
 export const datasetsApi = createApi({
     reducerPath: 'datasetsApi',
     baseQuery: axiosBaseQuery,
-    tagTypes: ['AllDatasets', 'MyDatasets', 'DatasetInfo'],
+    tagTypes: ['AllDatasets', 'MyDatasets', 'DatasetInfo', 'DatasetComments'],
     endpoints: (builder) => ({
         getAllDatasets: builder.query<IDatasetsResponse, IDatasetsRequest>({
             query: ({ data }) => ({
@@ -61,7 +61,15 @@ export const datasetsApi = createApi({
                 method: 'POST',
                 data: data,
             }),
-            // invalidatesTags: ['AllDatasets', 'MyDatasets'],
+            invalidatesTags: ['DatasetComments'],
+        }),
+        getDatasetComments: builder.query<IGetDatasetCommentsResponse, IGetDatasetCommentsRequest>({
+            query: ({ id }) => ({
+                url: `/datasets/${id}/comment`,
+                method: 'GET',
+                params: {},
+            }),
+            providesTags: ['DatasetComments'],
         }),
     }),
 });
@@ -74,4 +82,5 @@ export const {
     useUpdateDatasetMutation,
     useDeleteDatasetMutation,
     useCreateDatasetCommentMutation,
+    useLazyGetDatasetCommentsQuery,
 } = datasetsApi;

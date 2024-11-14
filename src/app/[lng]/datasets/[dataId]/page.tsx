@@ -71,8 +71,6 @@ const DatasetDetails: React.FC = () => {
                         <DatasetComments
                             datasetId={datasetId}
                             isEditable={datasetInfo?.isEditable}
-                            files={datasetInfo?.datasetFileDownloadDto}
-                            refetch={refetch}
                         />
                     </section>
                 </main>
