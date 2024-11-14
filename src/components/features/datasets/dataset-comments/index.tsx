@@ -1,96 +1,33 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
-import { saveAs } from 'file-saver';
-import { DocUpload, TrashIcon } from '@assets/icons';
-import { useUploadDatasetFileMutation } from '@api/upload-api';
 import { IDatasetFilesDto } from '@api/types/dataset-types';
-import { useDeleteDatasetMutation } from '@api/datasets-api';
+import { useCreateDatasetCommentMutation, useDeleteDatasetMutation } from '@api/datasets-api';
+import EmojiPicker from 'emoji-picker-react';
 
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://api.datarace.ai/v1';
 
 interface IDatasetCommentsProps {
     datasetId: number | string | undefined,
     isEditable?: boolean,
-    files?: IDatasetFilesDto[],
-    refetch: () => void,
 }
 
-export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ files, datasetId, isEditable, refetch }) => {
+export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, isEditable }) => {
     // const [triggerGetFiles, { data: files, isLoading: datasetsLoading }] = useLazyGetOriginalFilesQuery();
-    const [uploadDatasetFile] = useUploadDatasetFileMutation();
     const [deleteDatasetFile] = useDeleteDatasetMutation();
+    const [newComment, setNewComment] = React.useState<string>('');
+    const [createDatasetComment, { isLoading, error }] = useCreateDatasetCommentMutation();
 
 
-    const handleDownload = async (fileName: string, datasetFileId: number | undefined) => {
+    const onCreateComment = async () => {
         try {
-            const token = Cookies.get('dtr-dash-token');
-            const response = await fetch(BASE_URL + `/files/download/dataset/${datasetFileId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'text/csv',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to download the file');
-            }
-
-            const blob = await response.blob();
-            saveAs(blob, `${fileName}`);
-        } catch (error) {
-            console.error('Error downloading the file:', error);
-        }
-    };
-
-    const handleOriginalFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const uploadedFile = event.target.files?.[0];
-        if (uploadedFile) {
-            try {
-                const formData = new FormData();
-                formData.append("file", uploadedFile);
-
-                await uploadDatasetFile({
-                    datasetId: datasetId,
-                    file: formData,
-                }).unwrap();
-                toast.success("File has been uploaded successfully!");
-                await refetch();
-            } catch (error) {
-                toast.error("Failed to save the file.", {
-                    position: "bottom-left",
-                });
-                console.error("Upload error: ", error);
-            } finally {
-
-            }
-        }
-    };
-
-    const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        const droppedFile = event.dataTransfer.files[0];
-        if (droppedFile) {
-            try {
-                const formData = new FormData();
-                formData.append("file", droppedFile);
-
-                await uploadDatasetFile({
-                    datasetId: datasetId,
-                    file: formData,
-                }).unwrap();
-                toast.success("Solution has been saved successfully!", { position: "bottom-left" });
-
-            } catch (error) {
-                toast.error("Failed to save the file.", {
-                    position: "bottom-left",
-                });
-                console.error("Upload error: ", error);
-            } finally {
-
-            }
+            await createDatasetComment({
+                id: datasetId,
+                data: {
+                    text: newComment
+                }
+            }).unwrap();
+        } catch (err: any) {
+            console.error('Unknown error:', err);
+            toast.error(err.data?.message || 'An unexpected error occurred');
         }
     };
 
@@ -111,46 +48,30 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ files, datase
             <h2 className="text-2xl font-semibold text-black dark:text-white">
                 Comments
             </h2>
-            <div className="overflow-x-auto border rounded-2xl bg-white">
-                <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
-                    {/* Table Header */}
-                    <thead className="text-gray-600">
-                        <tr>
-                            <th className="py-3 px-6 text-left font-semibold">Id</th>
-                            <th className="py-3 px-6 text-left font-semibold">Filename</th>
-                            <th className="py-3 px-6 text-left font-semibold">Type</th>
-                            <th className="py-3 px-6 text-left font-semibold"></th>
-                        </tr>
-                    </thead>
-
-                    {/* Table Body */}
-                    <tbody>
-                        {files?.map((row: any, index: number) => (
-                            <tr
-                                key={row.id}
-                                className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                                    }`}
-                            >
-                                <td className="py-3 px-6">{row.id}</td>
-                                <td className="w-full py-3 px-6">{row.fileName}</td>
-                                <td className="w-full py-3 px-6">{row.fileType}</td>
-                                <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" >
-                                    <div className='flex space-x-6'>
-                                        <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
-                                            Download
-                                        </div>
-                                        {
-                                            isEditable &&
-                                            <div onClick={() => onDeleteFile(row.id)}>
-                                                <TrashIcon />
-                                            </div>
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className="space-y-2 flex flex-col items-end">
+                <textarea
+                    value={newComment}
+                    placeholder={"What's on your mind ?"}
+                    className={`w-full h-[100px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            onCreateComment();
+                            setNewComment('');
+                        }
+                    }}
+                    onChange={(e) => setNewComment(e.target.value)}
+                />
+                <button
+                    onClick={onCreateComment}
+                    className="h-[40px] font-regmed bg-primary text-md text-white px-6 py-1 rounded-lg ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none transition duration-200 ease-in-out transform"
+                >
+                    Comment
+                </button>
+                {/* <EmojiPicker
+                // value={newComment}
+                // onEmojiClick={(val) => setNewComment(val)}
+                /> */}
             </div>
         </section>
     )

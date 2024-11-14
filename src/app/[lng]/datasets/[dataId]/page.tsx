@@ -49,7 +49,7 @@ const DatasetDetails: React.FC = () => {
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
 
                 {/* Main Content */}
-                <main id="#main-content" className="overflow-hidden space-y-5">
+                <main id="#main-content" className="space-y-5">
                     <section className="relative border overflow-hidden rounded-2xl">
                         <img src={datasetInfo?.imageUrl || "/svg/noimg_large.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
@@ -67,7 +67,6 @@ const DatasetDetails: React.FC = () => {
                             refetch={refetch}
                         />
                     </section>
-
                     <section>
                         <DatasetComments
                             datasetId={datasetId}

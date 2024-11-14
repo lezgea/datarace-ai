@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { datasetsApi } from '@api/datasets-api';
-import { IDatasetsResponse } from '@api/types/dataset-types';
+import { IDatasetCreateCommentResponse, IDatasetsResponse } from '@api/types/dataset-types';
 
 
 interface IDatasetState {
@@ -78,6 +78,29 @@ const datasetSlice = createSlice({
                 }
             );
 
+        // POST DATASET COMMENT MUTATION
+        builder
+            .addMatcher(
+                datasetsApi.endpoints.createDatasetComment.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.createDatasetComment.matchFulfilled,
+                (state, action: PayloadAction<IDatasetCreateCommentResponse>) => {
+                    state.loading = false;
+                    // state.datasets = action.payload;
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.createDatasetComment.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to post the comment';
+                }
+            );
 
     },
 });

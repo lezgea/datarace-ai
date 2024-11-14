@@ -60,3 +60,16 @@ export interface IDatasetUpdateRequest {
     datasetProfileImageId?: number | null,
     datasetFileDownloadDto: number[] | [],
 }
+
+
+export interface IDatasetCreateCommentRequest {
+    id: string | number | undefined,
+    data: {
+        repliedComment?: {
+            commentId: number,
+        },
+        text: string,
+    }
+}
+
+export interface IDatasetCreateCommentResponse { }
