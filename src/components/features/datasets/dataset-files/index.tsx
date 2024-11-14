@@ -8,7 +8,7 @@ import { IDatasetFilesDto } from '@api/types/dataset-types';
 import { useDeleteDatasetMutation } from '@api/datasets-api';
 
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://beta.datarace.ai/v1';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://api.datarace.ai/v1';
 
 interface IOriginalFilesProps {
     datasetId: number | string | undefined,
@@ -107,7 +107,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
 
 
     return (
-        <section className="space-y-5 py-5 border-gray-200">
+        <section className="space-y-2 py-2 border-gray-200">
             {
                 !!files?.length &&
                 <>

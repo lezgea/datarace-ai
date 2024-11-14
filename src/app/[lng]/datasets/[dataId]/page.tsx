@@ -1,16 +1,13 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import TabSelects from '@components/shared/tab-selects';
-import { GeneralSection } from '@components/features/races/general-section';
-import { DatasetsSection, RigthContent, ScoreBoardSection } from '@components/features';
-import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useGetDatasetInfoQuery } from '@api/datasets-api';
 import { UpdateDatasetSidebar } from '@components/features/datasets/update-dataset-sidebar';
 import { DatasetFiles } from '@components/features/datasets/dataset-files';
+import { DatasetComments } from '@components/features';
 
 
 const DatasetDetails: React.FC = () => {
@@ -53,9 +50,9 @@ const DatasetDetails: React.FC = () => {
 
                 {/* Main Content */}
                 <main id="#main-content" className="overflow-hidden space-y-5">
-                    <section className="relative border rounded-2xl">
+                    <section className="relative border overflow-hidden rounded-2xl">
                         <img src={datasetInfo?.imageUrl || "/svg/noimg_large.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
-                        <h1 className="absolute bottom-5 left-5 text-2xl font-regmed bg-primary px-7 py-2 rounded-lg backdrop-blur-xl bg-white/60">
+                        <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
                             {datasetInfo?.title}
                         </h1>
                     </section>
@@ -64,6 +61,15 @@ const DatasetDetails: React.FC = () => {
                     </section>
                     <section>
                         <DatasetFiles
+                            datasetId={datasetId}
+                            isEditable={datasetInfo?.isEditable}
+                            files={datasetInfo?.datasetFileDownloadDto}
+                            refetch={refetch}
+                        />
+                    </section>
+
+                    <section>
+                        <DatasetComments
                             datasetId={datasetId}
                             isEditable={datasetInfo?.isEditable}
                             files={datasetInfo?.datasetFileDownloadDto}
