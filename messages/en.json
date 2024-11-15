@@ -133,5 +133,8 @@
   "allDatasets": "All datasets",
   "createDataset": "Create Dataset",
   "downloadDataset": "Download Dataset",
-  "myDatasets": "My Datasets"
+  "myDatasets": "My Datasets",
+  "edit": "Edit",
+  "comment": "Comment",
+  "noComments": "No comments yet"
 }

@@ -68,11 +68,11 @@ export interface IDatasetComment {
     text: string,
     userId: number,
     datasetId: number,
-    isEditable: true,
+    isEditable?: true,
     repliedCommentDto: string,
     fullName: string,
     nickname: string,
-    userImageUrl: string
+    userImageUrl: string,
 }
 
 export interface IDatasetCreateCommentRequest {
@@ -93,3 +93,7 @@ export interface IGetDatasetCommentsRequest {
 }
 
 export type IGetDatasetCommentsResponse = IDatasetComment[]
+
+export interface IDeleteDatasetCommentRequest {
+    commentId: string | number | undefined,
+}

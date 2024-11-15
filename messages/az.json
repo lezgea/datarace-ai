@@ -133,5 +133,8 @@
   "allDatasets": "Bütün datasetlər",
   "createDataset": "Dataset Yarat",
   "downloadDataset": "Dataseti Endir",
-  "myDatasets": "Mənim Datasetlərim"
+  "myDatasets": "Mənim Datasetlərim",
+  "edit": "Düzəlt",
+  "comment": "Şərh",
+  "noComments": "Hələ heç bir şərh yoxdur"
 }
