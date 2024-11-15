@@ -50,13 +50,13 @@ export const Comment: React.FC<ICommmentProps> = (props) => {
                         <>
                             <div
                                 onClick={() => { }}
-                                className="text-xs text-gray-500 cursor-pointer font-regmed hover:text-primary"
+                                className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
                             >
                                 {t('edit')}
                             </div>
                             <div
                                 onClick={() => setAskModal(true)}
-                                className="text-xs text-gray-500 cursor-pointer font-regmed hover:text-primary"
+                                className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
                             >
                                 {t('delete')}
                             </div>
