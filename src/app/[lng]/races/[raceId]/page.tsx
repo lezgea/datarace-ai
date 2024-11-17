@@ -8,6 +8,7 @@ import { DatasetsSection, RigthContent, ScoreBoardSection } from '@components/fe
 import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
+import { CompetitionComments } from '@components/features/races/competition-comments';
 
 
 const RaceDetails: React.FC = () => {
@@ -49,7 +50,7 @@ const RaceDetails: React.FC = () => {
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
 
                 {/* Main Content */}
-                <main id="#main-content" className="overflow-hidden space-y-5">
+                <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
                         <img src={competitionInfo?.imageUrl || "/svg/noimg_large.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <h1 className="absolute bottom-5 left-5 text-2xl font-regmed bg-primary px-7 py-2 rounded-lg backdrop-blur-xl bg-white/60">
@@ -65,6 +66,12 @@ const RaceDetails: React.FC = () => {
 
                         {/* Right Sidebar */}
                         <RigthContent raceId={competitionId} />
+                    </section>
+                    <section>
+                        <CompetitionComments
+                            competitionId={competitionId}
+                            isEditable={competitionInfo?.isEditable}
+                        />
                     </section>
                 </main>
             </div>

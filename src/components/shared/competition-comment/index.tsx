@@ -1,13 +1,14 @@
-import { useDeleteDatasetCommentMutation } from '@api/datasets-api';
-import { IDatasetComment } from '@api/types/dataset-types';
 import Image from 'next/image';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { ConfirmationModal } from '../confirmation-modal';
 import { useTranslations } from 'next-intl';
+import { ICompetitionComment } from '@api/types/competition-types';
+import { useDeleteCompetitionCommentMutation } from '@api/competition-api';
+import { CompetitionCommentEditModal } from '@components/features/races/competition-comment-edit-modal';
 
 
-interface ICommmentProps extends IDatasetComment { }
+interface ICommmentProps extends ICompetitionComment { }
 
 
 export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
@@ -16,7 +17,8 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
     const t = useTranslations();
 
     const [askModal, setAskModal] = React.useState<boolean>(false);
-    const [deleteComment] = useDeleteDatasetCommentMutation();
+    const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
+    const [deleteComment] = useDeleteCompetitionCommentMutation();
 
     const onDeleteComment = async () => {
         try {
@@ -49,7 +51,7 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                         isEditable &&
                         <>
                             <div
-                                onClick={() => { }}
+                                onClick={() => setShowEditModal(true)}
                                 className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
                             >
                                 {t('edit')}
@@ -65,6 +67,12 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                 </div>
             </div>
 
+            <CompetitionCommentEditModal
+                visible={showEditModal}
+                commentId={id}
+                commentText={text}
+                onClose={() => setShowEditModal(false)}
+            />
             <ConfirmationModal
                 visible={askModal}
                 onConfirm={onDeleteComment}

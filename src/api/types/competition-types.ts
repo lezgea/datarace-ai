@@ -71,6 +71,7 @@ export interface ICompetition {
     joinAvailable: boolean,
     uploadAvailable: boolean,
     currencySymbol: string,
+    isEditable?: boolean,
     tags?: { id?: number, name: string }[],
 }
 

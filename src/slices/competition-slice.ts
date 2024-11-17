@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { competitionApi } from '@api/competition-api';
-import { IAttendedCompetitionsResponse, ICompetition, ICompetitionsResponse, IMessageResponse, IScoreboardResponse } from '@api/types/competition-types';
+import { IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentResponse, ICompetitionsResponse, IMessageResponse, IScoreboardResponse } from '@api/types/competition-types';
 import { toast } from 'react-toastify';
 
 
@@ -155,6 +155,54 @@ const competitionSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to join competition';
+                }
+            );
+
+        // POST COMPETITION COMMENT MUTATION
+        builder
+            .addMatcher(
+                competitionApi.endpoints.createCompetitionComment.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.createCompetitionComment.matchFulfilled,
+                (state, action: PayloadAction<ICompetitionCreateCommentResponse>) => {
+                    state.loading = false;
+                    // state.datasets = action.payload;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.createCompetitionComment.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to post the comment';
+                }
+            );
+
+        // POST DATASET COMMENT MUTATION
+        builder
+            .addMatcher(
+                competitionApi.endpoints.updateCompetitionComment.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.updateCompetitionComment.matchFulfilled,
+                (state, action: PayloadAction<IMessageResponse>) => {
+                    state.loading = false;
+                    // state.datasets = action.payload;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.updateCompetitionComment.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to update the comment';
                 }
             );
     },
