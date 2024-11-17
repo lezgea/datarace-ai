@@ -53,7 +53,7 @@ const RaceDetails: React.FC = () => {
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
                         <img src={competitionInfo?.imageUrl || "/svg/noimg_large.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
-                        <h1 className="absolute bottom-5 left-5 text-2xl font-regmed bg-primary px-7 py-2 rounded-lg backdrop-blur-xl bg-white/60">
+                        <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
                             {competitionInfo?.name}
                         </h1>
                     </section>
