@@ -56,8 +56,29 @@ const DatasetDetails: React.FC = () => {
                             {datasetInfo?.title}
                         </h1>
                     </section>
-                    <section className="p-8 gap-8 rounded-2xl border border-gray-30 bg-white">
-                        <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
+                    <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
+                        <div className="lg:col-span-3 gap-8">
+                            <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
+                        </div>
+                        {/* Tags */
+                            !!datasetInfo?.tags?.length &&
+                            <div className="space-y-2">
+                                <div className="flex space-x-3 mb-5">
+                                    <div className="h-[30px] w-[2px] bg-primaryLight" />
+                                    <span className="text-xl font-medium">Tags</span>
+                                </div>
+                                <div className="space-y-2">
+                                    {
+                                        datasetInfo?.tags?.map((tag, index) =>
+                                            <div className="inline-block text-sm px-4 py-2 text-[1rem] rounded-lg space-x-2 mr-2 bg-gray-100">
+                                                <span className="text-primaryLight">#</span>
+                                                <span>{tag.name}</span>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        }
                     </section>
                     <section>
                         <DatasetFiles

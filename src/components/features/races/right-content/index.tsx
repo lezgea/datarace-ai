@@ -91,49 +91,6 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                     </div>
                 </div>
 
-                {/* Table of Content */}
-                {/* <div className="flex flex-col space-y-3">
-                    <div className="flex space-x-3 mb-3">
-                        <div className="h-[30px] w-[2px] bg-primaryLight" />
-                        <span className="text-xl font-medium">Table of content</span>
-                    </div>
-                    <label className="inline-flex items-center cursor-pointer">
-                        <input
-                            type="radio"
-                            className="h-4 w-4 text-primary"
-                            name="option"
-                            value="option1"
-                            checked={selectedOption === 'option1'}
-                            onChange={handleOptionChange}
-                        />
-                        <span className="ml-2 text-gray-700">Description</span>
-                    </label>
-
-                    <label className="inline-flex items-center cursor-pointer">
-                        <input
-                            type="radio"
-                            className="h-4 w-4 text-primary"
-                            name="option"
-                            value="option2"
-                            checked={selectedOption === 'option2'}
-                            onChange={handleOptionChange}
-                        />
-                        <span className="ml-2 text-gray-700">Evaluation</span>
-                    </label>
-
-                    <label className="inline-flex items-center cursor-pointer">
-                        <input
-                            type="radio"
-                            className="h-4 w-4 text-primary"
-                            name="option"
-                            value="option3"
-                            checked={selectedOption === 'option3'}
-                            onChange={handleOptionChange}
-                        />
-                        <span className="ml-2 text-gray-700">FAQ</span>
-                    </label>
-                </div> */}
-
                 {/* Join Button */
                     competitionInfo?.joinAvailable &&
                     <button
