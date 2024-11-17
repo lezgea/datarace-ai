@@ -7,6 +7,7 @@ export interface IDataset {
     visibility?: string,
     isEditable?: boolean,
     datasetFileDownloadDto?: IDatasetFilesDto[],
+    tags: { name: string }[],
     userDto: {
         email: string,
         fullName: string,
@@ -34,7 +35,7 @@ export interface IDatasetCreateRequest {
     usability?: number,
     datasetImageId?: number | null,
     datasetProfileImageId?: number,
-    // datasetFileDownloadDto?: IDatasetFilesDto[],
+    tags?: { name: string }[],
 }
 
 
@@ -59,6 +60,7 @@ export interface IDatasetUpdateRequest {
     usability?: number,
     datasetProfileImageId?: number | null,
     datasetFileDownloadDto: number[] | [],
+    tags?: { name: string }[],
 }
 
 

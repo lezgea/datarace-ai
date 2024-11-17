@@ -9,6 +9,7 @@ import { useCreateDatasetMutation } from '@api/datasets-api';
 import { toast } from 'react-toastify';
 import { IDatasetCreateRequest } from '@api/types/dataset-types';
 import TextEditor from '@components/shared/text-editor';
+import TagInput from '@components/shared/tag-input';
 
 
 interface IDatasetSidebarProps {
@@ -22,6 +23,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
     const t = useTranslations();
     const sidebarRef = React.useRef<HTMLDivElement>(null);
     const [imageId, setImageId] = React.useState<number | null>(0);
+    const [tags, setTags] = React.useState<{ name: string }[]>([]);
 
     const [createDataset, { isLoading, error }] = useCreateDatasetMutation();
 
@@ -47,7 +49,8 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
         try {
             await createDataset({
                 datasetImageId: imageId,
-                ...data
+                ...data,
+                tags
             }).unwrap();
             toast.success('Dataset has been created');
             setSidebarOpen(false);
@@ -111,6 +114,12 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                     PUBLIC
                                 </div>
                             </div>
+                            <TagInput
+                                label={`Tags`}
+                                tags={tags}
+                                setTags={setTags}
+                                placeholder="Press enter to add tags..."
+                            />
                         </div>
                     </div>
                     <div className="py-3 px-5 flex w-full gap-3 border-t">

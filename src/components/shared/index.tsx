@@ -14,3 +14,4 @@ export * from './footer-terms-modal';
 export * from './text-editor';
 export * from './dataset-comment';
 export * from './competition-comment';
+export * from './tag-input';

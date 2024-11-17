@@ -5,14 +5,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import DatasetImageUploader from '../dataset-image-uploader';
-import { useCreateDatasetMutation, useGetDatasetInfoQuery, useUpdateDatasetMutation } from '@api/datasets-api';
+import { useGetDatasetInfoQuery, useUpdateDatasetMutation } from '@api/datasets-api';
 import { toast } from 'react-toastify';
 import { IDatasetCreateRequest } from '@api/types/dataset-types';
-import { useUpdateUserMutation } from '@api/user-api';
 import { useParams } from 'next/navigation';
-import DatasetFileUploader from '../dataset-file-uploader';
-import { DatasetFiles } from '../dataset-files';
 import TextEditor from '@components/shared/text-editor';
+import TagInput from '@components/shared/tag-input';
 
 
 interface IDatasetSidebarProps {
@@ -30,6 +28,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
 
     const sidebarRef = React.useRef<HTMLDivElement>(null);
     const [imageId, setImageId] = React.useState<number | null>(null);
+    const [tags, setTags] = React.useState<{ name: string }[]>([]);
 
     const { data: datasetInfo, error: dataInfoError, isLoading: dataInfoLoading, refetch } = useGetDatasetInfoQuery({ id: dataId as string }, { skip: !dataId || !visible });
     const [updateDataset, { isLoading, error }] = useUpdateDatasetMutation();
@@ -60,7 +59,8 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                     !!datasetInfo?.datasetFileDownloadDto?.length
                         ? [...datasetInfo?.datasetFileDownloadDto?.map(item => item.id)]
                         : [],
-                ...data
+                ...data,
+                tags
             }).unwrap();
             toast.success('Dataset has been updated!');
             setSidebarOpen(false);
@@ -84,10 +84,11 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
             setValue('visibility', datasetInfo?.visibility);
             setValue('datasetProfileImageId', datasetInfo?.imageId);
             setImageId(datasetInfo.imageId || null);
+            setTags(datasetInfo.tags || []);
         }
     }, [datasetInfo])
 
-    console.log('@@@@@@', datasetInfo)
+
     React.useEffect(() => {
         setValue('datasetProfileImageId', imageId || undefined)
     }, [imageId])
@@ -134,12 +135,12 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                     PUBLIC
                                 </div>
                             </div>
-                            {/* <DatasetFiles
-                                datasetId={datasetId}
-                                isEditable={datasetInfo?.isEditable}
-                                files={datasetInfo?.datasetFileDownloadDto}
-                                refetch={refetch}
-                            /> */}
+                            <TagInput
+                                label={`Tags`}
+                                tags={tags}
+                                setTags={setTags}
+                                placeholder="Press enter to add tags..."
+                            />
                         </div>
                     </div>
                     <div className="py-3 px-5 flex w-full gap-3 border-t">
