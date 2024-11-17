@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IAttendedCompetitionsRequest, IAttendedCompetitionsResponse, ICompetition, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, IMessageResponse, IScoreboardRequest, IScoreboardResponse } from './types/competition-types';
+import { IAttendedCompetitionsRequest, IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentRequest, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, ICompetitionUpdateCommentRequest, IDeleteCompetitionCommentRequest, IGetCompetitionCommentsRequest, IGetCompetitionCommentsResponse, IMessageResponse, IScoreboardRequest, IScoreboardResponse } from './types/competition-types';
 
 
 export const competitionApi = createApi({
     reducerPath: 'competitionApi',
     baseQuery: axiosBaseQuery,
-    tagTypes: ['Competition'],
+    tagTypes: ['Competition', 'CompetitionComments'],
     endpoints: (builder) => ({
         getCompetitions: builder.query<ICompetitionsResponse, ICompetitionsRequest>({
             query: ({ categoryId, data }) => ({
@@ -43,6 +43,37 @@ export const competitionApi = createApi({
             }),
             invalidatesTags: ['Competition'],
         }),
+        createCompetitionComment: builder.mutation<IMessageResponse, ICompetitionCreateCommentRequest>({
+            query: ({ id, data }) => ({
+                url: `/competitions/${id}/comment`,
+                method: 'POST',
+                data: data,
+            }),
+            invalidatesTags: ['CompetitionComments'],
+        }),
+        getCompetitionComments: builder.query<IGetCompetitionCommentsResponse, IGetCompetitionCommentsRequest>({
+            query: ({ id }) => ({
+                url: `/competitions/${id}/comment`,
+                method: 'GET',
+                params: {},
+            }),
+            providesTags: ['CompetitionComments'],
+        }),
+        deleteCompetitionComment: builder.mutation<void, IDeleteCompetitionCommentRequest>({
+            query: ({ commentId }) => ({
+                url: `/competitions/comment/${commentId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['CompetitionComments'],
+        }),
+        updateCompetitionComment: builder.mutation<IMessageResponse, ICompetitionUpdateCommentRequest>({
+            query: ({ commentId, data }) => ({
+                url: `/competitions/comment/${commentId}`,
+                method: 'PUT',
+                data: data,
+            }),
+            invalidatesTags: ['CompetitionComments'],
+        }),
     }),
 });
 
@@ -52,4 +83,8 @@ export const {
     useJoinCompetitionMutation,
     useLazyGetAttendedCompetitionsQuery,
     useLazyGetScoreBoardQuery,
+    useCreateCompetitionCommentMutation,
+    useLazyGetCompetitionCommentsQuery,
+    useDeleteCompetitionCommentMutation,
+    useUpdateCompetitionCommentMutation,
 } = competitionApi;

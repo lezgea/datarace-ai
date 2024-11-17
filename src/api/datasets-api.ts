@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IDataset, IDatasetCreateCommentRequest, IDatasetCreateRequest, IDatasetInfoRequest, IDatasetsRequest, IDatasetsResponse, IDatasetUpdateRequest, IDeleteDatasetCommentRequest, IGetDatasetCommentsRequest, IGetDatasetCommentsResponse } from './types/dataset-types';
+import { IDataset, IDatasetCreateCommentRequest, IDatasetCreateRequest, IDatasetInfoRequest, IDatasetsRequest, IDatasetsResponse, IDatasetUpdateCommentRequest, IDatasetUpdateRequest, IDeleteDatasetCommentRequest, IGetDatasetCommentsRequest, IGetDatasetCommentsResponse } from './types/dataset-types';
 import { IMessageResponse } from './types/competition-types';
 
 
@@ -78,6 +78,14 @@ export const datasetsApi = createApi({
             }),
             invalidatesTags: ['DatasetComments'],
         }),
+        updateDatasetComment: builder.mutation<IMessageResponse, IDatasetUpdateCommentRequest>({
+            query: ({ commentId, data }) => ({
+                url: `/datasets/comment/${commentId}`,
+                method: 'PUT',
+                data: data,
+            }),
+            invalidatesTags: ['DatasetComments'],
+        }),
     }),
 });
 
@@ -91,4 +99,5 @@ export const {
     useCreateDatasetCommentMutation,
     useLazyGetDatasetCommentsQuery,
     useDeleteDatasetCommentMutation,
+    useUpdateDatasetCommentMutation,
 } = datasetsApi;

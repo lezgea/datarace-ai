@@ -79,3 +79,46 @@ export interface ICompetitionsResponse {
     hasNextPage: boolean,
     totalCount: number,
 }
+
+
+export interface ICompetitionComment {
+    id: number,
+    text: string,
+    userId: number,
+    datasetId: number,
+    isEditable?: true,
+    repliedCommentDto: string,
+    fullName: string,
+    nickname: string,
+    userImageUrl: string,
+}
+
+export interface ICompetitionCreateCommentRequest {
+    id: string | number | undefined,
+    data: {
+        repliedComment?: {
+            commentId: number,
+        },
+        text: string,
+    }
+}
+
+export interface ICompetitionCreateCommentResponse { }
+
+
+export interface IGetCompetitionCommentsRequest {
+    id: string | number | undefined,
+}
+
+export type IGetCompetitionCommentsResponse = ICompetitionComment[]
+
+export interface IDeleteCompetitionCommentRequest {
+    commentId: string | number | undefined,
+}
+
+export interface ICompetitionUpdateCommentRequest {
+    commentId: string | number | undefined,
+    data: {
+        text: string,
+    }
+}

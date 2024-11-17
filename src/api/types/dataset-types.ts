@@ -97,3 +97,10 @@ export type IGetDatasetCommentsResponse = IDatasetComment[]
 export interface IDeleteDatasetCommentRequest {
     commentId: string | number | undefined,
 }
+
+export interface IDatasetUpdateCommentRequest {
+    commentId: string | number | undefined,
+    data: {
+        text: string,
+    }
+}

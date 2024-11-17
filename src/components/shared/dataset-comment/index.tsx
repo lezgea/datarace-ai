@@ -5,17 +5,19 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { ConfirmationModal } from '../confirmation-modal';
 import { useTranslations } from 'next-intl';
+import { DatasetCommentEditModal } from '@components/features';
 
 
 interface ICommmentProps extends IDatasetComment { }
 
 
-export const Comment: React.FC<ICommmentProps> = (props) => {
+export const DatasetComment: React.FC<ICommmentProps> = (props) => {
     let { id, text, fullName, nickname, isEditable, userImageUrl } = props;
 
     const t = useTranslations();
 
     const [askModal, setAskModal] = React.useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
     const [deleteComment] = useDeleteDatasetCommentMutation();
 
     const onDeleteComment = async () => {
@@ -49,7 +51,7 @@ export const Comment: React.FC<ICommmentProps> = (props) => {
                         isEditable &&
                         <>
                             <div
-                                onClick={() => { }}
+                                onClick={() => setShowEditModal(true)}
                                 className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
                             >
                                 {t('edit')}
@@ -65,6 +67,12 @@ export const Comment: React.FC<ICommmentProps> = (props) => {
                 </div>
             </div>
 
+            <DatasetCommentEditModal
+                visible={showEditModal}
+                commentId={id}
+                commentText={text}
+                onClose={() => setShowEditModal(false)}
+            />
             <ConfirmationModal
                 visible={askModal}
                 onConfirm={onDeleteComment}

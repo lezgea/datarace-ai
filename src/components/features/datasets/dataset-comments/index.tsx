@@ -1,14 +1,12 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { IDatasetFilesDto } from '@api/types/dataset-types';
 import { useCreateDatasetCommentMutation, useDeleteDatasetMutation, useLazyGetDatasetCommentsQuery } from '@api/datasets-api';
 import EmojiPicker from 'emoji-picker-react';
-import { Comment } from '@components/shared';
+import { DatasetComment } from '@components/shared';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import getImgFromBase64 from '@utils/base64toImg';
-import { comment } from 'postcss';
 import { useTranslations } from 'next-intl';
 
 
@@ -19,7 +17,6 @@ interface IDatasetCommentsProps {
 
 export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, isEditable }) => {
     const [triggerGetComments, { data: comments, isLoading: commentsLoading }] = useLazyGetDatasetCommentsQuery();
-    const [deleteDatasetFile] = useDeleteDatasetMutation();
     const [newComment, setNewComment] = React.useState<string>('');
     const [createDatasetComment, { isLoading, error }] = useCreateDatasetCommentMutation();
     const { user, isAuthenticated, loading: isUserLoading } = useSelector((state: RootState) => state.user);
@@ -71,7 +68,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
                     } */}
                     {
                         comments?.map((comment) =>
-                            <Comment key={comment.id} {...comment} />
+                            <DatasetComment key={comment.id} {...comment} />
                         )
                     }
                 </div>
