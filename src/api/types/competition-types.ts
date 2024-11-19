@@ -92,6 +92,7 @@ export interface ICompetitionComment {
     fullName: string,
     nickname: string,
     userImageUrl: string,
+    createdAt: number,
 }
 
 export interface ICompetitionCreateCommentRequest {

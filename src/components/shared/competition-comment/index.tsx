@@ -6,13 +6,14 @@ import { useTranslations } from 'next-intl';
 import { ICompetitionComment } from '@api/types/competition-types';
 import { useDeleteCompetitionCommentMutation } from '@api/competition-api';
 import { CompetitionCommentEditModal } from '@components/features/races/competition-comment-edit-modal';
+import { timeAgo } from '@utils/timeAgo';
 
 
 interface ICommmentProps extends ICompetitionComment { }
 
 
 export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
-    let { id, text, fullName, nickname, isEditable, userImageUrl } = props;
+    let { id, text, fullName, nickname, isEditable, createdAt, userImageUrl } = props;
 
     const t = useTranslations();
 
@@ -47,6 +48,7 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                     <div className="text-gray-800 break-words">{text}</div>
                 </div>
                 <div className="flex gap-3 px-4 py-1">
+                    <div className="text-sm text-gray-500 cursor-pointer mr-2">{timeAgo(createdAt)}</div>
                     {
                         isEditable &&
                         <>

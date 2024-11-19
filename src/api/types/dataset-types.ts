@@ -75,6 +75,7 @@ export interface IDatasetComment {
     fullName: string,
     nickname: string,
     userImageUrl: string,
+    createdAt: number,
 }
 
 export interface IDatasetCreateCommentRequest {
