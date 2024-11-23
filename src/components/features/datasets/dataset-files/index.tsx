@@ -6,9 +6,14 @@ import { DocUpload, TrashIcon } from '@assets/icons';
 import { useUploadDatasetFileMutation } from '@api/upload-api';
 import { IDatasetFilesDto } from '@api/types/dataset-types';
 import { useDeleteDatasetMutation } from '@api/datasets-api';
+import { AuthModal } from '@components/shared';
+import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
 
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://api.datarace.ai/v1';
+const BASE_URL = 'https://api.datarace.ai/v1';
 
 interface IOriginalFilesProps {
     datasetId: number | string | undefined,
@@ -18,14 +23,18 @@ interface IOriginalFilesProps {
 }
 
 export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, isEditable, refetch }) => {
-    // const [triggerGetFiles, { data: files, isLoading: datasetsLoading }] = useLazyGetOriginalFilesQuery();
+    let lng = useLocale();
+    const router = useRouter();
+    const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
+
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const [uploadDatasetFile] = useUploadDatasetFileMutation();
     const [deleteDatasetFile] = useDeleteDatasetMutation();
 
 
     const handleDownload = async (fileName: string, datasetFileId: number | undefined) => {
         try {
-            const token = Cookies.get('dtr-dash-token');
+            const token = Cookies.get('dtr-token');
             const response = await fetch(BASE_URL + `/files/download/dataset/${datasetFileId}`, {
                 method: 'GET',
                 headers: {
@@ -139,7 +148,10 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                         <td className="w-full py-3 px-6">{row.fileType}</td>
                                         <td className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer" >
                                             <div className='flex space-x-6'>
-                                                <div className="cursor-pointer" onClick={() => handleDownload(row.fileName, row.id)}>
+                                                <div
+                                                    className="cursor-pointer"
+                                                    onClick={() => isAuthenticated ? handleDownload(row.fileName, row.id) : setShowAuthModal(true)}
+                                                >
                                                     Download
                                                 </div>
                                                 {
@@ -155,6 +167,13 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                             </tbody>
                         </table>
                     </div>
+
+                    <AuthModal
+                        visible={showAuthModal}
+                        onClose={() => setShowAuthModal(false)}
+                        onSignUp={() => router.push(`/${lng}/sign-up`)}
+                        onConfirm={() => router.push(`/${lng}/sign-in`)}
+                    />
                 </>
             }
 
