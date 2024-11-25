@@ -60,9 +60,9 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         }
     };
 
-    const onClickDataset = (id: string | number) => {
+    const onClickDataset = (e: any) => {
         if (isAuthenticated) {
-            router.push(`/${lng}/datasets/${id}`)
+            e.stopPropogation();
         } else {
             setShowAuthModal(true)
         }
@@ -84,7 +84,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
                     <DatasetItem
                         key={i}
                         {...item}
-                        onClick={() => onClickDataset(item.id)}
+                        onClick={onClickDataset}
                     />
                 ))}
             </div>

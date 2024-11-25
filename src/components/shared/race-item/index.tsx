@@ -1,7 +1,9 @@
 import { ArrowGreenIcon, BookmarkIcon } from "@assets/icons";
+import { RootState } from "@store/store";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 // Define the two types of props
 interface IAttendedCompetition {
@@ -18,7 +20,7 @@ interface IAttendedCompetition {
     imageUrl?: string,
     t?: (val: string) => string,
     lng?: string,
-    onClick?: () => void,
+    onClick?: (e: any) => void,
 }
 
 interface IRacesItemProps {
@@ -31,7 +33,7 @@ interface IRacesItemProps {
     currencySymbol: string,
     t?: (val: string) => string,
     lng?: string,
-    onClick?: () => void,
+    onClick?: (e: any) => void,
 }
 
 type RaceProps = IAttendedCompetition | IRacesItemProps;
@@ -44,6 +46,8 @@ const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition 
 const RaceItem: React.FC<RaceProps> = (props) => {
     let { onClick } = props;
     let lng = useLocale();
+
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
     const text = props.text;
@@ -55,8 +59,9 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     let endedText = Math.abs(lifeTimeDays as number) > 1 ? `Ended ${Math.abs(lifeTimeDays as number)} days ago` : 'Ended 1 day ago';
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
 
+
     return (
-        <div onClick={onClick} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <Link href={isAuthenticated ? `/${lng}/races/${id}` : ''} onClick={onClick} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
@@ -90,7 +95,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

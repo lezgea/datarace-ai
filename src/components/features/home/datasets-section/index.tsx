@@ -23,9 +23,9 @@ export const DatasetsSection: React.FC = () => {
 
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
 
-    const onClickDataset = (id: string | number) => {
+    const onClickDataset = (e: any) => {
         if (isAuthenticated) {
-            router.push(`/${lng}/datasets/${id}`)
+            e.stopPropogation();
         } else {
             setShowAuthModal(true)
         }
@@ -65,7 +65,7 @@ export const DatasetsSection: React.FC = () => {
                     <DatasetItem
                         key={i}
                         {...item}
-                        onClick={() => onClickDataset(item.id)}
+                        onClick={onClickDataset}
                     />
                 ))}
             </div>

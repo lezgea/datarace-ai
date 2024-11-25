@@ -32,9 +32,9 @@ export const CompetitionsSection: React.FC = () => {
 
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
 
-    const onClickCompetition = (id: string | number) => {
+    const onClickCompetition = (e: any) => {
         if (isAuthenticated) {
-            router.push(`/${lng}/races/${id}`)
+            e.stopPropogation();
         } else {
             setShowAuthModal(true)
         }
@@ -77,7 +77,7 @@ export const CompetitionsSection: React.FC = () => {
                     <RaceItem
                         key={i}
                         {...item}
-                        onClick={() => onClickCompetition(item.id)}
+                        onClick={onClickCompetition}
                     />
                 ))}
             </div>

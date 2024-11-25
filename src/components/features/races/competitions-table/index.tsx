@@ -42,9 +42,9 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
     };
 
 
-    const onClickCompetition = (id: string | number) => {
+    const onClickCompetition = (e: any) => {
         if (isAuthenticated) {
-            router.push(`/${lng}/races/${id}`)
+            e.stopPropagation()
         } else {
             setShowAuthModal(true)
         }
@@ -100,7 +100,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
                     <RaceItem
                         key={i}
                         {...item}
-                        onClick={() => onClickCompetition(item.id)}
+                        onClick={onClickCompetition}
                     />
                 ))}
             </div>
