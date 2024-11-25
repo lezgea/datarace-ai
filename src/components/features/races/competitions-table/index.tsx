@@ -1,11 +1,12 @@
 "use client";
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
+import { AuthModal } from '@components/shared';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -18,9 +19,14 @@ interface ICompetitionsTable {
 
 export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
     const t = useTranslations();
+    const lng = useLocale();
+    const router = useRouter();
 
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
+
+    const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
@@ -34,6 +40,16 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         4: "Oil & Industry",
         5: "Technology",
     };
+
+
+    const onClickCompetition = (id: string | number) => {
+        if (isAuthenticated) {
+            router.push(`/${lng}/races/${id}`)
+        } else {
+            setShowAuthModal(true)
+        }
+    }
+
 
     React.useEffect(() => {
         triggerGetCompetitions({
@@ -72,7 +88,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
     return (
         <>
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-10">
                 <div className="w-full space-y-3">
                     <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">{t('competitions')}</span></h2>
                     <p className="text-md text-gray-700">{t('competitionDescription')}</p>
@@ -81,7 +97,11 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {competitionsData?.competitions?.map((item, i) => (
-                    <RaceItem key={i} {...item} />
+                    <RaceItem
+                        key={i}
+                        {...item}
+                        onClick={() => onClickCompetition(item.id)}
+                    />
                 ))}
             </div>
 
@@ -105,6 +125,10 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
                     </button>
                 </div>
             }
+            <AuthModal
+                visible={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
+            />
         </>
     );
 };

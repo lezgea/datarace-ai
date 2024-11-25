@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
 import { RootState } from '@store/store';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import DatasetItem from '@components/shared/dataset-item';
-import { NoData } from '@components/shared';
+import { AuthModal, NoData } from '@components/shared';
 import { useDispatch } from 'react-redux';
 import { setDatasetCount } from '@slices/dataset-slice';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -20,9 +21,13 @@ interface ICompetitionsTable {
 
 export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
     const t = useTranslations();
-
+    const lng = useLocale();
+    const router = useRouter();
     const dispatch = useDispatch();
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { loading: datasetsLoading, datasetsCount } = useSelector((state: RootState) => state.datasets);
+
+    const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
@@ -55,7 +60,14 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         }
     };
 
-    console.log('@@@@', datasetsData)
+    const onClickDataset = (id: string | number) => {
+        if (isAuthenticated) {
+            router.push(`/${lng}/datasets/${id}`)
+        } else {
+            setShowAuthModal(true)
+        }
+    }
+
 
     if (datasetsLoading || isLoading) {
         return <CompetitionsSkeleton />;
@@ -69,7 +81,11 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
         <>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {datasetsData?.userDatasets?.map((item, i) => (
-                    <DatasetItem key={i} {...item} />
+                    <DatasetItem
+                        key={i}
+                        {...item}
+                        onClick={() => onClickDataset(item.id)}
+                    />
                 ))}
             </div>
 
@@ -93,6 +109,10 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
                     </button>
                 </div>
             }
+            <AuthModal
+                visible={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
+            />
         </>
     );
 };

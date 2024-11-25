@@ -62,11 +62,11 @@ const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                     <CategoriesSection />
                 </section>
 
-                <section className="container mx-auto space-y-10">
+                <section className="container mx-auto">
                     <CompetitionsSection />
                 </section>
 
-                <section className="container mx-auto space-y-10">
+                <section className="container mx-auto">
                     <DatasetsSection />
                 </section>
             </main>

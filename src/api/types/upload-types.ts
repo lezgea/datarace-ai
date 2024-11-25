@@ -26,6 +26,7 @@ export interface IGetResultResponse {
 export interface IDataset {
     dataFileId: number,
     fileName: string,
+    extension: string,
 }
 
 export interface IGetDatasetRequest {

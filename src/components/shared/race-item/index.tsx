@@ -18,6 +18,7 @@ interface IAttendedCompetition {
     imageUrl?: string,
     t?: (val: string) => string,
     lng?: string,
+    onClick?: () => void,
 }
 
 interface IRacesItemProps {
@@ -30,6 +31,7 @@ interface IRacesItemProps {
     currencySymbol: string,
     t?: (val: string) => string,
     lng?: string,
+    onClick?: () => void,
 }
 
 type RaceProps = IAttendedCompetition | IRacesItemProps;
@@ -40,6 +42,7 @@ const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition 
 };
 
 const RaceItem: React.FC<RaceProps> = (props) => {
+    let { onClick } = props;
     let lng = useLocale();
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
     const name = isAttendedCompetition(props) ? props.competitionName : props.name;
@@ -53,7 +56,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
 
     return (
-        <Link href={`/${lng}/races/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <div onClick={onClick} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 <div className="absolute z-10 flex justify-between items-center w-full p-4">
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
@@ -87,7 +90,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

@@ -17,7 +17,7 @@ const Races: React.FC = () => {
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
             <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 lg:px-0 lg:py-[7rem] space-y-20">
-                <section className="container mx-auto w-full space-y-10">
+                <section className="container mx-auto w-full space-y-10 mb-10">
                     <div className="flex justify-between">
                         <div className="space-y-3">
                             <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('chooseYourCompetitions')}</h2>
@@ -27,7 +27,7 @@ const Races: React.FC = () => {
                     <CategoriesSection />
                 </section>
 
-                <section className="container mx-auto text-center space-y-10">
+                <section className="container mx-auto text-center">
                     <CompetitionsTable />
                 </section>
             </main>

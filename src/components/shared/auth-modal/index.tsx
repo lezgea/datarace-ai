@@ -1,13 +1,16 @@
+"use client";
+
 import React from 'react';
 import { Modal } from '../modal';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 
 interface IAuthModalProps {
     visible: boolean,
     onClose: () => void,
     onSignUp?: () => void,
-    onConfirm: () => void,
+    onConfirm?: () => void,
 }
 
 export const AuthModal: React.FC<IAuthModalProps> = (props) => {
@@ -29,14 +32,16 @@ export const AuthModal: React.FC<IAuthModalProps> = (props) => {
 }
 
 interface IModalContent {
-    onConfirm: () => void,
+    onConfirm?: () => void,
     onSignUp?: () => void,
     onClose: () => void,
 }
 
 const ModalContent: React.FC<IModalContent> = (props) => {
     const t = useTranslations();
+    const lng = useLocale();
     let { onConfirm, onClose, onSignUp } = props;
+    const router = useRouter();
 
     return (
         <div className="flex flex-col items-center justify-center p-6 text-center">
@@ -44,14 +49,14 @@ const ModalContent: React.FC<IModalContent> = (props) => {
             <p className='font-light'>For this action authentification is required. Please login to continue</p>
             <div className="flex flex-col items-center space-y-3 mt-10">
                 <button
-                    onClick={onConfirm}
+                    onClick={() => router.push(`/${lng}/sign-in`)}
                     className="flex w-full max-w-[200px] text-center justify-center items-center px-6 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                     aria-label="Join the Race"
                 >
                     {t('signIn')}
                 </button>
                 <p className='font-light'>
-                    If you don't have an account yet create a <span className="font-medium cursor-pointer underline text-primary" onClick={onSignUp}>new account</span>
+                    If you don't have an account yet create a <span className="font-medium cursor-pointer underline text-primary" onClick={() => router.push(`/${lng}/sign-up`)}>new account</span>
                 </p>
             </div>
         </div>

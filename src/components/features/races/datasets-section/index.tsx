@@ -26,7 +26,7 @@ export const DatasetsSection: React.FC = () => {
     const [triggerGetDataset, { data: dataSet, error, isLoading }] = useLazyGetDatasetQuery();
 
 
-    const handleDownload = async (fileName: string, dataFileId: number) => {
+    const handleDownload = async (fileName: string, dataFileId: number, fileType: string) => {
         if (isAuthenticated) {
             try {
                 const token = Cookies.get('dtr-token');
@@ -43,7 +43,7 @@ export const DatasetsSection: React.FC = () => {
                 }
 
                 const blob = await response.blob();
-                saveAs(blob, `${fileName}`); // Change the file extension to .csv
+                saveAs(blob, `${fileName}.${fileType}`); // Change the file extension to .csv
             } catch (error) {
                 console.error('Error downloading the file:', error);
             }
@@ -103,7 +103,7 @@ export const DatasetsSection: React.FC = () => {
                                 <td className="w-full py-3 px-6">{row.fileName}</td>
                                 <td
                                     className="py-3 px-6 text-primary hover:text-primaryLight cursor-pointer"
-                                    onClick={() => handleDownload(row.fileName, row.dataFileId)}
+                                    onClick={() => handleDownload(row.fileName, row.dataFileId, row.extension)}
                                 >
                                     Download
                                 </td>

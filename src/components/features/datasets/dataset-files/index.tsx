@@ -32,7 +32,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
     const [deleteDatasetFile] = useDeleteDatasetMutation();
 
 
-    const handleDownload = async (fileName: string, datasetFileId: number | undefined) => {
+    const handleDownload = async (fileName: string, datasetFileId: number | undefined, fileType: string) => {
         try {
             const token = Cookies.get('dtr-token');
             const response = await fetch(BASE_URL + `/files/download/dataset/${datasetFileId}`, {
@@ -48,7 +48,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
             }
 
             const blob = await response.blob();
-            saveAs(blob, `${fileName}`);
+            saveAs(blob, `${fileName}.${fileType}`);
         } catch (error) {
             console.error('Error downloading the file:', error);
         }
@@ -150,7 +150,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                             <div className='flex space-x-6'>
                                                 <div
                                                     className="cursor-pointer"
-                                                    onClick={() => isAuthenticated ? handleDownload(row.fileName, row.id) : setShowAuthModal(true)}
+                                                    onClick={() => isAuthenticated ? handleDownload(row.fileName, row.id, row.fileType) : setShowAuthModal(true)}
                                                 >
                                                     Download
                                                 </div>

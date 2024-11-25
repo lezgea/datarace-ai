@@ -1,13 +1,13 @@
 "use client";
 
-import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
-import { NoData } from '@components/shared';
+import { AuthModal, NoData } from '@components/shared';
 import DatasetItem from '@components/shared/dataset-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -15,9 +15,21 @@ import { useSelector } from 'react-redux';
 export const DatasetsSection: React.FC = () => {
     const lng = useLocale();
     const t = useTranslations();
+    const router = useRouter();
 
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { loading: datasetsLoading } = useSelector((state: RootState) => state.datasets);
     const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
+
+    const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
+
+    const onClickDataset = (id: string | number) => {
+        if (isAuthenticated) {
+            router.push(`/${lng}/datasets/${id}`)
+        } else {
+            setShowAuthModal(true)
+        }
+    }
 
 
     React.useEffect(() => {
@@ -25,6 +37,7 @@ export const DatasetsSection: React.FC = () => {
             data: { page: 0, count: 6 },
         });
     }, [triggerGetDatasets]);
+    
 
     if (datasetsLoading)
         return <CompetitionsSkeleton />
@@ -41,15 +54,19 @@ export const DatasetsSection: React.FC = () => {
 
     return (
         <>
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-8">
                 <div className="w-full space-y-3">
                     <h2 className="text-[32px] md:text-[2.3rem]">{t('datasets')}</h2>
                     <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                 </div>
             </div>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
                 {datasetsData?.userDatasets?.map((item, i) => (
-                    <DatasetItem key={i} {...item} />
+                    <DatasetItem
+                        key={i}
+                        {...item}
+                        onClick={() => onClickDataset(item.id)}
+                    />
                 ))}
             </div>
             <div className="flex justify-center">
@@ -60,6 +77,10 @@ export const DatasetsSection: React.FC = () => {
                     </svg>
                 </Link>
             </div>
+            <AuthModal
+                visible={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
+            />
         </>
     )
 }

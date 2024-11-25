@@ -2,22 +2,22 @@ import { IDataset } from "@api/types/dataset-types";
 import { ArrowGreenIcon, BookmarkIcon, HeartIcon } from "@assets/icons";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 
 
-type DatasetProps = IDataset;
+interface DatasetProps extends IDataset {
+    onClick?: () => void,
+};
 
 
 const DatasetItem: React.FC<DatasetProps> = (props) => {
     let lng = useLocale();
 
-    let { id, title, description, visibility, userDto, datasetFileDownloadDto } = props
+    let { id, title, description, visibility, userDto, datasetFileDownloadDto, onClick } = props
     const imageUrl = props.imageUrl || "svg/noimg.svg";
 
-    console.log('@@@@@', datasetFileDownloadDto)
 
     return (
-        <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <div onClick={onClick} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 {
                     !!visibility && visibility === 'PRIVATE' &&
@@ -61,7 +61,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                 <div className="flex justify-between items-center">
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 
