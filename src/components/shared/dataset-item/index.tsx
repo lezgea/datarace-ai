@@ -43,9 +43,9 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
             <div className="flex flex-col px-7 pt-6 space-y-5 text-start items-between">
                 <div className="space-y-5">
                     <h3 className="text-xl font-medium text-customBlue-900 h-[50px] truncate-text mb-3">{title}</h3>
-                    <p className="text-md text-gray-500 truncate-text description-font">
+                    {/* <p className="text-md text-gray-500 truncate-text description-font">
                         <div dangerouslySetInnerHTML={{ __html: description }}></div>
-                    </p>
+                    </p> */}
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3">
                             <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
