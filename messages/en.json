@@ -137,5 +137,7 @@
   "edit": "Edit",
   "comment": "Comment",
   "noComments": "No comments yet",
-  "updateComment": "Update Comment"
+  "updateComment": "Update Comment",
+  "reply": "Reply",
+  "replyComment": "Reply Comment"
 }
