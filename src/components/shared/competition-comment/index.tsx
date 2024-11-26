@@ -7,17 +7,19 @@ import { ICompetitionComment } from '@api/types/competition-types';
 import { useDeleteCompetitionCommentMutation } from '@api/competition-api';
 import { CompetitionCommentEditModal } from '@components/features/races/competition-comment-edit-modal';
 import { timeAgo } from '@utils/timeAgo';
+import { CompetitionCommentReplyModal } from '@components/features';
 
 
 interface ICommmentProps extends ICompetitionComment { }
 
 
 export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
-    let { id, text, fullName, nickname, isEditable, createdAt, userImageUrl } = props;
+    let { id, text, fullName, nickname, isEditable, createdAt, userImageUrl, repliedCommentDto } = props;
 
     const t = useTranslations();
 
     const [askModal, setAskModal] = React.useState<boolean>(false);
+    const [showReplyModal, setShowReplyModal] = React.useState<boolean>(false);
     const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
     const [deleteComment] = useDeleteCompetitionCommentMutation();
 
@@ -45,27 +47,38 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
             <div className="inline-flex flex-col max-w-[300px] md:max-w-[50%]">
                 <div className="inline-flex flex-col bg-[#F0F2F5] border border-[#F1F3F5] px-4 py-3 gap-1 rounded-3xl">
                     <strong className="font-medium">{fullName || nickname}</strong>
-                    <div className="text-gray-800 break-words">{text}</div>
+                    <div className="text-gray-800 break-words">
+                        {!!repliedCommentDto?.fullName && <span className='text-primary'>@{repliedCommentDto?.fullName?.split(' ')[0]} </span>}
+                        {text}
+                    </div>
                 </div>
                 <div className="flex gap-3 px-4 py-1">
                     <div className="text-sm text-gray-500 cursor-pointer mr-2">{timeAgo(createdAt)}</div>
-                    {
-                        isEditable &&
-                        <>
-                            <div
-                                onClick={() => setShowEditModal(true)}
-                                className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
-                            >
-                                {t('edit')}
-                            </div>
-                            <div
-                                onClick={() => setAskModal(true)}
-                                className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
-                            >
-                                {t('delete')}
-                            </div>
-                        </>
-                    }
+                    <>
+                        <div
+                            onClick={() => setShowReplyModal(true)}
+                            className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
+                        >
+                            {t('reply')}
+                        </div>
+                        {
+                            isEditable &&
+                            <>
+                                <div
+                                    onClick={() => setShowEditModal(true)}
+                                    className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
+                                >
+                                    {t('edit')}
+                                </div>
+                                <div
+                                    onClick={() => setAskModal(true)}
+                                    className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
+                                >
+                                    {t('delete')}
+                                </div>
+                            </>
+                        }
+                    </>
                 </div>
             </div>
 
@@ -74,6 +87,12 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                 commentId={id}
                 commentText={text}
                 onClose={() => setShowEditModal(false)}
+            />
+            <CompetitionCommentReplyModal
+                visible={showReplyModal}
+                commentId={id}
+                commentText={text}
+                onClose={() => setShowReplyModal(false)}
             />
             <ConfirmationModal
                 visible={askModal}

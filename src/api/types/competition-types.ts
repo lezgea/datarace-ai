@@ -88,7 +88,7 @@ export interface ICompetitionComment {
     userId: number,
     datasetId: number,
     isEditable?: true,
-    repliedCommentDto: string,
+    repliedCommentDto: ICompetitionComment,
     fullName: string,
     nickname: string,
     userImageUrl: string,
@@ -99,7 +99,7 @@ export interface ICompetitionCreateCommentRequest {
     id: string | number | undefined,
     data: {
         repliedComment?: {
-            commentId: number,
+            commentId: string | number | undefined,
         },
         text: string,
     }
