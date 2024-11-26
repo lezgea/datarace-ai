@@ -54,6 +54,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
         }
     };
 
+
     React.useEffect(() => {
         if (datasetId) {
             triggerGetComments({ id: datasetId });
@@ -82,7 +83,10 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
                     {comments?.map((comment) => (
-                        <DatasetComment key={comment.id} {...comment} />
+                        <DatasetComment
+                            key={comment.id}
+                            {...comment}
+                        />
                     ))}
                 </div>
 

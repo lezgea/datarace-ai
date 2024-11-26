@@ -74,7 +74,7 @@ export interface IDatasetComment {
     userId: number,
     datasetId: number,
     isEditable?: true,
-    repliedCommentDto: string,
+    repliedCommentDto: IDatasetComment,
     fullName: string,
     nickname: string,
     userImageUrl: string,
@@ -85,7 +85,7 @@ export interface IDatasetCreateCommentRequest {
     id: string | number | undefined,
     data: {
         repliedComment?: {
-            commentId: number,
+            commentId: string | number | undefined,
         },
         text: string,
     }

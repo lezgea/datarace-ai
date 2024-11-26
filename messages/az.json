@@ -137,5 +137,7 @@
   "edit": "Düzəlt",
   "comment": "Şərh",
   "noComments": "Hələ heç bir şərh yoxdur",
-  "updateComment": "Şərhi Düzəlt"
+  "updateComment": "Şərhi Düzəlt",
+  "reply": "Cavab ver",
+  "replyComment": "Şərhə cavab ver"
 }
