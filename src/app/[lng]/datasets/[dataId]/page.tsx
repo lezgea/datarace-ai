@@ -51,7 +51,7 @@ const DatasetDetails: React.FC = () => {
                 {/* Main Content */}
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
-                        <img src={datasetInfo?.imageUrl || "/svg/noimg_large.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
+                        <img src={datasetInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
                             {datasetInfo?.title}
                         </h1>

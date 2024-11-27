@@ -11,7 +11,7 @@ export const AboutSection: React.FC<IAboutSectionProps> = (props) => {
     let { title, description } = props;
 
     return (
-        <section className="py-5 space-y-2">
+        <section className="py-4 space-y-2">
             {
                 title &&
                 <h2 className="text-2xl mb-5 font-regmed">&#8226; {title}</h2>
