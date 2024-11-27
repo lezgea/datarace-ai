@@ -45,7 +45,7 @@ const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                     </section>
                     <AboutSection description={t('aboutUsText1')} />
                     <AboutSection description={t('aboutUsText2')} />
-                    {/* <AboutSection description={t('aboutUsText3')} /> */}
+                    <AboutSection description={t('aboutUsText3')} />
                 </main>
             </div>
         </Suspense>
