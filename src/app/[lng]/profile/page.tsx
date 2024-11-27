@@ -13,6 +13,7 @@ import { useUploadAvatarMutation } from '@api/upload-api';
 import { useUpdateUserMutation } from '@api/user-api';
 import { truncate } from 'lodash';
 import { useTranslations } from 'next-intl';
+import { LogoFullWhite } from '@assets/icons';
 
 
 
@@ -96,48 +97,63 @@ const Profile: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col p-5">
             <main className="flex-grow py-20">
-                <section className="container flex flex-col items-center justify-between space-y-7 mx-auto p-10 border border-gray-300 rounded-3xl lg:flex-row lg:space-x-10 lg:space-y-0">
-                    <div
-                        className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200"
-                        onMouseEnter={() => setHovering(true)}
-                        onMouseLeave={() => setHovering(false)}
-                    >
+                <section className="container flex flex-col mx-auto rounded-3xl lg:flex-row lg:space-y-0 overflow-hidden shadow-md border-t border-t-primaryExtra">
+                    <div className="flex w-full relative">
                         <Image
-                            src={userImage}
-                            alt="Avatar"
-                            fill={true}
-                            className="object-cover"
-                            priority={true}
+                            src={"/svg/dr_banner.svg"}
+                            alt="Datarace Banner Image"
+                            height={200}
+                            width={800}
+                            className="w-full h-[20rem] object-cover"
                         />
-
-                        {hovering && (
-                            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                                {/* Label makes the hover area clickable */}
-                                <label
-                                    htmlFor="image-upload"
-                                    className="cursor-pointer bg-none text-white text-xs px-4 py-2 border border-1 border-white rounded-full"
-                                >
-                                    {isLoading ? 'Uploading...' : 'Upload Image'}
-                                </label>
-                            </div>
-                        )}
-
-                        {/* Invisible input */}
-                        <input
-                            id="image-upload"
-                            type="file"
-                            className="absolute inset-0 opacity-0 cursor-pointer"
-                            accept="image/png, image/jpeg"
-                            onChange={handleImageChange}
-                            disabled={isLoading}
-                        />
+                        <div className='absolute flex flex-col items-end justify-end gap-7 px-20 py-[4rem] top-0 w-full h-full'>
+                            <LogoFullWhite />
+                            <p className='text-md text-white font-light max-w-[80%] text-end'>{t('description')}</p>
+                        </div>
                     </div>
+                    <div className="flex flex-col items-center justify-center min-w-[30%]">
+                        <div
+                            className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200"
+                            onMouseEnter={() => setHovering(true)}
+                            onMouseLeave={() => setHovering(false)}
+                        >
+                            <Image
+                                src={userImage}
+                                alt="Avatar"
+                                fill={true}
+                                className="object-cover"
+                                priority={true}
+                            />
 
-                    <div className="w-full flex flex-col space-y-5 md:flex-row justify-start md:space-y-0">
-                        <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-1">
-                            <p className="text-[2rem] font-medium">{user?.fullName}</p>
-                            <p className="text-md text-gray-500">{user?.email}</p>
-                            <p className="text-md text-gray-500">@{user?.nickname}</p>
+                            {hovering && (
+                                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                    {/* Label makes the hover area clickable */}
+                                    <label
+                                        htmlFor="image-upload"
+                                        className="cursor-pointer bg-none text-white text-xs px-4 py-2 border border-1 border-white rounded-full"
+                                    >
+                                        {isLoading ? 'Uploading...' : 'Upload Image'}
+                                    </label>
+                                </div>
+                            )}
+
+                            {/* Invisible input */}
+                            <input
+                                id="image-upload"
+                                type="file"
+                                className="absolute inset-0 opacity-0 cursor-pointer"
+                                accept="image/png, image/jpeg"
+                                onChange={handleImageChange}
+                                disabled={isLoading}
+                            />
+                        </div>
+
+                        <div className="w-full flex flex-col space-y-3 md:flex-row justify-center md:space-y-0">
+                            <div className="w-full flex flex-col items-center md:justify-end">
+                                <p className="text-[1.7rem] font-medium">{user?.fullName}</p>
+                                <p className="text-md text-gray-500">{user?.email}</p>
+                                <p className="text-md text-primary">@{user?.nickname}</p>
+                            </div>
                         </div>
                     </div>
                 </section>
