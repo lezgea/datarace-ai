@@ -48,6 +48,7 @@ import HeartIcon from './heart.svg';
 import NoDataSvg from './no-data.svg';
 import DocUpload from './doc-upload.svg';
 import TrashIcon from './trash.svg';
+import LogoFullWhite from './logo_fullwhite.svg';
 
 
 
@@ -55,6 +56,7 @@ export {
     // logos
     DataraceLogo,
     LogoWhite,
+    LogoFullWhite,
 
     // illustrations
     TeamBrainstorming,

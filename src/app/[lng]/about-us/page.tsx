@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { AboutSection } from '@components/features/about';
 import { IParamsLanguage } from 'types/lang-types';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { LogoFullWhite, LogoWhite } from '@assets/icons';
 
 
 export const metadata: Metadata = {
@@ -28,6 +30,19 @@ const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                         <span className="text-lg">&gt;</span>
                         <span>{t('aboutUs')}</span>
                     </nav>
+                    <section className="relative border rounded-2xl mt-5 mb-4">
+                        <Image
+                            src={"/svg/dr_banner.svg"}
+                            alt="Datarace Banner Image"
+                            height={200}
+                            width={800}
+                            className="w-full h-[23rem] rounded-2xl object-cover"
+                        />
+                        <div className='absolute flex flex-col items-end justify-end gap-7 p-20 top-0 w-full h-full'>
+                            <LogoFullWhite />
+                            <p className='text-md text-white font-light max-w-[50%] text-end'>{t('description')}</p>
+                        </div>
+                    </section>
                     <AboutSection description={t('aboutUsText1')} />
                     <AboutSection description={t('aboutUsText2')} />
                     <AboutSection description={t('aboutUsText3')} />
