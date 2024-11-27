@@ -38,7 +38,7 @@ const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                             width={800}
                             className="w-full h-[23rem] rounded-2xl object-cover"
                         />
-                        <div className='absolute flex flex-col items-end justify-end gap-7 p-20 top-0 w-full h-full'>
+                        <div className='absolute flex flex-col items-end justify-end gap-7 px-20 py-[4rem] top-0 w-full h-full'>
                             <LogoFullWhite />
                             <p className='text-md text-white font-light max-w-[50%] text-end'>{t('description')}</p>
                         </div>
