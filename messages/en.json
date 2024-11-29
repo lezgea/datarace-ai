@@ -139,5 +139,8 @@
   "noComments": "No comments yet",
   "updateComment": "Update Comment",
   "reply": "Reply",
-  "replyComment": "Reply Comment"
+  "replyComment": "Reply Comment",
+  "blog": "Blog",
+  "seeMore": "See More",
+  "seeAll": "See All"
 }
