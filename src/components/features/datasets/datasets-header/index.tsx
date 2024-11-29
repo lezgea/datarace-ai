@@ -24,7 +24,7 @@ export const DatasetsHeaderSection = () => {
                         <span>{t('datasets')}</span>
                     </nav>
                     <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('datasets')} {!!datasetsCount && <span className="text-gray-400 font-regular">({datasetsCount})</span>}</h2>
-                    <p className="text-md text-gray-700">{t('competitionDescription')}</p>
+                    {/* <p className="text-md text-gray-700">{t('competitionDescription')}</p> */}
                 </div>
                 {
                     isAuthenticated &&

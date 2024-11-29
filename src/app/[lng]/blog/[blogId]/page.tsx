@@ -19,21 +19,6 @@ const RaceDetails: React.FC = () => {
     const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
 
-    const TABS: { title: string, content: ReactNode }[] = [
-        {
-            title: t('generalOverview'),
-            content: <GeneralSection />,
-        },
-        {
-            title: t('data'),
-            content: <DatasetsSection />,
-        },
-        {
-            title: t('scoreBoard'),
-            content: <ScoreBoardSection />,
-        },
-    ]
-
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -42,7 +27,7 @@ const RaceDetails: React.FC = () => {
                 <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
                     <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
                     <span className="text-lg">&gt;</span>
-                    <Link href={`/${lng}/races`} className="hover:text-primaryLight">{t('races')}</Link>
+                    <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
                     <span className="text-lg">&gt;</span>
                     <span>{competitionInfo?.name}</span>
                 </nav>
@@ -52,26 +37,22 @@ const RaceDetails: React.FC = () => {
                 {/* Main Content */}
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
-                        <img src={competitionInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
+                        <img src={competitionInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Blog Image" className="w-full h-[30rem] rounded-2xl object-cover" />
                         <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
-                            {competitionInfo?.name}
+                            {/* {competitionInfo?.name} */}
+                            Blog Title
                         </h1>
                     </section>
 
-                    <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-8 gap-8 rounded-2xl border border-gray-30">
                         {/* Left Content */}
-                        <div className="lg:col-span-3">
-                            <TabSelects tabs={TABS} />
-                        </div>
-
-                        {/* Right Sidebar */}
-                        <RigthContent raceId={competitionId} />
-                    </section>
-                    <section>
-                        <CompetitionComments
-                            competitionId={competitionId}
-                            isEditable={competitionInfo?.isEditable}
-                        />
+                        {/* <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: competitionInfo?.text || '' }} /> */}
+                        <p className='text-gray-700'>
+                            Arcu dictumst ac imperdiet egestas scelerisque dui vitae turpis purus. Dui dui vel ultricies augue consectetur dignissim lectus senectus at. Placerat nulla pretium commodo lobortis nunc. Aliquam etiam pretium dictum mi arcu et a bibendum magna. Nec ac sed donec egestas nunc. Nisl vel lectus velit eu ac. Vestibulum justo faucibus arcu sodales cras placerat sagittis. Eros ut justo ullamcorper risus. Lectus feugiat ipsum neque viverra eget bibendum. Nisl et ipsum aenean pellentesque. Nunc quam urna mauris scelerisque malesuada aenean.
+                            Turpis sed pretium sit magna. Nulla feugiat est nisl purus eros. Sagittis tempor accumsan id vitae ut. Facilisis tortor sed lacus est gravida
+                            Arcu dictumst ac imperdiet egestas scelerisque dui vitae turpis purus. Dui dui vel ultricies augue consectetur dignissim lectus senectus at. Placerat nulla pretium commodo lobortis nunc. Aliquam etiam pretium dictum mi arcu et a bibendum magna. Nec ac sed donec egestas nunc. Nisl vel lectus velit eu ac. Vestibulum justo faucibus arcu sodales cras placerat sagittis. Eros ut justo ullamcorper risus. Lectus feugiat ipsum neque viverra eget bibendum. Nisl et ipsum aenean pellentesque. Nunc quam urna mauris scelerisque malesuada aenean.
+                            Turpis sed pretium sit magna. Nulla feugiat est nisl purus eros. Sagittis tempor accumsan id vitae ut. Facilisis tortor sed lacus est gravida
+                        </p>
                     </section>
                 </main>
             </div>
