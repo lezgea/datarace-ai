@@ -37,7 +37,7 @@ export const CategoriesSection: React.FC = () => {
     }
 
     return (
-        <div className="container mx-auto flex flex-col justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
+        <div className="container mx-auto flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
             {categories && categories.map((item: IRaceType, i: number) => (
                 <RaceSelect key={i} {...item} type={item.name} />
             ))}

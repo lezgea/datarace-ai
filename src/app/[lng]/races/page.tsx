@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { CategoriesSection, CompetitionsSection } from '@components/features/home';
 import { CompetitionsTable } from '@components/features';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: "Races | DataRace.ai",
@@ -16,10 +17,16 @@ const Races: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 lg:px-0 lg:py-[7rem] space-y-20">
+            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-10 lg:px-0 lg:py-[6rem] space-y-20">
                 <section className="container mx-auto w-full space-y-10 mb-10">
                     <div className="flex justify-between">
-                        <div className="space-y-3">
+                        <div>
+                            {/* Breadcrumb */}
+                            <nav className="text-sm flex justify-start items-center text-gray-600 space-x-2">
+                                <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                                <span className="text-lg">&gt;</span>
+                                <span>{t('competitions')}</span>
+                            </nav>
                             <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('chooseYourCompetitions')}</h2>
                             <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                         </div>
