@@ -52,7 +52,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                 ...data,
                 tags
             }).unwrap();
-            toast.success('Dataset has been created');
+            toast.success('Your dataset has been created and will be available for public view after approval by the admins.');
             setSidebarOpen(false);
             onResetData();
         } catch (err: any) {
