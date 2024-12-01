@@ -13,7 +13,7 @@ jobs:
       - name: Build docker
         run: |
           rm -f .env
-          printf "NEXT_PUBLIC_BASE_API_URL=https://api.datarace.ai/v1" > .env
+          printf "NEXT_PUBLIC_BASE_API_URL=https://beta.datarace.ai/v1" > .env
           docker build -t datarace-web .
           docker stop datarace-web  || true
           docker rm datarace-web|| true
