@@ -35,14 +35,23 @@ const DatasetDetails: React.FC = () => {
                     </nav>
 
                     {
-                        datasetInfo?.isEditable &&
-                        <button
-                            aria-label="Upload Dataset"
-                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                            onClick={() => setSidebarOpen(true)}
-                        >
-                            Edit Dataset
-                        </button>
+                        // datasetInfo?.isEditable &&
+                        <div className='flex gap-3'>
+                            <button
+                                aria-label="Delete Dataset"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            // onClick={() => setSidebarOpen(true)}
+                            >
+                                Delete
+                            </button>
+                            <button
+                                aria-label="Upload Dataset"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                onClick={() => setSidebarOpen(true)}
+                            >
+                                Edit Dataset
+                            </button>
+                        </div>
                     }
                 </div>
 
@@ -58,7 +67,7 @@ const DatasetDetails: React.FC = () => {
                     </section>
                     <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
                         <div className="lg:col-span-3 gap-8">
-                            <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
+                            <div dangerouslySetInnerHTML={{ __html: datasetInfo?.content || '' }}></div>
                         </div>
                         {/* Tags */
                             !!datasetInfo?.tags?.length &&
