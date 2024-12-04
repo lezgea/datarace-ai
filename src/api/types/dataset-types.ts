@@ -78,6 +78,7 @@ export interface IDatasetComment {
     datasetId: number,
     isEditable?: true,
     repliedCommentDto: IDatasetComment,
+    datasetChildCommentDtos: IDatasetComment[],
     fullName: string,
     nickname: string,
     userImageUrl: string,
