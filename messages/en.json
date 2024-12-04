@@ -143,5 +143,7 @@
   "replyComment": "Reply Comment",
   "blog": "Blog",
   "seeMore": "See More",
-  "seeAll": "See All"
+  "seeAll": "See All",
+  "createBlog": "Create Blog",
+  "editBlog": "Edit Blog"
 }

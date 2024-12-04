@@ -59,3 +59,8 @@ export interface IDatasetFileUploadRequest {
     datasetId: number | string | undefined,
     file: FormData,
 }
+
+export interface IBlogFileUploadRequest {
+    blogProfileImageId?: number | string | undefined,
+    file: FormData,
+}

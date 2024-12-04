@@ -36,7 +36,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
             <div className="relative">
                 {
                     !!label &&
-                    <label htmlFor={name} className="block text-gray-700 mb-2" style={labelStyle}>
+                    <label htmlFor={name} className="block font-semibold text-gray-700 mb-2" style={labelStyle}>
                         {label}
                     </label>
                 }
@@ -46,7 +46,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
                         <textarea
                             id={name}
                             placeholder={placeholder}
-                            className={`w-full h-[200px] bg-gray-50 px-5 py-4 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
+                            className={`w-full h-[200px] px-5 py-4 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
                                 } rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                             style={inputStyle}
                             {...register(name)}
@@ -56,7 +56,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
                             type={type}
                             id={name}
                             placeholder={placeholder}
-                            className={`w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
+                            className={`w-full h-[50px] px-5 py-2 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
                                 } rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                             style={inputStyle}
                             {...register(name)}

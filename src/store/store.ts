@@ -5,12 +5,14 @@ import competitionReducer from '@slices/competition-slice';
 import datasetsReducer from '@slices/dataset-slice';
 import uploadReducer from '@slices/upload-slice';
 import contactReducer from '@slices/contacts-slice';
+import blogReducer from '@slices/blog-slice';
 import { userApi } from '@api/user-api';
 import { categoryApi } from '@api/category-api';
 import { competitionApi } from '@api/competition-api';
 import { uploadApi } from '@api/upload-api';
 import { datasetsApi } from '@api/datasets-api';
 import { contactsApi } from '@api/contact-api';
+import { blogsApi } from '@api/blogs-api';
 
 
 export const store = configureStore({
@@ -21,12 +23,14 @@ export const store = configureStore({
         datasets: datasetsReducer,
         uploads: uploadReducer,
         contacts: contactReducer,
+        blog: blogReducer,
         [userApi.reducerPath]: userApi.reducer,
         [categoryApi.reducerPath]: categoryApi.reducer,
         [competitionApi.reducerPath]: competitionApi.reducer,
         [datasetsApi.reducerPath]: datasetsApi.reducer,
         [uploadApi.reducerPath]: uploadApi.reducer,
         [contactsApi.reducerPath]: contactsApi.reducer,
+        [blogsApi.reducerPath]: blogsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -36,6 +40,7 @@ export const store = configureStore({
             datasetsApi.middleware,
             uploadApi.middleware,
             contactsApi.middleware,
+            blogsApi.middleware,
         ),
 });
 
