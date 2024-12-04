@@ -34,41 +34,40 @@ export interface IBlogCreateResponse {
 
 export interface IBlogItem {
     id: number | string | null,
-    cover: {
+    userDto: {
         id: number,
-        name: string,
-        url: string,
-        mime_type: string,
-        size: number,
-        created_at: string,
-        type: string,
+        email: string,
+        fullName: string,
+        username: string,
+        phoneNumber: string,
+        userImageUrl: string,
     },
     title: string,
     content: string,
-    description: string,
-    content_short: string,
-    read_time: number,
-    active: number,
-    creator: {
-        id: number,
-        name: string
-    },
-    category: boolean,
-    created_at: string
+    isPending: boolean,
+    status: string,
+    imageUrl: string,
+    createdAt: string
+
 }
 
 
 export interface IBlogListRequest {
-    skip: number,
-    limit: number,
+    data: {
+        page: number,
+        count: number,
+        blogCriteria?: {
+            content?: string,
+            isMyBlog: boolean,
+        }
+    }
 }
 
 export interface IBlogListResponse {
-    data: IBlogItem[],
-    status: string,
-    count: number,
-    skip: number,
-    limit: number,
+    userDatasets: IBlogItem[],
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
 }
 
 

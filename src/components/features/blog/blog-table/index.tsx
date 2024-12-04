@@ -1,5 +1,6 @@
 "use client";
 
+import { useLazyGetAllBlogsQuery } from '@api/blogs-api';
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
 import { AuthModal } from '@components/shared';
 import BlogItem from '@components/shared/blog-item';
@@ -67,23 +68,31 @@ export const BlogTable: React.FC<IBlogTable> = () => {
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
-    // const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
+    const [triggerGetBlogs, { data: blogsData, error, isLoading }] = useLazyGetAllBlogsQuery();
 
     const itemsPerPage = 6;
 
 
-    // React.useEffect(() => {
-    //     triggerGetCompetitions({
-    //         categoryId: selectedCategory,
-    //         data: { page: currentPage, count: itemsPerPage },
-    //     }).then((response) => {
-    //         if (response?.data?.totalCount) {
-    //             setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
-    //         } else {
-    //             setTotalPages(1)
-    //         }
-    //     });
-    // }, [currentPage, selectedCategory, triggerGetCompetitions]);
+    React.useEffect(() => {
+        triggerGetBlogs({
+            // categoryId: selectedCategory,
+            data: {
+                page: currentPage,
+                count: itemsPerPage,
+                blogCriteria: {
+                    "content": "string",
+                    "isMyBlog": true
+                }
+            },
+        }).then((response) => {
+            console.log("@@@@@", response)
+            // if (response?.totalElements) {
+            //     setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
+            // } else {
+            //     setTotalPages(1)
+            // }
+        });
+    }, [currentPage, triggerGetBlogs]);
 
 
     const handleNextPage = () => {
@@ -98,15 +107,15 @@ export const BlogTable: React.FC<IBlogTable> = () => {
         }
     };
 
-    // if (categoryLoading || competitionLoading || isLoading) {
-    //     return <CompetitionsSkeleton />;
-    // }
+    if (isLoading) {
+        return <CompetitionsSkeleton />;
+    }
 
 
     return (
         <>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-                {TEST_BLOGS.map((item) => (
+                {blogsData?.userDatasets?.map((item) => (
                     <BlogItem key={item.id} {...item} />
                 ))}
             </div>

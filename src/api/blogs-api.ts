@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IBlogCreateRequest, IBlogCreateResponse } from './types/blog-types';
+import { IBlogCreateRequest, IBlogCreateResponse, IBlogListRequest, IBlogListResponse } from './types/blog-types';
 
 
 export const blogsApi = createApi({
@@ -15,6 +15,18 @@ export const blogsApi = createApi({
                 data: data,
             }),
             invalidatesTags: ['Blogs'],
+        }),
+        getAllBlogs: builder.query<IBlogListResponse, IBlogListRequest>({
+            query: ({ data }) => ({
+                url: `/blogs/public/page`,
+                method: 'GET',
+                params: {
+                    page: data.page,
+                    count: data.count,
+                    blogCriteria: data.blogCriteria,
+                },
+            }),
+            providesTags: ['Blogs'],
         }),
         // getAllBlogs: builder.query<IBlogListResponse, IBlogListRequest>({
         //     query: ({ skip, limit }) => ({
@@ -51,7 +63,7 @@ export const blogsApi = createApi({
 
 export const {
     useCreateBlogMutation,
-    // useLazyGetAllBlogsQuery,
+    useLazyGetAllBlogsQuery,
     // useGetBlogInfoQuery,
     // useUpdateBlogMutation,
     // useDeleteBlogMutation,

@@ -14,10 +14,10 @@ export const BlogHeaderSection = () => {
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { loading: datasetsLoading, datasetsCount } = useSelector((state: RootState) => state.datasets);
 
-    
+
     return (
         <>
-            <div className="flex items-center justify-between">
+            <div className="flex items-end justify-between">
                 <div className="text-start">
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
                         <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
