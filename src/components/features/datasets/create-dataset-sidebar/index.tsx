@@ -98,7 +98,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 isTextarea
                                 type='text'
                                 name='description'
-                                placeholder="Dataset Description"
+                                placeholder="Meta Description"
                                 register={register}
                                 errors={errors}
                             />

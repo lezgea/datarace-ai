@@ -35,7 +35,7 @@ const DatasetDetails: React.FC = () => {
                     </nav>
 
                     {
-                        // datasetInfo?.isEditable &&
+                        datasetInfo?.isEditable &&
                         <div className='flex gap-3'>
                             <button
                                 aria-label="Delete Dataset"

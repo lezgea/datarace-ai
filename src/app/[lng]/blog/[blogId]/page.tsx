@@ -23,14 +23,36 @@ const RaceDetails: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <div className="container mx-auto py-[6rem] space-y-5">
-                {/* Breadcrumb */}
-                <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                    <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
-                    <span className="text-lg">&gt;</span>
-                    <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
-                    <span className="text-lg">&gt;</span>
-                    <span>{competitionInfo?.name}</span>
-                </nav>
+                <div className="flex justify-between">
+                    {/* Breadcrumb */}
+                    <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
+                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                        <span className="text-lg">&gt;</span>
+                        <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
+                        <span className="text-lg">&gt;</span>
+                        <span>{competitionInfo?.name}</span>
+                    </nav>
+
+                    {
+                        // datasetInfo?.isEditable &&
+                        <div className='flex gap-3'>
+                            <button
+                                aria-label="Delete Dataset"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            // onClick={() => setSidebarOpen(true)}
+                            >
+                                Delete
+                            </button>
+                            <button
+                                aria-label="Update Blog"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                onClick={() => { }}
+                            >
+                                Edit Blog
+                            </button>
+                        </div>
+                    }
+                </div>
 
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
 
