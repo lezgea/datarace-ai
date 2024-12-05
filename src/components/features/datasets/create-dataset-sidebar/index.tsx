@@ -29,7 +29,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(t('titleIsRequired')),
-        description: Yup.string().required(t('descriptionIsRequired'))
+        content: Yup.string().required(t('descriptionIsRequired'))
     });
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm<IFormInput>({
@@ -52,7 +52,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                 ...data,
                 tags
             }).unwrap();
-            toast.success('Dataset has been created');
+            toast.success('Your dataset has been created and will be available for public view after approval by the admins.');
             setSidebarOpen(false);
             onResetData();
         } catch (err: any) {
@@ -94,8 +94,16 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 register={register}
                                 errors={errors}
                             />
-                            <TextEditor
+                            <FormInput
+                                isTextarea
+                                type='text'
                                 name='description'
+                                placeholder="Meta Description"
+                                register={register}
+                                errors={errors}
+                            />
+                            <TextEditor
+                                name='content'
                                 initialValue=' '
                                 register={register}
                                 setValue={setValue}

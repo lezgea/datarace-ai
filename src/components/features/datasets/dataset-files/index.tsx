@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 
 
-const BASE_URL = 'https://api.datarace.ai/v1';
+const BASE_URL = 'https://beta.datarace.ai/v1';
 
 interface IOriginalFilesProps {
     datasetId: number | string | undefined,

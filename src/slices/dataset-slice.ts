@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { datasetsApi } from '@api/datasets-api';
 import { IDatasetCreateCommentResponse, IDatasetsResponse } from '@api/types/dataset-types';
 import { IMessageResponse } from '@api/types/competition-types';
+import { toast } from 'react-toastify';
 
 
 interface IDatasetState {
@@ -101,8 +102,8 @@ const datasetSlice = createSlice({
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to post the comment';
                 }
-        );
-        
+            );
+
         // UPDATE DATASET COMMENT MUTATION
         builder
             .addMatcher(
@@ -124,6 +125,33 @@ const datasetSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.error = action.error?.message || 'Failed to update the comment';
+                }
+            );
+
+
+        // DELETE DATASET MUTATION
+        builder
+            .addMatcher(
+                datasetsApi.endpoints.deleteDataset.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.deleteDataset.matchFulfilled,
+                (state, action: PayloadAction<void>) => {
+                    state.loading = false;
+                    // state.datasets = action.payload;
+                    toast.success('Dataset has been deleted!');
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.deleteDataset.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to update the comment';
+                    toast.error('Unable to delete this dataset!')
                 }
             );
 

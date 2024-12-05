@@ -4,6 +4,7 @@ import { Loader } from '@components/shared';
 import { useTranslations } from 'next-intl';
 import { ContactForm, SignUpForm } from '@components/features';
 import { InstagramIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from '@assets/icons';
+import Link from 'next/link';
 
 
 export const metadata: Metadata = {
@@ -18,11 +19,16 @@ const Contact: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-20 lg:px-0 lg:py-[7rem] space-y-20">
+            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-10 lg:px-0 lg:py-[6rem] space-y-20">
                 <section className="container flex flex-col lg:flex-row mx-auto w-full justify-between space-y-20 lg:space-y-0">
                     <div className="justify-between space-y-[50px]">
-                        <div className="space-y-3">
-                            <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('contact')}</h2>
+                        <div>
+                            <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
+                                <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                                <span className="text-lg">&gt;</span>
+                                <span>{t('contact')}</span>
+                            </nav>
+                            <h1 className="text-[32px] md:text-[2.3rem] font-medium">{t('contact')}</h1>
                             <p className="text-md text-gray-700">{t('contactDescription')}</p>
                         </div>
 

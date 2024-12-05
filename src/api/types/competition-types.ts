@@ -88,7 +88,7 @@ export interface ICompetitionComment {
     userId: number,
     datasetId: number,
     isEditable?: true,
-    repliedCommentDto: ICompetitionComment,
+    competitionChildCommentDtos: ICompetitionComment[],
     fullName: string,
     nickname: string,
     userImageUrl: string,

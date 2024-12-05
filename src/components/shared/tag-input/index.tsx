@@ -28,11 +28,11 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
         <div className="flex flex-col">
             {
                 !!label &&
-                <label className="block font-semibold text-gray-700 mb-2">
+                <label className="block font-semibold text-gray-700">
                     {label}
                 </label>
             }
-            <div className="flex flex-wrap gap-2 mb-2">
+            <div className="flex flex-wrap gap-2 my-2">
                 {tags.map((tag, index) => (
                     <span key={index} className="bg-primaryLight text-lg text-white px-3 py-1 rounded-lg flex items-center">
                         {tag.name}
@@ -51,7 +51,7 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={placeholder}
-                className={`w-full h-[50px] bg-gray-50 px-5 py-2 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
+                className={`w-full h-[50px] px-5 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
             />
         </div>
     );

@@ -29,17 +29,17 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
 
     const config = {
         readonly: false,
-        height: 400,
-        buttons: ['bold', 'italic', 'underline', 'link', 'unlink', 'source'],
+        height: 600,
+        // buttons: ['bold', 'italic', 'underline', 'link', 'unlink', 'source'],
         uploader: {
             insertImageAsBase64URI: true,
         },
     };
 
     return (
-        <>
+        <div>
             {label && (
-                <label htmlFor={name} className="block font-semibold text-gray-700">
+                <label htmlFor={name} className="block font-semibold text-gray-700 mb-2">
                     {label}
                 </label>
             )}
@@ -51,7 +51,7 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
                 onBlur={handleEditorChange}
                 onChange={handleEditorChange}
             />
-        </>
+        </div>
     );
 };
 

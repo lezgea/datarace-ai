@@ -5,6 +5,7 @@ import { CreateDatasetSidebar } from '../create-dataset-sidebar';
 import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
+import Link from 'next/link';
 
 
 export const DatasetsHeaderSection = () => {
@@ -16,9 +17,14 @@ export const DatasetsHeaderSection = () => {
     return (
         <>
             <div className="flex items-center justify-between">
-                <div className="text-start space-y-3">
-                    <h2 className="text-[32px] md:text-[2.3rem]">{t('datasets')} {!!datasetsCount && <span className="text-gray-400">({datasetsCount})</span>}</h2>
-                    <p className="text-md text-gray-700">{t('competitionDescription')}</p>
+                <div className="text-start">
+                    <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
+                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                        <span className="text-lg">&gt;</span>
+                        <span>{t('datasets')}</span>
+                    </nav>
+                    <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('datasets')} {!!datasetsCount && <span className="text-gray-400 font-regular">({datasetsCount})</span>}</h2>
+                    {/* <p className="text-md text-gray-700">{t('competitionDescription')}</p> */}
                 </div>
                 {
                     isAuthenticated &&

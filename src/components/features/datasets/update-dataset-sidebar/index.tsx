@@ -35,7 +35,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(t('titleIsRequired')),
-        description: Yup.string().required(t('descriptionIsRequired'))
+        content: Yup.string().required(t('descriptionIsRequired'))
     });
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm<IFormInput>({
@@ -83,6 +83,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
         if (datasetInfo) {
             setValue('title', datasetInfo?.title);
             setValue('description', datasetInfo?.description);
+            setValue('content', datasetInfo?.content);
             setValue('visibility', datasetInfo?.visibility);
             setValue('status', datasetInfo?.status);
             setValue('datasetProfileImageId', datasetInfo?.imageId);
@@ -118,8 +119,16 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 register={register}
                                 errors={errors}
                             />
-                            <TextEditor
+                            <FormInput
+                                isTextarea
+                                type='text'
                                 name='description'
+                                placeholder="Meta Description"
+                                register={register}
+                                errors={errors}
+                            />
+                            <TextEditor
+                                name='content'
                                 initialValue={datasetInfo?.description}
                                 register={register}
                                 setValue={setValue}

@@ -2,6 +2,7 @@ export interface IDataset {
     id: number | string,
     title: string,
     description: string,
+    content: string,
     imageId?: number,
     imageUrl?: string | null,
     visibility?: string,
@@ -31,7 +32,8 @@ export interface IDatasetsRequest {
 
 export interface IDatasetCreateRequest {
     title: string,
-    description: string,
+    description?: string,
+    content: string,
     visibility?: string,
     usability?: number,
     status?: string,
@@ -57,7 +59,8 @@ export interface IDatasetInfoRequest {
 export interface IDatasetUpdateRequest {
     dataId: string,
     title: string,
-    description: string,
+    description?: string,
+    content: string,
     visibility?: string,
     status?: string,
     usability?: number,
@@ -75,6 +78,7 @@ export interface IDatasetComment {
     datasetId: number,
     isEditable?: true,
     repliedCommentDto: IDatasetComment,
+    datasetChildCommentDtos: IDatasetComment[],
     fullName: string,
     nickname: string,
     userImageUrl: string,

@@ -7,7 +7,8 @@
   "allRaces": "Bütün yarışlar",
   "races": "Yarışlar",
   "race": "Yarış",
-  "faq": "Sual-Cavab",
+  "faq": "Suallar",
+  "faqTitle": "Tez-tez verilən suallar",
   "contact": "Əlaqə",
   "seeOurRaces": "Yarışlarımıza baxın",
   "competitionDescription": "Həyəcanlı yarışa hazır olun",
@@ -139,5 +140,9 @@
   "noComments": "Hələ heç bir şərh yoxdur",
   "updateComment": "Şərhi Düzəlt",
   "reply": "Cavab ver",
-  "replyComment": "Şərhə cavab ver"
+  "replyComment": "Şərhə cavab ver",
+  "blog": "Bloq",
+  "seeMore": "Ətraflı",
+  "seeAll": "Hamısına Bax",
+  "createBlog": "Bloq Yarat"
 }

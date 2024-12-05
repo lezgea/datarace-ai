@@ -22,14 +22,14 @@ const FAQ: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
             <div className="min-h-screen flex flex-col">
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
                 <main id="main-content" className="container mx-auto flex-grow px-5 py-10 md:px-0 md:py-[6rem]">
-                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">{t('faq')}</h1>
                     {/* Breadcrumb */}
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
                         <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span>{t('faq')}</span>
+                        <span>{t('faqTitle')}</span>
                     </nav>
-                    <HelpSection title={t('general')} />
+                    <h1 className="text-[32px] md:text-[2.3rem] font-medium">{t('faqTitle')}</h1>
+                    <HelpSection />
                 </main>
             </div>
         </Suspense>

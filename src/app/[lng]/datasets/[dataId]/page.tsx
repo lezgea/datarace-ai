@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { useGetDatasetInfoQuery } from '@api/datasets-api';
+import { useDeleteDatasetMutation, useGetDatasetInfoQuery } from '@api/datasets-api';
 import { UpdateDatasetSidebar } from '@components/features/datasets/update-dataset-sidebar';
 import { DatasetFiles } from '@components/features/datasets/dataset-files';
 import { DatasetComments } from '@components/features';
@@ -18,7 +18,17 @@ const DatasetDetails: React.FC = () => {
     const datasetId = Array.isArray(dataId) ? dataId[0] : dataId;
 
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
+    const [deleteDataset] = useDeleteDatasetMutation();
     const { data: datasetInfo, error, isLoading, refetch } = useGetDatasetInfoQuery({ id: dataId as string }, { skip: !dataId });
+
+    
+    const onDeleteDataset = async () => {
+        try {
+            await deleteDataset({ id: datasetId })
+        } catch (err: any) {
+            console.log('Error: ', err)
+        }
+    }
 
 
     return (
@@ -36,13 +46,22 @@ const DatasetDetails: React.FC = () => {
 
                     {
                         datasetInfo?.isEditable &&
-                        <button
-                            aria-label="Upload Dataset"
-                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                            onClick={() => setSidebarOpen(true)}
-                        >
-                            Edit Dataset
-                        </button>
+                        <div className='flex gap-3'>
+                            <button
+                                aria-label="Delete Dataset"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                onClick={onDeleteDataset}
+                            >
+                                Delete
+                            </button>
+                            <button
+                                aria-label="Upload Dataset"
+                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                onClick={() => setSidebarOpen(true)}
+                            >
+                                Edit Dataset
+                            </button>
+                        </div>
                     }
                 </div>
 
@@ -58,7 +77,7 @@ const DatasetDetails: React.FC = () => {
                     </section>
                     <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
                         <div className="lg:col-span-3 gap-8">
-                            <div dangerouslySetInnerHTML={{ __html: datasetInfo?.description || '' }}></div>
+                            <div dangerouslySetInnerHTML={{ __html: datasetInfo?.content || '' }}></div>
                         </div>
                         {/* Tags */
                             !!datasetInfo?.tags?.length &&

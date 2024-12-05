@@ -8,6 +8,7 @@
   "races": "Races",
   "race": "Race",
   "faq": "FAQ",
+  "faqTitle": "Frequently Asked Questions",
   "contact": "Contact",
   "seeOurRaces": "See our races",
   "competitionDescription": "Get ready for an exciting race",
@@ -139,5 +140,10 @@
   "noComments": "No comments yet",
   "updateComment": "Update Comment",
   "reply": "Reply",
-  "replyComment": "Reply Comment"
+  "replyComment": "Reply Comment",
+  "blog": "Blog",
+  "seeMore": "See More",
+  "seeAll": "See All",
+  "createBlog": "Create Blog",
+  "editBlog": "Edit Blog"
 }
