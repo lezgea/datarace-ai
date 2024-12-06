@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useGetBlogInfoQuery } from '@api/blogs-api';
 import { RelatedBlog } from '@components/features/blog';
+import { ShareModal } from '@components/shared';
 
 
 const RaceDetails: React.FC = () => {
@@ -14,6 +15,8 @@ const RaceDetails: React.FC = () => {
     const params = useParams();
     const { blogId } = params;
     const bId = Array.isArray(blogId) ? blogId[0] : blogId;
+
+    const [shareModal, setShareModal] = React.useState<boolean>(false);
     const { data: blogInfo, error, isLoading, refetch } = useGetBlogInfoQuery({ id: bId as string }, { skip: !bId });
 
 
@@ -52,7 +55,7 @@ const RaceDetails: React.FC = () => {
                             <button
                                 aria-label="Share Blog"
                                 className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                onClick={() => { }}
+                                onClick={() => setShareModal(true)}
                             >
                                 Share
                             </button>
@@ -83,6 +86,12 @@ const RaceDetails: React.FC = () => {
                     </section>
                 </main>
             </div>
+            <ShareModal
+                title={blogInfo?.title || ''}
+                shareUrl={`https://datarace.ai/${lng}/blog/${bId}`}
+                visible={shareModal}
+                onClose={() => setShareModal(false)}
+            />
         </div>
     );
 };

@@ -16,3 +16,4 @@ export * from './dataset-comment';
 export * from './competition-comment';
 export * from './tag-input';
 export * from './blog-item';
+export * from './share-modal';
