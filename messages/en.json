@@ -145,5 +145,7 @@
   "seeMore": "See More",
   "seeAll": "See All",
   "createBlog": "Create Blog",
-  "editBlog": "Edit Blog"
+  "editBlog": "Edit Blog",
+  "allBlogs": "All Blogs",
+  "myBlogs": "My Blogs"
 }

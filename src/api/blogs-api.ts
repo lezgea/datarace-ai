@@ -23,7 +23,18 @@ export const blogsApi = createApi({
                 params: {
                     page: data.page,
                     count: data.count,
-                    blogCriteria: data.blogCriteria,
+                },
+            }),
+            providesTags: ['Blogs'],
+        }),
+        getMyBlogs: builder.query<IBlogListResponse, IBlogListRequest>({
+            query: ({ data }) => ({
+                url: `/blogs/public/page`,
+                method: 'GET',
+                params: {
+                    page: data.page,
+                    count: data.count,
+                    isMyBlog: true,
                 },
             }),
             providesTags: ['Blogs'],
@@ -64,6 +75,7 @@ export const blogsApi = createApi({
 export const {
     useCreateBlogMutation,
     useLazyGetAllBlogsQuery,
+    useLazyGetMyBlogsQuery,
     // useGetBlogInfoQuery,
     // useUpdateBlogMutation,
     // useDeleteBlogMutation,
