@@ -83,7 +83,7 @@ export interface IBlogInfoResponse extends IBlogItem {
 export interface IBlogUpdateRequest {
     id: string,
     title: string,
-    description: string,
     content: string,
-    read_time: number,
+    blogProfileImageId: number | string | null,
+    tags: ITag[],
 }

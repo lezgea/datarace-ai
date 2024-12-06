@@ -39,13 +39,15 @@ const RaceDetails: React.FC = () => {
                             >
                                 Delete
                             </button>
-                            <button
-                                aria-label="Update Blog"
-                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                onClick={() => { }}
-                            >
-                                Edit Blog
-                            </button>
+                            <Link href={`/${lng}/blog/update/${bId}`}>
+                                <button
+                                    aria-label="Update Blog"
+                                    className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                    onClick={() => { }}
+                                >
+                                    Edit Blog
+                                </button>
+                            </Link>
                             <button
                                 aria-label="Share Blog"
                                 className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"

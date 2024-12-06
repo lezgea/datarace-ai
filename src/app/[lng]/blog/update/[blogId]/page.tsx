@@ -2,12 +2,12 @@
 
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import BlogImageUploader from '@components/features/blog/blog-image-uploader';
 import { FormInput } from '@components/shared';
 import TextEditor from '@components/shared/text-editor';
-import { useCreateBlogMutation } from '@api/blogs-api';
+import { useCreateBlogMutation, useGetBlogInfoQuery, useUpdateBlogMutation } from '@api/blogs-api';
 import * as Yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -26,11 +26,14 @@ const BlogUpdate: React.FC = () => {
     const t = useTranslations();
     const lng = useLocale();
     const router = useRouter();
+    const { blogId } = useParams();
+    const bId: string = Array.isArray(blogId) ? blogId[0] : blogId;
 
     const [imageId, setImageId] = React.useState<number | string | null>(null);
-    const [tags, setTags] = React.useState<{ name: string }[]>([]);
+    const [tags, setTags] = React.useState<ITag[]>([]);
 
-    const [createBlog, { isLoading, isError, isSuccess }] = useCreateBlogMutation();
+    const { data: blogInfo, error: blogInfoError, isLoading: blogInfoLoading, refetch } = useGetBlogInfoQuery({ id: bId as string }, { skip: !bId });
+    const [updateBlog, { isLoading, isError, isSuccess }] = useUpdateBlogMutation();
 
     const validationSchema = Yup.object().shape({
         // title: Yup.string().required(t('titleIsRequired')),
@@ -46,9 +49,11 @@ const BlogUpdate: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            await createBlog({
-                blogImageId: imageId,
+            await updateBlog({
+                id: bId,
+                blogProfileImageId: imageId,
                 ...data,
+                tags
             }).unwrap();
             toast.success('Blog has been updated!');
             onResetData();
@@ -63,6 +68,22 @@ const BlogUpdate: React.FC = () => {
         reset()
         router.push(`/${lng}/blog`)
     }
+
+
+    React.useEffect(() => {
+        if (blogInfo) {
+            setValue('title', blogInfo?.title);
+            setValue('content', blogInfo?.content);
+            // setValue('blogProfileImageId', blogInfo?.imageId);
+            // setImageId(datasetInfo.imageId || null);
+            // setTags(datasetInfo.tags || []);
+        }
+    }, [blogInfo])
+
+
+    // React.useEffect(() => {
+    //     setValue('blogProfileImageId', imageId || undefined)
+    // }, [imageId])
 
 
     return (
@@ -90,7 +111,7 @@ const BlogUpdate: React.FC = () => {
                     <section className="relative">
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="pb-5 text-start space-y-1 space-y-5 select-none">
-                                <BlogImageUploader setImageId={setImageId} />
+                                <BlogImageUploader image={blogInfo?.imageUrl} setImageId={setImageId} />
                                 <FormInput
                                     label="Title"
                                     type='text'
@@ -102,7 +123,7 @@ const BlogUpdate: React.FC = () => {
                                 <TextEditor
                                     label="Content"
                                     name='content'
-                                    initialValue=' '
+                                    initialValue={blogInfo?.content}
                                     register={register}
                                     setValue={setValue}
                                 />
