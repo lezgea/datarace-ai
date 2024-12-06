@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface TagInputProps {
     label?: string;
@@ -15,6 +16,10 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && inputValue.trim() !== '') {
             event.preventDefault(); // Prevent form submission
+            if (tags.length > 30) {
+                toast.warning('You have exceeded the maximum number of tags (30) allowed!');
+                return;
+            }
             setTags([...tags, { name: inputValue.trim() }]); // Add new tag
             setInputValue(''); // Clear the input
         }
@@ -23,6 +28,15 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
     const handleDelete = (tagToDelete: string) => {
         setTags(tags.filter(tag => tag.name !== tagToDelete)); // Remove the tag
     };
+
+    const handleChange = (value: string) => {
+        if (value.length > 30) {
+            toast.warning('You have exceeded the maximum number of symbols (30) allowed!');
+            return;
+        }
+        setInputValue(value);
+    }
+
 
     return (
         <div className="flex flex-col">
@@ -48,7 +62,7 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
             <input
                 type="text"
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => handleChange(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={placeholder}
                 className={`w-full h-[50px] px-5 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}

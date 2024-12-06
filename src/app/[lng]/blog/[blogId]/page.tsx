@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useGetBlogInfoQuery } from '@api/blogs-api';
+import { RelatedBlog } from '@components/features/blog';
 
 
 const RaceDetails: React.FC = () => {
@@ -72,6 +73,13 @@ const RaceDetails: React.FC = () => {
 
                     <section className="p-8 gap-8 rounded-2xl border border-gray-30">
                         <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: blogInfo?.content || '' }} />
+                    </section>
+
+                    <section className="relative">
+                        <h2 className="text-[1.7rem] leading-[2.5rem] md:text-[2.5rem] font-semibold">
+                            Related Blogs
+                        </h2>
+                        <RelatedBlog />
                     </section>
                 </main>
             </div>

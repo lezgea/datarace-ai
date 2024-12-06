@@ -87,3 +87,18 @@ export interface IBlogUpdateRequest {
     blogProfileImageId: number | string | null,
     tags: ITag[],
 }
+
+export interface IRelatedBlogListRequest {
+    id: number | string | null,
+    // data: {
+    //     page: number,
+    //     count: number,
+    //     blogCriteria?: {
+    //         content?: string,
+    //         isMyBlog: boolean,
+    //     }
+    // }
+}
+
+
+export type IRelatedBlogListResponse = IBlogItem[];
