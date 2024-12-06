@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IBlogCreateRequest, IBlogCreateResponse, IBlogListRequest, IBlogListResponse } from './types/blog-types';
+import { IBlogCreateRequest, IBlogCreateResponse, IBlogInfoRequest, IBlogInfoResponse, IBlogListRequest, IBlogListResponse } from './types/blog-types';
 
 
 export const blogsApi = createApi({
@@ -39,6 +39,13 @@ export const blogsApi = createApi({
             }),
             providesTags: ['Blogs'],
         }),
+        getBlogInfo: builder.query<IBlogInfoResponse, IBlogInfoRequest>({
+            query: ({ id }) => ({
+                url: `/blogs/info/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['BlogInfo'],
+        }),
         // getAllBlogs: builder.query<IBlogListResponse, IBlogListRequest>({
         //     query: ({ skip, limit }) => ({
         //         url: `/blog/posts`,
@@ -46,13 +53,6 @@ export const blogsApi = createApi({
         //         params: { skip: skip, limit: limit },
         //     }),
         //     providesTags: ['Blogs'],
-        // }),
-        // getBlogInfo: builder.query<IBlogInfoResponse, IBlogInfoRequest>({
-        //     query: ({ id }) => ({
-        //         url: `/blog/posts/${id}`,
-        //         method: 'GET',
-        //     }),
-        //     providesTags: ['BlogInfo'],
         // }),
         // updateBlog: builder.mutation<null, IBlogUpdateRequest>({
         //     query: (data) => ({
@@ -76,7 +76,7 @@ export const {
     useCreateBlogMutation,
     useLazyGetAllBlogsQuery,
     useLazyGetMyBlogsQuery,
-    // useGetBlogInfoQuery,
+    useGetBlogInfoQuery,
     // useUpdateBlogMutation,
     // useDeleteBlogMutation,
 } = blogsApi;

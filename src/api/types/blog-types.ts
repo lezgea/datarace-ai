@@ -75,9 +75,8 @@ export interface IBlogInfoRequest {
     id: number | string,
 }
 
-export interface IBlogInfoResponse {
+export interface IBlogInfoResponse extends IBlogItem {
     status: string,
-    data: IBlogItem,
 }
 
 

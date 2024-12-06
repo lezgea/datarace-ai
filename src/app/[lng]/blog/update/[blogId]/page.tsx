@@ -22,7 +22,7 @@ interface IFormInput {
 }
 
 
-const BlogCreate: React.FC = () => {
+const BlogUpdate: React.FC = () => {
     const t = useTranslations();
     const lng = useLocale();
     const router = useRouter();
@@ -50,7 +50,7 @@ const BlogCreate: React.FC = () => {
                 blogImageId: imageId,
                 ...data,
             }).unwrap();
-            toast.success('Your blog has been created and will be available for public view after approval by the admins.');
+            toast.success('Blog has been updated!');
             onResetData();
         } catch (err: any) {
             console.error('Unknown error:', err);
@@ -138,4 +138,4 @@ const BlogCreate: React.FC = () => {
     );
 };
 
-export default BlogCreate;
+export default BlogUpdate;
