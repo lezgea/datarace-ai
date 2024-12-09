@@ -18,6 +18,7 @@ import TagInput from '@components/shared/tag-input';
 interface IFormInput {
     title: string,
     content: string,
+    blogProfileImageId: number | string,
     tags: ITag[],
 }
 
@@ -51,7 +52,7 @@ const BlogUpdate: React.FC = () => {
         try {
             await updateBlog({
                 id: bId,
-                blogProfileImageId: imageId,
+                // blogProfileImageId: imageId,
                 ...data,
                 tags
             }).unwrap();
@@ -74,16 +75,16 @@ const BlogUpdate: React.FC = () => {
         if (blogInfo) {
             setValue('title', blogInfo?.title);
             setValue('content', blogInfo?.content);
-            // setValue('blogProfileImageId', blogInfo?.imageId);
-            // setImageId(datasetInfo.imageId || null);
-            // setTags(datasetInfo.tags || []);
+            setValue('blogProfileImageId', blogInfo?.imageId);
+            setImageId(blogInfo.imageId || null);
+            setTags(blogInfo.tags || []);
         }
     }, [blogInfo])
 
 
-    // React.useEffect(() => {
-    //     setValue('blogProfileImageId', imageId || undefined)
-    // }, [imageId])
+    React.useEffect(() => {
+        setValue('blogProfileImageId', imageId || 0)
+    }, [imageId])
 
 
     return (

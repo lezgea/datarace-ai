@@ -69,13 +69,20 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
         }
     };
 
+
+
     if (isLoading) {
         return <CompetitionsSkeleton />;
     }
 
 
+    if (!blogsData?.length) return null;
+
     return (
         <>
+            <h2 className="text-[1.7rem] leading-[2.5rem] md:text-[2.5rem] font-semibold">
+                Related Blogs
+            </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
                 {blogsData?.map((item) => (
                     <BlogItem key={item.id} {...item} />

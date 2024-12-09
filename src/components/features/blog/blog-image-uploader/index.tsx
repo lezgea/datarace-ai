@@ -55,7 +55,7 @@ const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setIma
                     <>
                         <div
                             id="FileUpload"
-                            className="relative w-full h-60 flex items-center justify-center content-center cursor-pointer appearance-none rounded-2xl border-2 border-dashed border-gray-300 dark:bg-meta-4 overflow-hidden"
+                            className="relative w-full h-[500px] flex items-center justify-center content-center cursor-pointer appearance-none rounded-2xl border-2 border-dashed border-gray-300 dark:bg-meta-4 overflow-hidden"
                         >
                             {
                                 !!uploadedImage
@@ -88,7 +88,7 @@ const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setIma
                     :
                     <div
                         id="FileUpload"
-                        className="relative w-full h-60 inline-block items-center content-center cursor-pointer appearance-none rounded-2xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-gray-50 p-[4rem] sm:py-7.5"
+                        className="relative w-full h-[500px] inline-block items-center content-center cursor-pointer appearance-none rounded-2xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-gray-50 p-[4rem] sm:py-7.5"
                     >
                         <input
                             type="file"
@@ -96,9 +96,9 @@ const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setIma
                             className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                             onChange={handleImageChange}
                         />
-                        <div className="flex flex-col items-center justify-between h-full text-gray-400 font-light">
+                        <div className="flex flex-col items-center justify-center h-full text-gray-400 font-light">
                             <p className="text-md">Click to Upload Image</p>
-                            <p className='text-xl text-gray-300'>OR</p>
+                            <p className='text-xl text-gray-300 my-5'>OR</p>
                             <p className="text-md">Drag and Drop</p>
                         </div>
                     </div>

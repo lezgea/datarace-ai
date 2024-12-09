@@ -49,6 +49,7 @@ const BlogCreate: React.FC = () => {
             await createBlog({
                 blogImageId: imageId,
                 ...data,
+                tags,
             }).unwrap();
             toast.success('Your blog has been created and will be available for public view after approval by the admins.');
             onResetData();

@@ -59,17 +59,6 @@ export const AccountSettings: React.FC = () => {
         mode: 'onBlur',
     });
 
-    React.useEffect(() => {
-        if (user) {
-            // Set default values when user data is available
-            setValue('profileFileId', user.profileFileId || 1);
-            setValue('fullName', user.fullName || '');
-            setValue('email', user.email || '');
-            setValue('nickname', user.nickname || '');
-            setValue('phoneNumber', user.phoneNumber || '');
-        }
-    }, [user, setValue]);
-
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
             await updateUser({ id: user?.id || '', data: data }).unwrap();
@@ -106,6 +95,18 @@ export const AccountSettings: React.FC = () => {
             setValue('phoneNumber', user.phoneNumber || '');
         }
     }
+
+
+    React.useEffect(() => {
+        if (user) {
+            // Set default values when user data is available
+            setValue('profileFileId', user.profileFileId || 1);
+            setValue('fullName', user.fullName || '');
+            setValue('email', user.email || '');
+            setValue('nickname', user.nickname || '');
+            setValue('phoneNumber', user.phoneNumber || '');
+        }
+    }, [user, setValue]);
 
 
     return (

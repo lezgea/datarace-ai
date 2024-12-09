@@ -44,11 +44,13 @@ export interface IBlogItem {
     },
     title: string,
     content: string,
+    isEditable: boolean,
     isPending: boolean,
     status: string,
+    imageId: number,
     imageUrl: string,
     createdAt: string
-
+    tags: ITag[],
 }
 
 

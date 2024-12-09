@@ -19,6 +19,7 @@ const RaceDetails: React.FC = () => {
     const [shareModal, setShareModal] = React.useState<boolean>(false);
     const { data: blogInfo, error, isLoading, refetch } = useGetBlogInfoQuery({ id: bId as string }, { skip: !bId });
 
+    console.log('@@@', blogInfo)
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -33,34 +34,36 @@ const RaceDetails: React.FC = () => {
                         <span>{blogInfo?.title}</span>
                     </nav>
 
-                    {
-                        // datasetInfo?.isEditable &&
-                        <div className='flex gap-3'>
-                            <button
-                                aria-label="Delete Dataset"
-                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                            // onClick={() => setSidebarOpen(true)}
-                            >
-                                Delete
-                            </button>
-                            <Link href={`/${lng}/blog/update/${bId}`}>
+                    <div className='flex gap-3'>
+                        {
+                            blogInfo?.isEditable &&
+                            <>
                                 <button
-                                    aria-label="Update Blog"
-                                    className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                    onClick={() => { }}
+                                    aria-label="Delete Dataset"
+                                    className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                // onClick={() => setSidebarOpen(true)}
                                 >
-                                    Edit Blog
+                                    Delete
                                 </button>
-                            </Link>
-                            <button
-                                aria-label="Share Blog"
-                                className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                onClick={() => setShareModal(true)}
-                            >
-                                Share
-                            </button>
-                        </div>
-                    }
+                                <Link href={`/${lng}/blog/update/${bId}`}>
+                                    <button
+                                        aria-label="Update Blog"
+                                        className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                                        onClick={() => { }}
+                                    >
+                                        Edit Blog
+                                    </button>
+                                </Link>
+                            </>
+                        }
+                        <button
+                            aria-label="Share Blog"
+                            className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            onClick={() => setShareModal(true)}
+                        >
+                            Share
+                        </button>
+                    </div>
                 </div>
 
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
@@ -79,9 +82,6 @@ const RaceDetails: React.FC = () => {
                     </section>
 
                     <section className="relative">
-                        <h2 className="text-[1.7rem] leading-[2.5rem] md:text-[2.5rem] font-semibold">
-                            Related Blogs
-                        </h2>
                         <RelatedBlog />
                     </section>
                 </main>
