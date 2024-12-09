@@ -51,6 +51,7 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags, label, placeholder }
                     <span key={index} className="bg-primaryLight text-lg text-white px-3 py-1 rounded-lg flex items-center">
                         {tag.name}
                         <button
+                            type='button'
                             onClick={() => handleDelete(tag.name)}
                             className="ml-2 text-lg text-red-500"
                         >

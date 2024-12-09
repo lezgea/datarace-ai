@@ -61,13 +61,13 @@ export const blogsApi = createApi({
             }),
             providesTags: ['RelatedBlogs'],
         }),
-        // deleteBlog: builder.mutation<void, { id: number | string }>({
-        //     query: ({ id }) => ({
-        //         url: `/blog/posts/${id}`,
-        //         method: 'DELETE',
-        //     }),
-        //     invalidatesTags: ['Blogs'],
-        // }),
+        deleteBlog: builder.mutation<void, { id: number | string }>({
+            query: ({ id }) => ({
+                url: `/blogs/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Blogs'],
+        }),
     }),
 });
 
@@ -78,5 +78,5 @@ export const {
     useGetBlogInfoQuery,
     useUpdateBlogMutation,
     useGetRelatedBlogsQuery,
-    // useDeleteBlogMutation,
+    useDeleteBlogMutation,
 } = blogsApi;

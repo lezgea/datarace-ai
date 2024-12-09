@@ -2,24 +2,37 @@
 
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { useGetBlogInfoQuery } from '@api/blogs-api';
+import { useDeleteBlogMutation, useGetBlogInfoQuery } from '@api/blogs-api';
 import { RelatedBlog } from '@components/features/blog';
-import { ShareModal } from '@components/shared';
+import { ConfirmationModal, ShareModal } from '@components/shared';
 
 
 const RaceDetails: React.FC = () => {
     const t = useTranslations();
     const lng = useLocale();
     const params = useParams();
+    const router = useRouter();
     const { blogId } = params;
     const bId = Array.isArray(blogId) ? blogId[0] : blogId;
 
     const [shareModal, setShareModal] = React.useState<boolean>(false);
+    const [deleteModal, setDeleteModal] = React.useState<boolean>(false);
     const { data: blogInfo, error, isLoading, refetch } = useGetBlogInfoQuery({ id: bId as string }, { skip: !bId });
+    const [deleteBlog] = useDeleteBlogMutation();
 
-    console.log('@@@', blogInfo)
+
+    const onDeleteBlog = async () => {
+        try {
+            await deleteBlog({ id: bId }).unwrap();
+            setDeleteModal(false);
+            router.back();
+        } catch (err: any) {
+            console.log('Error: ', err)
+        }
+    }
+
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -41,7 +54,7 @@ const RaceDetails: React.FC = () => {
                                 <button
                                     aria-label="Delete Dataset"
                                     className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                // onClick={() => setSidebarOpen(true)}
+                                    onClick={() => setDeleteModal(true)}
                                 >
                                     Delete
                                 </button>
@@ -49,7 +62,6 @@ const RaceDetails: React.FC = () => {
                                     <button
                                         aria-label="Update Blog"
                                         className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
-                                        onClick={() => { }}
                                     >
                                         Edit Blog
                                     </button>
@@ -91,6 +103,11 @@ const RaceDetails: React.FC = () => {
                 shareUrl={`https://datarace.ai/${lng}/blog/${bId}`}
                 visible={shareModal}
                 onClose={() => setShareModal(false)}
+            />
+            <ConfirmationModal
+                visible={deleteModal}
+                onConfirm={onDeleteBlog}
+                onClose={() => setDeleteModal(false)}
             />
         </div>
     );
