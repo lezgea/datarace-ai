@@ -20,7 +20,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
     let lng = useLocale();
     let t = useTranslations();
 
-    let { id, imageUrl, title } = props
+    let { id, imageUrl, title, userDto } = props
 
     const imgUrl = imageUrl || "/svg/noimg.svg";
 
@@ -37,8 +37,8 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
                     priority={true}
                 />
             </div>
-            <div className="flex flex-col px-7 py-6 space-y-2 text-start items-between">
-                <div className="mb-3 space-y-2">
+            <div className="flex flex-col px-7 py-6 space-y-2 text-start justify-between">
+                <div className="flex h-20 mb-3 space-y-2">
                     <h3 className="text-xl font-medium text-customBlue-900 truncate-text">{title}</h3>
                     {/* <p className="text-md text-gray-500 truncate-text description-font">{date}</p> */}
                 </div>
@@ -49,6 +49,21 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
                     </Link>
+                    <div className="flex items-center justify-end cursor-pointer group select-none">
+                        <div className="flex flex-col items-end text-gray-400 font-regmed mr-3 transition-all duration-200 ease-in-out">
+                            <span className='text-sm'>Written by</span>
+                            <span className='ml-2 text-xl text-gray-600 font-medium hover:text-primary'> {userDto?.fullName?.split(' ')[0]}</span>
+                        </div>
+                        <div className="relative w-[45px] h-[45px] min-w-[45px] min-h-[45px] rounded-full overflow-hidden">
+                            <Image
+                                src={userDto?.userImageUrl || '/svg/user.svg'}
+                                alt="Avatar"
+                                fill={true}
+                                className="object-cover"
+                                priority={true}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </Link>

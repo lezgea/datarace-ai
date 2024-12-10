@@ -49,6 +49,7 @@ import NoDataSvg from './no-data.svg';
 import DocUpload from './doc-upload.svg';
 import TrashIcon from './trash.svg';
 import LogoFullWhite from './logo_fullwhite.svg';
+import CopyIcon from './copy.svg';
 
 
 
@@ -68,6 +69,7 @@ export {
     NoDataSvg,
 
     // icons
+    CopyIcon,
     TrashIcon,
     DocUpload,
     HeartIcon,

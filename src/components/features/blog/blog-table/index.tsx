@@ -85,7 +85,6 @@ export const BlogTable: React.FC<IBlogTable> = () => {
                 }
             },
         }).then((response) => {
-            console.log("@@@@@", response)
             // if (response?.totalElements) {
             //     setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
             // } else {
