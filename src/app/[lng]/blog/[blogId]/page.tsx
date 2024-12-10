@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useDeleteBlogMutation, useGetBlogInfoQuery } from '@api/blogs-api';
 import { RelatedBlog } from '@components/features/blog';
 import { ConfirmationModal, ShareModal } from '@components/shared';
+import Image from 'next/image';
 
 
 const RaceDetails: React.FC = () => {
@@ -92,7 +93,21 @@ const RaceDetails: React.FC = () => {
                     <section className="p-8 gap-8 rounded-2xl border border-gray-30">
                         <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: blogInfo?.content || '' }} />
                     </section>
-
+                    <div className="flex items-center justify-end cursor-pointer group select-none">
+                        <div className="flex flex-col items-end text-gray-400 font-regmed mr-3 transition-all duration-200 ease-in-out">
+                            <span className='text-sm'>Written by</span>
+                            <span className='ml-2 text-xl text-gray-600 font-medium hover:text-primary'> {blogInfo?.fullName}</span>
+                        </div>
+                        <div className="relative w-[45px] h-[45px] min-w-[45px] min-h-[45px] rounded-full overflow-hidden">
+                            <Image
+                                src={blogInfo?.userImageUrl || '/svg/user.svg'}
+                                alt="Avatar"
+                                fill={true}
+                                className="object-cover"
+                                priority={true}
+                            />
+                        </div>
+                    </div>
                     <section className="relative">
                         <RelatedBlog />
                     </section>

@@ -49,7 +49,9 @@ export interface IBlogItem {
     status: string,
     imageId: number,
     imageUrl: string,
-    createdAt: string
+    createdAt: string,
+    fullName: string,
+    userImageUrl: string,
     tags: ITag[],
 }
 
