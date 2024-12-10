@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import JoditEditor from 'jodit-react';
+import JoditEditor, { Jodit } from 'jodit-react';
 
 
 interface ITextEditorProps {
@@ -34,6 +34,22 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
         uploader: {
             insertImageAsBase64URI: true,
         },
+        controls: {
+            paragraph: {
+                list: Jodit.atom({
+                    p: 'Pharagraph',
+                    // h1: 'Heading 1',
+                    h2: 'Heading 2',
+                    h3: 'Heading 3',
+                    h4: 'Heading 4',
+                    h5: 'Heading 5',
+                    h6: 'Heading 6',
+                    blockquote: 'Quote',
+                    div: 'Div',
+                    pre: 'Source code'
+                })
+            }
+        }
     };
 
     return (
