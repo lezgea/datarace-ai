@@ -107,6 +107,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
             {/* Pagination Controls */
                 !!competitionsData?.totalCount &&
+                competitionsData?.totalCount > itemsPerPage &&
                 <div className="flex justify-between items-center mt-6">
                     <button
                         onClick={handlePreviousPage}

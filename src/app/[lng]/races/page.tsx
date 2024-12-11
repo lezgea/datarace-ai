@@ -34,7 +34,7 @@ const Races: React.FC = () => {
                     <CategoriesSection />
                 </section>
 
-                <section className="container mx-auto text-center">
+                <section className="container mx-auto">
                     <CompetitionsTable />
                 </section>
             </main>

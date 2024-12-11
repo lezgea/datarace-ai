@@ -84,7 +84,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
                     <DatasetItem
                         key={i}
                         {...item}
-                        onClick={onClickDataset}
+                    // onClick={onClickDataset}
                     />
                 ))}
             </div>

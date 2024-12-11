@@ -21,7 +21,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
 
 
     return (
-        <Link href={isAuthenticated ? `/${lng}/datasets/${id}` : ''} onClick={onClick} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 {
                     !!visibility && visibility === 'PRIVATE' &&
