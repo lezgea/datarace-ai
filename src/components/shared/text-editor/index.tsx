@@ -52,6 +52,7 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
         }
     };
 
+    
     return (
         <div>
             {label && (

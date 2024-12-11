@@ -100,7 +100,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
                     <RaceItem
                         key={i}
                         {...item}
-                        onClick={onClickCompetition}
+                    // onClick={onClickCompetition}
                     />
                 ))}
             </div>

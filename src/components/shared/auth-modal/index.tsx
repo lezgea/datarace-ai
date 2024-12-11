@@ -45,8 +45,8 @@ const ModalContent: React.FC<IModalContent> = (props) => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 text-center">
-            <h2 className="text-3xl mx-3 mb-2">Authentification is required</h2>
-            <p className='font-light'>For this action authentification is required. Please login to continue</p>
+            <h2 className="text-3xl mx-3 mb-2">{t("authModalTitle")}</h2>
+            <p className='font-light'>{t("authModalDescription")}</p>
             <div className="flex flex-col items-center space-y-3 mt-10">
                 <button
                     onClick={() => router.push(`/${lng}/sign-in`)}
@@ -56,7 +56,7 @@ const ModalContent: React.FC<IModalContent> = (props) => {
                     {t('signIn')}
                 </button>
                 <p className='font-light'>
-                    If you don't have an account yet create a <span className="font-medium cursor-pointer underline text-primary" onClick={() => router.push(`/${lng}/sign-up`)}>new account</span>
+                    {t("dontHaveAccount")} <span className="font-medium cursor-pointer underline text-primary" onClick={() => router.push(`/${lng}/sign-up`)}>{t("signUp")}</span>
                 </p>
             </div>
         </div>
