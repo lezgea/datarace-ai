@@ -56,7 +56,7 @@ export const DatasetsSection: React.FC = () => {
         <>
             <div className="flex justify-between mb-8">
                 <div className="w-full space-y-3">
-                    <h2 className="text-[32px] md:text-[2.3rem]">{t('datasets')}</h2>
+                    <h2 className="font-medium text-[32px] md:text-[2.3rem]">{t('datasets')}</h2>
                     <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                 </div>
             </div>

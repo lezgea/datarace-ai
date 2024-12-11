@@ -108,10 +108,12 @@ const ComingSoonContent: React.FC = () => {
                     <div>
                         <h2 className="text-[4rem] font-semi mb-4 text-center">Coming Soon</h2>
                     </div>
-
-                    <p className="mt-6 text-center font-light">
-                        {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-primary font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
-                    </p>
+                    {
+                        !isAuthenticated &&
+                        <p className="mt-6 text-center font-light">
+                            {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-primary font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
+                        </p>
+                    }
                 </div>
             </div>
         </div>

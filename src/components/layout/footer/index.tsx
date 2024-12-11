@@ -67,10 +67,17 @@ export const Footer: React.FC = () => {
                         <h2 className="font-semibold">{t('contact')}</h2>
                         <ul className="text-sm font-light space-y-4">
                             <li>
-                                <Link href="#" className="hover:text-primary">{t('email')}</Link>
+                                <Link href="mailto:info@datarace.ai" className="hover:text-primary">info@datarace.ai</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary">{t('address')}</Link>
+                                <Link
+                                    href={`https://www.google.com/maps/place/The+Landmark+Hotel+Baku/@40.375979,49.8510411,17z/data=!3m1!4b1!4m9!3m8!1s0x40307da92226dcf3:0xe7030175bf64e918!5m2!4m1!1i2!8m2!3d40.375979!4d49.8510411!16s%2Fg%2F1v2yxbyy?entry=ttu&g_ep=EgoyMDI0MTIwOC4wIKXMDSoASAFQAw%3D%3D`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-primary"
+                                >
+                                    90A Nizami St, Baku 1010, Azerbaijan
+                                </Link>
                             </li>
                         </ul>
                     </div>
