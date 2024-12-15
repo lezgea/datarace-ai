@@ -1,7 +1,11 @@
 export interface ICategory {
     id: number;
-    name: string;
+    titles: {
+        en: string,
+        az: string,
+    };
     competitionsCount: number;
+    color: string,
     children: ICategory[];
 }
 

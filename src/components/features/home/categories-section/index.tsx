@@ -8,12 +8,12 @@ import RaceSelect from '@components/shared/race-select';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
+import { ICategory } from '@api/types/category-types';
 
 // const RaceSelect = dynamic(() => import('@components/shared/race-select').then(mod => mod.default), { ssr: false });
 
-interface IRaceType {
+interface IRaceType extends ICategory {
     id: number,
-    name: string,
     competitionsCount: number,
     children: IRaceType[],
     type?: string,
@@ -39,7 +39,7 @@ export const CategoriesSection: React.FC = () => {
     return (
         <div className="container mx-auto flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
             {categories && categories.map((item: IRaceType, i: number) => (
-                <RaceSelect key={i} {...item} type={item.name} />
+                <RaceSelect key={i} {...item} type={item.titles.en} />
             ))}
         </div>
     );
