@@ -35,10 +35,10 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
     const CATEGORY_LABELS: Record<number, string> = {
         1: t('all'),
-        2: "Environment",
-        3: "Education",
-        4: "Oil & Industry",
-        5: "Technology",
+        2: t('environment'),
+        3: t('education'),
+        4: t('oilIndustry'),
+        5: t('technology'),
     };
 
 
@@ -49,6 +49,18 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
             setShowAuthModal(true)
         }
     }
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages - 1) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
 
 
     React.useEffect(() => {
@@ -69,17 +81,6 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         setCurrentPage(0);
     }, [selectedCategory]);
 
-    const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage((prevPage) => prevPage + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage((prevPage) => prevPage - 1);
-        }
-    };
 
     if (categoryLoading || competitionLoading || isLoading) {
         return <CompetitionsSkeleton />;
@@ -90,7 +91,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         <>
             <div className="flex justify-between mb-10">
                 <div className="w-full space-y-3">
-                    <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">{t('competitions')}</span></h2>
+                    <h2 className="text-[32px] md:text-[2.3rem]">{CATEGORY_LABELS[selectedCategory]} <span className="font-medium">{selectedCategory == 1 ? t('competitions') : t('competitions2')}</span></h2>
                     <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                 </div>
             </div>

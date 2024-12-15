@@ -56,7 +56,7 @@ export const CompetitionsSection: React.FC = () => {
     if (!categoryLoading && !competitionLoading && !isLoading && !competitionsData?.competitions?.length) {
         return (
             <div>
-                <h2 className="text-[32px] md:text-[2.3rem]">Competitions</h2>
+                <h2 className="text-[32px] md:text-[2.3rem]">{t('competitions')}</h2>
                 <p className="text-md text-gray-700">{t('competitionDescription')}</p>
                 <NoData />
             </div>

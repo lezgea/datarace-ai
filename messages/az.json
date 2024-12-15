@@ -149,5 +149,11 @@
   "myBlogs": "Mənim Bloqlarım",
   "authModalTitle": "Doğrulama tələb olunur",
   "authModalDescription": "Bu əməliyyatı yerinə yetirmək üçün doğrulama tələb olunur. \nDavam etmək üçün zəhmət olmasa daxil olun",
-  "dontHaveAccount": "Hələ hesabınız yoxdursa"
+  "dontHaveAccount": "Hələ hesabınız yoxdursa",
+  "technology": "Texnologiya",
+  "oilIndustry": "Neft və İndustriya",
+  "education": "Təhsil",
+  "environment": "Ətraf mühit",
+  "competitions2": "Yarışları",
+  "competitions3": "Yarış"
 }
