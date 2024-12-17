@@ -157,5 +157,8 @@
   "competitions2": "Yarışları",
   "competitions3": "Yarış",
   "writtenBy": "Müəllif",
-  "by": "Müəllif"
+  "by": "Müəllif",
+  "noDataTitle": "Bu əməliyyatı yerinə yetirmək üçün autentifikasiya tələb olunur.",
+  "noDataDescription": "Davam etmək üçün daxil olun. Əgər hələ hesabınız yoxdursa,",
+  "newAccount": "Yeni Hesab Yaradın"
 }

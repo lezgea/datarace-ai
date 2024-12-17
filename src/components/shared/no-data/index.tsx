@@ -16,9 +16,9 @@ export const NoData = () => {
     if (!isAuthenticated) {
         return (
             <div className="flex flex-col items-center justify-center p-6 text-center min-h-[50vh]">
-                <p className='font-light'>For this action authentification is required. Please login to continue</p>
+                <p className='font-light'>{t('noDataTitle')}</p>
                 <p className='font-light'>
-                    If you don't have an account yet create a <span className="font-medium cursor-pointer underline text-primary" onClick={() => router.push(`/${lng}/sign-up`)}>new account</span>
+                    {t('noDataDescription')} <span className="font-medium cursor-pointer underline text-primary" onClick={() => router.push(`/${lng}/sign-up`)}>{t('newAccount').toLowerCase()}</span>
                 </p>
                 <div className="flex flex-col items-center space-y-3 mt-5">
                     <button
