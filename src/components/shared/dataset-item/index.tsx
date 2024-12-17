@@ -1,6 +1,6 @@
 import { IDataset } from "@api/types/dataset-types";
 import { RootState } from "@store/store";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ interface DatasetProps extends IDataset {
 
 const DatasetItem: React.FC<DatasetProps> = (props) => {
     let lng = useLocale();
+    let t = useTranslations();
 
     let { id, title, description, visibility, userDto, datasetFileDownloadDto, onClick } = props
 
@@ -56,7 +57,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                                 priority={true}
                             />
                         </div>
-                        <p className="text-md text-gray-500 truncate-text">by <strong className="font-medium">{userDto?.fullName}</strong></p>
+                        <p className="text-md text-gray-500 truncate-text">{t('by')} <strong className="font-medium">{userDto?.fullName}</strong></p>
                     </div>
                     <p className="text-md text-primary truncate-text font-regular">{!!datasetFileDownloadDto?.length ? `${datasetFileDownloadDto?.length} File` : ` `}</p>
                 </div>

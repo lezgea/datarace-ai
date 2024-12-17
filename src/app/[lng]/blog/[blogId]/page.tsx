@@ -95,7 +95,7 @@ const RaceDetails: React.FC = () => {
                     </section>
                     <div className="flex items-center justify-end cursor-pointer group select-none">
                         <div className="flex flex-col items-end text-gray-400 font-regmed mr-3 transition-all duration-200 ease-in-out">
-                            <span className='text-sm'>Written by</span>
+                            <span className='text-sm'>{t('writtenBy')}</span>
                             <span className='ml-2 text-xl text-gray-600 font-medium hover:text-primary'> {blogInfo?.fullName}</span>
                         </div>
                         <div className="relative w-[45px] h-[45px] min-w-[45px] min-h-[45px] rounded-full overflow-hidden">
