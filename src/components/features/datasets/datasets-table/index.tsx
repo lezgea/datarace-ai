@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import DatasetItem from '@components/shared/dataset-item';
-import { AuthModal, NoData } from '@components/shared';
+import { AuthModal, NoData, TablePagination } from '@components/shared';
 import { useDispatch } from 'react-redux';
 import { setDatasetCount } from '@slices/dataset-slice';
 import { useRouter } from 'next/navigation';
@@ -30,9 +30,17 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalElems, setTotalElems] = React.useState(1);
     const [triggerGetDatasets, { data: datasetsData, error, isLoading }] = useLazyGetAllDatasetsQuery();
 
     const itemsPerPage = 6;
+
+
+    const onPageChange = (page: number) => {
+        if (page >= 0 && page < totalPages) {
+            setCurrentPage(page);
+        }
+    };
 
     React.useEffect(() => {
         triggerGetDatasets({
@@ -41,32 +49,12 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
             if (response?.data?.totalElements) {
                 dispatch(setDatasetCount(response?.data?.totalElements));
                 setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
+                setTotalElems(response?.data?.totalElements);
             } else {
                 setTotalPages(1)
             }
         });
     }, [currentPage, triggerGetDatasets]);
-
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage((prevPage) => prevPage + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage((prevPage) => prevPage - 1);
-        }
-    };
-
-    const onClickDataset = (e: any) => {
-        if (isAuthenticated) {
-            e.stopPropogation();
-        } else {
-            setShowAuthModal(true)
-        }
-    }
 
 
     if (datasetsLoading || isLoading) {
@@ -89,24 +77,8 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
             </div>
 
             {/* Pagination Controls */
-                !!datasetsData?.totalElements &&
-                <div className="flex justify-between items-center mt-6">
-                    <button
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 0}
-                        className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('previous')}
-                    </button>
-                    <span>{t('page')} {currentPage + 1} of {totalPages}</span>
-                    <button
-                        onClick={handleNextPage}
-                        disabled={currentPage >= totalPages - 1}
-                        className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('next')}
-                    </button>
-                </div>
+                !!datasetsData?.totalElements && datasetsData?.totalElements > itemsPerPage &&
+                <TablePagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
             }
             <AuthModal
                 visible={showAuthModal}

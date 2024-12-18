@@ -1,7 +1,7 @@
 "use client";
 
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
-import { AuthModal } from '@components/shared';
+import { AuthModal, TablePagination } from '@components/shared';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
@@ -19,16 +19,15 @@ interface ICompetitionsTable {
 
 export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
     const t = useTranslations();
-    const lng = useLocale();
-    const router = useRouter();
 
-    const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { selectedCategory, loading: categoryLoading } = useSelector((state: RootState) => state.categories);
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
 
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalElems, setTotalElems] = React.useState(1);
+
     const [triggerGetCompetitions, { data: competitionsData, error, isLoading }] = useLazyGetCompetitionsQuery();
 
     const itemsPerPage = 6;
@@ -41,27 +40,11 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         5: t('technology'),
     };
 
-
-    const onClickCompetition = (e: any) => {
-        if (isAuthenticated) {
-            e.stopPropagation()
-        } else {
-            setShowAuthModal(true)
-        }
-    }
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage((prevPage) => prevPage + 1);
+    const onPageChange = (page: number) => {
+        if (page >= 0 && page < totalPages) {
+            setCurrentPage(page);
         }
     };
-
-    const handlePreviousPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage((prevPage) => prevPage - 1);
-        }
-    };
-
 
     React.useEffect(() => {
         triggerGetCompetitions({
@@ -70,6 +53,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
         }).then((response) => {
             if (response?.data?.totalCount) {
                 setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
+                setTotalElems(response?.data?.totalCount);
             } else {
                 setTotalPages(1)
             }
@@ -109,23 +93,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
             {/* Pagination Controls */
                 !!competitionsData?.totalCount &&
                 competitionsData?.totalCount > itemsPerPage &&
-                <div className="flex justify-between items-center mt-6">
-                    <button
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 0}
-                        className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('previous')}
-                    </button>
-                    <span>{t('page')} {currentPage + 1} of {totalPages}</span>
-                    <button
-                        onClick={handleNextPage}
-                        disabled={currentPage >= totalPages - 1}
-                        className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                    >
-                        {t('next')}
-                    </button>
-                </div>
+                <TablePagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
             }
             <AuthModal
                 visible={showAuthModal}

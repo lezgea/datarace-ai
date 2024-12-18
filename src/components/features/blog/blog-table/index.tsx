@@ -2,7 +2,7 @@
 
 import { useLazyGetAllBlogsQuery } from '@api/blogs-api';
 import { useLazyGetCompetitionsQuery } from '@api/competition-api';
-import { AuthModal } from '@components/shared';
+import { AuthModal, TablePagination } from '@components/shared';
 import BlogItem from '@components/shared/blog-item';
 import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
@@ -68,14 +68,19 @@ export const BlogTable: React.FC<IBlogTable> = () => {
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalElems, setTotalElems] = React.useState(1);
     const [triggerGetBlogs, { data: blogsData, error, isLoading }] = useLazyGetAllBlogsQuery();
 
     const itemsPerPage = 6;
 
+    const onPageChange = (page: number) => {
+        if (page >= 0 && page < totalPages) {
+            setCurrentPage(page);
+        }
+    };
 
     React.useEffect(() => {
         triggerGetBlogs({
-            // categoryId: selectedCategory,
             data: {
                 page: currentPage,
                 count: itemsPerPage,
@@ -85,26 +90,15 @@ export const BlogTable: React.FC<IBlogTable> = () => {
                 }
             },
         }).then((response) => {
-            // if (response?.totalElements) {
-            //     setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
-            // } else {
-            //     setTotalPages(1)
-            // }
+            if (response?.data?.totalElements) {
+                setTotalPages(Math.ceil(response.data.totalElements / itemsPerPage));
+                setTotalElems(response?.data?.totalElements);
+            } else {
+                setTotalPages(1)
+            }
         });
     }, [currentPage, triggerGetBlogs]);
 
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage((prevPage) => prevPage + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage((prevPage) => prevPage - 1);
-        }
-    };
 
     if (isLoading) {
         return <CompetitionsSkeleton />;
@@ -118,26 +112,9 @@ export const BlogTable: React.FC<IBlogTable> = () => {
                     <BlogItem key={item.id} {...item} />
                 ))}
             </div>
-
             {/* Pagination Controls */
-                // !!competitionsData?.totalCount &&
-                // <div className="flex justify-between items-center mt-6">
-                //     <button
-                //         onClick={handlePreviousPage}
-                //         disabled={currentPage === 0}
-                //         className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                //     >
-                //         {t('previous')}
-                //     </button>
-                //     <span>{t('page')} {currentPage + 1} of {totalPages}</span>
-                //     <button
-                //         onClick={handleNextPage}
-                //         disabled={currentPage >= totalPages - 1}
-                //         className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
-                //     >
-                //         {t('next')}
-                //     </button>
-                // </div>
+                !!blogsData?.totalElements && blogsData?.totalElements > itemsPerPage &&
+                <TablePagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
             }
             <AuthModal
                 visible={showAuthModal}
