@@ -1,45 +1,26 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ProfileSectionSkeleton } from '@components/shared';
+import { ProfileSectionSkeleton, ShareModal } from '@components/shared';
 import Image from 'next/image';
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import getImgFromBase64 from '@utils/base64toImg';
-import withProtectedRoute from '@utils/withProtectedRoute';
-import TabSelects from '@components/shared/tab-selects';
-import { AccountSettings, AttendedRaces, SubmittedProjects } from '@components/features';
 import { useUploadAvatarMutation } from '@api/upload-api';
-import { useUpdateUserMutation } from '@api/user-api';
-import { truncate } from 'lodash';
-import { useTranslations } from 'next-intl';
+import { useLazyGetUserByIdQuery, useUpdateUserMutation } from '@api/user-api';
+import { useLocale, useTranslations } from 'next-intl';
+import { LogoFullWhite } from '@assets/icons';
+import { useParams } from 'next/navigation';
 
 
 
 const UserProfile: React.FC = () => {
     const t = useTranslations();
+    const lng = useLocale();
 
-    const TABS: { title: string, content: React.ReactNode }[] = [
-        {
-            title: t('attendedRaces'),
-            content: <AttendedRaces />,
-        },
-        // {
-        //     title: t('bookmarks'),
-        //     content: <div>Bookmarks</div>,
-        // },
-        {
-            title: t('submittedProjects'),
-            content: <SubmittedProjects />,
-        },
-        {
-            title: t('settings'),
-            content: <AccountSettings />,
-        },
-    ];
+    const { userId } = useParams();
 
-
-    const [hovering, setHovering] = React.useState(false);
+    const [shareModal, setShareModal] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const [isClient, setIsClient] = React.useState<boolean>(false);
     const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.user);
@@ -47,40 +28,23 @@ const UserProfile: React.FC = () => {
     const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();
     const [updateUser, { isLoading: updateLoading, isError: updateError, data }] = useUpdateUserMutation();
 
+
+    const [triggerGetUser, { data: userData, isLoading: userDataLoading }] = useLazyGetUserByIdQuery();
+
+
     const userImage = React.useMemo(
         () => (user?.profileImage ? getImgFromBase64(user.profileImage) : '/svg/user.svg'),
         [user?.profileImage]
     );
 
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const uploadedFile = e.target.files?.[0];
-        if (!uploadedFile) {
-            setErrorMessage("Please select a file to upload.");
-            return;
-        }
 
+    React.useEffect(() => {
         try {
-            const formData = new FormData();
-            formData.append("file", uploadedFile);
-
-            let response = await uploadAvatar({ file: formData }).unwrap();
-            await updateUser({
-                id: user?.id || '',
-                data: {
-                    profileFileId: response?.id,
-                    fullName: user?.fullName,
-                    email: user?.email,
-                    nickname: user?.nickname,
-                    phoneNumber: user?.phoneNumber,
-                }
-            }).unwrap();
-
-            setErrorMessage(null);
-        } catch (error) {
-            setErrorMessage("Profile image upload failed.");
+            triggerGetUser({ id: userId as string });
+        } catch (err: any) {
+            console.log('Error: ', err)
         }
-    };
-
+    }, [userId])
 
     React.useEffect(() => {
         setIsClient(true);
@@ -96,49 +60,50 @@ const UserProfile: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col p-5">
             <main className="flex-grow py-20">
-                <section className="container flex flex-col items-center justify-between space-y-7 mx-auto p-10 border border-gray-300 rounded-3xl lg:flex-row lg:space-x-10 lg:space-y-0">
-                    <div
-                        className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200"
-                        onMouseEnter={() => setHovering(true)}
-                        onMouseLeave={() => setHovering(false)}
-                    >
+                <section className="container flex flex-col mx-auto rounded-3xl lg:flex-row lg:space-y-0 overflow-hidden shadow-md border-t border-t-primaryExtra">
+                    <div className="flex w-full relative">
                         <Image
-                            src={userImage}
-                            alt="Avatar"
-                            fill={true}
-                            className="object-cover"
-                            priority={true}
+                            src={"/svg/dr_banner.svg"}
+                            alt="Datarace Banner Image"
+                            height={200}
+                            width={800}
+                            className="w-full h-[23rem] object-cover"
                         />
-
-                        {hovering && (
-                            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                                {/* Label makes the hover area clickable */}
-                                <label
-                                    htmlFor="image-upload"
-                                    className="cursor-pointer bg-none text-white text-xs px-4 py-2 border border-1 border-white rounded-full"
-                                >
-                                    {isLoading ? 'Uploading...' : 'Upload Image'}
-                                </label>
-                            </div>
-                        )}
-
-                        {/* Invisible input */}
-                        <input
-                            id="image-upload"
-                            type="file"
-                            className="absolute inset-0 opacity-0 cursor-pointer"
-                            accept="image/png, image/jpeg"
-                            onChange={handleImageChange}
-                            disabled={isLoading}
-                        />
-                    </div>
-
-                    <div className="w-full flex flex-col space-y-5 md:flex-row justify-start md:space-y-0">
-                        <div className="w-full flex flex-col items-center md:items-start md:justify-end space-y-1">
-                            <p className="text-[2rem] font-medium">{user?.fullName}</p>
-                            <p className="text-md text-gray-500">{user?.email}</p>
-                            <p className="text-md text-gray-500">@{user?.nickname}</p>
+                        <div className='absolute flex flex-col items-end justify-end gap-7 px-20 py-[4rem] top-0 w-full h-full'>
+                            <LogoFullWhite />
+                            <p className='text-md text-white font-light max-w-[80%] text-end'>{t('description')}</p>
                         </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center min-w-[30%]">
+                        <div
+                            className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200"
+                        >
+                            <Image
+                                src={userData?.profileImageUrl || '/svg/user.svg'}
+                                alt="Avatar"
+                                fill={true}
+                                className="object-cover"
+                                priority={true}
+                            />
+                        </div>
+
+                        <div className="w-full flex flex-col gap-3 space-y-3 md:flex-row justify-center md:space-y-0">
+                            <div className="w-full flex flex-col items-center md:justify-end">
+                                <p className="text-[1.7rem] font-medium">{userData?.fullName}</p>
+                                <p className="text-md text-gray-500">{userData?.email}</p>
+                                {
+                                    !!userData?.nickname &&
+                                    <p className="text-md text-primary">@{userData?.nickname}</p>
+                                }
+                            </div>
+                        </div>
+                        <button
+                            aria-label="Share Blog"
+                            className="inline-flex w-auto text-center items-center px-7 py-2 mt-3 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
+                            onClick={() => setShareModal(true)}
+                        >
+                            Share
+                        </button>
                     </div>
                 </section>
 
@@ -150,8 +115,15 @@ const UserProfile: React.FC = () => {
                 )}
 
                 <section className="container mx-auto py-10 space-y-5">
-                    <TabSelects tabs={TABS} />
+                    {/* <TabSelects tabs={TABS} /> */}
                 </section>
+
+                <ShareModal
+                    title={userData?.fullName || ''}
+                    shareUrl={`https://datarace.ai/${lng}/profile/${userId}`}
+                    visible={shareModal}
+                    onClose={() => setShareModal(false)}
+                />
             </main>
         </div>
     );

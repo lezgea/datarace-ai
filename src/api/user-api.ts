@@ -55,6 +55,13 @@ export const userApi = createApi({
             }),
             providesTags: ['User'],
         }),
+        getUserById: builder.query<IUser, { id: number | string }>({
+            query: ({ id }) => ({
+                url: `/users/info/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['User'],
+        }),
         updateUser: builder.mutation<IUser, { id: number | string; data: Partial<IUser> }>({
             query: ({ id, data }) => ({
                 url: `/users/${id}`,
@@ -83,4 +90,5 @@ export const {
     useDeleteUserMutation,
     useForgotPasswordMutation,
     useChangePasswordMutation,
+    useLazyGetUserByIdQuery,
 } = userApi;

@@ -1,9 +1,12 @@
+"use client"
+
 import { IBlogItem } from "@api/types/blog-types";
 import { IDataset } from "@api/types/dataset-types";
 import { RootState } from "@store/store";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 
@@ -19,6 +22,7 @@ interface BlogItemProps extends IBlogItem {
 const BlogItem: React.FC<BlogItemProps> = (props) => {
     let lng = useLocale();
     let t = useTranslations();
+    const router = useRouter();
 
     let { id, imageUrl, title, userDto } = props
 
@@ -26,7 +30,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
 
 
     return (
-        <Link href={`/${lng}/blog/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <div onClick={() => router.push(`/${lng}/blog/${id}`)} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 <Image
                     src={imgUrl}
@@ -49,10 +53,10 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
                     </Link>
-                    <div className="flex items-center justify-end cursor-pointer group select-none">
+                    <div className="flex items-center justify-end cursor-pointer group select-none" onClick={(e) => { e.stopPropagation(); router.push(`${lng}/profile/${userDto?.id}`) }}>
                         <div className="flex flex-col items-end text-gray-400 font-regmed mr-3 transition-all duration-200 ease-in-out">
                             <span className='text-sm'>{t('writtenBy')}</span>
-                            <span className='ml-2 text-xl text-gray-600 font-medium hover:text-primary'> {userDto?.fullName?.split(' ')[0]}</span>
+                            <span className='ml-2 text-xl text-gray-600 font-medium group-hover:text-primary'> {userDto?.fullName?.split(' ')[0]}</span>
                         </div>
                         <div className="relative w-[45px] h-[45px] min-w-[45px] min-h-[45px] rounded-full overflow-hidden">
                             <Image
@@ -66,7 +70,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

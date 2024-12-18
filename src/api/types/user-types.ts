@@ -27,6 +27,7 @@ export type LoginResponse = string
 export interface IUser {
     id: number | string,
     fullName: string,
+    profileImageUrl?: string,
     profileImage?: string,
     profileFileId?: number | string,
     nickname?: string,

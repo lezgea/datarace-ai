@@ -1,8 +1,10 @@
+"use client"
+
 import { IDataset } from "@api/types/dataset-types";
 import { RootState } from "@store/store";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 
@@ -14,6 +16,7 @@ interface DatasetProps extends IDataset {
 const DatasetItem: React.FC<DatasetProps> = (props) => {
     let lng = useLocale();
     let t = useTranslations();
+    const router = useRouter();
 
     let { id, title, description, visibility, userDto, datasetFileDownloadDto, onClick } = props
 
@@ -22,7 +25,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
 
 
     return (
-        <Link href={`/${lng}/datasets/${id}`} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
+        <div onClick={() => router.push(`/${lng}/datasets/${id}`)} className="h-md rounded-custom_md select-none cursor-pointer overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg group active:shadow-none bg-white">
             <div className="relative overflow-hidden">
                 {
                     !!visibility && visibility === 'PRIVATE' &&
@@ -47,7 +50,7 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                     <p className="text-md text-gray-500 truncate-text description-font">{description}</p>
                 </div>
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 cursor-pointer group" onClick={(e) => { e.stopPropagation(); router.push(`/${lng}/profile/${userDto?.id}`) }}>
                         <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
                             <Image
                                 src={userDto?.userImageUrl || "/png/user.png"}
@@ -57,12 +60,12 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                                 priority={true}
                             />
                         </div>
-                        <p className="text-md text-gray-500 truncate-text">{t('by')} <strong className="font-medium">{userDto?.fullName}</strong></p>
+                        <p className="text-md text-gray-500 truncate-text">{t('by')} <strong className="font-medium group-hover:text-primary">{userDto?.fullName}</strong></p>
                     </div>
                     <p className="text-md text-primary truncate-text font-regular">{!!datasetFileDownloadDto?.length ? `${datasetFileDownloadDto?.length} File` : ` `}</p>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 
