@@ -46,6 +46,7 @@ const isAttendedCompetition = (props: RaceProps): props is IAttendedCompetition 
 const RaceItem: React.FC<RaceProps> = (props) => {
     let { onClick } = props;
     let lng = useLocale();
+    let t = useTranslations();
 
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const id = isAttendedCompetition(props) ? props.competitionId : props.id;
@@ -56,8 +57,8 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     const currencySymbol = props.currencySymbol;
     const awardAmount = props.awardAmount;
 
-    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `Ended ${Math.abs(lifeTimeDays as number)} days ago` : 'Ended 1 day ago';
-    let lifeTimeText = (lifeTimeDays as number) > 0 ? `Ends in ${lifeTimeDays} days` : endedText;
+    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `${t('ended')} ${Math.abs(lifeTimeDays as number)} ${t('daysAgo')}` : `${t('ended')} 1 ${t('daysAgo')}`;
+    let lifeTimeText = (lifeTimeDays as number) > 0 ? `${t('endsIn')} ${lifeTimeDays} ${t('days')}` : endedText;
 
 
     return (

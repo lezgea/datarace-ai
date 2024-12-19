@@ -161,5 +161,9 @@
   "by": "By",
   "noDataTitle": "For this action authentification is required. Please login to continue.",
   "noDataDescription": "If you don't have an account yet create a",
-  "newAccount": "New Account"
+  "newAccount": "New Account",
+  "ended": "Ended",
+  "daysAgo": "days ago",
+  "endsIn": "Ends in",
+  "days": "days"
 }

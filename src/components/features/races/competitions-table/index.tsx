@@ -82,11 +82,7 @@ export const CompetitionsTable: React.FC<ICompetitionsTable> = () => {
 
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {competitionsData?.competitions?.map((item, i) => (
-                    <RaceItem
-                        key={i}
-                        {...item}
-                    // onClick={onClickCompetition}
-                    />
+                    <RaceItem key={i} {...item} />
                 ))}
             </div>
 
