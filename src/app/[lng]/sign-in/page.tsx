@@ -106,9 +106,9 @@ const SignInContent: React.FC = () => {
                     priority
                 />
                 <div className="absolute column w-full h-full content-end text-center px-20 py-[10%] space-y-7">
-                    <a className="flex cursor-pointer justify-center mb-10" href="/">
+                    <Link className="flex cursor-pointer justify-center mb-10" href={`/${lng}`}>
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
-                    </a>
+                    </Link>
                     <h1 className="text-4xl font-medium">{t('title')}</h1>
                     <p className="text-lg text-gray-500">{t('description')}</p>
                 </div>
@@ -117,7 +117,7 @@ const SignInContent: React.FC = () => {
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center px-8 py-[30px] lg:p-20 overflow-y-scroll">
                 <div className="w-full mx-auto lg:max-w-md space-y-10 animate-right-svg">
-                    <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
+                    <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href={`/${lng}`}>
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                     </Link>
                     <div>

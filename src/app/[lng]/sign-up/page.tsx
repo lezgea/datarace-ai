@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { SignUpForm } from '@components/features';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 export const metadata: Metadata = {
@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 
 
 const SignUp: React.FC = () => {
-    const t = useTranslations();
+    let t = useTranslations();
+    let lng = useLocale();
 
     return (
         <div className="min-h-screen max-h-screen flex">
@@ -28,7 +29,7 @@ const SignUp: React.FC = () => {
                     priority
                 />
                 <div className="absolute column w-full h-full content-end text-center px-20 py-[10%] space-y-7">
-                    <Link className="flex cursor-pointer justify-center mb-10" href="/">
+                    <Link className="flex cursor-pointer justify-center mb-10" href={`/${lng}`}>
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </Link>
                     <h1 className="text-4xl font-medium">{t('title')}</h1>

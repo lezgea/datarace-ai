@@ -22,8 +22,8 @@ interface IFormInput {
 
 
 export const SignUpForm: React.FC = () => {
-    const lng = useLocale();
-    const t = useTranslations();
+    let t = useTranslations();
+    let lng = useLocale();
 
     const [terms, acceptTerms] = React.useState<boolean>(false);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -72,7 +72,7 @@ export const SignUpForm: React.FC = () => {
     return (
         <div className="w-full mx-auto lg:max-w-md animate-right-svg">
             <div>
-                <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href="/">
+                <Link className="flex items-center lg:hidden justify-center cursor-pointer mb-[50px]" href={`/${lng}`}>
                     <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} priority />
                 </Link>
                 <h2 className="text-2xl font-semi mb-4 lg:text-start text-center">{t('registerWithEmail')}</h2>

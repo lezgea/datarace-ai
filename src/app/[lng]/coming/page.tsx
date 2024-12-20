@@ -94,9 +94,9 @@ const ComingSoonContent: React.FC = () => {
                     priority
                 />
                 <div className="absolute column w-full h-full content-end text-center px-20 py-[10%] space-y-7">
-                    <a className="flex cursor-pointer justify-center mb-10" href="/">
+                    <Link className="flex cursor-pointer justify-center mb-10" href={`/${lng}`}>
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
-                    </a>
+                    </Link>
                     <h1 className="text-4xl font-medium">{t('title')}</h1>
                     <p className="text-lg text-gray-500">{t('description')}</p>
                 </div>

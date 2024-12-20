@@ -7,6 +7,7 @@ import { FailedOperation, SuccessfullOperation } from '@components/features/acti
 import { useActivateUserQuery } from '@api/user-api';
 import { Loader } from '@components/shared';
 import { useSearchParams } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 enum ErrorType {
     EXCEED_REQUEST_COUNT = "EXCEED_REQUEST_COUNT",
@@ -24,6 +25,7 @@ interface ApiError {
 }
 
 const ActivationPageContent: React.FC = () => {
+    let lng = useLocale();
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
@@ -58,7 +60,7 @@ const ActivationPageContent: React.FC = () => {
                     priority
                 />
                 <div className="absolute column w-full h-full content-end text-center px-20 py-[10%] space-y-7">
-                    <Link className="flex cursor-pointer justify-center mb-10" href="/">
+                    <Link className="flex cursor-pointer justify-center mb-10" href={`/${lng}`}>
                         <Image src="/svg/datarace-logo.svg" alt="Logo" width={250} height={70} />
                     </Link>
                     <h1 className="text-4xl font-medium">Join the race to AI excellence</h1>
