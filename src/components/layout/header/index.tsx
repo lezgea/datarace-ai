@@ -60,7 +60,7 @@ export const Header: React.FC = () => {
                                     : <HamburgerIcon onClick={toggleSidebar} data-testid="hamburger-icon" />
                             }
                         </div>
-                        <Link href="/" passHref>
+                        <Link href={`/${lng}`} passHref>
                             <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-[150px] lg:w-[180px]" />
                         </Link>
                     </div>
