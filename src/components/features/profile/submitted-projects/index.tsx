@@ -7,9 +7,12 @@ import AttendedCompetitionsSkeleton from '@components/shared/skeletons/attended-
 import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import { NoData } from '@components/shared';
+import { useTranslations } from 'next-intl';
 
 
 export const SubmittedProjects: React.FC = () => {
+    let t = useTranslations();
+
     const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
     const [currentPage, setCurrentPage] = React.useState(0);
     const [totalPages, setTotalPages] = React.useState(1);
@@ -68,7 +71,7 @@ export const SubmittedProjects: React.FC = () => {
                         disabled={currentPage === 0}
                         className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
                     >
-                        Previous
+                        {t('previous')}
                     </button>
                     <span>Page {currentPage + 1} of {totalPages}</span>
                     <button
@@ -76,7 +79,7 @@ export const SubmittedProjects: React.FC = () => {
                         disabled={currentPage >= totalPages - 1}
                         className={`px-4 py-2 rounded-md ${currentPage >= totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-primaryDark'}`}
                     >
-                        Next
+                        {t('next')}
                     </button>
                 </div>
             }

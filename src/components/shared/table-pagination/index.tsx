@@ -1,7 +1,10 @@
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 
 export const TablePagination = ({ currentPage, totalPages, onPageChange }: { currentPage: number, totalPages: number, onPageChange: (page: number) => void }) => {
+    let t = useTranslations();
+
     const generatePageNumbers = () => {
         const pages = [];
         const maxVisiblePages = 5;
@@ -34,7 +37,7 @@ export const TablePagination = ({ currentPage, totalPages, onPageChange }: { cur
                 disabled={currentPage === 0}
                 className="px-3 py-1 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                Previous
+                {t('previous')}
             </button>
             {pages.map((page) => (
                 <button
@@ -50,7 +53,7 @@ export const TablePagination = ({ currentPage, totalPages, onPageChange }: { cur
                 disabled={currentPage === totalPages - 1}
                 className="px-3 py-1 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                Next
+                {t('next')}
             </button>
         </div>
     );
