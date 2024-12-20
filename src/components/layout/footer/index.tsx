@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { FooterTermsModal } from '@components/shared';
+import { FooterTermsModal, TermsModal } from '@components/shared';
 
 const InstagramIcon = dynamic(() => import('@assets/icons').then(mod => mod.InstagramIcon), { ssr: false });
 const TwitterIcon = dynamic(() => import('@assets/icons').then(mod => mod.TwitterIcon), { ssr: false });
@@ -106,8 +106,9 @@ export const Footer: React.FC = () => {
                 </section>
             </div>
 
-            <FooterTermsModal
+            <TermsModal
                 visible={termsModal}
+                hideButtons
                 onConfirm={() => setTermsModal(false)}
                 onClose={() => setTermsModal(false)}
             />

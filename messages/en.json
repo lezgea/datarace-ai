@@ -166,5 +166,22 @@
   "daysAgo": "days ago",
   "endsIn": "Ends in",
   "days": "days",
-  "comingSoon": "Coming Soon"
+  "comingSoon": "Coming Soon",
+  "privacyTitle": "Privacy Policy",
+  "pr1": "Privacy Rules",
+  "pr11": "This Privacy Policy is an integral part of the Datarace.ai platform (hereinafter referred to as the \"Platform\").",
+  "pr12": "The Privacy Policy outlines the rules for the collection, storage, processing, use, disclosure, and protection of users' personal data.",
+  "pr13": "Users' personal data refers to the set of information provided or automatically obtained during the use of the Datarace.ai platform.",
+  "pr14": "Users' personal data is stored and protected within the platform's database.",
+  "pr15": "Users voluntarily provide their personal data during registration and while using the platform.",
+  "pr16": "The processing of personal data is only possible with the user's consent or in cases provided by law.",
+  "pr17": "Users can change, update, or delete their personal data on the platform at any time.",
+  "pr18": "Datarace.ai takes effective measures to prevent the transfer of personal data to third parties and ensures its protection.",
+  "pr2": "Data Storage and Security",
+  "pr21": "Datarace.ai uses modern security technologies to protect users' personal data.",
+  "pr22": "All personal data is stored on secure servers and is protected from unauthorized access.",
+  "pr23": "The platform uses cookies and other similar technologies to track user activities and enhance the user experience.",
+  "pr3": "Changes",
+  "pr31": "Datarace.ai may make changes to the Privacy Policy, and users will be informed about these changes.",
+  "pr32": "If the user does not accept the changes, they may stop using the platform. Otherwise, they are considered to have agreed to the changes."
 }

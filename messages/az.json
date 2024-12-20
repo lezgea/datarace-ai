@@ -165,5 +165,22 @@
   "daysAgo": "gün öncə",
   "endsIn": "Bitir",
   "days": "günə",
-  "comingSoon": "Tezliklə"
+  "comingSoon": "Tezliklə",
+  "privacyTitle": "Məxfilik Siyasəti",
+  "pr1": "Məxfilik qaydası",
+  "pr11": "Bu Məxfilik siyasəti Datarace.ai platformasından (bundan sonra - Platforma) istifadənin ayrılmaz tərkib hissəsidir.",
+  "pr12": "Məxfilik siyasəti istifadəçilərin şəxsi məlumatlarının toplanması, saxlanılması, işlənməsi, istifadəsi, açıqlanması və müdafiəsi qaydalarını müəyyən edir.",
+  "pr13": "İstifadəçinin şəxsi məlumatları – Datarace.ai platformasından istifadə zamanı təqdim olunan və avtomatik olaraq əldə edilən məlumatların məcmusudur.",
+  "pr14": "İstifadəçilərin şəxsi məlumatları platformanın məlumat bazasında saxlanılır və müdafiə olunur.",
+  "pr15": "İstifadəçi qeydiyyat zamanı və platformadan istifadə edərkən şəxsi məlumatlarını könüllü olaraq təqdim edir.",
+  "pr16": "Şəxsi məlumatların işlənməsi, yalnız istifadəçinin razılığı ilə və ya qanunla nəzərdə tutulan hallarda mümkündür.",
+  "pr17": "İstifadəçi öz şəxsi məlumatlarını platformada istənilən vaxt dəyişə, yeniləyə və ya silə bilər.",
+  "pr18": "Datarace.ai şəxsi məlumatların üçüncü şəxslərə ötürülməsinə qarşı səmərəli tədbirlər görür və bu məlumatların qorunmasını təmin edir.",
+  "pr2": "Məlumatların saxlanması və təhlükəsizliyi",
+  "pr21": "Datarace.ai istifadəçilərin şəxsi məlumatlarını qorumaq üçün müasir təhlükəsizlik texnologiyalarından istifadə edir.",
+  "pr22": "Bütün şəxsi məlumatlar qorunan serverlərdə saxlanılır və icazəsiz girişdən müdafiə olunur.",
+  "pr23": "Platforma cookies və digər oxşar texnologiyalardan istifadə edərək istifadəçilərin fəaliyyətini izləyir və təcrübəni yaxşılaşdırır.",
+  "pr3": "Dəyişikliklər",
+  "pr31": "Datarace.ai Məxfilik siyasətində dəyişikliklər edə bilər və bu dəyişikliklər haqqında istifadəçilərə məlumat veriləcəkdir.",
+  "pr32": "İstifadəçi dəyişiklikləri qəbul etməzsə, platformadan istifadəni dayandıra bilər. Əks halda, dəyişikliklərlə razılaşmış sayılır."
 }
