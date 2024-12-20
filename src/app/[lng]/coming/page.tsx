@@ -106,7 +106,7 @@ const ComingSoonContent: React.FC = () => {
             <div className="w-full lg:w-1/2 bg-white content-center py-[30px] lg:p-20 overflow-y-scroll">
                 <div className="w-full mx-auto lg:max-w-md space-y-10 animate-right-svg">
                     <div>
-                        <h2 className="text-[4rem] font-semi mb-4 text-center">Coming Soon</h2>
+                        <h2 className="text-[4rem] font-semi mb-4 text-center">{t('comingSoon')}</h2>
                     </div>
                     {
                         !isAuthenticated &&
