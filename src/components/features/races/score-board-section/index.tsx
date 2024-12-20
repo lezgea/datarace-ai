@@ -87,14 +87,14 @@ export const ScoreBoardSection: React.FC = () => {
                                 <td className="flex items-center py-3 px-6 space-x-2">
                                     <Image
                                         src={row.profileImageUrl || '/png/user.png'}
-                                        alt={row.nickname}
+                                        alt={row.nickname || row.fullName}
                                         className='w-[30px] h-[30px] rounded-full'
                                         width={10}
                                         height={10}
                                     />
-                                    <div>{row.nickname}</div>
+                                    <div>{row.nickname || row.fullName}</div>
                                 </td>
-                                <td className="py-3 px-6">{row.score}</td>
+                                <td className="py-3 px-6">{row.score || '-'}</td>
                             </tr>
                         ))}
                     </tbody>
