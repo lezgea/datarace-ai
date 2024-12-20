@@ -36,11 +36,11 @@ const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                             alt="Datarace Banner Image"
                             height={200}
                             width={800}
-                            className="w-full h-[23rem] rounded-2xl object-cover"
+                            className="w-full h-[14rem] md:h-[23rem] rounded-2xl object-cover"
                         />
-                        <div className='absolute flex flex-col items-end justify-end gap-7 px-20 py-[4rem] top-0 w-full h-full'>
-                            <LogoFullWhite />
-                            <p className='text-md text-white font-light max-w-[50%] text-end'>{t('description')}</p>
+                        <div className='absolute flex flex-col items-end justify-end gap-3 md:gap-7 px-8 md:px-20 py-[2rem] md:py-[4rem] top-0 w-full h-full'>
+                            <LogoFullWhite className='w-[200px] md:w-[300px]' />
+                            <p className='text-xs md:text-lg text-white font-light md:max-w-[50%] text-end'>{t('description')}</p>
                         </div>
                     </section>
                     <AboutSection description={t('aboutUsText1')} />

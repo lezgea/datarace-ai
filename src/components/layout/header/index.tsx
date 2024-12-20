@@ -53,7 +53,7 @@ export const Header: React.FC = () => {
             <header className="backdrop-blur-xl bg-transparent w-full fixed z-30 h-[65px] select-none">
                 <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-3 py-0 h-full space-x-5 md:px-0">
                     <div className="flex items-center cursor-pointer lg:w-[25%] space-x-3 lg:space-x-0">
-                        <div className="w-[30px] ml-3 flex lg:hidden">
+                        <div className="w-[30px] ml-1 flex lg:hidden">
                             {
                                 isSidebarOpen
                                     ? <CloseIcon onClick={toggleSidebar} data-testid="close-icon" />
@@ -61,7 +61,7 @@ export const Header: React.FC = () => {
                             }
                         </div>
                         <Link href="/" passHref>
-                            <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-[160px] lg:w-[180px]" />
+                            <Image src="/svg/datarace-logo.svg" alt="Logo" width={200} height={50} priority className="h-auto w-[150px] lg:w-[180px]" />
                         </Link>
                     </div>
 
@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
                         {navLinks}
                     </ul>
 
-                    <div className="flex items-center justify-end lg:w-[30%] h-full gap-4">
+                    <div className="flex items-center justify-end lg:w-[30%] h-full gap-2 md:gap-4">
                         <UserProfile />
                         <LanguageSwitcher />
                     </div>
