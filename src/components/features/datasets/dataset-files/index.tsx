@@ -8,7 +8,7 @@ import { IDatasetFilesDto } from '@api/types/dataset-types';
 import { useDeleteDatasetMutation } from '@api/datasets-api';
 import { AuthModal } from '@components/shared';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 
@@ -23,6 +23,7 @@ interface IOriginalFilesProps {
 }
 
 export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, isEditable, refetch }) => {
+    let t = useTranslations();
     let lng = useLocale();
     const router = useRouter();
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
@@ -152,7 +153,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                                     className="cursor-pointer"
                                                     onClick={() => isAuthenticated ? handleDownload(row.fileName, row.id, row.fileType) : setShowAuthModal(true)}
                                                 >
-                                                    Download
+                                                    {t('download')}
                                                 </div>
                                                 {
                                                     isEditable &&

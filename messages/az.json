@@ -199,5 +199,7 @@
   "hourAgo": "saat əvvəl",
   "weekAgo": "həftə əvvəl",
   "monthAgo": "ay əvvəl",
-  "yearAgo": "il əvvəl"
+  "yearAgo": "il əvvəl",
+  "editDataset": "Dataseti Yenilə",
+  "download": "Yüklə"
 }

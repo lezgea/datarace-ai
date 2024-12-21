@@ -200,5 +200,7 @@
   "hourAgo": "hour ago",
   "weekAgo": "week ago",
   "monthAgo": "month ago",
-  "yearAgo": "year ago"
+  "yearAgo": "year ago",
+  "editDataset": "Edit Dataset",
+  "download": "Download"
 }

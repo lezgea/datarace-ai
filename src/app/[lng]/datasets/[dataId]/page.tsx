@@ -21,7 +21,7 @@ const DatasetDetails: React.FC = () => {
     const [deleteDataset] = useDeleteDatasetMutation();
     const { data: datasetInfo, error, isLoading, refetch } = useGetDatasetInfoQuery({ id: dataId as string }, { skip: !dataId });
 
-    
+
     const onDeleteDataset = async () => {
         try {
             await deleteDataset({ id: datasetId })
@@ -52,14 +52,14 @@ const DatasetDetails: React.FC = () => {
                                 className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                                 onClick={onDeleteDataset}
                             >
-                                Delete
+                                {t('delete')}
                             </button>
                             <button
                                 aria-label="Upload Dataset"
                                 className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                                 onClick={() => setSidebarOpen(true)}
                             >
-                                Edit Dataset
+                                {t('editDataset')}
                             </button>
                         </div>
                     }
