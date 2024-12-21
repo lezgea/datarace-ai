@@ -34,6 +34,7 @@ export interface IAttendedCompetition {
     phoneNumber: string | number,
     resultFileId: string,
     imageUrl?: string,
+    userId: string | number,
 }
 
 export interface IScoreboard extends IAttendedCompetition {

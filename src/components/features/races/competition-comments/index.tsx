@@ -80,12 +80,6 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
             </h2>
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
-                    {/* {
-                        !comments?.length &&
-                        <div className="flex flex-col items-center justify-center w-full h-[12vh] gap-10">
-                            <p className="text-gray-400 ">{t('noComments')}</p>
-                        </div>
-                    } */}
                     {
                         comments?.map((comment) =>
                             <CompetitionComment key={comment.id} {...comment} />

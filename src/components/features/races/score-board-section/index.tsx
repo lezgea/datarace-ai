@@ -3,14 +3,17 @@
 import { useLazyGetScoreBoardQuery } from '@api/competition-api';
 import { CompetitionInfoSectionSkeleton, NoData } from '@components/shared';
 import { RootState } from '@store/store';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
 
 export const ScoreBoardSection: React.FC = () => {
-    const t = useTranslations();
+    let lng = useLocale();
+    let t = useTranslations();
+
     const { loading: competitionLoading, competitionInfo } = useSelector((state: RootState) => state.competitions);
     const [isClient, setIsClient] = useState(false);
 
@@ -84,15 +87,18 @@ export const ScoreBoardSection: React.FC = () => {
                                     }`}
                             >
                                 <td className="py-3 px-6">{row.rank}</td>
-                                <td className="flex items-center py-3 px-6 space-x-2">
-                                    <Image
-                                        src={row.profileImageUrl || '/png/user.png'}
-                                        alt={row.nickname || row.fullName}
-                                        className='w-[30px] h-[30px] rounded-full'
-                                        width={10}
-                                        height={10}
-                                    />
-                                    <div>{row.nickname || row.fullName}</div>
+                                <td>
+                                    <Link href={`/${lng}/profile/${row.userId}`} className="group flex items-center py-3 px-6 space-x-2">
+                                        <Image
+                                            src={row.profileImageUrl || '/png/user.png'}
+                                            alt={row.nickname || row.fullName}
+                                            className='w-[30px] h-[30px] rounded-full'
+                                            width={10}
+                                            height={10}
+                                        />
+                                        <strong className='font-medium group-hover:text-primary cursor-pointer'>{row.nickname || row.fullName}</strong>
+                                    </Link>
+
                                 </td>
                                 <td className="py-3 px-6">{row.score || '-'}</td>
                             </tr>

@@ -4,9 +4,10 @@ import Image from 'next/image';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { ConfirmationModal } from '../confirmation-modal';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { DatasetCommentEditModal, DatasetCommentReplyModal } from '@components/features';
 import { timeAgo } from '@utils/timeAgo';
+import Link from 'next/link';
 
 
 interface ICommmentProps extends IDatasetComment {
@@ -18,6 +19,7 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
     let {
         id,
         text,
+        userId,
         fullName,
         nickname,
         isEditable,
@@ -28,7 +30,8 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
         isReply
     } = props;
 
-    const t = useTranslations();
+    let t = useTranslations();
+    let lng = useLocale();
 
     const [askModal, setAskModal] = React.useState<boolean>(false);
     const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
@@ -59,7 +62,9 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
                 </div>
                 <div className="inline-flex flex-col min-w-[300px] max-w-[500px] md:max-w-[50%]">
                     <div className={`inline-flex flex-col ${isReply ? 'bg-[#E7EFEC]' : 'bg-[#F0F2F5]'} border ${isReply ? 'border-[#E7EFEC]' : 'border-[#F0F2F5]'} px-4 py-3 gap-1 rounded-3xl`}>
-                        <strong className="font-medium">{fullName || nickname}</strong>
+                        <Link href={`/${lng}/profile/${userId}`}>
+                            <strong className="font-medium hover:text-primary cursor-pointer">{fullName || nickname}</strong>
+                        </Link>
                         <div className="text-gray-800 break-words">
                             {!!repliedCommentDto?.fullName && <span className='text-primary'>@{repliedCommentDto?.fullName?.split(' ')[0]} </span>}
                             {text}

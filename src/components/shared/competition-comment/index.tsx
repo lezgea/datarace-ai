@@ -2,12 +2,13 @@ import Image from 'next/image';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { ConfirmationModal } from '../confirmation-modal';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { ICompetitionComment } from '@api/types/competition-types';
 import { useDeleteCompetitionCommentMutation } from '@api/competition-api';
 import { CompetitionCommentEditModal } from '@components/features/races/competition-comment-edit-modal';
 import { timeAgo } from '@utils/timeAgo';
 import { CompetitionCommentReplyModal } from '@components/features';
+import Link from 'next/link';
 
 
 interface ICommmentProps extends ICompetitionComment {
@@ -16,9 +17,21 @@ interface ICommmentProps extends ICompetitionComment {
 
 
 export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
-    let { id, text, fullName, nickname, isEditable, createdAt, userImageUrl, isReply, competitionChildCommentDtos } = props;
+    let {
+        id,
+        text,
+        userId,
+        fullName,
+        nickname,
+        isEditable,
+        createdAt,
+        userImageUrl,
+        isReply,
+        competitionChildCommentDtos,
+    } = props;
 
-    const t = useTranslations();
+    let lng = useLocale();
+    let t = useTranslations();
 
     const [askModal, setAskModal] = React.useState<boolean>(false);
     const [showReplyModal, setShowReplyModal] = React.useState<boolean>(false);
@@ -49,7 +62,9 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                 </div>
                 <div className="inline-flex flex-col min-w-[300px] max-w-[500px] md:max-w-[50%]">
                     <div className={`inline-flex flex-col ${isReply ? 'bg-[#E7EFEC]' : 'bg-[#F0F2F5]'} border ${isReply ? 'border-[#E7EFEC]' : 'border-[#F0F2F5]'} px-4 py-3 gap-1 rounded-3xl`}>
-                        <strong className="font-medium">{fullName || nickname}</strong>
+                        <Link href={`/${lng}/profile/${userId}`}>
+                            <strong className="font-medium hover:text-primary cursor-pointer">{fullName || nickname}</strong>
+                        </Link>
                         <div className="text-gray-800 break-words">{text}</div>
                     </div>
                     <div className="flex gap-3 px-4 py-1">
