@@ -1,11 +1,13 @@
+import { useTranslations } from "next-intl";
+
 export function timeAgo(unixTimestamp: number): string {
-    console.log('@@@@@@', unixTimestamp)
+    const t = useTranslations();
     const now = new Date().getTime(); // Current time in milliseconds
     const date = new Date((unixTimestamp - 14400) * 1000).getTime(); // Convert Unix timestamp to milliseconds
     const secondsAgo = Math.floor((now - date) / 1000);
 
     if (secondsAgo < 60) {
-        return 'Just now';
+        return t('justNow');
     }
 
     const minutesAgo = Math.floor(secondsAgo / 60);
@@ -16,18 +18,18 @@ export function timeAgo(unixTimestamp: number): string {
     const yearsAgo = Math.floor(daysAgo / 365);
 
     if (secondsAgo < 60) {
-        return secondsAgo === 1 ? '1 second ago' : `${secondsAgo} seconds ago`;
+        return secondsAgo === 1 ? `1 ${t('secondAgo')}` : `${secondsAgo} ${t('secondsAgo')}`;
     } else if (minutesAgo < 60) {
-        return minutesAgo === 1 ? '1 min ago' : `${minutesAgo} min ago`;
+        return minutesAgo === 1 ? `1 ${t('minuteAgo')}` : `${minutesAgo} ${t('minutesAgo')}`;
     } else if (hoursAgo < 24) {
-        return hoursAgo === 1 ? '1 hour ago' : `${hoursAgo} hours ago`;
+        return hoursAgo === 1 ? `1 ${t('hourAgo')}` : `${hoursAgo} ${t('hoursAgo')}`;
     } else if (daysAgo < 7) {
-        return daysAgo === 1 ? '1 day ago' : `${daysAgo} days ago`;
+        return daysAgo === 1 ? `1 ${t('dayAgo')}` : `${daysAgo} ${t('daysAgo')}`;
     } else if (weeksAgo < 4) {
-        return weeksAgo === 1 ? '1 week ago' : `${weeksAgo} weeks ago`;
+        return weeksAgo === 1 ? `1 ${t('weekAgo')}` : `${weeksAgo} ${t('weeksAgo')}`;
     } else if (monthsAgo < 12) {
-        return monthsAgo === 1 ? '1 month ago' : `${monthsAgo} months ago`;
+        return monthsAgo === 1 ? `1 ${t('monthAgo')}` : `${monthsAgo} ${t('monthsAgo')}`;
     } else {
-        return yearsAgo === 1 ? '1 year ago' : `${yearsAgo} years ago`;
+        return yearsAgo === 1 ? `1 ${t('yearAgo')}` : `${yearsAgo} ${t('yearsAgo')}`;
     }
 }

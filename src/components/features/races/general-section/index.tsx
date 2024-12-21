@@ -25,13 +25,13 @@ export const GeneralSection: React.FC = () => {
             <div className='space-y-10'>
                 {/* Description */}
                 <div className="space-y-4" >
-                    <h2 className="text-lg text-primary font-semibold">Description</h2>
+                    <h2 className="text-lg text-primary font-semibold">{t('descriptionLabel')}</h2>
                     <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: competitionInfo?.text || '' }} />
                 </div>
                 {
                     !!competitionInfo?.rules &&
                     <div className="space-y-4" >
-                        <h3 className="text-lg text-primary font-semibold">Rules</h3>
+                        <h3 className="text-lg text-primary font-semibold">{t('rules')}</h3>
                         <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: competitionInfo?.rules }} />
                     </div>
                 }

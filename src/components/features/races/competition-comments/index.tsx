@@ -76,7 +76,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
     return (
         <section className="space-y-2 py-2 border-gray-200">
             <h2 className="text-2xl font-semibold text-black dark:text-white">
-                Comments
+                {t('comments')}
             </h2>
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
@@ -108,7 +108,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
                         <div className="flex w-full space-y-3 flex-col items-end">
                             <textarea
                                 value={newComment}
-                                placeholder={"What's on your mind ?"}
+                                placeholder={t('whatsOnYourMind')}
                                 className={`w-full h-[100px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {

@@ -182,5 +182,22 @@
   "pr23": "Platforma cookies və digər oxşar texnologiyalardan istifadə edərək istifadəçilərin fəaliyyətini izləyir və təcrübəni yaxşılaşdırır.",
   "pr3": "Dəyişikliklər",
   "pr31": "Datarace.ai Məxfilik siyasətində dəyişikliklər edə bilər və bu dəyişikliklər haqqında istifadəçilərə məlumat veriləcəkdir.",
-  "pr32": "İstifadəçi dəyişiklikləri qəbul etməzsə, platformadan istifadəni dayandıra bilər. Əks halda, dəyişikliklərlə razılaşmış sayılır."
+  "pr32": "İstifadəçi dəyişiklikləri qəbul etməzsə, platformadan istifadəni dayandıra bilər. Əks halda, dəyişikliklərlə razılaşmış sayılır.",
+  "comments": "Şərhlər",
+  "whatsOnYourMind": "Bu haqda fikirləriniz nədir ?",
+  "descriptionLabel": "Təsvir",
+  "tags": "Etiketlər",
+  "justNow": "İndicə",
+  "secondsAgo": "saniyə əvvəl",
+  "minutesAgo": "dəqiqə əvvəl",
+  "hoursAgo": "saat əvvəl",
+  "weeksAgo": "həftə əvvəl",
+  "monthsAgo": "ay əvvəl",
+  "yearsAgo": "il əvvəl",
+  "secondAgo": "saniyə əvvəl",
+  "minuteAgo": "dəqiqə əvvəl",
+  "hourAgo": "saat əvvəl",
+  "weekAgo": "həftə əvvəl",
+  "monthAgo": "ay əvvəl",
+  "yearAgo": "il əvvəl"
 }

@@ -183,5 +183,22 @@
   "pr23": "The platform uses cookies and other similar technologies to track user activities and enhance the user experience.",
   "pr3": "Changes",
   "pr31": "Datarace.ai may make changes to the Privacy Policy, and users will be informed about these changes.",
-  "pr32": "If the user does not accept the changes, they may stop using the platform. Otherwise, they are considered to have agreed to the changes."
+  "pr32": "If the user does not accept the changes, they may stop using the platform. Otherwise, they are considered to have agreed to the changes.",
+  "comments": "Comments",
+  "whatsOnYourMind": "What's on your mind ?",
+  "descriptionLabel": "Description",
+  "tags": "Tags",
+  "justNow": "Just now",
+  "secondsAgo": "seconds ago",
+  "minutesAgo": "minutes ago",
+  "hoursAgo": "hours ago",
+  "weeksAgo": "weeks ago",
+  "monthsAgo": "months ago",
+  "yearsAgo": "years ago",
+  "secondAgo": "second ago",
+  "minuteAgo": "minute ago",
+  "hourAgo": "hour ago",
+  "weekAgo": "week ago",
+  "monthAgo": "month ago",
+  "yearAgo": "year ago"
 }

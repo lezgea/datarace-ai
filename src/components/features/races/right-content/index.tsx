@@ -77,7 +77,7 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
                 <div className="space-y-2">
                     <div className="flex space-x-3 mb-5">
                         <div className="h-[30px] w-[2px] bg-primaryLight" />
-                        <span className="text-xl font-medium">Tags</span>
+                        <span className="text-xl font-medium">{t('tags')}</span>
                     </div>
                     <div className="space-y-2">
                         {
