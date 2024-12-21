@@ -1,9 +1,10 @@
 export function timeAgo(unixTimestamp: number): string {
+    console.log('@@@@@@', unixTimestamp)
     const now = new Date().getTime(); // Current time in milliseconds
-    const date = new Date(unixTimestamp * 1000).getTime(); // Convert Unix timestamp to milliseconds
+    const date = new Date((unixTimestamp - 14400) * 1000).getTime(); // Convert Unix timestamp to milliseconds
     const secondsAgo = Math.floor((now - date) / 1000);
 
-    if (secondsAgo < 0) {
+    if (secondsAgo < 60) {
         return 'Just now';
     }
 
