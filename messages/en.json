@@ -198,6 +198,7 @@
   "secondAgo": "second ago",
   "minuteAgo": "minute ago",
   "hourAgo": "hour ago",
+  "dayAgo": "day ago",
   "weekAgo": "week ago",
   "monthAgo": "month ago",
   "yearAgo": "year ago",

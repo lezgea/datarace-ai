@@ -8,6 +8,9 @@ import { useLocale, useTranslations } from 'next-intl';
 import { DatasetCommentEditModal, DatasetCommentReplyModal } from '@components/features';
 import { timeAgo } from '@utils/timeAgo';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/store';
+import { AuthModal } from '../auth-modal';
 
 
 interface ICommmentProps extends IDatasetComment {
@@ -33,6 +36,9 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
     let t = useTranslations();
     let lng = useLocale();
 
+    const { isAuthenticated } = useSelector((state: RootState) => state.user);
+
+    const [authModal, setAuthModal] = React.useState<boolean>(false);
     const [askModal, setAskModal] = React.useState<boolean>(false);
     const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
     const [showReplyModal, setShowReplyModal] = React.useState<boolean>(false);
@@ -62,7 +68,7 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
                 </div>
                 <div className="inline-flex flex-col min-w-[300px] max-w-[500px] md:max-w-[50%]">
                     <div className={`inline-flex flex-col ${isReply ? 'bg-[#E7EFEC]' : 'bg-[#F0F2F5]'} border ${isReply ? 'border-[#E7EFEC]' : 'border-[#F0F2F5]'} px-4 py-3 gap-1 rounded-3xl`}>
-                        <Link href={`/${lng}/profile/${userId}`}>
+                        <Link href={isAuthenticated ? `/${lng}/profile/${userId}` : '#'} onClick={() => isAuthenticated ? {} : setAuthModal(true)}>
                             <strong className="font-medium hover:text-primary cursor-pointer">{fullName || nickname}</strong>
                         </Link>
                         <div className="text-gray-800 break-words">
@@ -74,7 +80,7 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
                         <div className="text-sm text-gray-500 cursor-pointer mr-2">{timeAgo(createdAt)}</div>
                         <>
                             {
-                                !isReply &&
+                                !isReply && isAuthenticated &&
                                 <div
                                     onClick={() => setShowReplyModal(true)}
                                     className="text-sm text-gray-500 cursor-pointer font-regmed hover:text-primary"
@@ -119,6 +125,10 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
                     visible={askModal}
                     onConfirm={onDeleteComment}
                     onClose={() => setAskModal(false)}
+                />
+                <AuthModal
+                    visible={authModal}
+                    onClose={() => setAuthModal(false)}
                 />
             </div>
 
