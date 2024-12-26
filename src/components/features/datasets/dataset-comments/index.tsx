@@ -77,9 +77,12 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
 
     return (
         <section className="space-y-2 border-gray-200">
-            <h2 className="text-2xl font-semibold text-black dark:text-white">
-                {t('comments')}
-            </h2>
+            {
+                (!!comments?.length || isAuthenticated) &&
+                <h2 className="text-2xl font-semibold text-black dark:text-white">
+                    {t('comments')}
+                </h2>
+            }
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
                     {comments?.map((comment) => (
