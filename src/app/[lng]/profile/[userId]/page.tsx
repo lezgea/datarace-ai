@@ -11,6 +11,7 @@ import { useLazyGetUserByIdQuery, useUpdateUserMutation } from '@api/user-api';
 import { useLocale, useTranslations } from 'next-intl';
 import { LogoFullWhite } from '@assets/icons';
 import { useParams } from 'next/navigation';
+import withProtectedRoute from '@utils/withProtectedRoute';
 
 
 
@@ -129,4 +130,4 @@ const UserProfile: React.FC = () => {
     );
 };
 
-export default UserProfile;
+export default withProtectedRoute(UserProfile);

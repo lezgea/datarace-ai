@@ -14,7 +14,7 @@ const withProtectedRoute = (WrappedComponent: React.ComponentType) => {
 
         React.useEffect(() => {
             if (!isAuthenticated) {
-                router.push('/sign-in');
+                router.push('/en/sign-in');
             }
         }, [isAuthenticated, router]);
 
