@@ -54,16 +54,17 @@ const TEST_BLOGS = [
 
 interface IBlogTable {
     lng?: string,
+    hidePagination?: boolean,
     t?: (val: string) => string,
 }
 
-export const BlogTable: React.FC<IBlogTable> = () => {
+export const BlogTable: React.FC<IBlogTable> = (props) => {
+    let { hidePagination } = props;
     const t = useTranslations();
     const lng = useLocale();
     const router = useRouter();
 
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
-    // const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
 
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
@@ -113,7 +114,7 @@ export const BlogTable: React.FC<IBlogTable> = () => {
                 ))}
             </div>
             {/* Pagination Controls */
-                !!blogsData?.totalElements && blogsData?.totalElements > itemsPerPage &&
+                !hidePagination && !!blogsData?.totalElements && blogsData?.totalElements > itemsPerPage &&
                 <TablePagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
             }
             <AuthModal

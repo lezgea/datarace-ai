@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { StarsIcon } from '@assets/icons';
 import { CategoriesSection } from '@components/features/home/categories-section';
-import { CompetitionsSection, DatasetsSection } from '@components/features/home';
+import { BlogSection, CompetitionsSection, DatasetsSection } from '@components/features/home';
 import { IParamsLanguage } from 'types/lang-types';
 import { useTranslations } from 'next-intl';
 
@@ -70,9 +70,9 @@ const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                     <DatasetsSection />
                 </section>
 
-                {/* <section className="container mx-auto">
+                <section className="container mx-auto">
                     <BlogSection />
-                </section> */}
+                </section>
             </main>
         </div>
     );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLazyGetAllDatasetsQuery } from '@api/datasets-api';
+import { BlogTable } from '@components/features/blog';
 import { AuthModal, NoData } from '@components/shared';
 import BlogItem from '@components/shared/blog-item';
 import DatasetItem from '@components/shared/dataset-item';
@@ -96,15 +97,10 @@ export const BlogSection: React.FC = () => {
         <>
             <div className="flex justify-between mb-8">
                 <div className="w-full space-y-3">
-                    <h2 className="text-[32px] md:text-[2.3rem]">{t('blog')}</h2>
-                    <p className="text-md text-gray-700">{t('blogDescription')}</p>
+                    <h2 className="text-[32px] md:text-[2.3rem] font-medium">{t('blog')}</h2>
                 </div>
             </div>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-                {/* {TEST_BLOGS.map((item) => (
-                    <BlogItem key={item.id} {...item} />
-                ))} */}
-            </div>
+            <BlogTable hidePagination />
             <div className="flex justify-center">
                 <Link href={`/${lng}/blog`} className="inline-flex w-auto text-center font-medium items-center px-6 py-3 text-gray-900 transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
                     {t('seeAll')}
