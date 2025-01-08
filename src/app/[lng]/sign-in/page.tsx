@@ -16,6 +16,7 @@ import { RootState } from '@store/store';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { useLocale, useTranslations } from 'next-intl';
+import withProtectedRoute from '@utils/withProtectedRoute';
 
 
 interface IFormInput {
@@ -201,4 +202,4 @@ const SignIn: React.FC = () => {
     )
 }
 
-export default SignIn;
+export default withProtectedRoute(SignIn);
