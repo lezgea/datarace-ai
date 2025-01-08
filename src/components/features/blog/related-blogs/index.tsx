@@ -8,7 +8,7 @@ import RaceItem from '@components/shared/race-item';
 import CompetitionsSkeleton from '@components/shared/skeletons/competitions-skeleton';
 import { RootState } from '@store/store';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -20,9 +20,9 @@ interface IRelatedBlogProps {
 }
 
 export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
-    const t = useTranslations();
-    const lng = useLocale();
-    const router = useRouter();
+
+    const params = useParams();
+    let { blogId } = params;
 
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     // const { loading: competitionLoading } = useSelector((state: RootState) => state.competitions);
@@ -30,31 +30,12 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
     const [showAuthModal, setShowAuthModal] = React.useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
-    const { data: blogsData, error, isLoading } = useGetRelatedBlogsQuery({ id: 6 });
+    const { data: blogsData, error, isLoading } = useGetRelatedBlogsQuery({
+        data: { page: 0, count: 3 },
+        id: blogId as string
+    });
 
-    const itemsPerPage = 6;
-
-
-    // React.useEffect(() => {
-    //     triggerGetBlogs({
-    //         // categoryId: selectedCategory,
-    //         data: {
-    //             page: currentPage,
-    //             count: itemsPerPage,
-    //             blogCriteria: {
-    //                 "content": "string",
-    //                 "isMyBlog": true
-    //             }
-    //         },
-    //     }).then((response) => {
-    //         console.log("@@@@@", response)
-    //         // if (response?.totalElements) {
-    //         //     setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage));
-    //         // } else {
-    //         //     setTotalPages(1)
-    //         // }
-    //     });
-    // }, [currentPage, triggerGetBlogs]);
+    const itemsPerPage = 3;
 
 
     const handleNextPage = () => {
@@ -70,7 +51,6 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
     };
 
 
-
     if (isLoading) {
         return <CompetitionsSkeleton />;
     }
@@ -80,7 +60,7 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
 
     return (
         <>
-            <h2 className="text-[1.7rem] leading-[2.5rem] md:text-[2.5rem] font-semibold">
+            <h2 className="text-[1.7rem] leading-[2.5rem] md:text-[2.5rem] font-semibold mb-4">
                 Related Blogs
             </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">

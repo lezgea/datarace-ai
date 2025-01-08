@@ -136,12 +136,12 @@ const userSlice = createSlice({
                     const { rememberMe } = action.meta.arg.originalArgs;
 
                     // Determine the expiration time based on rememberMe
-                    const expirationTime = rememberMe ? 47 / 24 : 50 / 1440; // 47 hours for rememberMe, 50 minutes otherwise
+                    const expirationTime = rememberMe ? 167 / 24 : 11 / 24; // 167 hours for rememberMe, 11 hours otherwise
 
                     // Store the token in the cookie with the appropriate expiration time
                     Cookies.set('dtr-token', token, {
                         secure: process.env.NODE_ENV === 'production',
-                        expires: expirationTime,
+                        expires: expirationTime, // Expiration time in days
                     });
                 }
             )

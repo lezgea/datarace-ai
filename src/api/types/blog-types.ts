@@ -94,14 +94,14 @@ export interface IBlogUpdateRequest {
 
 export interface IRelatedBlogListRequest {
     id: number | string | null,
-    // data: {
-    //     page: number,
-    //     count: number,
-    //     blogCriteria?: {
-    //         content?: string,
-    //         isMyBlog: boolean,
-    //     }
-    // }
+    data: {
+        page: number,
+        count: number,
+        blogCriteria?: {
+            content?: string,
+            isMyBlog: boolean,
+        }
+    }
 }
 
 

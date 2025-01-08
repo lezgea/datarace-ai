@@ -55,9 +55,13 @@ export const blogsApi = createApi({
             invalidatesTags: ['BlogInfo', 'RelatedBlogs'],
         }),
         getRelatedBlogs: builder.query<IRelatedBlogListResponse, IRelatedBlogListRequest>({
-            query: ({ id }) => ({
+            query: ({ data, id }) => ({
                 url: `/blogs/tags/${id}`,
                 method: 'GET',
+                params: {
+                    page: data.page,
+                    count: data.count,
+                },
             }),
             providesTags: ['RelatedBlogs'],
         }),
