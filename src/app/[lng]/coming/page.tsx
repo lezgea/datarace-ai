@@ -30,7 +30,7 @@ const ComingSoonContent: React.FC = () => {
     const lng = useLocale();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const token = Cookies.get('dtr-token');
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.isAuthenticated,
@@ -109,7 +109,7 @@ const ComingSoonContent: React.FC = () => {
                         <h2 className="text-[4rem] font-semi mb-4 text-center">{t('comingSoon')}</h2>
                     </div>
                     {
-                        !isAuthenticated &&
+                        !token &&
                         <p className="mt-6 text-center font-light">
                             {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-primary font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
                         </p>
