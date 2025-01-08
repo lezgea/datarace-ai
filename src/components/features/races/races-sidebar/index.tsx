@@ -46,7 +46,6 @@ export const RacesSidebar: React.FC<IRacesSidebarProps> = ({ visible, setSidebar
                         <img src={competitionInfo?.imageUrl || "/svg/noimg_large.svg"} alt={competitionInfo?.name} className="w-full h-[10rem] rounded-2xl object-cover" />
                     </div>
                     <h2 className="text-2xl font-regmed">{competitionInfo?.name}</h2>
-                    <p className="text-sm font-light mb-2 truncate-text">{competitionInfo?.text}</p>
                     <Divider />
                     <h2 className="text-2xl font-regmed text-center">{t('uploadYourSolution')}</h2>
                     <p className="text-sm mb-2 text-center px-10">

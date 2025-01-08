@@ -37,7 +37,7 @@ const Contact: React.FC = () => {
                             <p className="text-md text-gray-700"><strong className="mr-2">{t('emailAddress')}: </strong> info@datarace.ai</p>
                         </div>
 
-                        <div className="space-y-5">
+                        {/* <div className="space-y-5">
                             <h4 className="text-2xl font-medium">{t('socialLinks')}:</h4>
                             <div className="flex space-x-5">
                                 <a href="#" className="text-gray-400 hover:text-gray-900 dark:hover:text-white">
@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
                                     <span className="sr-only" aria-label='LinkedIn page'>LinkedIn page</span>
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="flex lg:w-[50%]">
                         <ContactForm />
