@@ -37,15 +37,15 @@ const RaceDetails: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <div className="container mx-auto py-[6rem] space-y-5">
+            <div className="container mx-auto py-[6rem] space-y-5 px-2 md:px-0">
                 <div className="flex justify-between">
                     {/* Breadcrumb */}
-                    <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                    <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
+                        <Link href="/" className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span>{blogInfo?.title}</span>
+                        <span className='truncate-text-1'>{blogInfo?.title}</span>
                     </nav>
 
                     <div className='flex gap-3'>
@@ -84,13 +84,13 @@ const RaceDetails: React.FC = () => {
                 {/* Main Content */}
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
-                        <img src={blogInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Blog Image" className="w-full h-[30rem] rounded-2xl object-cover" />
-                        <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
+                        <img src={blogInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Blog Image" className="w-full h-[12rem] md:h-[30rem] rounded-2xl object-cover" />
+                        <h1 className="absolute w-full bottom-0 left-0 text-xl md:text-2xl text-white font-regmed px-4 md:px-7 py-2 backdrop-blur-xl bg-dark/30">
                             {blogInfo?.title}
                         </h1>
                     </section>
 
-                    <section className="p-8 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-4 md:p-8 gap-8 rounded-2xl border border-gray-30">
                         <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: blogInfo?.content || '' }} />
                     </section>
                     <div className="flex items-center justify-end cursor-pointer group select-none">

@@ -32,16 +32,16 @@ const DatasetDetails: React.FC = () => {
 
 
     return (
-        <div className="min-h-screen px-5 flex flex-col">
-            <div className="container mx-auto py-[6rem] space-y-5">
+        <div className="min-h-screen flex flex-col">
+            <div className="container mx-auto py-[6rem] space-y-5 px-2 md:px-0">
                 {/* Breadcrumb */}
                 <div className="flex justify-between">
-                    <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                    <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
+                        <Link href="/" className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <Link href={`/${lng}/datasets`} className="hover:text-primaryLight">{t('datasets')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span>{datasetInfo?.title}</span>
+                        <span className='truncate-text-1'>{datasetInfo?.title}</span>
                     </nav>
 
                     {
