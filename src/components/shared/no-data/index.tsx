@@ -7,7 +7,13 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 
-export const NoData = () => {
+interface INoDataProps {
+    description?: string,
+}
+
+export const NoData: React.FC<INoDataProps> = (props) => {
+    let { description } = props;
+
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const lng = useLocale();
     const t = useTranslations();
@@ -37,7 +43,7 @@ export const NoData = () => {
     return (
         <div className="flex flex-col items-center justify-center w-full h-[50vh] gap-10">
             <NoDataSvg className="h-40 w-[300px]" />
-            <p className="text-gray-400 ">No Data Found</p>
+            <p className="text-gray-400 ">{description || 'No Data Found'}</p>
         </div>
     )
 }

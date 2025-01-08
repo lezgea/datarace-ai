@@ -203,5 +203,6 @@
   "monthAgo": "month ago",
   "yearAgo": "year ago",
   "editDataset": "Edit Dataset",
-  "download": "Download"
+  "download": "Download",
+  "noRacesDescription": "There isn’t any active race in this category. Stay tuned"
 }
