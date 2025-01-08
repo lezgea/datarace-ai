@@ -72,9 +72,9 @@ export const ScoreBoardSection: React.FC = () => {
                     {/* Table Header */}
                     <thead className="text-gray-600">
                         <tr>
-                            <th className="py-3 px-6 text-left font-semibold">Rank</th>
-                            <th className="py-3 px-6 text-left font-semibold">User</th>
-                            <th className="py-3 px-6 text-left font-semibold">Score</th>
+                            <th className="py-3 px-3 md:px-6 text-left font-semibold">Rank</th>
+                            <th className="py-3 px-3 md:px-6 text-left font-semibold">User</th>
+                            <th className="py-3 px-3 md:px-6 text-left font-semibold">Score</th>
                         </tr>
                     </thead>
 
@@ -86,9 +86,9 @@ export const ScoreBoardSection: React.FC = () => {
                                 className={`border-t border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                                     }`}
                             >
-                                <td className="py-3 px-6">{row.rank}</td>
+                                <td className="py-3 px-3 md:px-6">{row.rank}</td>
                                 <td>
-                                    <Link href={`/${lng}/profile/${row.userId}`} className="group flex items-center py-3 px-6 space-x-2">
+                                    <Link href={`/${lng}/profile/${row.userId}`} className="group flex items-center py-3 px-3 md:px-6 space-x-2">
                                         <Image
                                             src={row.profileImageUrl || '/png/user.png'}
                                             alt={row.nickname || row.fullName}
@@ -96,11 +96,10 @@ export const ScoreBoardSection: React.FC = () => {
                                             width={10}
                                             height={10}
                                         />
-                                        <strong className='font-medium group-hover:text-primary cursor-pointer'>{row.nickname || row.fullName}</strong>
+                                        <div className='font-medium group-hover:text-primary cursor-pointer truncate-text-1 max-w-[70px] md:max-w-full'>{row.nickname || row.fullName}</div>
                                     </Link>
-
                                 </td>
-                                <td className="py-3 px-6">{row.score || '-'}</td>
+                                <td className="py-3 px-3 md:px-6">{row.score || '-'}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -58,7 +58,7 @@ const RaceDetails: React.FC = () => {
                         </h1>
                     </section>
 
-                    <section className="p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
+                    <section className="p-4 md:p-8 grid grid-cols-1 lg:grid-cols-4 gap-8 rounded-2xl border border-gray-30">
                         {/* Left Content */}
                         <div className="lg:col-span-3">
                             <TabSelects tabs={TABS} />
