@@ -152,7 +152,10 @@ const Profile: React.FC = () => {
                             <div className="w-full flex flex-col items-center md:justify-end">
                                 <p className="text-[1.7rem] font-medium">{user?.fullName}</p>
                                 <p className="text-md text-gray-500">{user?.email}</p>
-                                <p className="text-md text-primary">@{user?.nickname}</p>
+                                {
+                                    !!user?.nickname &&
+                                    <p className="text-md text-primary">@{user?.nickname}</p>
+                                }
                             </div>
                         </div>
                     </div>
