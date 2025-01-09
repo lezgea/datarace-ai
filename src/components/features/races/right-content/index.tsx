@@ -52,7 +52,6 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
         }
     }
 
-    // if (competitionLoading) return <CompetitionInfoRightSkeleton />
 
     return (
         <div>

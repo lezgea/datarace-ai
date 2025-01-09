@@ -9,10 +9,11 @@ import { UseFormSetValue } from 'react-hook-form';
 
 interface ImageUploaderProps {
     image?: string,
+    imageId?: number | null | undefined,
     setImageId: (val: number | null) => void,
 }
 
-const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId }) => {
+const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, imageId, setImageId }) => {
     const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
     const [uploadDatasetImage, { isLoading }] = useUploadDatasetImageMutation();
     const [initialImage, setInitialImage] = React.useState<string>('');
@@ -51,7 +52,7 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, setImageId 
                 Image Upload
             </label> */}
             {
-                (uploadedImage || initialImage) ?
+                (uploadedImage || initialImage) && !!imageId ?
                     <>
                         <div
                             id="FileUpload"
