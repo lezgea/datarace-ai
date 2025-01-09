@@ -42,6 +42,7 @@ export interface IBlogItem {
         phoneNumber: string,
         userImageUrl: string,
     },
+    userId?: number,
     title: string,
     content: string,
     isEditable: boolean,

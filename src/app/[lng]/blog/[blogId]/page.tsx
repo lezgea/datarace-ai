@@ -93,7 +93,10 @@ const RaceDetails: React.FC = () => {
                     <section className="p-4 md:p-8 gap-8 rounded-2xl border border-gray-30">
                         <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: blogInfo?.content || '' }} />
                     </section>
-                    <div className="flex items-center justify-end cursor-pointer group select-none">
+                    <Link
+                        href={`/${lng}/profile/${blogInfo?.userId}`}
+                        className="flex items-center justify-end cursor-pointer group select-none"
+                    >
                         <div className="flex flex-col items-end text-gray-400 font-regmed mr-3 transition-all duration-200 ease-in-out">
                             <span className='text-sm'>{t('writtenBy')}</span>
                             <span className='ml-2 text-xl text-gray-600 font-medium hover:text-primary'> {blogInfo?.fullName}</span>
@@ -107,7 +110,7 @@ const RaceDetails: React.FC = () => {
                                 priority={true}
                             />
                         </div>
-                    </div>
+                    </Link>
                     <section className="relative">
                         <RelatedBlog />
                     </section>

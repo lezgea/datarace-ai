@@ -75,7 +75,7 @@ const UserProfile: React.FC = () => {
                             <p className='text-md text-white font-light max-w-[80%] text-end'>{t('description')}</p>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center min-w-[30%]">
+                    <div className="flex flex-col items-center justify-center min-w-[30%] py-6">
                         <div
                             className="relative w-[150px] h-[150px] min-w-[150px] min-h-[150px] rounded-full overflow-hidden border border-bg-gray-200"
                         >
