@@ -45,7 +45,7 @@ const RaceDetails: React.FC = () => {
                         <span className="text-lg">&gt;</span>
                         <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
                         <span className="text-lg">&gt;</span>
-                        <span className='truncate-text-1'>{blogInfo?.title}</span>
+                        <div className='truncate-text-1'>{blogInfo?.title}</div>
                     </nav>
 
                     <div className='flex gap-3'>
@@ -85,7 +85,7 @@ const RaceDetails: React.FC = () => {
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
                         <img src={blogInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Blog Image" className="w-full h-[12rem] md:h-[30rem] rounded-2xl object-cover" />
-                        <h1 className="absolute w-full bottom-0 left-0 text-xl md:text-2xl text-white font-regmed px-4 md:px-7 py-2 backdrop-blur-xl bg-dark/30">
+                        <h1 className="absolute w-full bottom-0 left-0 text-xl md:text-2xl text-white font-regmed px-4 md:px-7 py-2 backdrop-blur-xl bg-dark/30 truncate-text-1">
                             {blogInfo?.title}
                         </h1>
                     </section>

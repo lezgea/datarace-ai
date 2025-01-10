@@ -42,7 +42,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
                 />
             </div>
             <div className="flex flex-col px-7 py-6 space-y-2 text-start justify-between">
-                <div className="flex h-20 mb-3 space-y-2">
+                <div className="flex mb-3 space-y-2">
                     <h3 className="text-xl font-medium text-customBlue-900 truncate-text">{title}</h3>
                     {/* <p className="text-md text-gray-500 truncate-text description-font">{date}</p> */}
                 </div>
