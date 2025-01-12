@@ -31,20 +31,25 @@ export const Header: React.FC = () => {
         { route: '/contact', label: t('contact') },
     ];
 
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
     const navLinks = React.useMemo(() => {
         return NAV_ROUTES.map((item, i) => (
             <li key={i} className="relative flex items-center space-x-3">
                 {pathname === `/${lng}${item.route}` && (
                     <div className="absolute left-0 w-[7px] h-[7px] rounded-full bg-primaryLight" aria-hidden="true" />
                 )}
-                <Link href={`/${lng}${item.route}`} className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}>
+                <Link
+                    href={`/${lng}${item.route}`}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`text-gray-600 hover:text-primaryLight transition-all duration-200 ease-in-out ${pathname === `/${lng}${item.route}` ? 'font-medium' : ''}`}
+                >
                     {item.label}
                 </Link>
             </li>
         ));
     }, [pathname]);
 
-    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
     if (shouldHideHeader) return null;
 
