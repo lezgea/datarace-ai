@@ -104,7 +104,7 @@ const ComingSoonContent: React.FC = () => {
 
             {/* Right side with form */}
             <div className="w-full lg:w-1/2 bg-white content-center py-[30px] lg:p-20 overflow-y-scroll">
-                <div className="w-full mx-auto lg:max-w-md space-y-10 animate-right-svg">
+                <div className="w-full flex flex-col items-center justify-center mx-auto lg:max-w-md space-y-10 animate-right-svg">
                     <div>
                         <h2 className="text-[4rem] font-semi mb-4 text-center">{t('comingSoon')}</h2>
                     </div>
@@ -114,6 +114,13 @@ const ComingSoonContent: React.FC = () => {
                             {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-primary font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
                         </p>
                     }
+
+                    <Link
+                        href={`/${lng}`}
+                        className="inline-flex items-center justify-center px-10 h-[50px] font-regmed bg-primary text-white py-2 rounded-xl ring-2 ring-primary hover:bg-primaryDark hover:ring-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:outline-none focus:ring-2 focus:ring-primaryDark focus:shadow-none transition duration-200 ease-in-out transform"
+                    >
+                        {t('mainPage')}
+                    </Link>
                 </div>
             </div>
         </div>
