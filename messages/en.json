@@ -204,5 +204,8 @@
   "yearAgo": "year ago",
   "editDataset": "Edit Dataset",
   "download": "Download",
-  "noRacesDescription": "There isn’t any active race in this category. Stay tuned"
+  "noRacesDescription": "There isn’t any active race in this category. Stay tuned",
+  "registerConfirmationTitle": "Thank you for registering!",
+  "registerConfirmationDescription1": "We have sent a confirmation email to your registered email address. Please check your inbox and click on the confirmation link to complete your registration.",
+  "registerConfirmationDescription2": "If you did not receive the email, please check your spam folder or request a new confirmation email."
 }
