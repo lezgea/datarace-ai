@@ -140,10 +140,10 @@ const userSlice = createSlice({
 
                     // Store the token in the cookie with the appropriate expiration time
                     Cookies.set('dtr-token', token, {
-                        httpOnly: true,
+                        // httpOnly: true,
                         secure: process.env.NODE_ENV === 'production',
                         expires: expirationTime, // Expiration time in days
-                        sameSite: 'Strict',
+                        sameSite: 'Lax',
                     });
                 }
             )
