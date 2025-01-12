@@ -9,8 +9,6 @@ import {
     WhatsappIcon,
     FacebookShareButton,
     FacebookIcon,
-    TwitterShareButton,
-    TwitterIcon,
     TelegramIcon,
     TelegramShareButton,
     LinkedinIcon,
@@ -83,10 +81,6 @@ const ModalContent: React.FC<IModalContent> = (props) => {
                 <FacebookShareButton url={shareUrl}>
                     <FacebookIcon size={50} round />
                 </FacebookShareButton>
-
-                <TwitterShareButton url={shareUrl} title={title}>
-                    <TwitterIcon size={50} round />
-                </TwitterShareButton>
 
                 <TelegramShareButton url={shareUrl} title={title}>
                     <TelegramIcon size={50} round />
