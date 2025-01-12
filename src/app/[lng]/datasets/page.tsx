@@ -35,7 +35,7 @@ const Datasets: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 lg:px-0 space-y-10 px-5 py-10 md:px-0 md:py-[6rem]">
+            <main id="main-content" className="flex-grow bg-gray-50 lg:px-0 space-y-10 px-5 py-10 pt-20 md:px-0 md:py-[6rem]">
                 <section className="container mx-auto text-center">
                     <DatasetsHeaderSection />
                 </section>

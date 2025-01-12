@@ -4,7 +4,7 @@ import { Loader } from '@components/shared';
 import Link from 'next/link';
 import { AboutSection } from '@components/features/about';
 import { IParamsLanguage } from 'types/lang-types';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { LogoFullWhite, LogoWhite } from '@assets/icons';
 
@@ -25,7 +25,7 @@ const AboutUs: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                 <main id="main-content" className="container mx-auto flex-grow px-5 py-10 md:px-0 md:py-[6rem]">
                     {/* Breadcrumb */}
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                        <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <span>{t('aboutUs')}</span>
                     </nav>

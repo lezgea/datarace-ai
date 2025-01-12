@@ -41,7 +41,7 @@ const RaceDetails: React.FC = () => {
                 <div className="flex justify-between">
                     {/* Breadcrumb */}
                     <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
+                        <Link href={`/${lng}`} className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <Link href={`/${lng}/blog`} className="hover:text-primaryLight">{t('blog')}</Link>
                         <span className="text-lg">&gt;</span>

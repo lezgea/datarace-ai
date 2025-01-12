@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { CategoriesSection, CompetitionsSection } from '@components/features/home';
 import { CompetitionsTable } from '@components/features';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 const Races: React.FC = () => {
     const t = useTranslations();
+    const lng = useLocale();
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -23,7 +24,7 @@ const Races: React.FC = () => {
                         <div>
                             {/* Breadcrumb */}
                             <nav className="text-sm flex justify-start items-center text-gray-600 space-x-2">
-                                <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                                <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>
                                 <span className="text-lg">&gt;</span>
                                 <span>{t('competitions')}</span>
                             </nav>

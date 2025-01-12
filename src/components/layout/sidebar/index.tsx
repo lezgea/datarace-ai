@@ -26,7 +26,7 @@ export const Sidebar: React.FC<ISidebarProps> = ({ navLinks, visible, setSidebar
         visible && (
             <div
                 data-testid="sidebar"
-                className="fixed inset-0 z-20 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
+                className="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
             >
                 <div
                     className="relative w-64 h-[100%] bg-white shadow-xl py-8"

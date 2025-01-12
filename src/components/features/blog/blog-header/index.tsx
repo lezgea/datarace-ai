@@ -20,7 +20,7 @@ export const BlogHeaderSection = () => {
             <div className="flex items-end justify-between">
                 <div className="text-start">
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                        <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <span>{t('blog')}</span>
                     </nav>

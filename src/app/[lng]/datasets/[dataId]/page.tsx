@@ -37,7 +37,7 @@ const DatasetDetails: React.FC = () => {
                 {/* Breadcrumb */}
                 <div className="flex justify-between">
                     <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
+                        <Link href={`/${lng}`} className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <Link href={`/${lng}/datasets`} className="hover:text-primaryLight">{t('datasets')}</Link>
                         <span className="text-lg">&gt;</span>

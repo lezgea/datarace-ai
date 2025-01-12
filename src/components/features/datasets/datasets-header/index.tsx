@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CreateDatasetSidebar } from '../create-dataset-sidebar';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import Link from 'next/link';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 
 export const DatasetsHeaderSection = () => {
     const t = useTranslations();
+    const lng = useLocale();
     const [isSidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const { loading: datasetsLoading, datasetsCount } = useSelector((state: RootState) => state.datasets);
@@ -19,7 +20,7 @@ export const DatasetsHeaderSection = () => {
             <div className="flex items-center justify-between">
                 <div className="text-start">
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                        <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                        <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
                         <span>{t('datasets')}</span>
                     </nav>

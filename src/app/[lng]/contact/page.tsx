@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { Loader } from '@components/shared';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { ContactForm, SignUpForm } from '@components/features';
 import { InstagramIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from '@assets/icons';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 const Contact: React.FC = () => {
     const t = useTranslations();
+    const lng = useLocale();
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -24,7 +25,7 @@ const Contact: React.FC = () => {
                     <div className="justify-between space-y-[50px]">
                         <div>
                             <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
-                                <Link href="/" className="hover:text-primaryLight">{t('mainPage')}</Link>
+                                <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>
                                 <span className="text-lg">&gt;</span>
                                 <span>{t('contact')}</span>
                             </nav>

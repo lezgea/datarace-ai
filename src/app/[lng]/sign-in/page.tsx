@@ -186,7 +186,10 @@ const SignInContent: React.FC = () => {
                         </Link>
                     </form>
                     <p className="mt-6 text-center font-light">
-                        {t('dontHaveAnAccount')} <a href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signUp')}</a>
+                        {t('dontHaveAnAccount')}
+                        <Link href={`/${lng}/sign-up`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform ml-2">
+                            {t('signUp')}
+                        </Link>
                     </p>
                 </div>
             </div>

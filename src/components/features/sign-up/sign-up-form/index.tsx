@@ -149,7 +149,10 @@ export const SignUpForm: React.FC = () => {
                 </Link>
             </form>
             <p className="mt-6 text-center font-light">
-                {t('haveAnAccount')} <a href={`/${lng}/sign-in`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform">{t('signIn')}</a>
+                {t('haveAnAccount')}
+                <Link href={`/${lng}/sign-in`} className="!text-gray-700 font-semi hover:!text-primaryLight transition duration-200 ease-in-out transform ml-2">
+                    {t('signIn')}
+                </Link>
             </p>
 
             <TermsModal
