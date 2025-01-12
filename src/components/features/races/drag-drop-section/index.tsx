@@ -56,12 +56,19 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         const droppedFile = event.dataTransfer.files[0];
+
         if (droppedFile) {
+            const isZipFile = droppedFile.type === 'application/zip' || droppedFile.name.endsWith('.zip');
+            if (!isZipFile) {
+                toast.error("Only .zip files are allowed.", { position: "bottom-left" });
+                return;
+            }
             setFile(droppedFile);
             setUploadProgress(0);
             startFakeUpload(); // Start fake upload on drop
         }
     };
+
 
 
     const startFakeUpload = () => {

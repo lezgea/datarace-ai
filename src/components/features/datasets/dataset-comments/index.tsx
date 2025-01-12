@@ -76,7 +76,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
 
 
     return (
-        <section className="space-y-2 border-gray-200">
+        <section className="relative space-y-2 border-gray-200">
             {
                 (!!comments?.length || isAuthenticated) &&
                 <h2 className="text-2xl font-semibold text-black dark:text-white">
