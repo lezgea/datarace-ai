@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from '../modal';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 
 interface IConfirmationModalProps {
@@ -104,6 +105,14 @@ const TermsModalContent: React.FC<ITermsModalContent> = (props) => {
                     {t('pr32')}
                 </p>
             </div>
+            {
+                hideButtons &&
+                <div className="flex w-full space-x-3 absolute bg-white p-4 left-0 bottom-0 rounded-xl">
+                    <button onClick={onClose} className="flex w-full text-center justify-center px-4 py-2 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none">
+                        {t('close')}
+                    </button>
+                </div>
+            }
             {
                 !hideButtons &&
                 <div className="flex w-full space-x-3 absolute bg-white p-4 left-0 bottom-0 rounded-xl">
