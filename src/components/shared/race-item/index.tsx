@@ -57,7 +57,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
     const currencySymbol = props.currencySymbol;
     const awardAmount = props.awardAmount;
 
-    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `${t('ended')} ${Math.abs(lifeTimeDays as number)} ${t('daysAgo')}` : `${t('ended')} 1 ${t('daysAgo')}`;
+    let endedText = Math.abs(lifeTimeDays as number) > 1 ? `${t('ended')} ${Math.abs(lifeTimeDays as number)} ${t('daysAgo')}` : `${t('ends')} ${t('today').toLowerCase()}`;
     let lifeTimeText = (lifeTimeDays as number) > 0 ? `${t('endsIn')} ${lifeTimeDays} ${t('days')}` : endedText;
 
 
@@ -68,11 +68,7 @@ const RaceItem: React.FC<RaceProps> = (props) => {
                     <div className="inline-flex px-4 py-2 bg-white bg-opacity-50 backdrop-blur-xl flex-shrink-0 rounded-full">
                         <p className="text-sm font-regmed">{lifeTimeText}</p>
                     </div>
-                    {/* <div className="inline-flex bg-white bg-opacity-50 backdrop-blur-xl p-2 flex-shrink-0 rounded-full">
-                        <BookmarkIcon />
-                    </div> */}
                 </div>
-
                 <Image
                     src={imageUrl}
                     height="300"

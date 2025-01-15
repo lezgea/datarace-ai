@@ -1,0 +1,15 @@
+# Allow all web crawlers
+User-agent: *
+
+# Block access to the API routes
+Disallow: /api/
+
+# Disallow specific folders (if needed)
+# Disallow: /app/ # Prevent crawlers from indexing app-specific directories
+Disallow: /node_modules/ # Prevent indexing of node_modules
+
+# Allow access to static assets and images
+Allow: /assets/
+Allow: /img/
+Allow: /public/
+
