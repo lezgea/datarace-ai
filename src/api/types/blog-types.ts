@@ -106,4 +106,9 @@ export interface IRelatedBlogListRequest {
 }
 
 
-export type IRelatedBlogListResponse = IBlogItem[];
+export interface IRelatedBlogListResponse {
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
+    userDatasets: IBlogItem[],
+};

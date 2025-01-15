@@ -56,7 +56,7 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
     }
 
 
-    if (!blogsData?.length) return null;
+    if (!blogsData?.userDatasets?.length) return null;
 
     return (
         <>
@@ -64,7 +64,7 @@ export const RelatedBlog: React.FC<IRelatedBlogProps> = () => {
                 Related Blogs
             </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-                {blogsData?.map((item) => (
+                {blogsData?.userDatasets?.map((item) => (
                     <BlogItem key={item.id} {...item} />
                 ))}
             </div>
