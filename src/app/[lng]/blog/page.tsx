@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 const Blog: React.FC = () => {
     const t = useTranslations();
 
-    const TABS: { title: string, content: ReactNode }[] = [
+    const TABS: { title: string, value: string, content: ReactNode }[] = [
         {
+            value: 'all',
             title: t('allBlogs'),
             content: <BlogTable />,
         },
         {
+            value: 'my',
             title: t('myBlogs'),
             content: <MyBlogTable />,
         },

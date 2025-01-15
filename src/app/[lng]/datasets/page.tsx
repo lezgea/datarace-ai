@@ -21,12 +21,14 @@ const Datasets: React.FC = () => {
     const t = useTranslations();
     const { user, isAuthenticated, loading: isUserLoading } = useSelector((state: RootState) => state.user);
 
-    const TABS: { title: string, content: ReactNode }[] = [
+    const TABS: { title: string, value: string, content: ReactNode }[] = [
         {
+            value: 'all',
             title: t('allDatasets'),
             content: <DatasetsTable />,
         },
         {
+            value: 'my',
             title: t('myDatasets'),
             content: <MyDatasetsTable />,
         },

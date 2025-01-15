@@ -19,16 +19,20 @@ const RaceDetails: React.FC = () => {
     const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
 
-    const TABS: { title: string, content: ReactNode }[] = [
+    
+    const TABS: { title: string, value: string, content: ReactNode }[] = [
         {
+            value: 'general',
             title: t('generalOverview'),
             content: <GeneralSection />,
         },
         {
+            value: 'data',
             title: t('data'),
             content: <DatasetsSection />,
         },
         {
+            value: 'scoreboard',
             title: t('scoreBoard'),
             content: <ScoreBoardSection />,
         },

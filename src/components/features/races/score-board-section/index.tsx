@@ -93,8 +93,8 @@ export const ScoreBoardSection: React.FC = () => {
                                             src={row.profileImageUrl || '/png/user.png'}
                                             alt={row.nickname || row.fullName}
                                             className='w-[30px] h-[30px] rounded-full'
-                                            width={10}
-                                            height={10}
+                                            width={50}
+                                            height={50}
                                         />
                                         <div className='font-medium group-hover:text-primary cursor-pointer truncate-text-1 max-w-[70px] md:max-w-full'>{row.nickname || row.fullName}</div>
                                     </Link>

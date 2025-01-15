@@ -20,20 +20,19 @@ import { LogoFullWhite } from '@assets/icons';
 const Profile: React.FC = () => {
     const t = useTranslations();
 
-    const TABS: { title: string, content: React.ReactNode }[] = [
+    const TABS: { title: string, value: string, content: React.ReactNode }[] = [
         {
+            value: 'attended',
             title: t('attendedRaces'),
             content: <AttendedRaces />,
         },
-        // {
-        //     title: t('bookmarks'),
-        //     content: <div>Bookmarks</div>,
-        // },
         {
+            value: 'submitted',
             title: t('submittedProjects'),
             content: <SubmittedProjects />,
         },
         {
+            value: 'settings',
             title: t('settings'),
             content: <AccountSettings />,
         },
