@@ -107,12 +107,6 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
                                 value={newComment}
                                 placeholder={t('whatsOnYourMind')}
                                 className={`w-full h-[100px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                        e.preventDefault();
-                                        onCreateComment();
-                                    }
-                                }}
                                 onChange={(e) => setNewComment(e.target.value)}
                             />
                             <div className="flex gap-3">

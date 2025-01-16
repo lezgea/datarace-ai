@@ -65,12 +65,6 @@ const ModalContent: React.FC<IModalContent> = (props) => {
                     value={newComment}
                     placeholder={"What's on your mind ?"}
                     className={`w-full h-[200px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            e.preventDefault();
-                            onUpdateComment();
-                        }
-                    }}
                     onChange={(e) => setNewComment(e.target.value)}
                 />
                 <button
@@ -79,10 +73,6 @@ const ModalContent: React.FC<IModalContent> = (props) => {
                 >
                     {t('updateComment')}
                 </button>
-                {/* <EmojiPicker
-                // value={newComment}
-                // onEmojiClick={(val) => setNewComment(val)}
-                /> */}
             </div>
         </div>
     )
