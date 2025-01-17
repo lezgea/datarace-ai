@@ -54,10 +54,10 @@ export async function generateMetadata() {
         openGraph: {
             title: "DataRace.ai",
             description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
-            url: `${process.env.WEBSITE_URL}`,
+            url: `https://datarace.ai`,
             images: [
                 {
-                    url: `${process.env.WEBSITE_URL}/en/webp/default_banner.webp`,
+                    url: `https://datarace.ai/en/webp/default_banner.webp`,
                     width: 1200,
                     height: 630,
                     alt: `DataRace.ai Banner`,
@@ -70,10 +70,10 @@ export async function generateMetadata() {
             card: 'summary_large_image',
             title: "DataRace.ai",
             description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
-            images: [`${process.env.WEBSITE_URL}/en/webp/default_banner.webp`],
+            images: [`https://datarace.ai/en/webp/default_banner.webp`],
         },
         alternates: {
-            canonical: `${process.env.WEBSITE_URL}`,
+            canonical: `https://datarace.ai`,
         },
     };
 }
