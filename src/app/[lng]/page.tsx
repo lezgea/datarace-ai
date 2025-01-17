@@ -1,24 +1,88 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import { StarsIcon } from '@assets/icons';
 import { CategoriesSection } from '@components/features/home/categories-section';
 import { BlogSection, CompetitionsSection, DatasetsSection } from '@components/features/home';
 import { IParamsLanguage } from 'types/lang-types';
 import { useTranslations } from 'next-intl';
 
-export const metadata: Metadata = {
-    title: "DataRace.ai",
-    description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
-};
+
+export async function generateMetadata() {
+    return {
+        title: "DataRace.ai",
+        description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
+        keywords: [
+            'AI Academy',
+            'Artificial Intelligence',
+            'AI Courses',
+            'Future Technology',
+            'AI Education',
+            'Süni İntellekt Təhsili',
+            'Machine Learning',
+            'Data Science',
+            'AI Programming',
+            'AI Təlimləri',
+            'Deep Learning',
+            'Neural Networks',
+            'AI Research',
+            'AI Studies',
+            'AI Certification',
+            'AI Lessons',
+            'AI Development',
+            'AI Tədrisi',
+            'Robototexnika',
+            'AI Proqramlaşdırma',
+            'AI Öyrənmə',
+            'AI Academy Haqqında',
+            'AI Təhsili',
+            'Riaziyyat Olimpiyadasi',
+            'Olimpiada Suallari',
+            'RFO',
+            'RPM',
+        ],
+        robots: {
+            index: true,
+            follow: true,
+            nocache: false,
+            googleBot: {
+                index: true,
+                follow: true,
+                noarchive: false,
+            },
+        },
+        openGraph: {
+            title: "DataRace.ai",
+            description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
+            url: `${process.env.WEBSITE_URL}`,
+            images: [
+                {
+                    url: `${process.env.WEBSITE_URL}/en/webp/default_banner.webp`,
+                    width: 1200,
+                    height: 630,
+                    alt: `DataRace.ai Banner`,
+                },
+            ],
+            locale: 'en_US',
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: "DataRace.ai",
+            description: "DataRace is an innovative platform designed to bring data scientists and AI enthusiasts together to compete in data-driven challenges.",
+            images: [`${process.env.WEBSITE_URL}/en/webp/default_banner.webp`],
+        },
+        alternates: {
+            canonical: `${process.env.WEBSITE_URL}`,
+        },
+    };
+}
+
 
 // Dynamic imports for better performance
 const TeamBrainStorm = dynamic(() => import('@assets/icons/team-brainstorm.svg').then(mod => mod.default));
 const TeamBrainstorming = dynamic(() => import('@assets/icons/team-brainstorming.svg').then(mod => mod.default));
 const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mod => mod.default));
-const RaceItem = dynamic(() => import('@components/shared/race-item').then(mod => mod.default), { ssr: false });
-
 
 
 const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
