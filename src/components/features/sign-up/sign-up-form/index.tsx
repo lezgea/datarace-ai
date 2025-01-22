@@ -15,6 +15,8 @@ import { useLocale, useTranslations } from 'next-intl';
 
 
 interface IFormInput {
+    fullname?: string,
+    nickname?: string,
     email: string;
     password: string;
     confirmation: string;
@@ -80,6 +82,22 @@ export const SignUpForm: React.FC = () => {
             </div>
             <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                 <FormInput
+                    label={`${t('fullname')}*`}
+                    type='text'
+                    name='fullname'
+                    placeholder="John Doe"
+                    register={register}
+                    errors={errors}
+                />
+                <FormInput
+                    label={`${t('nickname')}*`}
+                    type='text'
+                    name='nickname'
+                    placeholder="@nickname"
+                    register={register}
+                    errors={errors}
+                />
+                <FormInput
                     label={`${t('email')}*`}
                     type='email'
                     name='email'
@@ -138,7 +156,7 @@ export const SignUpForm: React.FC = () => {
                 >
                     {t('signUp')}
                 </button>
-                <div className="text-center my-4">{t('or')}</div>
+                {/* <div className="text-center my-4">{t('or')}</div> */}
                 <Link
                     href="https://api.datarace.ai/oauth2/authorization/google"
                     type="button"
