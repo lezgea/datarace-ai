@@ -14,7 +14,7 @@ import { logout } from '@slices/user-slice';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { ConfirmationModal } from '@components/shared';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 
@@ -36,6 +36,7 @@ const validationSchema = Yup.object().shape({
 
 export const AccountSettings: React.FC = () => {
     const t = useTranslations();
+    const lng = useLocale();
     const dispatch = useDispatch();
     const router = useRouter();
     const [logoutModal, setLogoutModal] = React.useState<boolean>(false);
@@ -61,7 +62,11 @@ export const AccountSettings: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            await updateUser({ id: user?.id || '', data: data }).unwrap();
+            await updateUser({
+                id: user?.id || '',
+                data: data,
+                lang: lng,
+            }).unwrap();
         } catch (err: any) {
             console.error('Unknown error:', err);
             toast.error(err.data?.message || 'An unexpected error occurred');

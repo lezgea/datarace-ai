@@ -12,13 +12,14 @@ import { AccountSettings, AttendedRaces, SubmittedProjects } from '@components/f
 import { useUploadAvatarMutation } from '@api/upload-api';
 import { useUpdateUserMutation } from '@api/user-api';
 import { truncate } from 'lodash';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { LogoFullWhite } from '@assets/icons';
 
 
 
 const Profile: React.FC = () => {
     const t = useTranslations();
+    const lng = useLocale();
 
     const TABS: { title: string, value: string, content: React.ReactNode }[] = [
         {
@@ -66,13 +67,14 @@ const Profile: React.FC = () => {
             let response = await uploadAvatar({ file: formData }).unwrap();
             await updateUser({
                 id: user?.id || '',
+                lang: lng,
                 data: {
                     profileFileId: response?.id,
                     fullName: user?.fullName,
                     email: user?.email,
                     nickname: user?.nickname,
                     phoneNumber: user?.phoneNumber,
-                }
+                },
             }).unwrap();
 
             setErrorMessage(null);

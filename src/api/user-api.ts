@@ -62,11 +62,12 @@ export const userApi = createApi({
             }),
             providesTags: ['User'],
         }),
-        updateUser: builder.mutation<IUser, { id: number | string; data: Partial<IUser> }>({
-            query: ({ id, data }) => ({
+        updateUser: builder.mutation<IUser, { id: number | string; data: Partial<IUser>; lang: string }>({
+            query: ({ id, data, lang }) => ({
                 url: `/users/${id}`,
                 method: 'PUT',
                 data,
+                headers: { "Accept-language": lang }
             }),
             invalidatesTags: ['User'],
         }),
