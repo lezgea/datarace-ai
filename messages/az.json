@@ -219,5 +219,8 @@
   "fullNameIsRequired": "Tam ad tələb olunur",
   "usernameIsRequired": "İstifadəçi adı tələb olunur",
   "invalidPhoneNumber": "Telefon nömrəsi formatı yanlışdır. Doğru beynəlxalq nömrə daxil edin",
-  "phoneNumberIsRequired": "Telefon nömrəsi tələb olunur"
+  "phoneNumberIsRequired": "Telefon nömrəsi tələb olunur",
+  "pageNotFoundTitle": "Səhifə Tapılmadı",
+  "pageNotFoundDescription": "Axtardığınız səhifə mövcud deyil",
+  "returnToHome": "Əsas Səhifəyə Qayıdın"
 }

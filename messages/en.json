@@ -220,5 +220,8 @@
   "fullNameIsRequired": "Fullname is required",
   "usernameIsRequired": "Username is required",
   "invalidPhoneNumber": "Invalid phone number format. Must be a valid international number",
-  "phoneNumberIsRequired": "Phone number is required"
+  "phoneNumberIsRequired": "Phone number is required",
+  "pageNotFoundTitle": "Page Not Found",
+  "pageNotFoundDescription": "The page you’re looking for doesn’t exist",
+  "returnToHome": "Return to Home"
 }
