@@ -217,5 +217,7 @@
   "usernameOnlyLettersAndNumbers": "Yalnız hərflər (a-z, A-Z) və rəqəmlər (0-9) ola bilər",
   "fullNameOnlyLettersAndUnderscore": "Yalnız hərflər (a-z, A-Z) və “_” ola bilər",
   "fullNameIsRequired": "Tam ad tələb olunur",
-  "usernameIsRequired": "İstifadəçi adı tələb olunur"
+  "usernameIsRequired": "İstifadəçi adı tələb olunur",
+  "invalidPhoneNumber": "Telefon nömrəsi formatı yanlışdır. Doğru beynəlxalq nömrə daxil edin",
+  "phoneNumberIsRequired": "Telefon nömrəsi tələb olunur"
 }

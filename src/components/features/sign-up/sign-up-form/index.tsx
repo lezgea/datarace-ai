@@ -34,7 +34,7 @@ export const SignUpForm: React.FC = () => {
 
     const validationSchema = Yup.object().shape({
         fullName: Yup.string()
-            .matches(/^[a-zA-Z_]+$/, t('fullNameOnlyLettersAndUnderscore')) // Only letters and "_"
+            .matches(/^[a-zA-Z_ ]+$/, t('fullNameOnlyLettersAndUnderscore')) // Only letters and "_"
             .min(5, t('fullNameMustBeBetween5And20Characters')) // Minimum 5 characters
             .max(20, t('fullNameMustBeBetween5And20Characters')) // Maximum 20 characters
             .required(t('fullNameIsRequired')),

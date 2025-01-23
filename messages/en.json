@@ -218,5 +218,7 @@
   "usernameOnlyLettersAndNumbers": "Can only contain letters (a-z, A-Z) and numbers (0-9)",
   "fullNameOnlyLettersAndUnderscore": "Can only contain letters (a-z, A-Z) and “_”",
   "fullNameIsRequired": "Fullname is required",
-  "usernameIsRequired": "Username is required"
+  "usernameIsRequired": "Username is required",
+  "invalidPhoneNumber": "Invalid phone number format. Must be a valid international number",
+  "phoneNumberIsRequired": "Phone number is required"
 }

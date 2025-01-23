@@ -21,17 +21,10 @@ import { useLocale, useTranslations } from 'next-intl';
 interface IFormInput {
     fullName: string,
     email: string,
-    nickname?: string,
-    phoneNumber?: string,
+    nickname: string,
+    phoneNumber: string,
     profileFileId?: number | string,
 }
-
-const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required('Fullname is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    nickname: Yup.string(),
-    phoneNumber: Yup.string(),
-});
 
 
 export const AccountSettings: React.FC = () => {
@@ -41,6 +34,29 @@ export const AccountSettings: React.FC = () => {
     const router = useRouter();
     const [logoutModal, setLogoutModal] = React.useState<boolean>(false);
     const [deleteModal, setDeleteModal] = React.useState<boolean>(false);
+
+
+    const validationSchema = Yup.object().shape({
+        fullName: Yup.string()
+            .matches(/^[a-zA-Z_ ]+$/, t('fullNameOnlyLettersAndUnderscore')) // Only letters and "_"
+            .min(5, t('fullNameMustBeBetween5And20Characters')) // Minimum 5 characters
+            .max(20, t('fullNameMustBeBetween5And20Characters')) // Maximum 20 characters
+            .required(t('fullNameIsRequired')),
+        email: Yup.string()
+            .email(t('invalidEmail'))
+            .required(t('emailIsRequired')),
+        nickname: Yup.string()
+            .matches(/^[a-zA-Z0-9]+$/, t('usernameOnlyLettersAndNumbers')) // Only letters and numbers
+            .min(5, t('usernameMustBeBetween5And15Characters')) // Minimum 5 characters
+            .max(15, t('usernameMustBeBetween5And15Characters')) // Maximum 15 characters
+            .required(t('usernameIsRequired')),
+        phoneNumber: Yup.string()
+            .matches(
+                /^\+?[1-9]\d{1,14}$/,
+                t('invalidPhoneNumber') // Translation key for invalid phone number message
+            ) // International format, allows + and digits
+            .required(t('phoneNumberIsRequired')),
+    });
 
     const selectAuthData = createSelector(
         (state: RootState) => state.user.user,
