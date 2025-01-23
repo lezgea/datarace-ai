@@ -3,6 +3,7 @@ export interface IRegisterRequest {
     nickname?: string;
     email: string;
     password: string;
+    lang: string,
 }
 
 export type RegisterResponse = string

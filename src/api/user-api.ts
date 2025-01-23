@@ -13,6 +13,7 @@ export const userApi = createApi({
                 url: '/users',
                 method: 'POST',
                 data: credentials,
+                headers: { "Accept-language": credentials.lang }
             }),
         }),
         loginUser: builder.mutation<LoginResponse, ILoginRequest>({

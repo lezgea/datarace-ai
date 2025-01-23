@@ -208,5 +208,14 @@
   "registerConfirmationDescription1": "Qeydiyyatınızı tamamlamaq üçün qeyd etdiyiniz e-poçt ünvanına təsdiq e-poçtu göndərdik. Zəhmət olmasa, poçt qutunuzu yoxlayın və təsdiq linkinə klikləyin.",
   "registerConfirmationDescription2": "Əgər e-poçtu almadınızsa, spam qovluğunu yoxlayın və ya yeni təsdiq e-poçtu tələb edin.",
   "ends": "Bitir",
-  "today": "Bugün"
+  "today": "Bugün",
+  "fullname": "Tam ad",
+  "nickname": "Ləqəb",
+  "username": "İstifadəçi adı",
+  "fullNameMustBeBetween5And20Characters": "5-20 simvol arasında olmalıdır",
+  "usernameMustBeBetween5And15Characters": "5-15 simvol arasında olmalıdır",
+  "usernameOnlyLettersAndNumbers": "Yalnız hərflər (a-z, A-Z) və rəqəmlər (0-9) ola bilər",
+  "fullNameOnlyLettersAndUnderscore": "Yalnız hərflər (a-z, A-Z) və “_” ola bilər",
+  "fullNameIsRequired": "Tam ad tələb olunur",
+  "usernameIsRequired": "İstifadəçi adı tələb olunur"
 }

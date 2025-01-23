@@ -209,5 +209,14 @@
   "registerConfirmationDescription1": "We have sent a confirmation email to your registered email address. Please check your inbox and click on the confirmation link to complete your registration.",
   "registerConfirmationDescription2": "If you did not receive the email, please check your spam folder or request a new confirmation email.",
   "ends": "Ends",
-  "today": "Today"
+  "today": "Today",
+  "fullname": "Fullname",
+  "nickname": "Nickname",
+  "username": "Username",
+  "fullNameMustBeBetween5And20Characters": "Must be 5-20 characters long",
+  "usernameMustBeBetween5And15Characters": "Must be 5-15 characters long",
+  "usernameOnlyLettersAndNumbers": "Can only contain letters (a-z, A-Z) and numbers (0-9)",
+  "fullNameOnlyLettersAndUnderscore": "Can only contain letters (a-z, A-Z) and “_”",
+  "fullNameIsRequired": "Fullname is required",
+  "usernameIsRequired": "Username is required"
 }

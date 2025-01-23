@@ -15,8 +15,8 @@ import { useLocale, useTranslations } from 'next-intl';
 
 
 interface IFormInput {
-    fullname?: string,
-    nickname?: string,
+    fullName: string,
+    username: string,
     email: string;
     password: string;
     confirmation: string;
@@ -33,6 +33,16 @@ export const SignUpForm: React.FC = () => {
     const [termsModal, setTermsModal] = React.useState<boolean>(false);
 
     const validationSchema = Yup.object().shape({
+        fullName: Yup.string()
+            .matches(/^[a-zA-Z_]+$/, t('fullNameOnlyLettersAndUnderscore')) // Only letters and "_"
+            .min(5, t('fullNameMustBeBetween5And20Characters')) // Minimum 5 characters
+            .max(20, t('fullNameMustBeBetween5And20Characters')) // Maximum 20 characters
+            .required(t('fullNameIsRequired')),
+        username: Yup.string()
+            .matches(/^[a-zA-Z0-9]+$/, t('usernameOnlyLettersAndNumbers')) // Only letters and numbers
+            .min(5, t('usernameMustBeBetween5And15Characters')) // Minimum 5 characters
+            .max(15, t('usernameMustBeBetween5And15Characters')) // Maximum 15 characters
+            .required(t('usernameIsRequired')),
         email: Yup.string()
             .email(t('invalidEmail'))
             .required(t('emailIsRequired')),
@@ -55,7 +65,7 @@ export const SignUpForm: React.FC = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            await registerUser(data).unwrap();
+            await registerUser({ lang: lng, ...data }).unwrap();
             showEmailSent(true);
         } catch (err: any) {
             console.error('Unknown error:', err);
@@ -84,16 +94,16 @@ export const SignUpForm: React.FC = () => {
                 <FormInput
                     label={`${t('fullname')}*`}
                     type='text'
-                    name='fullname'
+                    name='fullName'
                     placeholder="John Doe"
                     register={register}
                     errors={errors}
                 />
                 <FormInput
-                    label={`${t('nickname')}*`}
+                    label={`${t('username')}*`}
                     type='text'
-                    name='nickname'
-                    placeholder="@nickname"
+                    name='username'
+                    placeholder={t('username')}
                     register={register}
                     errors={errors}
                 />
