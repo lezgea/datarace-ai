@@ -5,7 +5,6 @@ import { Footer, Header, Loader } from "components";
 import ReduxProvider from "providers/redux-provider";
 import ToastProvider from "@providers/toast-provider";
 import { IntlProvider, NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { getMessages } from "next-intl/server";
 
 

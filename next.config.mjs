@@ -14,6 +14,9 @@ const withNextIntl = createNextIntlPlugin();
 
 // Define your Next.js config
 const nextConfig = {
+    experimental: {
+        appDir: true, // Ensure App Router is enabled
+    },
     sassOptions: {
         includePaths: [path.join(__dirname, 'src/styles')],
     },

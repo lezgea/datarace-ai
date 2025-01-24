@@ -33,8 +33,8 @@ export default function middleware(req: NextRequest) {
     // Check if the route exists in your app (optional dynamic validation)
     const validLocalesPath = new RegExp(`^/(${locales.join('|')})(/.*)?$`);
     if (!validLocalesPath.test(pathname)) {
-        // Redirect to the main page or show a 404 page
-        return NextResponse.redirect(new URL('/not-found', req.url)); // Adjust this if you prefer '/'
+        // Redirect directly to the 404 page
+        return NextResponse.redirect(new URL(`/${defaultLocale}/404`, req.url));
     }
 
     // Proceed to the next middleware if it starts with a valid locale
