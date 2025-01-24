@@ -14,14 +14,8 @@ const withNextIntl = createNextIntlPlugin();
 
 // Define your Next.js config
 const nextConfig = {
-    experimental: {
-        appDir: true, // Ensure App Router is enabled
-    },
     sassOptions: {
         includePaths: [path.join(__dirname, 'src/styles')],
-    },
-    images: {
-        domains: ['api.datarace.ai'],
     },
     webpack(config) {
         config.module.rules.push({
