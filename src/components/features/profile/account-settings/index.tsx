@@ -1,8 +1,6 @@
 "use client"
 
 import React from 'react';
-import { SignOutIcon, WarningIcon } from '@assets/icons';
-import { FormEditInput } from '@components/shared/form-edit-input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { logout } from '@slices/user-slice';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
-import { ConfirmationModal } from '@components/shared';
+import { ConfirmationModal, FormInput } from '@components/shared';
 import { useLocale, useTranslations } from 'next-intl';
 
 
@@ -68,8 +66,8 @@ export const AccountSettings: React.FC = () => {
     const { user } = useSelector(selectAuthData);
 
     const [logoutUser] = useLogoutUserMutation();
-    const [updateUser, { isLoading: updateLoading, isError: updateError, data }] = useUpdateUserMutation();
-    const [deleteUser, { isLoading: deleteLoading, isError: deleteError }] = useDeleteUserMutation();
+    const [updateUser] = useUpdateUserMutation();
+    const [deleteUser] = useDeleteUserMutation();
 
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<IFormInput>({
         resolver: yupResolver(validationSchema),
@@ -141,7 +139,7 @@ export const AccountSettings: React.FC = () => {
                     </button>
                 </div> */}
                 <form className="space-y-4 w-full sm:w-80" onSubmit={handleSubmit(onSubmit)}>
-                    <FormEditInput
+                    <FormInput
                         label={t('fullName')}
                         type='string'
                         name='fullName'
@@ -149,7 +147,7 @@ export const AccountSettings: React.FC = () => {
                         register={register}
                         errors={errors}
                     />
-                    <FormEditInput
+                    <FormInput
                         label={t('userName')}
                         type='text'
                         name='nickname'
@@ -158,18 +156,19 @@ export const AccountSettings: React.FC = () => {
                         errors={errors}
                     />
                     <div className="space-y-2">
-                        <FormEditInput
-                            label={t('contact')}
+                        <FormInput
+                            label={t('Email')}
                             type='email'
                             name='email'
                             placeholder="email@example.com"
                             register={register}
                             errors={errors}
                         />
-                        <FormEditInput
+                        <FormInput
+                            label={t('phone')}
                             type='string'
                             name='phoneNumber'
-                            placeholder="phone"
+                            placeholder="994xxxxxxxxx"
                             register={register}
                             errors={errors}
                         />
