@@ -50,6 +50,7 @@ import DocUpload from './doc-upload.svg';
 import TrashIcon from './trash.svg';
 import LogoFullWhite from './logo_fullwhite.svg';
 import CopyIcon from './copy.svg';
+import ErrorIllustration from './404.svg';
 
 
 
@@ -67,6 +68,7 @@ export {
     Failed,
     RaceFlag,
     NoDataSvg,
+    ErrorIllustration,
 
     // icons
     CopyIcon,

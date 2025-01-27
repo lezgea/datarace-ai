@@ -6,6 +6,7 @@ import { CategoriesSection } from '@components/features/home/categories-section'
 import { BlogSection, CompetitionsSection, DatasetsSection } from '@components/features/home';
 import { IParamsLanguage } from 'types/lang-types';
 import { useTranslations } from 'next-intl';
+import { notFound } from 'next/navigation'
 
 
 export async function generateMetadata() {
@@ -87,6 +88,11 @@ const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mo
 
 const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
     const t = useTranslations();
+
+    console.log('@@@@', lng)
+    if (!lng) {
+        return notFound()
+    }
 
     return (
         <div className="min-h-screen flex flex-col">

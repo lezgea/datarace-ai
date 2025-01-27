@@ -131,13 +131,6 @@ export const AccountSettings: React.FC = () => {
     return (
         <div>
             <div className="space-y-5">
-                {/* <div className="flex items-center border border-gray-300 px-5 py-3 rounded-2xl space-x-5">
-                    <WarningIcon className="w-10 h-10" />
-                    <div className="w-full font-medium">{t('verifyYourAccount')}</div>
-                    <button className="inline-flex min-w-[150px] text-center font-medium items-center justify-center px-6 py-3 text-primaryLight transition-all dark:bg-white dark:text-gray-800 rounded-xl sm:w-auto hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 dark:shadow-neutral-700 focus:shadow-none">
-                        {t('verifyNow')}
-                    </button>
-                </div> */}
                 <form className="space-y-4 w-full sm:w-80" onSubmit={handleSubmit(onSubmit)}>
                     <FormInput
                         label={t('fullName')}
