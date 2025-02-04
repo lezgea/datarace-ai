@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
     const [triggerGetComments, { data: comments, isLoading: commentsLoading }] = useLazyGetCompetitionCommentsQuery();
     const [newComment, setNewComment] = React.useState<string>('');
     const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState<boolean>(false);
+    const [allCommentsVisible, showComments] = React.useState<boolean>(false);
     const [createCompetitionComment, { isLoading, error }] = useCreateCompetitionCommentMutation();
     const { user, isAuthenticated, loading: isUserLoading } = useSelector((state: RootState) => state.user);
     const pickerRef = useRef<HTMLDivElement>(null);
@@ -53,13 +54,15 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
         }
     };
 
+
     React.useEffect(() => {
         if (competitionId) {
             triggerGetComments({ id: competitionId });
         }
     }, [competitionId])
 
-    useEffect(() => {
+
+    React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
                 setIsEmojiPickerVisible(false);
@@ -84,9 +87,24 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
                     {
-                        comments?.map((comment) =>
-                            <CompetitionComment key={comment.id} {...comment} />
-                        )
+                        allCommentsVisible
+                            ?
+                            comments?.map((comment) =>
+                                <CompetitionComment key={comment.id} {...comment} />
+                            )
+                            :
+                            comments?.slice(0, 3)?.map((comment) =>
+                                <CompetitionComment key={comment.id} {...comment} />
+                            )
+                    }
+                    {
+                        !!comments?.length &&
+                        <button
+                            onClick={() => showComments(!allCommentsVisible)}
+                            className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
+                        >
+                            {allCommentsVisible ? 'Hide Comments' : 'View More Comments'}
+                        </button>
                     }
                 </div>
 

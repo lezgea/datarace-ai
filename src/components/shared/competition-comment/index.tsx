@@ -36,6 +36,9 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
     let lng = useLocale();
     let t = useTranslations();
 
+    const [replies, setReplies] = React.useState<any[]>([])
+    const [allRepliesVisible, showAllReplies] = React.useState<boolean>(false)
+
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
 
     const [authModal, setAuthModal] = React.useState<boolean>(false);
@@ -53,6 +56,14 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
             toast.error("Unable to delete this comment")
         }
     }
+
+    React.useEffect(() => {
+        if (competitionChildCommentDtos?.length)
+            setReplies([...competitionChildCommentDtos])
+    }, [competitionChildCommentDtos?.length])
+
+    console.info('REPS', replies)
+
 
     return (
         <>
@@ -130,12 +141,26 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
             </div>
 
             {/*  COMMENT REPLIES */}
-            <div className='ml-10'>
+            <div className='w-full ml-10'>
                 {
-                    !!competitionChildCommentDtos?.length &&
-                    competitionChildCommentDtos?.map(reply =>
-                        <CompetitionComment isReply key={reply.id} {...reply} />
-                    )
+                    !!replies?.length && allRepliesVisible
+                        ?
+                        replies?.map(reply =>
+                            <CompetitionComment isReply key={reply.id} {...reply} />
+                        )
+                        :
+                        replies?.slice(0, 2)?.map(reply =>
+                            <CompetitionComment isReply key={reply.id} {...reply} />
+                        )
+                }
+                {
+                    !isReply && !!replies?.length &&
+                    <button
+                        onClick={() => showAllReplies(!allRepliesVisible)}
+                        className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
+                    >
+                        {allRepliesVisible ? 'Hide Replies' : 'View More Replies'}
+                    </button>
                 }
             </div>
         </>
