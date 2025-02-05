@@ -62,13 +62,15 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
             setReplies([...competitionChildCommentDtos])
     }, [competitionChildCommentDtos?.length])
 
-    console.info('REPS', replies)
-
 
     return (
         <>
             <div className={`inline-flex gap-2 ${isReply ? 'mb-1' : 'mb-3'}`}>
-                <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
+                <Link
+                    href={isAuthenticated ? `/${lng}/profile/${userId}` : '#'}
+                    onClick={() => isAuthenticated ? {} : setAuthModal(true)}
+                    className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden"
+                >
                     <Image
                         src={userImageUrl || "/png/user.png"}
                         alt="Avatar"
@@ -76,7 +78,7 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
                         className="object-cover"
                         priority={true}
                     />
-                </div>
+                </Link>
                 <div className="inline-flex flex-col min-w-[300px] max-w-[500px] md:max-w-[50%]">
                     <div className={`inline-flex flex-col ${isReply ? 'bg-[#E7EFEC]' : 'bg-[#F0F2F5]'} border ${isReply ? 'border-[#E7EFEC]' : 'border-[#F0F2F5]'} px-4 py-3 gap-1 rounded-3xl`}>
                         <Link href={isAuthenticated ? `/${lng}/profile/${userId}` : '#'} onClick={() => isAuthenticated ? {} : setAuthModal(true)}>

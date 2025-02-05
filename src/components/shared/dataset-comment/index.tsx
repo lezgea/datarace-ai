@@ -36,6 +36,8 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
     let t = useTranslations();
     let lng = useLocale();
 
+    const [allRepliesVisible, showAllReplies] = React.useState<boolean>(false);
+    const [replies, setReplies] = React.useState<any[]>([]);
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
 
     const [authModal, setAuthModal] = React.useState<boolean>(false);
@@ -54,10 +56,20 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
         }
     }
 
+    React.useEffect(() => {
+        if (datasetChildCommentDtos?.length)
+            setReplies([...datasetChildCommentDtos])
+    }, [datasetChildCommentDtos?.length])
+
+
     return (
         <>
             <div className={`inline-flex gap-2 ${isReply ? 'mb-1' : 'mb-3'}`}>
-                <div className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden">
+                <Link
+                    href={isAuthenticated ? `/${lng}/profile/${userId}` : '#'}
+                    onClick={() => isAuthenticated ? {} : setAuthModal(true)}
+                    className="relative w-[35px] h-[35px] min-w-[35px] min-h-[35px] rounded-full overflow-hidden"
+                >
                     <Image
                         src={userImageUrl || "/png/user.png"}
                         alt="Avatar"
@@ -65,7 +77,7 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
                         className="object-cover"
                         priority={true}
                     />
-                </div>
+                </Link>
                 <div className="inline-flex flex-col min-w-[300px] max-w-[500px] md:max-w-[50%]">
                     <div className={`inline-flex flex-col ${isReply ? 'bg-[#E7EFEC]' : 'bg-[#F0F2F5]'} border ${isReply ? 'border-[#E7EFEC]' : 'border-[#F0F2F5]'} px-4 py-3 gap-1 rounded-3xl`}>
                         <Link href={isAuthenticated ? `/${lng}/profile/${userId}` : '#'} onClick={() => isAuthenticated ? {} : setAuthModal(true)}>
@@ -135,10 +147,24 @@ export const DatasetComment: React.FC<ICommmentProps> = (props) => {
             {/*  COMMENT REPLIES */}
             <div className='ml-10'>
                 {
-                    !!datasetChildCommentDtos?.length &&
-                    datasetChildCommentDtos?.map(reply =>
-                        <DatasetComment isReply key={reply.id} {...reply} />
-                    )
+                    !!replies?.length && allRepliesVisible
+                        ?
+                        replies?.map(reply =>
+                            <DatasetComment isReply key={reply.id} {...reply} />
+                        )
+                        :
+                        replies?.slice(0, 2)?.map(reply =>
+                            <DatasetComment isReply key={reply.id} {...reply} />
+                        )
+                }
+                {
+                    !isReply && !!replies?.length &&
+                    <button
+                        onClick={() => showAllReplies(!allRepliesVisible)}
+                        className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
+                    >
+                        {allRepliesVisible ? 'Hide Replies' : 'View More Replies'}
+                    </button>
                 }
             </div>
         </>

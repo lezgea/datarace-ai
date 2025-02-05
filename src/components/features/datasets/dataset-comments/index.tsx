@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useCreateDatasetCommentMutation, useLazyGetDatasetCommentsQuery } from '@api/datasets-api';
 import { EmojiClickData } from 'emoji-picker-react';
@@ -23,6 +23,7 @@ interface IDatasetCommentsProps {
 export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, isEditable }) => {
     const [triggerGetComments, { data: comments }] = useLazyGetDatasetCommentsQuery();
     const [newComment, setNewComment] = useState<string>('');
+    const [allCommentsVisible, showAllComments] = React.useState<boolean>(false)
     const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState<boolean>(false);
     const [createDatasetComment] = useCreateDatasetCommentMutation();
     const { user, isAuthenticated } = useSelector((state: RootState) => state.user);
@@ -61,7 +62,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
         }
     }, [datasetId]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
                 setIsEmojiPickerVisible(false);
@@ -85,9 +86,23 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
             }
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
-                    {comments?.map((comment) => (
-                        <DatasetComment key={comment.id} {...comment} />
-                    ))}
+                    {
+                        allCommentsVisible
+                            ?
+                            comments?.map((comment) => (
+                                <DatasetComment key={comment.id} {...comment} />
+                            ))
+                            :
+                            comments?.slice(0, 3).map((comment) => (
+                                <DatasetComment key={comment.id} {...comment} />
+                            ))
+                    }
+                    <button
+                        onClick={() => showAllComments(!allCommentsVisible)}
+                        className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
+                    >
+                        {allCommentsVisible ? 'Hide Comments' : 'View More Comments'}
+                    </button>
                 </div>
 
                 {isAuthenticated && (
