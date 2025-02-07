@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
                                 <Link href={`/${lng}/coming`} className="hover:text-primary">{t('courses')}</Link>
                             </li>
                             <li>
-                                <Link href={`/${lng}/coming`} className="hover:text-primary">Proqram təminatı mühəndisliyi</Link>
+                                <Link href={`/${lng}/coming`} className="hover:text-primary">{t('softwareDevelopment')}</Link>
                             </li>
                         </ul>
                     </div>

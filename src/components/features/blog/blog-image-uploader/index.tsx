@@ -1,6 +1,7 @@
 "use client"
 
 import { useUploadBlogImageMutation } from '@api/upload-api';
+import { useTranslations } from 'next-intl';
 // import { useUploadBlogImageMutation, useUploadFileMutation } from '@api/upload-api';
 import React from 'react';
 import { UseFormSetValue } from 'react-hook-form';
@@ -15,6 +16,8 @@ interface ImageUploaderProps {
 }
 
 const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setImageId }) => {
+    const t = useTranslations();
+
     const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
     const [initialImage, setInitialImage] = React.useState<string>('');
 
@@ -76,12 +79,12 @@ const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setIma
                                 onClick={onDeleteImage}
                                 className="absolute z-2330 w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark shadow-neutral-300 focus:shadow-none animate-button"
                             >
-                                Delete Image
+                                {t('deleteImage')}
                             </button>
                         </div>
                         {
                             uploadedImage &&
-                            <p className="text-gray-400 text-sm">Uploaded Image: {uploadedImage.name}</p>
+                            <p className="text-gray-400 text-sm">{t('uploadedImage')}: {uploadedImage.name}</p>
                         }
                     </>
 
@@ -97,9 +100,9 @@ const BlogImageUploader: React.FC<ImageUploaderProps> = ({ blogId, image, setIma
                             onChange={handleImageChange}
                         />
                         <div className="flex flex-col items-center justify-center h-full text-gray-400 font-light">
-                            <p className="text-md">Click to Upload Image</p>
-                            <p className='text-xl text-gray-300 my-5'>OR</p>
-                            <p className="text-md">Drag and Drop</p>
+                            <p className="text-md">{t('clickToUploadImage')}</p>
+                            <p className='text-xl text-gray-300 my-5'>{t('or')}</p>
+                            <p className="text-md">{t('dragAndDrop')}</p>
                         </div>
                     </div>
             }

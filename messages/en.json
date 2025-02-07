@@ -223,5 +223,15 @@
   "phoneNumberIsRequired": "Phone number is required",
   "pageNotFoundTitle": "Page Not Found",
   "pageNotFoundDescription": "The page you’re looking for doesn’t exist",
-  "returnToHome": "Return to Home"
+  "returnToHome": "Return to Home",
+  "softwareDevelopment": "Software Development",
+  "clickToUploadImage": "Click to Upload Image",
+  "dragAndDrop": "Drag and Drop",
+  "blogTitle": "Blog Title",
+  "content": "Content",
+  "pressEnterToAddTags": "Press enter to add tags",
+  
+  "deleteImage": "Delete Image",
+  "uploadedImage": "Uploaded Image",
+  "mainTitle": "Title"
 }

@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import BlogImageUploader from '@components/features/blog/blog-image-uploader';
 import { FormInput } from '@components/shared';
 import TextEditor from '@components/shared/text-editor';
-import { useCreateBlogMutation, useGetBlogInfoQuery, useUpdateBlogMutation } from '@api/blogs-api';
+import { useGetBlogInfoQuery, useUpdateBlogMutation } from '@api/blogs-api';
 import * as Yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -114,25 +114,25 @@ const BlogUpdate: React.FC = () => {
                             <div className="pb-5 text-start space-y-1 space-y-5 select-none">
                                 <BlogImageUploader image={blogInfo?.imageUrl} setImageId={setImageId} />
                                 <FormInput
-                                    label="Title"
+                                    label={t('mainTitle')}
                                     type='text'
                                     name='title'
-                                    placeholder="Blog Title"
+                                    placeholder={t('blogTitle')}
                                     register={register}
                                     errors={errors}
                                 />
                                 <TextEditor
-                                    label="Content"
+                                    label={t('content')}
                                     name='content'
                                     initialValue={blogInfo?.content}
                                     register={register}
                                     setValue={setValue}
                                 />
                                 <TagInput
-                                    label={`Tags`}
+                                    label={t('tags')}
                                     tags={tags}
                                     setTags={setTags}
-                                    placeholder="Press enter to add tags..."
+                                    placeholder={t('pressEnterToAddTags')}
                                 />
                             </div>
                             <div className='flex gap-3 border-t justify-end py-3'>
@@ -142,14 +142,14 @@ const BlogUpdate: React.FC = () => {
                                         onClick={onResetData}
                                         className="flex w-40 text-center items-center justify-center px-4 py-3 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none"
                                     >
-                                        Cancel
+                                        {t('cancel')}
                                     </button>
                                 </Link>
                                 <button
                                     type='submit'
                                     className="flex w-40 text-center items-center justify-center px-4 py-3 text-white transition-all bg-primary rounded-lg hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                                 >
-                                    Submit
+                                    {t('submit')}
                                 </button>
                             </div>
                         </form>
