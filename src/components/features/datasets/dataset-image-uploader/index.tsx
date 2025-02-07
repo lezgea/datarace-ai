@@ -1,6 +1,7 @@
 "use client"
 
 import { useUploadDatasetImageMutation } from '@api/upload-api';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
@@ -14,6 +15,8 @@ interface ImageUploaderProps {
 }
 
 const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, imageId, setImageId }) => {
+    const t = useTranslations();
+
     const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
     const [uploadDatasetImage, { isLoading }] = useUploadDatasetImageMutation();
     const [initialImage, setInitialImage] = React.useState<string>('');
@@ -77,12 +80,12 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, imageId, se
                                 onClick={onDeleteImage}
                                 className="absolute z-2330 w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-gray-700 rounded-xl sm:w-auto hover:bg-dark shadow-neutral-300 focus:shadow-none animate-button"
                             >
-                                Delete Image
+                                {t('deleteImage')}
                             </button>
                         </div>
                         {
                             uploadedImage &&
-                            <p className="text-gray-400 text-sm">Uploaded Image: {uploadedImage.name}</p>
+                            <p className="text-gray-400 text-sm">{t('uploadedImage')}: {uploadedImage.name}</p>
                         }
                     </>
 
@@ -99,7 +102,7 @@ const DatasetImageUploader: React.FC<ImageUploaderProps> = ({ image, imageId, se
                         />
                         <div className="flex flex-col items-center justify-center space-y-3">
                             {/* <IImageIcon /> */}
-                            <p className="mt-1.5">Image Upload</p>
+                            <p className="mt-1.5">{t('imageUpload')}</p>
                         </div>
                     </div>
             }

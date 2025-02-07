@@ -70,7 +70,7 @@ const ModalContent: React.FC<IModalContent> = (props) => {
                 <div>{commentText}</div>
                 <textarea
                     value={newComment}
-                    placeholder={"What's on your mind ?"}
+                    placeholder={t('whatsOnYourMind')}
                     className={`w-full h-[200px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                     onChange={(e) => setNewComment(e.target.value)}
                 />

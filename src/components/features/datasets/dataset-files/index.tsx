@@ -122,16 +122,16 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                 !!files?.length &&
                 <>
                     <h2 className="text-2xl font-semibold text-black dark:text-white">
-                        Files
+                        {t('files')}
                     </h2>
                     <div className="overflow-x-auto border rounded-2xl bg-white">
                         <table className="min-w-full border border-gray-600 rounded-lg overflow-hidden">
                             {/* Table Header */}
                             <thead className="text-gray-600">
                                 <tr>
-                                    <th className="py-3 px-6 text-left font-semibold">Id</th>
-                                    <th className="py-3 px-6 text-left font-semibold">Filename</th>
-                                    <th className="py-3 px-6 text-left font-semibold">Type</th>
+                                    <th className="py-3 px-6 text-left font-semibold">{t('id')}</th>
+                                    <th className="py-3 px-6 text-left font-semibold">{t('filename')}</th>
+                                    <th className="py-3 px-6 text-left font-semibold">{t('type')}</th>
                                     <th className="py-3 px-6 text-left font-semibold"></th>
                                 </tr>
                             </thead>
@@ -202,13 +202,13 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
                                     htmlFor="file-upload"
                                     className="inline-flex cursor-pointer w-auto text-center text-bluePrimary items-center transition-all underline rounded-lg sm:w-auto"
                                 >
-                                    Upload
+                                    {t('upload')}
                                 </label>
-                                <span>or drag and drop file here</span>
+                                <span>{t('or')} {t('dragAndDropFile')}</span>
                             </div>
 
                             <p className="text-gray-400 text-md">
-                                Accepted file types are xls, docx, txt, or csv (File limit 50MB)
+                                {t('acceptedFileTypesAre')} xls, docx, txt, or csv ({t('fileLimit')} 50MB)
                             </p>
                         </div>
                     </div>

@@ -101,7 +101,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
                         onClick={() => showAllComments(!allCommentsVisible)}
                         className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
                     >
-                        {allCommentsVisible ? 'Hide Comments' : 'View More Comments'}
+                        {allCommentsVisible ? t('hideComments') : t('viewMoreComments')}
                     </button>
                 </div>
 

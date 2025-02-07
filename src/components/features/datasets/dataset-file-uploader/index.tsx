@@ -232,13 +232,13 @@ const DatasetFileUploader: React.FC<FileUploaderProps> = () => {
                                 htmlFor="file-upload"
                                 className="inline-flex cursor-pointer w-auto text-center text-bluePrimary items-center transition-all underline rounded-lg sm:w-auto"
                             >
-                                Upload
+                                {t('upload')}
                             </label>
-                            <span>or drag and drop file here</span>
+                            <span>{t('or')} {t('dragAndDropFile')}</span>
                         </div>
 
                         <p className="text-gray-400 text-md">
-                            Accepted file type .csv (File limit 5MB)
+                            {t('acceptedFileType')} .csv ({t('fileLimit')} 5MB)
                         </p>
                     </div>
                 </div>

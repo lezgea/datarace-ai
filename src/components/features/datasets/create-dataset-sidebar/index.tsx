@@ -91,7 +91,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                             <FormInput
                                 type='text'
                                 name='title'
-                                placeholder="Dataset Title"
+                                placeholder={t('datasetTitle')}
                                 register={register}
                                 errors={errors}
                             />
@@ -99,7 +99,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 isTextarea
                                 type='text'
                                 name='description'
-                                placeholder="Meta Description"
+                                placeholder={t('metaDescription')}
                                 register={register}
                                 errors={errors}
                             />
@@ -114,20 +114,20 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                     className={`flex items-center text-center px-4 py-2 rounded-xl cursor-pointer ${visibility === 'PRIVATE' ? 'bg-primary text-white' : 'text-primary border border-primary'}`}
                                     onClick={() => setValue('visibility', 'PRIVATE')}
                                 >
-                                    PRIVATE
+                                    {t('private')}
                                 </div>
                                 <div
                                     className={`flex items-center text-center px-4 py-2 rounded-xl cursor-pointer ${visibility === 'PUBLIC' ? 'bg-primary text-white' : 'text-primary border border-primary'}`}
                                     onClick={() => setValue('visibility', 'PUBLIC')}
                                 >
-                                    PUBLIC
+                                    {t('public')}
                                 </div>
                             </div>
                             <TagInput
-                                label={`Tags`}
+                                label={t('tags')}
                                 tags={tags}
                                 setTags={setTags}
-                                placeholder="Press enter to add tags..."
+                                placeholder={t('pressEnterToAddTags')}
                             />
                         </div>
                     </div>
@@ -136,14 +136,14 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                             type='submit'
                             className="inline-flex w-[50%] text-center items-center justify-center px-6 py-3 text-white transition-all bg-primary rounded-lg sm:w-auto hover:bg-primaryDark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
                         >
-                            Create Dataset
+                            {t('createDataset')}
                         </button>
                         <button
                             type="button"
                             onClick={onCancel}
                             className="flex w-[50%] text-center items-center justify-center px-4 py-2 text-gray-500 transition-all bg-gray-100 rounded-lg hover:bg-primaryDark hover:text-white shadow-neutral-300 hover:shadow-lg hover:shadow-neutral-300 hover:-tranneutral-y-px focus:shadow-none"
                         >
-                            Close
+                            {t('close')}
                         </button>
                     </div>
                 </form>

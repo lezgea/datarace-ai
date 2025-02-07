@@ -230,8 +230,26 @@
   "blogTitle": "Blog Title",
   "content": "Content",
   "pressEnterToAddTags": "Press enter to add tags",
-  
   "deleteImage": "Delete Image",
   "uploadedImage": "Uploaded Image",
-  "mainTitle": "Title"
+  "mainTitle": "Title",
+  "datasetTitle": "Dataset Title",
+  "metaDescription": "Meta Description",
+  "private": "Private",
+  "public": "Public",
+  "close": "Close",
+  "hideComments": "Hide Comments",
+  "viewMoreComments": "View More Comments",
+  "upload": "Upload",
+  "acceptedFileType": "Accepted file type",
+  "fileLimit": "File limit",
+  "dragAndDropFile": "Drag and Drop file here",
+  "files": "Files",
+  "id": "Id",
+  "filename": "Filename",
+  "type": "Type",
+  "acceptedFileTypesAre": "Accepted file types are",
+  "active": "Active",
+  "updateDataset": "Update Dataset",
+  "imageUpload": "Image Upload"
 }
