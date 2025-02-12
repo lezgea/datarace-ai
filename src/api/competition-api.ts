@@ -52,10 +52,10 @@ export const competitionApi = createApi({
             invalidatesTags: ['CompetitionComments'],
         }),
         getCompetitionComments: builder.query<IGetCompetitionCommentsResponse, IGetCompetitionCommentsRequest>({
-            query: ({ id }) => ({
+            query: ({ id, page, count }) => ({
                 url: `/competitions/${id}/comment`,
                 method: 'GET',
-                params: {},
+                params: { page, count },
             }),
             providesTags: ['CompetitionComments'],
         }),

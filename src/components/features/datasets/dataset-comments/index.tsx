@@ -21,7 +21,10 @@ interface IDatasetCommentsProps {
 }
 
 export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, isEditable }) => {
-    const [triggerGetComments, { data: comments }] = useLazyGetDatasetCommentsQuery();
+
+    const [page, setPage] = React.useState(0);
+    const [count, setCount] = React.useState(3)
+    const [triggerGetComments, { data: commentsData }] = useLazyGetDatasetCommentsQuery();
     const [newComment, setNewComment] = useState<string>('');
     const [allCommentsVisible, showAllComments] = React.useState<boolean>(false)
     const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState<boolean>(false);
@@ -58,9 +61,13 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
 
     React.useEffect(() => {
         if (datasetId) {
-            triggerGetComments({ id: datasetId });
+            triggerGetComments({
+                id: datasetId,
+                page: page,
+                count: count,
+            });
         }
-    }, [datasetId]);
+    }, [datasetId, page, count]);
 
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -79,7 +86,7 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
     return (
         <section className="relative space-y-2 border-gray-200">
             {
-                (!!comments?.length || isAuthenticated) &&
+                (!!commentsData?.comments?.length || isAuthenticated) &&
                 <h2 className="text-2xl font-semibold text-black dark:text-white">
                     {t('comments')}
                 </h2>
@@ -87,22 +94,19 @@ export const DatasetComments: React.FC<IDatasetCommentsProps> = ({ datasetId, is
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
                     {
-                        allCommentsVisible
-                            ?
-                            comments?.map((comment) => (
-                                <DatasetComment key={comment.id} {...comment} />
-                            ))
-                            :
-                            comments?.slice(0, 3).map((comment) => (
-                                <DatasetComment key={comment.id} {...comment} />
-                            ))
+                        commentsData?.comments?.map((comment) => (
+                            <DatasetComment key={comment.id} {...comment} />
+                        ))
                     }
-                    <button
-                        onClick={() => showAllComments(!allCommentsVisible)}
-                        className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
-                    >
-                        {allCommentsVisible ? t('hideComments') : t('viewMoreComments')}
-                    </button>
+                    {
+                        !!commentsData?.comments?.length &&
+                        <button
+                            onClick={() => setCount(count > 3 ? 3 : 10)}
+                            className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
+                        >
+                            {count > 3 ? 'Hide Comments' : 'View More Comments'}
+                        </button>
+                    }
                 </div>
 
                 {isAuthenticated && (

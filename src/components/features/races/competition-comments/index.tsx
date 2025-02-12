@@ -18,7 +18,10 @@ interface ICompetitionCommentsProps {
 }
 
 export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ competitionId, isEditable }) => {
-    const [triggerGetComments, { data: comments, isLoading: commentsLoading }] = useLazyGetCompetitionCommentsQuery();
+
+    const [page, setPage] = React.useState(0);
+    const [count, setCount] = React.useState(5)
+    const [triggerGetComments, { data: commentsData, isLoading: commentsLoading }] = useLazyGetCompetitionCommentsQuery();
     const [newComment, setNewComment] = React.useState<string>('');
     const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState<boolean>(false);
     const [allCommentsVisible, showComments] = React.useState<boolean>(false);
@@ -57,9 +60,13 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
 
     React.useEffect(() => {
         if (competitionId) {
-            triggerGetComments({ id: competitionId });
+            triggerGetComments({
+                id: competitionId,
+                page: page,
+                count: count,
+            });
         }
-    }, [competitionId])
+    }, [competitionId, page, count])
 
 
     React.useEffect(() => {
@@ -79,7 +86,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
     return (
         <section className="relative space-y-2 py-2 border-gray-200">
             {
-                (!!comments?.length || isAuthenticated) &&
+                (!!commentsData?.comments?.length || isAuthenticated) &&
                 <h2 className="text-2xl font-semibold text-black dark:text-white">
                     {t('comments')}
                 </h2>
@@ -87,23 +94,17 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
             <div className="flex flex-col py-3">
                 <div className="w-full inline-flex flex-col">
                     {
-                        allCommentsVisible
-                            ?
-                            comments?.map((comment) =>
-                                <CompetitionComment key={comment.id} {...comment} />
-                            )
-                            :
-                            comments?.slice(0, 3)?.map((comment) =>
-                                <CompetitionComment key={comment.id} {...comment} />
-                            )
+                        commentsData?.comments?.map((comment) =>
+                            <CompetitionComment key={comment.id} {...comment} />
+                        )
                     }
                     {
-                        !!comments?.length &&
+                        !!commentsData?.comments?.length &&
                         <button
-                            onClick={() => showComments(!allCommentsVisible)}
+                            onClick={() => setCount(count > 3 ? 3 : 10)}
                             className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
                         >
-                            {allCommentsVisible ? 'Hide Comments' : 'View More Comments'}
+                            {count > 3 ? 'Hide Comments' : 'View More Comments'}
                         </button>
                     }
                 </div>

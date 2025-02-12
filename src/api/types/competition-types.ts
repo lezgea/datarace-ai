@@ -111,9 +111,16 @@ export interface ICompetitionCreateCommentResponse { }
 
 export interface IGetCompetitionCommentsRequest {
     id: string | number | undefined,
+    page: number,
+    count: number,
 }
 
-export type IGetCompetitionCommentsResponse = ICompetitionComment[]
+export interface IGetCompetitionCommentsResponse {
+    comments: ICompetitionComment[],
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
+}
 
 export interface IDeleteCompetitionCommentRequest {
     commentId: string | number | undefined,

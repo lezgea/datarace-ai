@@ -100,9 +100,17 @@ export interface IDatasetCreateCommentResponse { }
 
 export interface IGetDatasetCommentsRequest {
     id: string | number | undefined,
+    page: number,
+    count: number,
 }
 
-export type IGetDatasetCommentsResponse = IDatasetComment[]
+
+export interface IGetDatasetCommentsResponse {
+    comments: IDatasetComment[],
+    hasNext: boolean,
+    lastPageNumber: number,
+    totalElements: number,
+}
 
 export interface IDeleteDatasetCommentRequest {
     commentId: string | number | undefined,

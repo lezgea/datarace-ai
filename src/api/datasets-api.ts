@@ -64,10 +64,10 @@ export const datasetsApi = createApi({
             invalidatesTags: ['DatasetComments'],
         }),
         getDatasetComments: builder.query<IGetDatasetCommentsResponse, IGetDatasetCommentsRequest>({
-            query: ({ id }) => ({
+            query: ({ id, page, count }) => ({
                 url: `/datasets/${id}/comment`,
                 method: 'GET',
-                params: {},
+                params: {page, count},
             }),
             providesTags: ['DatasetComments'],
         }),
