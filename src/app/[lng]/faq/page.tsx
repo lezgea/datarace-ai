@@ -21,7 +21,7 @@ const FAQ: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
         <Suspense fallback={<Loader />}>
             <div className="min-h-screen flex flex-col">
                 <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-                <main id="main-content" className="container mx-auto flex-grow px-5 py-10 md:px-0 md:py-[6rem]">
+                <main id="main-content" className="container mx-auto flex-grow px-7 py-10 md:py-[6rem]">
                     {/* Breadcrumb */}
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
                         <Link href={`/${lng}`} className="hover:text-primaryLight">{t('mainPage')}</Link>

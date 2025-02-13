@@ -89,7 +89,7 @@ const BlogUpdate: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <div className="container mx-auto py-[6rem] space-y-5">
+            <div className="container mx-auto px-7 py-[6rem] space-y-5">
                 <div>
                     <nav className="text-sm flex justify-start items-center text-gray-600 space-x-3">
                         <Link href={`/${lng}`} className="hover:text-primary">{t('mainPage')}</Link>

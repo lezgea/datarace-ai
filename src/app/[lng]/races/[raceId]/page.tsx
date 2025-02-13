@@ -19,7 +19,7 @@ const RaceDetails: React.FC = () => {
     const competitionId = Array.isArray(raceId) ? raceId[0] : raceId;
     const { data: competitionInfo, error, isLoading, refetch } = useGetCompetitionInfoQuery({ id: competitionId as string }, { skip: !competitionId });
 
-    
+
     const TABS: { title: string, value: string, content: ReactNode }[] = [
         {
             value: 'general',
@@ -41,7 +41,7 @@ const RaceDetails: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <div className="container mx-auto py-[6rem] space-y-5 px-2 md:px-0">
+            <div className="container mx-auto py-[6rem] space-y-5 px-7">
                 {/* Breadcrumb */}
                 <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
                     <Link href={`/${lng}`} className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
