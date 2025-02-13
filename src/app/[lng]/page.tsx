@@ -128,19 +128,19 @@ const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
                     </div>
                 </section>
 
-                <section className="w-full overflow-x-auto py-[6rem] hide-scrollbar">
+                <section className="w-full overflow-x-auto py-[6rem] hide-scrollba md:px-7">
                     <CategoriesSection />
                 </section>
 
-                <section className="container mx-auto">
+                <section className="container mx-auto md:px-7">
                     <CompetitionsSection />
                 </section>
 
-                <section className="container mx-auto">
+                <section className="container mx-auto md:px-7">
                     <DatasetsSection />
                 </section>
 
-                <section className="container mx-auto">
+                <section className="container mx-auto md:px-7">
                     <BlogSection />
                 </section>
             </main>

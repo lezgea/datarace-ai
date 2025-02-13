@@ -18,7 +18,7 @@ const Races: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 px-5 py-10 lg:px-0 lg:py-[6rem] space-y-20">
+            <main id="main-content" className="flex-grow bg-gray-50 px-10 py-10 lg:py-[6rem] space-y-20">
                 <section className="container mx-auto w-full space-y-10 mb-10">
                     <div className="flex justify-between">
                         <div>
