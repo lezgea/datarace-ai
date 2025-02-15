@@ -78,14 +78,14 @@ const RaceItem: React.FC<RaceProps> = (props) => {
                     priority={true}
                 />
             </div>
-            <div className="flex flex-col p-8 space-y-3 text-start items-between">
+            <div className="flex flex-col p-6 space-y-3 text-start items-between">
                 <div className="h-20">
-                    <h3 className="text-xl font-medium text-customBlue-900">{name}</h3>
+                    <h3 className="text-xl font-medium text-customBlue-900 truncate-text">{name}</h3>
                     <p className="text-md text-gray-500 truncate-text description-font">
                         <div dangerouslySetInnerHTML={{ __html: text }}></div>
                     </p>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center pt-5">
                     <p className="text-[1.5rem] text-customBlue-900">{currencySymbol} {awardAmount}</p>
                     <div className="w-[4rem] h-[4rem] rounded-full border border-gray-300 flex items-center justify-center transition-transform duration-300 ease-in-out transform group-hover:scale-110 group-hover:border-primaryLight group-active:scale-100">
                         <ArrowGreenIcon />
