@@ -100,6 +100,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
                     }
                     {
                         !!commentsData?.comments?.length &&
+                        commentsData?.comments?.length > 2 &&
                         <button
                             onClick={() => setCount(count > 3 ? 3 : 10)}
                             className='text-start text-gray-500 hover:text-primary hover:underline font-medium hover:text-primary min-w-[300px] py-2 ml-10 rounded-3xl mb-3'
