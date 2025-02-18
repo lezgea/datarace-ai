@@ -126,7 +126,7 @@ export const CompetitionComments: React.FC<ICompetitionCommentsProps> = ({ compe
                             <textarea
                                 value={newComment}
                                 placeholder={t('whatsOnYourMind')}
-                                className={`w-full h-[100px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
+                                className={`w-full h-[100px] bg-gray-50 px-5 py-4 pr-12 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform resize-none`}
                                 onChange={(e) => setNewComment(e.target.value)}
                             />
                             <div className="flex gap-3">
