@@ -44,9 +44,9 @@ const DatasetItem: React.FC<DatasetProps> = (props) => {
                     priority={true}
                 />
             </div>
-            <div className="flex flex-col px-7 py-6 space-y-2 justify-between items-between">
+            <div className="flex flex-col p-5 space-y-2 justify-between items-between h-[200px]">
                 <div className="h-auto">
-                    <h3 className="text-xl font-medium text-customBlue-900 truncate-text mb-3">{title}</h3>
+                    <h3 className="text-xl font-medium text-customBlue-900 truncate-text mb-2">{title}</h3>
                     <p className="text-md text-gray-500 truncate-text description-font">{description}</p>
                 </div>
                 <div className="flex justify-between items-center">
