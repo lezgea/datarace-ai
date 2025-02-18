@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import { DocUpload, TrashIcon } from '@assets/icons';
 import { useUploadDatasetFileMutation } from '@api/upload-api';
 import { IDatasetFilesDto } from '@api/types/dataset-types';
-import { useDeleteDatasetMutation } from '@api/datasets-api';
+import { useDeleteDatasetFileMutation, useDeleteDatasetMutation } from '@api/datasets-api';
 import { AuthModal } from '@components/shared';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -30,7 +30,7 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
 
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
     const [uploadDatasetFile] = useUploadDatasetFileMutation();
-    const [deleteDatasetFile] = useDeleteDatasetMutation();
+    const [deleteDatasetFile] = useDeleteDatasetFileMutation();
 
 
     const handleDownload = async (fileName: string, datasetFileId: number | undefined, fileType: string) => {
@@ -108,10 +108,8 @@ export const DatasetFiles: React.FC<IOriginalFilesProps> = ({ files, datasetId, 
     const onDeleteFile = async (fileId: any) => {
         try {
             await deleteDatasetFile({ id: fileId });
-            toast.success("File has been deteleted")
         } catch (err) {
             console.log(err);
-            toast.error("Unable to delete this file")
         }
     }
 

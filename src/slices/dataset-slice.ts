@@ -155,6 +155,33 @@ const datasetSlice = createSlice({
                 }
             );
 
+
+        // DELETE DATASET FILE MUTATION
+        builder
+            .addMatcher(
+                datasetsApi.endpoints.deleteDatasetFile.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.deleteDatasetFile.matchFulfilled,
+                (state, action: PayloadAction<void>) => {
+                    state.loading = false;
+                    // state.datasets = action.payload;
+                    toast.success('Dataset file has been deleted!');
+                }
+            )
+            .addMatcher(
+                datasetsApi.endpoints.deleteDatasetFile.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to delete the file';
+                    toast.error('Unable to delete this file!')
+                }
+            );
+
     },
 });
 

@@ -67,9 +67,16 @@ export const datasetsApi = createApi({
             query: ({ id, page, count }) => ({
                 url: `/datasets/${id}/comment`,
                 method: 'GET',
-                params: {page, count},
+                params: { page, count },
             }),
             providesTags: ['DatasetComments'],
+        }),
+        deleteDatasetFile: builder.mutation<void, { id: number | string }>({
+            query: ({ id }) => ({
+                url: `/files/dataset/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['DatasetInfo'],
         }),
         deleteDatasetComment: builder.mutation<void, IDeleteDatasetCommentRequest>({
             query: ({ commentId }) => ({
@@ -100,4 +107,5 @@ export const {
     useLazyGetDatasetCommentsQuery,
     useDeleteDatasetCommentMutation,
     useUpdateDatasetCommentMutation,
+    useDeleteDatasetFileMutation,
 } = datasetsApi;
