@@ -251,5 +251,6 @@
   "acceptedFileTypesAre": "Accepted file types are",
   "active": "Active",
   "updateDataset": "Update Dataset",
-  "imageUpload": "Image Upload"
+  "imageUpload": "Image Upload",
+  "noData": "No Data Found"
 }

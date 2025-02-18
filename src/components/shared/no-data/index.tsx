@@ -43,7 +43,7 @@ export const NoData: React.FC<INoDataProps> = (props) => {
     return (
         <div className="flex flex-col items-center justify-center w-full h-[50vh] gap-10">
             <NoDataSvg className="h-40 w-[300px]" />
-            <p className="text-gray-400 ">{description || 'No Data Found'}</p>
+            <p className="text-gray-400 ">{description || t('noData')}</p>
         </div>
     )
 }

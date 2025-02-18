@@ -250,5 +250,6 @@
   "acceptedFileTypesAre": "Qəbul edilən fayl növləri",
   "active": "Aktiv",
   "updateDataset": "Məlumat Dəstini Yenilə",
-  "imageUpload": "Şəkil Yükləyin"
+  "imageUpload": "Şəkil Yükləyin",
+  "noData": "Məlumat Tapılmadı"
 }
