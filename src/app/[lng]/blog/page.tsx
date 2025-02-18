@@ -32,7 +32,7 @@ const Blog: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="container mx-auto flex-grow px-7 py-10 md:py-[6rem] space-y-5">
+            <main id="main-content" className="container mx-auto flex-grow px-5 md:px-7 py-[4rem] md:py-[6rem] space-y-5">
                 <section className="container mx-auto text-center">
                     <BlogHeaderSection />
                 </section>

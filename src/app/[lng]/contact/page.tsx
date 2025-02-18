@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-            <main id="main-content" className="flex-grow bg-gray-50 px-7 py-10 lg:py-[6rem] space-y-20">
+            <main id="main-content" className="flex-grow bg-gray-50 px-5 md:px-7 py-[4rem] lg:py-[6rem] space-y-20">
                 <section className="container flex flex-col lg:flex-row mx-auto w-full justify-between space-y-20 lg:space-y-0">
                     <div className="justify-between space-y-[50px]">
                         <div>
