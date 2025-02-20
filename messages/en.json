@@ -252,5 +252,7 @@
   "active": "Active",
   "updateDataset": "Update Dataset",
   "imageUpload": "Image Upload",
-  "noData": "No Data Found"
+  "noData": "No Data Found",
+  "joinedSuccessfully": "Joined successfully",
+  "failedToJoin": "Failed to join competition"
 }

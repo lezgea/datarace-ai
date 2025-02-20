@@ -251,5 +251,7 @@
   "active": "Aktiv",
   "updateDataset": "Məlumat Dəstini Yenilə",
   "imageUpload": "Şəkil Yükləyin",
-  "noData": "Məlumat Tapılmadı"
+  "noData": "Məlumat Tapılmadı",
+  "joinedSuccessfully": "Yarışa uğurla qoşuldunuz",
+  "failedToJoin": "Müsabiqəyə qoşulmaq mümkün olmadı"
 }

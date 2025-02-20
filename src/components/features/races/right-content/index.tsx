@@ -39,14 +39,15 @@ export const RigthContent: React.FC<IRightContentProps> = (props) => {
     const onJoinTheRace = async () => {
         try {
             await joinCompetition({ id: raceId }).unwrap();
+            toast.success(t('joinedSuccessfully'), { position: "bottom-left" });
             setShowModal(false);
         } catch (error: any) {
             if (error.data) {
-                toast.error(error.data?.message || 'Failed to join competition', { position: "bottom-left" });
+                toast.error(t('failedToJoin'), { position: "bottom-left" });
             } else if (error.error) {
-                toast.error(error.error || 'Failed to join competition', { position: "bottom-left" });
+                toast.error(t('failedToJoin'), { position: "bottom-left" });
             } else {
-                toast.error('Failed to join competition', { position: "bottom-left" });
+                toast.error(t('failedToJoin'), { position: "bottom-left" });
             }
             setShowModal(false);
         }

@@ -147,7 +147,6 @@ const competitionSlice = createSlice({
                 (state, action: PayloadAction<IMessageResponse>) => {
                     state.loading = false;
                     state.message = action.payload?.message;
-                    toast.success(action.payload?.message || 'Joined successfully', { position: "bottom-left" });
                 }
             )
             .addMatcher(
