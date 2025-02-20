@@ -39,6 +39,7 @@ export const DatasetsTable: React.FC<ICompetitionsTable> = () => {
     const onPageChange = (page: number) => {
         if (page >= 0 && page < totalPages) {
             setCurrentPage(page);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
