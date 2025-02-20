@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash';
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
@@ -9,6 +10,7 @@ interface IFormInputProps {
     errors: FieldErrors;
     register: UseFormRegister<any>;
     name: string;
+    nonCapitalize?: boolean,
     icon?: JSX.Element;
     isTextarea?: boolean;
     labelStyle?: React.CSSProperties;
@@ -21,6 +23,7 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
         isTextarea,
         label,
         type,
+        nonCapitalize,
         placeholder,
         errors,
         icon,
@@ -56,10 +59,15 @@ export const FormInput: React.FC<IFormInputProps> = (props) => {
                             type={type}
                             id={name}
                             placeholder={placeholder}
+                            autoCapitalize={nonCapitalize ? "none" : "off"}
                             className={`w-full h-[50px] px-5 py-2 pr-12 border ${errors[name] ? 'ring-2 ring-red' : 'border-gray-300'
                                 } rounded-xl focus:outline-none focus:ring-2 focus:ring-primaryLight transition duration-200 ease-in-out transform`}
                             style={inputStyle}
-                            {...register(name)}
+                            {...register(name, {
+                                onChange: (e) => {
+                                    e.target.value = nonCapitalize ? e.target.value.toLowerCase() : e.target.value;
+                                }
+                            })}
                         />
                 }
                 {

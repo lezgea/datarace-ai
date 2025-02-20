@@ -127,6 +127,7 @@ const SignInContent: React.FC = () => {
                     </div>
                     <form className="space-y-5 select-none" onSubmit={handleSubmit(onSubmit)}>
                         <FormInput
+                            nonCapitalize
                             label={`${t('emailOrNickname')}*`}
                             type='text'
                             name='emailOrNickname'
