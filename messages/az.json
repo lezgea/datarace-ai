@@ -79,7 +79,7 @@
   "uploadNewFile": "Yeni fayl yükləyin",
   "browseFile": "Faylı göstərin",
   "uploading": "Yüklənmə...",
-  "submit": "Təqdimat",
+  "submit": "Təqdim et",
   "saving": "Saxlanma...",
   "save": "Saxla",
   "cancel": "Ləğv",
@@ -253,5 +253,6 @@
   "imageUpload": "Şəkil Yükləyin",
   "noData": "Məlumat Tapılmadı",
   "joinedSuccessfully": "Yarışa uğurla qoşuldunuz",
-  "failedToJoin": "Müsabiqəyə qoşulmaq mümkün olmadı"
+  "failedToJoin": "Müsabiqəyə qoşulmaq mümkün olmadı",
+  "uploadedSuccessfully": "Fayl uğurla yükləndi"
 }

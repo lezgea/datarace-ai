@@ -131,6 +131,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 }).unwrap();
             }
             await triggerSubmitResult({ competitionId: competitionInfo?.id as number });
+            toast.success(t('uploadedSuccessfully'), { position: "bottom-left" })
             await refetchCompetitionInfo();
             handleFileRemove();
             onClose();

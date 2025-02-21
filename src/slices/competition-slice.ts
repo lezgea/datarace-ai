@@ -181,7 +181,7 @@ const competitionSlice = createSlice({
                 }
             );
 
-        // POST DATASET COMMENT MUTATION
+        // UPDATE COMPETITION COMMENT MUTATION
         builder
             .addMatcher(
                 competitionApi.endpoints.updateCompetitionComment.matchPending,

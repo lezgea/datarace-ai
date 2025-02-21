@@ -254,5 +254,6 @@
   "imageUpload": "Image Upload",
   "noData": "No Data Found",
   "joinedSuccessfully": "Joined successfully",
-  "failedToJoin": "Failed to join competition"
+  "failedToJoin": "Failed to join competition",
+  "uploadedSuccessfully": "Solution has been submitted successfully!"
 }

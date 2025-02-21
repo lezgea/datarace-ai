@@ -187,8 +187,6 @@ const uploadSlice = createSlice({
                 (state, action) => {
                     state.loading = false;
                     state.success = true;
-                    state.message = "Solution has been submitted successfully!";
-                    toast.success(state.message, { position: "bottom-left" })
                 }
             )
             .addMatcher(
