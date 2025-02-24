@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@utils/axiosBaseQuery';
-import { IAttendedCompetitionsRequest, IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentRequest, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, ICompetitionUpdateCommentRequest, IDeleteCompetitionCommentRequest, IGetCompetitionCommentsRequest, IGetCompetitionCommentsResponse, IMessageResponse, IScoreboardRequest, IScoreboardResponse } from './types/competition-types';
+import { IAttendedCompetitionsRequest, IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentRequest, ICompetitionInfoRequest, ICompetitionsRequest, ICompetitionsResponse, ICompetitionUpdateCommentRequest, IDeleteCompetitionCommentRequest, IDeleteCompetitionFileRequest, IGetCompetitionCommentsRequest, IGetCompetitionCommentsResponse, IMessageResponse, IScoreboardRequest, IScoreboardResponse } from './types/competition-types';
+import { IResultSaveRequest } from './types/upload-types';
 
 
 export const competitionApi = createApi({
@@ -59,6 +60,13 @@ export const competitionApi = createApi({
             }),
             providesTags: ['CompetitionComments'],
         }),
+        deleteCompetitionFile: builder.mutation<void, IDeleteCompetitionFileRequest>({
+            query: ({ fileId }) => ({
+                url: `/files/delete/result/${fileId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Competition'],
+        }),
         deleteCompetitionComment: builder.mutation<void, IDeleteCompetitionCommentRequest>({
             query: ({ commentId }) => ({
                 url: `/competitions/comment/${commentId}`,
@@ -74,6 +82,14 @@ export const competitionApi = createApi({
             }),
             invalidatesTags: ['CompetitionComments'],
         }),
+        saveResult: builder.mutation<IMessageResponse, IResultSaveRequest>({
+            query: ({ competitionId, file }) => ({
+                url: `/files/upload/result/${competitionId}`,
+                method: 'POST',
+                data: file,
+            }),
+            invalidatesTags: ['Competition'],
+        }),
     }),
 });
 
@@ -87,4 +103,6 @@ export const {
     useLazyGetCompetitionCommentsQuery,
     useDeleteCompetitionCommentMutation,
     useUpdateCompetitionCommentMutation,
+    useDeleteCompetitionFileMutation,
+    useSaveResultMutation,
 } = competitionApi;

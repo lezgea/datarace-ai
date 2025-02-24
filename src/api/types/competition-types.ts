@@ -72,6 +72,8 @@ export interface ICompetition {
     joinAvailable: boolean,
     uploadAvailable: boolean,
     currencySymbol: string,
+    resultFileId: number,
+    resultFileName: string,
     isEditable?: boolean,
     tags?: { id?: number, name: string }[],
 }
@@ -120,6 +122,10 @@ export interface IGetCompetitionCommentsResponse {
     hasNext: boolean,
     lastPageNumber: number,
     totalElements: number,
+}
+
+export interface IDeleteCompetitionFileRequest {
+    fileId: string | number | undefined,
 }
 
 export interface IDeleteCompetitionCommentRequest {

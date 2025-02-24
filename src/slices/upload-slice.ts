@@ -34,34 +34,34 @@ const uploadSlice = createSlice({
     },
     extraReducers: (builder) => {
         // SAVE RESULT MUTATION
-        builder
-            .addMatcher(
-                uploadApi.endpoints.saveResult.matchPending,
-                (state) => {
-                    state.loading = true;
-                    state.progress = 0;
-                    state.error = false;
-                    state.success = false;
-                }
-            )
-            .addMatcher(
-                uploadApi.endpoints.saveResult.matchFulfilled,
-                (state, action) => {
-                    state.loading = false;
-                    state.progress = 100;
-                    state.success = true;
-                    state.message = "Solution has been saved successfully!";
-                }
-            )
-            .addMatcher(
-                uploadApi.endpoints.saveResult.matchRejected,
-                (state, action) => {
-                    state.loading = false;
-                    state.progress = 0;
-                    state.error = action.error?.message || 'Failed to save the solution';
-                    toast.error(state.error, { position: "bottom-left" });
-                }
-            );
+        // builder
+        //     .addMatcher(
+        //         uploadApi.endpoints.saveResult.matchPending,
+        //         (state) => {
+        //             state.loading = true;
+        //             state.progress = 0;
+        //             state.error = false;
+        //             state.success = false;
+        //         }
+        //     )
+        //     .addMatcher(
+        //         uploadApi.endpoints.saveResult.matchFulfilled,
+        //         (state, action) => {
+        //             state.loading = false;
+        //             state.progress = 100;
+        //             state.success = true;
+        //             state.message = "Solution has been saved successfully!";
+        //         }
+        //     )
+        //     .addMatcher(
+        //         uploadApi.endpoints.saveResult.matchRejected,
+        //         (state, action) => {
+        //             state.loading = false;
+        //             state.progress = 0;
+        //             state.error = action.error?.message || 'Failed to save the solution';
+        //             toast.error(state.error, { position: "bottom-left" });
+        //         }
+        //     );
 
         // GET RESULT QUERY
         builder

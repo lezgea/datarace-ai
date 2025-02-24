@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';
-import { CheckIcon, DownloadIcon, ZipIcon } from '@assets/icons';
-import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery, useSaveResultMutation } from '@api/upload-api';
-import { useGetCompetitionInfoQuery } from '@api/competition-api';
+import { CheckIcon, DownloadIcon, TrashIcon, ZipIcon } from '@assets/icons';
+import { useGetResultQuery, useLazyDownloadResultQuery, useLazySubmitResultQuery } from '@api/upload-api';
+import { useDeleteCompetitionFileMutation, useGetCompetitionInfoQuery, useSaveResultMutation } from '@api/competition-api';
 import { ConfirmationModal } from '@components/shared';
 import { saveAs } from 'file-saver';
 import Cookies from 'js-cookie';
@@ -41,6 +41,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
         { skip: !competitionInfo?.id }
     );
     const [triggerDownloadResult, { isLoading: isDownloading }] = useLazyDownloadResultQuery();
+    const [deleteFile] = useDeleteCompetitionFileMutation();
 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +106,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                 competitionId: competitionInfo?.id,
                 file: formData,
             }).unwrap();
-            toast.success("Solution has been saved successfully!", { position: "bottom-left" })
+            toast.success(t("solutionSavedSuccessfully"), { position: "bottom-left" })
             handleFileRemove();
             refetchResult();
         } catch (error) {
@@ -165,6 +166,16 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
     };
 
 
+    const handleFileDelete = async () => {
+        try {
+            await deleteFile({ fileId: competitionInfo?.resultFileId }).unwrap();
+            toast.success('File has been deleted successfully!');
+        } catch (error) {
+            console.error('Error deleting the file:', error);
+        }
+    };
+
+
     const handleFileRemove = () => {
         setFile(null);
         setUploadProgress(0);
@@ -178,15 +189,16 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
     let submitIsDisabled = !resultData?.id || isSaving || isSubmitting || isFakeUploading
     let saveIsDisabled = !file || isSaving || isSubmitting || isFakeUploading
 
+
     return (
         <div className="flex flex-col justify-center items-center h-[300px] space-y-2 mb-40 pt-20">
             <div className="w-full space-y-2">
                 {
-                    (file || resultData?.id) &&
+                    (file || competitionInfo?.resultFileId) &&
                     <div className="flex items-center space-x-3">
                         <ZipIcon className="w-9 h-9" />
                         <div className="w-full">
-                            <p className="text-sm">{file?.name || "1 solution file has been saved"}</p>
+                            <p className="text-sm">{file?.name || competitionInfo?.resultFileName}</p>
                             {
                                 file &&
                                 <p className="text-xs text-gray-500 w-full">{(file?.size / (1024 * 1024)).toFixed(2)} MB</p>
@@ -195,6 +207,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ competitionId, onClose }) =
                         <div className="flex space-x-3 items-center justify-center">
                             {((uploadProgress == 100) || resultData?.id) && <CheckIcon className="w-10 h-10" />}
                             {resultData?.id && <DownloadIcon onClick={handleDownload} className="w-6 h-6 cursor-pointer fill-gray-800 hover:fill-primaryLight" />}
+                            {competitionInfo?.resultFileId && <TrashIcon onClick={handleFileDelete} className="w-6 h-6 cursor-pointer hover:stroke-red" />}
                         </div>
                     </div>
                 }

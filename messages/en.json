@@ -255,5 +255,6 @@
   "noData": "No Data Found",
   "joinedSuccessfully": "Joined successfully",
   "failedToJoin": "Failed to join competition",
-  "uploadedSuccessfully": "Solution has been submitted successfully!"
+  "uploadedSuccessfully": "Solution has been submitted successfully!",
+  "solutionSavedSuccessfully": "Solution has been saved successfully!"
 }

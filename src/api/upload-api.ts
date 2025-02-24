@@ -8,13 +8,6 @@ export const uploadApi = createApi({
     reducerPath: 'uploadApi',
     baseQuery: axiosBaseQuery,
     endpoints: (builder) => ({
-        saveResult: builder.mutation<IMessageResponse, IResultSaveRequest>({
-            query: ({ competitionId, file }) => ({
-                url: `/files/upload/result/${competitionId}`,
-                method: 'POST',
-                data: file,
-            }),
-        }),
         getResult: builder.query<IGetResultResponse, IGetResultRequest>({
             query: ({ competitionId, userId }) => ({
                 url: `/files/result/${competitionId}/${userId}`,
@@ -81,7 +74,6 @@ export const uploadApi = createApi({
 });
 
 export const {
-    useSaveResultMutation,
     useUploadAvatarMutation,
     useGetResultQuery,
     useLazyDownloadResultQuery,
