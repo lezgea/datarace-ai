@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import JoditEditor, { Jodit } from 'jodit-react';
 
 
@@ -9,12 +9,13 @@ interface ITextEditorProps {
     label?: string;
     name: string;
     initialValue?: string,
+    errors: FieldErrors,
     register: UseFormRegister<any>;
     setValue: UseFormSetValue<any>; // Added setValue prop
 };
 
 const TextEditor: React.FC<ITextEditorProps> = (props) => {
-    const { name, label, initialValue, register, setValue } = props;
+    const { name, label, initialValue, register, setValue, errors } = props;
 
     const editor = React.useRef(null);
 
@@ -52,7 +53,7 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
         }
     };
 
-    
+
     return (
         <div>
             {label && (
@@ -68,6 +69,11 @@ const TextEditor: React.FC<ITextEditorProps> = (props) => {
                 onBlur={handleEditorChange}
                 onChange={handleEditorChange}
             />
+            {
+                errors[name] && (
+                    <p className="text-red text-sm mt-1">{(errors[name]?.message as string) || ''}</p>
+                )
+            }
         </div>
     );
 };

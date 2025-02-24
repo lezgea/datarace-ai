@@ -255,5 +255,7 @@
   "joinedSuccessfully": "Yarışa uğurla qoşuldunuz",
   "failedToJoin": "Müsabiqəyə qoşulmaq mümkün olmadı",
   "uploadedSuccessfully": "Fayl uğurla yükləndi",
-  "solutionSavedSuccessfully": "Fayl uğurla yadda saxlanıldı!"
+  "solutionSavedSuccessfully": "Fayl uğurla yadda saxlanıldı!",
+  "titleIsRequired": "Başlıq tələb olunur",
+  "contentIsRequired": "Məzmun tələb olunur"
 }

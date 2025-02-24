@@ -13,12 +13,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { ITag } from '@api/types/blog-types';
 import TagInput from '@components/shared/tag-input';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 
 interface IFormInput {
     title: string,
     content: string,
-    tags: ITag[],
+    tags?: ITag[],
 }
 
 
@@ -33,8 +34,8 @@ const BlogCreate: React.FC = () => {
     const [createBlog, { isLoading, isError, isSuccess }] = useCreateBlogMutation();
 
     const validationSchema = Yup.object().shape({
-        // title: Yup.string().required(t('titleIsRequired')),
-        // description: Yup.string().required(t('descriptionIsRequired'))
+        title: Yup.string().required(t('titleIsRequired')),
+        content: Yup.string().required(t('contentIsRequired'))
     });
 
 
@@ -45,6 +46,14 @@ const BlogCreate: React.FC = () => {
 
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+        if (!data.title?.trim()) {
+            toast.error(t('titleIsRequired'));
+            return;
+        }
+        if (!data.content?.trim()) {
+            toast.error(t('contentIsRequired'));
+            return;
+        }
         try {
             await createBlog({
                 blogImageId: imageId,
@@ -106,6 +115,7 @@ const BlogCreate: React.FC = () => {
                                     initialValue=' '
                                     register={register}
                                     setValue={setValue}
+                                    errors={errors}
                                 />
                                 <TagInput
                                     label={t('tags')}
