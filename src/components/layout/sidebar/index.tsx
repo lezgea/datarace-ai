@@ -1,4 +1,5 @@
 import React from 'react';
+import LanguageSwitcher from '../language-switch';
 
 interface ISidebarProps {
     navLinks: React.ReactNode[];
@@ -15,12 +16,12 @@ export const Sidebar: React.FC<ISidebarProps> = ({ navLinks, visible, setSidebar
                 setSidebarOpen(false);
             }
         };
-
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [setSidebarOpen]);
+
 
     return (
         visible && (
@@ -29,12 +30,15 @@ export const Sidebar: React.FC<ISidebarProps> = ({ navLinks, visible, setSidebar
                 className="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 top-[65px] transition-transform transform translate-x-0 opacity-1 lg:hidden"
             >
                 <div
-                    className="relative w-64 h-[100%] bg-white shadow-xl py-8"
+                    className="relative w-64 h-[100%] bg-white shadow-xl"
                     ref={sidebarRef}
                     onClick={(e) => e.stopPropagation()} // Prevent event propagation
                 >
                     <nav>
-                        <ul className="space-y-6 px-8">
+                        <div className='relative z-40 flex justify-end px-5 py-2 border-b border-[#dedede]'>
+                            <LanguageSwitcher />
+                        </div>
+                        <ul className="flex flex-col gap-5 p-5">
                             {navLinks}
                         </ul>
                     </nav>

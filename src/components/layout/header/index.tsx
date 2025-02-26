@@ -56,9 +56,9 @@ export const Header: React.FC = () => {
     return (
         <>
             <header className="backdrop-blur-xl bg-transparent w-full fixed z-30 h-[55px] md:h-[65px] select-none">
-                <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-7 py-0 h-full space-x-5">
+                <nav role="navigation" aria-label="Main navigation" className="container w-full mx-auto flex justify-between items-center px-3 md:px-7 py-0 h-full space-x-5">
                     <div className="flex items-center cursor-pointer lg:w-[25%] space-x-3 lg:space-x-0">
-                        <div className="w-[30px] ml-1 flex lg:hidden">
+                        <div className="w-[20px] ml-1 flex lg:hidden">
                             {
                                 isSidebarOpen
                                     ? <CloseIcon onClick={toggleSidebar} data-testid="close-icon" />
@@ -76,7 +76,9 @@ export const Header: React.FC = () => {
 
                     <div className="flex items-center justify-end lg:w-[30%] h-full gap-2 md:gap-4">
                         <UserProfile />
-                        <LanguageSwitcher />
+                        <div className='hidden md:flex'>
+                            <LanguageSwitcher />
+                        </div>
                     </div>
                 </nav>
             </header>
