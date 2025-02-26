@@ -108,6 +108,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 initialValue=' '
                                 register={register}
                                 setValue={setValue}
+                                errors={errors}
                             />
                             <div id="visibility" className='flex gap-3'>
                                 <div

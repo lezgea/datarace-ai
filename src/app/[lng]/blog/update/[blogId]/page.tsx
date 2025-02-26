@@ -124,9 +124,10 @@ const BlogUpdate: React.FC = () => {
                                 <TextEditor
                                     label={t('content')}
                                     name='content'
-                                    initialValue={blogInfo?.content}
+                                    initialValue=' '
                                     register={register}
                                     setValue={setValue}
+                                    errors={errors}
                                 />
                                 <TagInput
                                     label={t('tags')}

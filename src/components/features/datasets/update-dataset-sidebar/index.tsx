@@ -132,6 +132,7 @@ export const UpdateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
                                 initialValue={datasetInfo?.description}
                                 register={register}
                                 setValue={setValue}
+                                errors={errors}
                             />
                             <div id="visibility" className='flex gap-3'>
                                 <div
