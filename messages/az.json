@@ -257,5 +257,6 @@
   "uploadedSuccessfully": "Fayl uğurla yükləndi",
   "solutionSavedSuccessfully": "Fayl uğurla yadda saxlanıldı!",
   "titleIsRequired": "Başlıq tələb olunur",
-  "contentIsRequired": "Məzmun tələb olunur"
+  "contentIsRequired": "Məzmun tələb olunur",
+  "uploadImage": "Şəkil Yüklə"
 }

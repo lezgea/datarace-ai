@@ -258,5 +258,6 @@
   "uploadedSuccessfully": "Solution has been submitted successfully!",
   "solutionSavedSuccessfully": "Solution has been saved successfully!",
   "titleIsRequired": "Title is required",
-  "contentIsRequired": "Content is required"
+  "contentIsRequired": "Content is required",
+  "uploadImage": "Upload Image"
 }

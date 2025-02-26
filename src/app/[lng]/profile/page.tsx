@@ -134,7 +134,7 @@ const Profile: React.FC = () => {
                                             htmlFor="image-upload"
                                             className="cursor-pointer bg-none text-white text-xs px-4 py-2 border border-1 border-white rounded-full"
                                         >
-                                            {isLoading ? 'Uploading...' : 'Upload Image'}
+                                            {isLoading ? `${t('uploading')}...` : t('uploadImage')}
                                         </label>
                                     </div>
                                 )}
