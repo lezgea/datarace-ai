@@ -33,7 +33,7 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
     });
 
     const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm<IFormInput>({
-        resolver: yupResolver(validationSchema),
+        // resolver: yupResolver(validationSchema),
         mode: 'onBlur',
     });
 
@@ -47,6 +47,14 @@ export const CreateDatasetSidebar: React.FC<IDatasetSidebarProps> = ({ visible, 
     }
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+        if (!data.title?.trim()) {
+            toast.error(t('titleIsRequired'));
+            return;
+        }
+        if (!data.content?.trim()) {
+            toast.error(t('contentIsRequired'));
+            return;
+        }
         try {
             await createDataset({
                 datasetImageId: imageId,

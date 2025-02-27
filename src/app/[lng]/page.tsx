@@ -89,7 +89,6 @@ const HumanRight = dynamic(() => import('@assets/icons/human-right.svg').then(mo
 const Home: React.FC<IParamsLanguage> = ({ params: { lng } }) => {
     const t = useTranslations();
 
-    console.log('@@@@', lng)
     if (!lng) {
         return notFound()
     }

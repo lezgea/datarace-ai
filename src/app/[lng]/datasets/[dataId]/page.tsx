@@ -33,9 +33,9 @@ const DatasetDetails: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <div className="container mx-auto px-7 py-[6rem] space-y-5">
+            <div className="container mx-auto px-3 md:px-7 py-[6rem] space-y-5">
                 {/* Breadcrumb */}
-                <div className="flex justify-between">
+                <div className="flex flex-col md:flex-row justify-between gap-3">
                     <nav className="px-2 md:px-0 text-sm flex justify-start items-center text-gray-600 space-x-3">
                         <Link href={`/${lng}`} className="hover:text-primaryLight" style={{ whiteSpace: "nowrap" }}>{t('mainPage')}</Link>
                         <span className="text-lg">&gt;</span>
@@ -46,7 +46,7 @@ const DatasetDetails: React.FC = () => {
 
                     {
                         datasetInfo?.isEditable &&
-                        <div className='flex gap-3'>
+                        <div className='flex gap-3 justify-end'>
                             <button
                                 aria-label="Delete Dataset"
                                 className="inline-flex w-auto text-center items-center px-6 py-2.5 text-white transition-all bg-red rounded-lg sm:w-auto hover:bg-dark hover:shadow-lg hover:shadow-neutral-300 hover:-translate-y-px shadow-neutral-300 focus:shadow-none animate-button"
