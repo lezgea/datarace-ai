@@ -9,6 +9,7 @@ import { useGetCompetitionInfoQuery } from '@api/competition-api';
 import { useParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { CompetitionComments } from '@components/features/races/competition-comments';
+import CountdownTimer from '@components/shared/countdown-timer';
 
 
 const RaceDetails: React.FC = () => {
@@ -39,6 +40,7 @@ const RaceDetails: React.FC = () => {
     ]
 
 
+
     return (
         <div className="min-h-screen flex flex-col">
             <div className="container mx-auto py-[6rem] space-y-5 px-7">
@@ -56,6 +58,12 @@ const RaceDetails: React.FC = () => {
                 {/* Main Content */}
                 <main id="#main-content" className="space-y-5">
                     <section className="relative border rounded-2xl">
+                        {
+                            competitionInfo?.expirationDate &&
+                            <div className='absolute'>
+                                <CountdownTimer date={competitionInfo?.expirationDate || ''} />
+                            </div>
+                        }
                         <img src={competitionInfo?.imageUrl || "/svg/dr_banner.svg"} alt="Race Image" className="w-full h-[20rem] rounded-2xl object-cover" />
                         <h1 className="absolute w-full bottom-0 left-0 text-2xl text-white font-regmed px-7 py-2 backdrop-blur-xl bg-dark/30">
                             {competitionInfo?.name}

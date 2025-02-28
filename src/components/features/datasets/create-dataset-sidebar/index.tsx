@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { FormInput } from '@components/shared';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import DatasetImageUploader from '../dataset-image-uploader';
 import { useCreateDatasetMutation } from '@api/datasets-api';
 import { toast } from 'react-toastify';

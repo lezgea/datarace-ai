@@ -71,6 +71,7 @@ export interface ICompetition {
     lifeTimeDays: number,
     joinAvailable: boolean,
     uploadAvailable: boolean,
+    expirationDate: string,
     currencySymbol: string,
     resultFileId: number,
     resultFileName: string,
