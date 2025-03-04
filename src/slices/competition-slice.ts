@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { competitionApi } from '@api/competition-api';
-import { IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentResponse, ICompetitionsResponse, IMessageResponse, IScoreboardResponse } from '@api/types/competition-types';
+import { IAttendedCompetitionsResponse, ICompetition, ICompetitionCreateCommentResponse, ICompetitionsResponse, IDeleteCompetitionCommentResponse, IMessageResponse, IScoreboardResponse } from '@api/types/competition-types';
 import { toast } from 'react-toastify';
 
 

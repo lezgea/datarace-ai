@@ -67,7 +67,7 @@ export const competitionApi = createApi({
             }),
             invalidatesTags: ['Competition'],
         }),
-        deleteCompetitionComment: builder.mutation<void, IDeleteCompetitionCommentRequest>({
+        deleteCompetitionComment: builder.mutation<IMessageResponse, IDeleteCompetitionCommentRequest>({
             query: ({ commentId, lang }) => ({
                 url: `/competitions/comment/${commentId}`,
                 method: 'DELETE',

@@ -140,3 +140,7 @@ export interface ICompetitionUpdateCommentRequest {
         text: string,
     }
 }
+
+export interface IDeleteCompetitionCommentResponse {
+    message: string,
+}
