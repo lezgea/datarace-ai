@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useDeleteDatasetMutation, useGetDatasetInfoQuery } from '@api/datasets-api';
 import { UpdateDatasetSidebar } from '@components/features/datasets/update-dataset-sidebar';
@@ -14,6 +14,7 @@ const DatasetDetails: React.FC = () => {
     const t = useTranslations();
     const lng = useLocale();
     const params = useParams();
+    const router = useRouter();
     const { dataId } = params;
     const datasetId = Array.isArray(dataId) ? dataId[0] : dataId;
 
@@ -25,6 +26,7 @@ const DatasetDetails: React.FC = () => {
     const onDeleteDataset = async () => {
         try {
             await deleteDataset({ id: datasetId })
+            router.push(`/${lng}/datasets`)
         } catch (err: any) {
             console.log('Error: ', err)
         }

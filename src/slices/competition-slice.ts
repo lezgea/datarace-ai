@@ -204,6 +204,31 @@ const competitionSlice = createSlice({
                     state.error = action.error?.message || 'Failed to update the comment';
                 }
             );
+
+        // DELETE COMPETITION COMMENT MUTATION
+        builder
+            .addMatcher(
+                competitionApi.endpoints.deleteCompetitionComment.matchPending,
+                (state) => {
+                    state.loading = true;
+                    state.error = false;
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.deleteCompetitionComment.matchFulfilled,
+                (state, action: PayloadAction<IMessageResponse>) => {
+                    state.loading = false;
+                    toast.success(action?.payload?.message)
+                }
+            )
+            .addMatcher(
+                competitionApi.endpoints.deleteCompetitionComment.matchRejected,
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.error?.message || 'Failed to update the comment';
+                    toast.error(action?.error?.message || 'Failed to update the comment')
+                }
+            );
     },
 });
 

@@ -130,6 +130,7 @@ export interface IDeleteCompetitionFileRequest {
 }
 
 export interface IDeleteCompetitionCommentRequest {
+    lang: string,
     commentId: string | number | undefined,
 }
 

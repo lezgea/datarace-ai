@@ -68,9 +68,10 @@ export const competitionApi = createApi({
             invalidatesTags: ['Competition'],
         }),
         deleteCompetitionComment: builder.mutation<void, IDeleteCompetitionCommentRequest>({
-            query: ({ commentId }) => ({
+            query: ({ commentId, lang }) => ({
                 url: `/competitions/comment/${commentId}`,
                 method: 'DELETE',
+                headers: { "Accept-language": lang }
             }),
             invalidatesTags: ['CompetitionComments'],
         }),

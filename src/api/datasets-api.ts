@@ -50,7 +50,7 @@ export const datasetsApi = createApi({
         }),
         deleteDataset: builder.mutation<void, { id: number | string }>({
             query: ({ id }) => ({
-                url: `/dataset/${id}`,
+                url: `/datasets/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['DatasetInfo'],

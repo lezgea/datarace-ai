@@ -49,8 +49,7 @@ export const CompetitionComment: React.FC<ICommmentProps> = (props) => {
 
     const onDeleteComment = async () => {
         try {
-            await deleteComment({ commentId: id });
-            toast.success("Comment has been deteleted!")
+            await deleteComment({ lang: lng, commentId: id });
         } catch (err) {
             console.log(err);
             toast.error("Unable to delete this comment")
